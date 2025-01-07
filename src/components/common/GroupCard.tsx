@@ -15,7 +15,7 @@ const GroupCard = ({ groupInfo }: GroupCardProps) => {
   return (
     <div className="bg-[#FFF] rounded-[12px] shadow-group_card">
       <div className="flex justify-start p-[0.5rem] gap-[0.563rem]">
-        <div className="h-[6rem] w-[6rem] min-w-[96px] bg-[#F2F2F2] rounded-[12px] overflow-hidden">
+        <div className="h-[6rem] w-[6rem] min-w-[6rem] bg-[#F2F2F2] rounded-[12px] overflow-hidden">
           <img className="w-full h-full" src={`${image_url}`} alt="group_profile" />
         </div>
         <div className="overflow-hidden w-full flex flex-col justify-center p-[0.25rem 0rem] gap-[0.25rem]">
@@ -56,6 +56,6 @@ export default GroupCard;
       'https://mblogthumb-phinf.pstatic.net/MjAxNzA2MjBfMTU4/MDAxNDk3ODg2MjUzOTI2.EbxRHMUgpGYH5rsXkNtvfG8gVXkR0prdWmefPKa4gVEg.3i5uvgyGPeCt8_2zCv5xde1FtkZw-mIdsCkP57NTszIg.PNG.alfodpwlq/2313.PNG?type=w800',
     membersNum: 7
   };
-  
+
   <GroupCard groupInfo={test} />;
 */
