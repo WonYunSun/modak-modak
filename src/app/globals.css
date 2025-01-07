@@ -15,9 +15,8 @@
 }
 @layer base {
   body {
-    color: var(--foreground);
-    background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    background: #fff;
   }
 
   .inner {
@@ -28,5 +27,36 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* button 클래스 */
+@layer utilities {
+  .full-btn {
+    @apply border-none outline-none w-full h-[56px] px-[20px] py-[12px] rounded-xl bg-primary text-white flex items-center justify-center text-[16px] font-semibold leading-[140%];
+  }
+
+  .full-white-btn {
+    @apply border outline-none w-full h-[56px] px-[20px] py-[12px] rounded-xl border-primary bg-white text-primary flex items-center justify-center text-[16px] font-semibold leading-[140%];
+  }
+
+  .modal-full-btn {
+    @apply border-none outline-none w-full h-[48px] px-[20px] py-[12px] rounded-lg bg-primary text-white flex items-center justify-center text-[16px] font-semibold leading-[150%];
+  }
+
+  .modal-white-btn {
+    @apply border outline-none w-full h-[48px] rounded-lg border-primary bg-white text-primary flex items-center justify-center text-[16px] font-semibold leading-[150%];
+  }
+
+  .floating-btn {
+    @apply w-[144px] h-[44px] flex items-center justify-center gap-1 rounded-[20px] text-[14px] bg-floating font-semibold leading-[140%] text-white shadow-[0_px_4px_4px_0px_rgba(0,0,0,0.2)] absolute bottom-[142px] right-[20px];
+  }
+
+  .no-floating-btn {
+    @apply w-[144px] h-[44px] flex items-center justify-center gap-1 rounded-[20px] text-[14px] bg-floating font-semibold leading-[19.6px] text-white shadow-[0_px_4px_4px_0px_rgba(0,0,0,0.2)];
+  }
+
+  .disabled-btn {
+    @apply border-none outline-none bg-gray-300 text-white leading-[140%] cursor-not-allowed;
   }
 }
