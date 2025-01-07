@@ -9,11 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
-        primary: '#B94600',
         floating: '#F58A47',
-        'gray-300': '#D4D4D8'
+        primary: '#B94600',
+        'gray-300': '#D4D4D8',
+        'gray-400': '#A1A1AA',
+        'gray-500': '#71717A',
+        'gray-600': '#575761'
       }
     }
   },
