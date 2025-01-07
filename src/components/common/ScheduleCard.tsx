@@ -15,7 +15,7 @@ const ScheduleCard = () => {
   const detailClass = 'flex items-center gap-3';
 
   return (
-    <div className="inner border border-gray-300 rounded-xl flex justify-between items-center p-4">
+    <div className="inner border border-gray-300 rounded-xl flex justify-between items-center p-4 gap-[8px]">
       <div className="flex flex-col">
         <p className="text-lg font-semibold leading-[140%] mb-2">{dummyData.name}</p>
         <div className={detailClass}>
