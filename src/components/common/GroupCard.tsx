@@ -13,9 +13,9 @@ const GroupCard = ({ groupInfo }: GroupCardProps) => {
   const { id, name, description, image_url, membersNum } = groupInfo;
   //todo: Link의 href는 모임방 페이지의 경로를 상의한 후 추가하기
   return (
-    <div className="bg-[#FFF] rounded-[12px] shadow-group_card">
+    <div className="bg-[#FFF] rounded-[0.75rem] shadow-group_card">
       <div className="flex justify-start p-[0.5rem] gap-[0.563rem]">
-        <div className="h-[6rem] w-[6rem] min-w-[6rem] bg-[#F2F2F2] rounded-[12px] overflow-hidden">
+        <div className="h-[6rem] w-[6rem] min-w-[6rem] bg-[#F2F2F2] rounded-[0.75rem] overflow-hidden">
           <img className="w-full h-full" src={`${image_url}`} alt="group_profile" />
         </div>
         <div className="overflow-hidden w-full flex flex-col justify-center p-[0.25rem 0rem] gap-[0.25rem]">
@@ -24,7 +24,7 @@ const GroupCard = ({ groupInfo }: GroupCardProps) => {
             <span className="block truncate text-gray-600 text-[0.875rem] leading-[140%]">{description}</span>
           </div>
           <div className="h-[2rem] flex items-center justify-between">
-            <div className="flex items-center gap-[2px]">
+            <div className="flex items-center gap-[0.125rem]">
               <span className="text-lg leading-[140%]">{membersNum}</span>
               <span className="text-gray-600 text-[0.75rem] leading-[140%]">명 참여 중</span>
             </div>
