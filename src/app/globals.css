@@ -44,7 +44,7 @@
   }
 
   .no-floating-btn {
-    @apply w-[144px] h-[44px] flex items-center justify-center gap-1 rounded-[20px] text-[14px] bg-floating font-semibold leading-[19.6px] text-white shadow-[0_px_4px_4px_0px_rgba(0,0,0,0.2)];
+    @apply w-[144px] h-[44px] flex items-center justify-center gap-1 rounded-[20px] text-[14px] bg-floating font-semibold leading-[140%] text-white shadow-[0_px_4px_4px_0px_rgba(0,0,0,0.2)];
   }
 
   .disabled-btn {
