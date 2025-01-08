@@ -32,19 +32,19 @@
   }
 
   .modal-full-btn {
-    @apply border-none outline-none w-full h-[48px] px-5 py-3 rounded-xl bg-primary text-white flex items-center justify-center text-base font-semibold leading-[150%];
+    @apply border-none outline-none w-full h-12 px-5 py-3 rounded-xl bg-primary text-white flex items-center justify-center text-base font-semibold leading-[150%];
   }
 
   .modal-white-btn {
-    @apply border outline-none w-full h-[48px] rounded-xl border-primary bg-white text-primary flex items-center justify-center text-base font-semibold leading-[150%];
+    @apply border outline-none w-full h-12 rounded-xl border-primary bg-white text-primary flex items-center justify-center text-base font-semibold leading-[150%];
   }
 
   .floating-btn {
-    @apply w-[144px] h-[44px] flex items-center justify-center gap-1 rou rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0_px_4px_4px_0px_rgba(0,0,0,0.2)] absolute bottom-[142px] right-5;
+    @apply w-36 h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0_px_4px_4px_0px_rgba(0,0,0,0.2)] absolute bottom-[142px] right-5;
   }
 
   .no-floating-btn {
-    @apply w-[144px] h-[44px] flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white;
+    @apply w-36 h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white;
   }
 
   .disabled-btn {

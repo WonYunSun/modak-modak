@@ -18,7 +18,7 @@ const Header = ({ home = true, label = '', hasSetting = true }: HeaderProps) => 
 
   return (
     <header>
-      <div className="w-full h-[48px] flex items-center justify-between">
+      <div className="w-full h-12 flex items-center justify-between">
         {home ? (
           <Image src="" alt="Modak Modak Logo" className="w-20 h-10" />
         ) : (
