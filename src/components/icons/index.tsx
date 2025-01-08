@@ -1,6 +1,7 @@
 interface IconProps {
   className?: string;
   active?: boolean;
+  onClick?: () => void;
 }
 
 export const HasNotification = ({ className }: IconProps) => {
@@ -72,10 +73,11 @@ export const NextArrow = ({ className }: IconProps) => {
   );
 };
 
-export const PrevArrow = ({ className }: IconProps) => {
+export const PrevArrow = ({ className, onClick }: IconProps) => {
   return (
     <svg
       className={className}
+      onClick={onClick}
       width="24"
       height="24"
       viewBox="0 0 24 24"
