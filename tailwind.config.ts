@@ -16,7 +16,8 @@ const config: Config = {
         'gray-400': '#A1A1AA',
         'gray-500': '#71717A',
         'gray-600': '#575761',
-        'gray-900': '#18181B'
+        'gray-900': '#18181B',
+        'gray-700': '#3F3F46'
       }
     },
     boxShadow: {
