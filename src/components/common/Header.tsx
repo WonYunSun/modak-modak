@@ -17,8 +17,8 @@ const Header = ({ home = true, label = '', hasSetting = true }: HeaderProps) => 
   const handleNavigation = () => router.back();
 
   return (
-    <header>
-      <div className="w-full h-12 flex items-center justify-between">
+    <header className="w-full">
+      <div className="w-full fixed px-5 h-12 flex items-center justify-between">
         {home ? (
           <Image src="" alt="Modak Modak Logo" className="w-20 h-10" />
         ) : (
