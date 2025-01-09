@@ -3,11 +3,7 @@
 import React from 'react';
 import useModalStore from 'stores/useModalStore';
 
-interface ModalProps {
-  children: React.ReactNode;
-}
-
-const Modal: React.FC<ModalProps> = ({ children }) => {
+const Modal = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, closeModal } = useModalStore();
 
   if (!isOpen) return null;
