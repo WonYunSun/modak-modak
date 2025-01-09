@@ -7,10 +7,10 @@ interface GroupCardInfos extends Omit<GroupType, 'created_at'> {
 }
 interface GroupCardProps {
   groupInfo: GroupCardInfos;
-  mode: 'yesLink' | 'noLink';
+  hasLink: boolean;
 }
 
-const GroupCard = ({ groupInfo, mode }: GroupCardProps) => {
+const GroupCard = ({ groupInfo, hasLink=true }: GroupCardProps) => {
   const { /*id,*/ name, description, image_url, membersNum } = groupInfo;
   //todo: Link의 href는 모임방 페이지의 경로를 상의한 후 추가하기
   return (
@@ -29,7 +29,7 @@ const GroupCard = ({ groupInfo, mode }: GroupCardProps) => {
               <span className="text-lg leading-[140%]">{membersNum}</span>
               <span className="text-gray-600 text-[0.75rem] leading-[140%]">명 참여 중</span>
             </div>
-            {mode === 'yesLink' && (
+            {hasLink && (
               <Link href={'/'}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -60,5 +60,5 @@ export default GroupCard;
     membersNum: 7
   };
 
-  <GroupCard groupInfo={test} mode='yesLink'/>;
+  <GroupCard groupInfo={test} hasLink={true} />;
 */
