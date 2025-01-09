@@ -33,7 +33,7 @@ const ScheduleCard = ({
         <div className="pb-[4px] text-gray-600">{groupName}</div>
         <div className="flex flex-col"></div>
         <p className="text-lg font-semibold leading-[140%] mb-2">{name}</p>
-        <div className={`${detailClass}`}>
+        <div className={detailClass}>
           <span className={labelClass}>메모</span>
           <span className="truncate w-full">{memo}</span>
         </div>

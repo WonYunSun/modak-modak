@@ -113,6 +113,25 @@ export const DownArrow = ({ className }: IconProps) => {
     </svg>
   );
 };
+export const UpArrow = ({ className }: IconProps) => {
+  return (
+    <svg
+      className={className}
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M18 14L12.7071 8.70711C12.3166 8.31658 11.6834 8.31658 11.2929 8.70711L6 14"
+        stroke="#A1A1AA"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+  );
+};
 
 export const Modification = ({ className }: IconProps) => {
   return (
