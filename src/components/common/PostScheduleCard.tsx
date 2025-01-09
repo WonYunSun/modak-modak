@@ -1,0 +1,54 @@
+'use client';
+
+import { useState } from 'react';
+import { DownArrow, UpArrow } from '@components/icons';
+import { Database } from '@ts/supabase';
+import { formatDate, formatTime } from '@utils/dateUtils';
+type ScheduleType = Database['public']['Tables']['schedules']['Row'];
+
+const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: ScheduleType) => {
+  const [showDetails, setShowDetails] = useState(false);
+  const labelClass = 'text-gray-500 whitespace-nowrap';
+  const detailClass = 'flex items-center gap-3';
+
+  const toggleDetails = () => {
+    setShowDetails((prev) => !prev);
+  };
+  const isSingleDay = end_date === start_date;
+  return (
+    <div className="box-border border border-gray-300 rounded-xl pl-[1.25rem] pr-[0.5rem] py-[0.5rem] gap-[0.5rem]">
+      <div className=" flex justify-between items-center">
+        <p className="text-lg font-semibold leading-[140%]">{name}</p>
+
+        <div onClick={toggleDetails} className="min-w-6">
+          {showDetails ? <UpArrow /> : <DownArrow />}
+        </div>
+      </div>
+      <div className={` ${showDetails ? 'block animate-fade-down animate-duration-200' : 'hidden'} mt-2`}>
+        <div className={detailClass}>
+          <span className={labelClass}>메모</span>
+          <span className="truncate w-full">{memo}</span>
+        </div>
+
+        <div className="flex items-center whitespace-nowrap">
+          <span className={`${labelClass} pr-[12px]`}>일자</span>
+          <span>{formatDate(start_date)}</span>
+          {isSingleDay ? (
+            ''
+          ) : (
+            <>
+              <span className="px-[4px]">⁓</span>
+              <span className="truncate">{formatDate(end_date)}</span>
+            </>
+          )}
+        </div>
+        <div className={detailClass}>
+          <span className={labelClass}>시간</span>
+          <span>{formatTime(start_time)}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PostScheduleCard;

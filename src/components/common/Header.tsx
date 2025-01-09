@@ -16,7 +16,7 @@ const Header = ({ home = false, label, hasSetting }: HeaderProps) => {
   const handleNavigation = () => router.back();
 
   return (
-    <header>
+    <header className="fixed top-0 left-0 right-0 z-10">
       <div className="w-full h-12 flex items-center justify-between">
         {home ? <img src="" alt="Modak Modak Logo" className="w-20 h-10" /> : <PrevArrow onClick={handleNavigation} />}
 
