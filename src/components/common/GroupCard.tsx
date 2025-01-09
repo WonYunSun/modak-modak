@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Database } from '@ts/supabase';
 import { NextArrow } from '@components/icons';
+import { Database } from '@ts/supabase';
 
 type GroupType = Database['public']['Tables']['groups']['Row'];
 interface GroupCardInfos extends Omit<GroupType, 'created_at'> {
