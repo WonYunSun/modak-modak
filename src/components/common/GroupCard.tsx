@@ -7,10 +7,11 @@ interface GroupCardInfos extends Omit<GroupType, 'created_at'> {
 }
 interface GroupCardProps {
   groupInfo: GroupCardInfos;
+  mode: 'yesLink' | 'noLink';
 }
 
-const GroupCard = ({ groupInfo }: GroupCardProps) => {
-  const { id, name, description, image_url, membersNum } = groupInfo;
+const GroupCard = ({ groupInfo, mode }: GroupCardProps) => {
+  const { /*id,*/ name, description, image_url, membersNum } = groupInfo;
   //todo: Link의 href는 모임방 페이지의 경로를 상의한 후 추가하기
   return (
     <div className="bg-[#FFF] rounded-[0.75rem] shadow-group_card">
@@ -28,16 +29,18 @@ const GroupCard = ({ groupInfo }: GroupCardProps) => {
               <span className="text-lg leading-[140%]">{membersNum}</span>
               <span className="text-gray-600 text-[0.75rem] leading-[140%]">명 참여 중</span>
             </div>
-            <Link href={'/'}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M10 18L15.2929 12.7071C15.6834 12.3166 15.6834 11.6834 15.2929 11.2929L10 6"
-                  stroke="#A1A1AA"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </Link>
+            {mode === 'yesLink' && (
+              <Link href={'/'}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 18L15.2929 12.7071C15.6834 12.3166 15.6834 11.6834 15.2929 11.2929L10 6"
+                    stroke="#A1A1AA"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -57,5 +60,5 @@ export default GroupCard;
     membersNum: 7
   };
 
-  <GroupCard groupInfo={test} />;
+  <GroupCard groupInfo={test} mode='yesLink'/>;
 */
