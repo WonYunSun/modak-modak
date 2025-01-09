@@ -9,14 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        floating: '#F58A47',
         primary: '#B94600',
         'gray-300': '#D4D4D8',
         'gray-400': '#A1A1AA',
         'gray-500': '#71717A',
         'gray-600': '#575761',
+        'gray-900': '#18181B',
         'gray-700': '#3F3F46'
       }
+    },
+    boxShadow: {
+      'group-card': '0px -2px 4px 0px rgba(0, 0, 0, 0.05), 0px 4px 8px 0px rgba(0, 0, 0, 0.10)'
     }
   },
   plugins: []
