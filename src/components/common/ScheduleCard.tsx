@@ -1,40 +1,61 @@
+import { NextArrow } from '@components/icons';
 import { Database } from '@ts/supabase';
 import { formatDate, formatTime } from '@utils/dateUtils';
 
 type ScheduleType = Database['public']['Tables']['schedules']['Row'];
 
-const ScheduleCard = ({ name, memo, start_date, end_date, start_time }: ScheduleType) => {
-  const labelClass = 'text-gray-400'; // 라벨 스타일
+interface ScheduleCardProps extends ScheduleType {
+  groupName?: string;
+  hasArrow?: boolean;
+}
+
+const ScheduleCard = ({
+  name,
+  memo,
+  start_date,
+  end_date,
+  start_time,
+  groupName,
+  hasArrow = true
+}: ScheduleCardProps) => {
+  const labelClass = 'text-gray-500 whitespace-nowrap'; // 라벨 스타일
   const detailClass = 'flex items-center gap-3';
+  const isExpired = new Date(end_date) < new Date();
+  const isSingleDay = end_date === start_date;
 
   return (
-    <div className="inner border border-gray-300 rounded-xl flex justify-between items-center p-4 gap-[8px]">
-      <div className="flex flex-col">
+    <div
+      className={`box-border border border-gray-300 rounded-xl flex justify-between items-center pl-[1.25rem] pr-[0.5rem] py-[0.5rem] gap-[0.5rem]  ${
+        isExpired ? 'bg-gray-100' : ''
+      }`}
+    >
+      <div className="flex flex-col w-full w-11/12">
+        <div className="pb-[4px] text-gray-600">{groupName}</div>
+        <div className="flex flex-col"></div>
         <p className="text-lg font-semibold leading-[140%] mb-2">{name}</p>
         <div className={detailClass}>
           <span className={labelClass}>메모</span>
-          <span>{memo}</span>
+          <span className="truncate w-full">{memo}</span>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center whitespace-nowrap">
           <span className={`${labelClass} pr-[12px]`}>일자</span>
           <span>{formatDate(start_date)}</span>
-          <span className="px-[4px]">⁓</span>
-          <span>{formatDate(end_date)}</span>
+          {isSingleDay ? (
+            ''
+          ) : (
+            <>
+              <span className="px-[4px]">⁓</span>
+              <span className="truncate">{formatDate(end_date)}</span>
+            </>
+          )}
         </div>
         <div className={detailClass}>
           <span className={labelClass}>시간</span>
           <span>{formatTime(start_time)}</span>
         </div>
       </div>
-      {/* svg */}
-      <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M10 18.5L15.2929 13.2071C15.6834 12.8166 15.6834 12.1834 15.2929 11.7929L10 6.5"
-          stroke="#A1A1AA"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
+
+      {hasArrow ? <NextArrow className="min-w-6" /> : null}
     </div>
   );
 };
