@@ -1,8 +1,6 @@
-'use client';
-
 type SmallAlertProps = {
-  children: React.ReactNode;
-  show: boolean;
+  children: React.ReactNode; //알럿 내용용
+  show: boolean; //열림/닫힘 상태값
 };
 
 const SmallAlert = ({ children, show }: SmallAlertProps) => {
