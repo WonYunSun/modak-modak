@@ -3,10 +3,12 @@ import { Database } from '@ts/supabase';
 import { formatDate, formatTime } from '@utils/dateUtils';
 
 type ScheduleType = Database['public']['Tables']['schedules']['Row'];
+
 interface ScheduleCardProps extends ScheduleType {
   groupName?: string;
   hasArrow?: boolean;
 }
+
 const ScheduleCard = ({
   name,
   memo,
