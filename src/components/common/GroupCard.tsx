@@ -15,7 +15,7 @@ const GroupCard = ({ groupInfo, hasLink=true }: GroupCardProps) => {
   const { /*id,*/ name, description, image_url, membersNum } = groupInfo;
   //todo: Link의 href는 모임방 페이지의 경로를 상의한 후 추가하기
   return (
-    <div className="bg-[#FFF] rounded-[0.75rem] shadow-group_card">
+    <div className="bg-[#FFF] rounded-[0.75rem] shadow-group-card">
       <div className="flex justify-start p-[0.5rem] gap-[0.563rem]">
         <div className="h-[6rem] w-[6rem] min-w-[6rem] bg-[#F2F2F2] rounded-[0.75rem] overflow-hidden">
           <img className="w-full h-full" src={`${image_url}`} alt="group_profile" />
