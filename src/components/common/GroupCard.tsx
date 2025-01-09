@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { NextArrow } from '@components/icons';
 import { Database } from '@ts/supabase';
 
 type GroupType = Database['public']['Tables']['groups']['Row'];
@@ -7,13 +8,14 @@ interface GroupCardInfos extends Omit<GroupType, 'created_at'> {
 }
 interface GroupCardProps {
   groupInfo: GroupCardInfos;
+  hasLink: boolean;
 }
 
-const GroupCard = ({ groupInfo }: GroupCardProps) => {
-  const { id, name, description, image_url, membersNum } = groupInfo;
+const GroupCard = ({ groupInfo, hasLink=true }: GroupCardProps) => {
+  const { /*id,*/ name, description, image_url, membersNum } = groupInfo;
   //todo: Link의 href는 모임방 페이지의 경로를 상의한 후 추가하기
   return (
-    <div className="bg-[#FFF] rounded-[0.75rem] shadow-group_card">
+    <div className="bg-[#FFF] rounded-[0.75rem] shadow-group-card">
       <div className="flex justify-start p-[0.5rem] gap-[0.563rem]">
         <div className="h-[6rem] w-[6rem] min-w-[6rem] bg-[#F2F2F2] rounded-[0.75rem] overflow-hidden">
           <img className="w-full h-full" src={`${image_url}`} alt="group_profile" />
@@ -28,16 +30,11 @@ const GroupCard = ({ groupInfo }: GroupCardProps) => {
               <span className="text-lg leading-[140%]">{membersNum}</span>
               <span className="text-gray-600 text-[0.75rem] leading-[140%]">명 참여 중</span>
             </div>
-            <Link href={'/'}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M10 18L15.2929 12.7071C15.6834 12.3166 15.6834 11.6834 15.2929 11.2929L10 6"
-                  stroke="#A1A1AA"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </Link>
+            {hasLink && (
+              <Link href={'/'}>
+                <NextArrow/>
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -57,5 +54,5 @@ export default GroupCard;
     membersNum: 7
   };
 
-  <GroupCard groupInfo={test} />;
+  <GroupCard groupInfo={test} hasLink={true} />;
 */
