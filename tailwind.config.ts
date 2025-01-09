@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import tailwindcssAnimated from 'tailwindcss-animated';
 
 const config: Config = {
   content: [
@@ -23,6 +24,6 @@ const config: Config = {
       'group-card': '0px -2px 4px 0px rgba(0, 0, 0, 0.05), 0px 4px 8px 0px rgba(0, 0, 0, 0.10)'
     }
   },
-  plugins: []
+  plugins: [tailwindcssAnimated]
 };
 export default config;
