@@ -9,12 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        floating: '#F58A47',
         primary: '#B94600',
         'gray-300': '#D4D4D8',
         'gray-400': '#A1A1AA',
         'gray-500': '#71717A',
-        'gray-600': '#575761'
+        'gray-600': '#575761',
+        'gray-900': '#18181B'
       }
     },
     boxShadow: {
