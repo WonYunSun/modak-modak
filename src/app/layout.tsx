@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import BottomNav from '@components/common/BottomNav';
 
 const pretendard = localFont({
   src: '/fonts/PretendardVariable.woff2',
@@ -21,8 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${pretendard.className} antialiased`}>{children}</body>
+    <html lang="ko">
+      <body className={`${pretendard.className} antialiased`}>
+        {children}
+        <BottomNav />
+      </body>
     </html>
   );
 }
