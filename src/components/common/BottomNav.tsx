@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import useNavStore from 'stores/useNavStore';
 import { Home, Chat, User } from '@components/icons';
 
@@ -32,7 +31,7 @@ const buttons = [
 const BottomNav = () => {
   const { activeButton, setActiveButton } = useNavStore();
 
-  console.log('activeButton', activeButton);
+  //console.log('activeButton', activeButton);
 
   return (
     <div className="fixed bottom-0 left-0 w-full h-16 bg-white flex shadow-[0px_-4px_4px_0px_rgba(0,0,0,0.1)] z-30">
