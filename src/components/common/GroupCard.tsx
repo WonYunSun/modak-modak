@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Database } from '@ts/supabase';
+import { NextArrow } from '@components/icons';
 
 type GroupType = Database['public']['Tables']['groups']['Row'];
 interface GroupCardInfos extends Omit<GroupType, 'created_at'> {
@@ -31,14 +32,7 @@ const GroupCard = ({ groupInfo, hasLink=true }: GroupCardProps) => {
             </div>
             {hasLink && (
               <Link href={'/'}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M10 18L15.2929 12.7071C15.6834 12.3166 15.6834 11.6834 15.2929 11.2929L10 6"
-                    stroke="#A1A1AA"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                <NextArrow/>
               </Link>
             )}
           </div>
