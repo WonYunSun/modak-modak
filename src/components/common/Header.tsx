@@ -1,29 +1,24 @@
 'use client';
 
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { Notification, PrevArrow, Setting } from '@components/icons';
 
 interface HeaderProps {
-  home?: boolean;
+  home: boolean;
   label?: string;
   hasSetting?: boolean;
 }
 
-const Header = ({ home = true, label = '', hasSetting = true }: HeaderProps) => {
+const Header = ({ home = false, label, hasSetting }: HeaderProps) => {
   const router = useRouter();
 
   const handleNavigation = () => router.back();
 
   return (
-    <header className='w-full fixed'>
+    <header className="fixed top-0 left-0 right-0 z-10">
       <div className="w-full h-12 flex items-center justify-between">
-        {home ? (
-          <Image src="" alt="Modak Modak Logo" className="w-20 h-10" />
-        ) : (
-          <PrevArrow onClick={handleNavigation} />
-        )}
+        {home ? <img src="" alt="Modak Modak Logo" className="w-20 h-10" /> : <PrevArrow onClick={handleNavigation} />}
 
         {label && <h3 className="text-xl font-semibold leading-[140%] text-gray-900">{label}</h3>}
 

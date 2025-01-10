@@ -4,6 +4,7 @@
 
 @media (prefers-color-scheme: dark) {
 }
+
 @layer base {
   body {
     color: #000;
