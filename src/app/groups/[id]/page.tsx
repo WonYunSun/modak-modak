@@ -14,7 +14,7 @@ const GroupPage = () => {
   return (
     <div className="w-full">
       {/* 헤더 영역 */}
-      <div className="fixed top-0 left-0 w-full z-30">
+      <div className="w-full fixed top-0 left-0 z-30">
         <Header home={false} hasSetting={true} />
       </div>
       <div className="w-full h-[6.5rem] bg-primary-2"></div>
@@ -33,9 +33,9 @@ const GroupPage = () => {
       </div>
 
       {/* 탭 화면 */}
-      <div className="w-full mx-auto px-5">
+      <div className="w-full mx-auto px-5 mt-4">
         <Tabs />
-        <div className="mt-4">
+        <div className="">
           {activeTab === 'posts' && <PostList />}
           {activeTab === 'photos' && <PhotoList />}
           {activeTab === 'schedules' && <ScheduleList />}

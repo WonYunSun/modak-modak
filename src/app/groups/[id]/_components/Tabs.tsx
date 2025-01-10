@@ -6,7 +6,7 @@ const Tabs = () => {
   const { activeTab, setActiveTab } = useTabStore();
 
   return (
-    <div className="flex mt-5">
+    <div className="flex">
       {/* 게시글 탭 */}
       <button
         onClick={() => setActiveTab('posts')}
