@@ -8,7 +8,7 @@
 
 ## PR 생성 날짜
 
-- YYYY.MM.DD
+- 2025.01.DD
 
 ## CheckList
 
