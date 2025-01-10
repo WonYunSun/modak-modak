@@ -17,14 +17,14 @@ const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: Sche
   const isSingleDay = end_date === start_date;
   return (
     <div className="box-border border border-gray-300 rounded-xl pl-[1.25rem] pr-[0.5rem] py-[0.5rem] gap-[0.5rem]">
-      <div className=" flex justify-between items-center">
-        <p className="text-lg font-semibold leading-[140%]">{name}</p>
+      <div className="flex justify-between items-center">
+        <p className="text-sm font-semibold leading-[140%]">{name}</p>
 
         <div onClick={toggleDetails} className="min-w-6">
           {showDetails ? <UpArrow /> : <DownArrow />}
         </div>
       </div>
-      <div className={` ${showDetails ? 'block animate-fade-down animate-duration-200' : 'hidden'} mt-2`}>
+      <div className={` ${showDetails ? 'block animate-fade-down animate-duration-200 text-xs' : 'hidden'} mt-1`}>
         <div className={detailClass}>
           <span className={labelClass}>메모</span>
           <span className="truncate w-full">{memo}</span>
