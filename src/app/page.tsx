@@ -12,7 +12,7 @@ const HomePage = () => {
       <Header hasSetting={false} home={true} />
       <HomeContents />
       <Button label={'모임 만들기'} className={'floating-btn'} type={'button'}>
-        <Plus className={'w-4 h-4'} />
+        <Plus className={'w-4 h-4'} active={true}/>
       </Button>
     </div>
   );
