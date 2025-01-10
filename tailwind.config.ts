@@ -11,13 +11,15 @@ const config: Config = {
     extend: {
       colors: {
         primary: '#B94600',
+        white: '#FFFFFF',
+        'primary-10': '#FFF2EB',
         'gray-100': '#F4F4F5',
         'gray-300': '#D4D4D8',
         'gray-400': '#A1A1AA',
         'gray-500': '#71717A',
         'gray-600': '#575761',
-        'gray-900': '#18181B',
-        'gray-700': '#3F3F46'
+        'gray-700': '#3F3F46',
+        'gray-900': '#18181B'
       }
     },
     boxShadow: {
