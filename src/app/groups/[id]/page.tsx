@@ -17,7 +17,7 @@ const GroupPage = () => {
       <div className="w-full fixed top-0 left-0 z-30">
         <Header home={false} hasSetting={true} />
       </div>
-      <div className="w-full h-[6.5rem] bg-primary-2"></div>
+      <div className="w-full h-[6.5rem] bg-primary-10"></div>
 
       <div className="w-full px-5 relative -mt-[2.75rem] z-10">
         <GroupCard
