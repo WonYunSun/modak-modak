@@ -126,7 +126,7 @@ export const UpArrow = ({ className }: IconProps) => {
       <path
         d="M18 14L12.7071 8.70711C12.3166 8.31658 11.6834 8.31658 11.2929 8.70711L6 14"
         stroke="#A1A1AA"
-        stroke-width="2"
+        strokeWidth="2"
         stroke-linecap="round"
       />
     </svg>
@@ -150,9 +150,9 @@ export const Modification = ({ className }: IconProps) => {
           clip-rule="evenodd"
           d="M30.0858 17.9142C30.8668 17.1332 32.1332 17.1332 32.9142 17.9142L34.0858 19.0858C34.8668 19.8668 34.8668 21.1332 34.0858 21.9142L23.9282 32.0718C23.649 32.351 23.2934 32.5413 22.9062 32.6188L18.7942 33.4412C18.6542 33.4692 18.5308 33.3458 18.5588 33.2058L19.3812 29.0938C19.4587 28.7066 19.649 28.351 19.9282 28.0718L30.0858 17.9142Z"
           stroke="#18181B"
-          stroke-width="2"
+          strokeWidth="2"
         />
-        <path d="M28.5 19.5L32.5 23.5" stroke="#18181B" stroke-width="2" />
+        <path d="M28.5 19.5L32.5 23.5" stroke="#18181B" strokeWidth="2" />
       </g>
       <defs>
         <filter
@@ -179,6 +179,22 @@ export const Modification = ({ className }: IconProps) => {
           <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_527_14166" result="shape" />
         </filter>
       </defs>
+    </svg>
+  );
+};
+
+export const ModificationLine = () => {
+  return (
+    <svg className="mb-[2px]" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M15.5858 4.41421C16.3668 3.63317 17.6332 3.63317 18.4142 4.41421L19.5858 5.58579C20.3668 6.36684 20.3668 7.63316 19.5858 8.41421L9.42819 18.5718C9.14899 18.851 8.79339 19.0413 8.40621 19.1188L4.29417 19.9412C4.15423 19.9692 4.03085 19.8458 4.05883 19.7058L4.88124 15.5938C4.95868 15.2066 5.14899 14.851 5.42819 14.5718L15.5858 4.41421Z"
+        stroke="#FFF"
+        strokeWidth="2"
+      />
+      <path d="M14 6L18 10" stroke="#FFF" strokeWidth="2" />
+      <path d="M12 20H20" stroke="#FFF" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 };
