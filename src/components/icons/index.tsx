@@ -126,7 +126,7 @@ export const UpArrow = ({ className }: IconProps) => {
       <path
         d="M18 14L12.7071 8.70711C12.3166 8.31658 11.6834 8.31658 11.2929 8.70711L6 14"
         stroke="#A1A1AA"
-        stroke-width="2"
+        strokeWidth="2"
         stroke-linecap="round"
       />
     </svg>
@@ -150,9 +150,9 @@ export const Modification = ({ className }: IconProps) => {
           clip-rule="evenodd"
           d="M30.0858 17.9142C30.8668 17.1332 32.1332 17.1332 32.9142 17.9142L34.0858 19.0858C34.8668 19.8668 34.8668 21.1332 34.0858 21.9142L23.9282 32.0718C23.649 32.351 23.2934 32.5413 22.9062 32.6188L18.7942 33.4412C18.6542 33.4692 18.5308 33.3458 18.5588 33.2058L19.3812 29.0938C19.4587 28.7066 19.649 28.351 19.9282 28.0718L30.0858 17.9142Z"
           stroke="#18181B"
-          stroke-width="2"
+          strokeWidth="2"
         />
-        <path d="M28.5 19.5L32.5 23.5" stroke="#18181B" stroke-width="2" />
+        <path d="M28.5 19.5L32.5 23.5" stroke="#18181B" strokeWidth="2" />
       </g>
       <defs>
         <filter
