@@ -1,7 +1,7 @@
 'use client';
 
 import useFunnel from 'hooks/useFunnel';
-import React from 'react';
+
 //단계 name 정의
 const steps = ['일정명', '모임일시', '메모'];
 
