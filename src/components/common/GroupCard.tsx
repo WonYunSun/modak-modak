@@ -3,11 +3,11 @@ import { NextArrow } from '@components/icons';
 import { Database } from '@ts/supabase';
 
 type GroupType = Database['public']['Tables']['groups']['Row'];
-interface GroupCardInfos extends Omit<GroupType, 'created_at'> {
+export interface GroupCardInfosType extends GroupType {
   membersNum: number;
 }
 interface GroupCardProps {
-  groupInfo: GroupCardInfos;
+  groupInfo: GroupCardInfosType;
   hasLink: boolean;
 }
 
@@ -21,6 +21,14 @@ const GroupCard = ({ groupInfo, hasLink = true }: GroupCardProps) => {
     <div className="h-[7.938rem] bg-[#FFF] rounded-xl shadow-group-card">
       <div className="h-full flex justify-start items-center px-2 py-3 gap-[0.563rem]">
         <div className="h-24 w-24 min-w-24 bg-[#F2F2F2] rounded-xl overflow-hidden">
+          {/* 이미지 컴포넌트 쓰기 */}
+          {/* <Image
+            width={0}
+            height={0}
+            style={{ width: '100%', height: '100%' }}
+            src={`${image_url}`}
+            alt="group_profile"
+          /> */}
           <img className="w-full h-full" src={`${image_url}`} alt="group_profile" />
         </div>
         <div className="overflow-hidden w-full h-full flex flex-col justify-center py-1 gap-1">
