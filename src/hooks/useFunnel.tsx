@@ -1,6 +1,5 @@
 'use client';
-// import { useSearchParams } from 'next/navigation';
-import React, { ReactElement, ReactNode, useState } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
 
 type StepProps = {
   name: string;
