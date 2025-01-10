@@ -26,7 +26,7 @@ const Post = () => {
           <div className="flex items-center space-x-3">
             {/* 동그란 프로필 이미지 */}
             <Image
-              src="/icons/개인 프로필 사진.webp"
+              src="/icons/profile-image.webp"
               alt="프로필"
               width={32}
               height={32}
