@@ -13,9 +13,10 @@ const GroupPage = () => {
 
   return (
     <div className="w-full">
-      <header className="fixed top-0 left-0 w-full z-30 px-5">
+      {/* 헤더 영역 */}
+      <div className="fixed top-0 left-0 w-full z-30">
         <Header home={false} hasSetting={true} />
-      </header>
+      </div>
       <div className="w-full h-[6.5rem] bg-primary-2"></div>
 
       <div className="w-full px-5 relative -mt-[2.75rem] z-10">
