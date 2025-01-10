@@ -4,7 +4,7 @@ import NoGroup from './NoGroup';
 
 const HomeContents = () => {
   const isGroup = true;
-  const GroupListBoxStyle = `h-auto pb-5 bg-white rounded-t-[1.25rem] ${isGroup ? '' : 'overflow-hidden'}`;
+  const GroupListBoxStyle = `h-auto pb-5 bg-white rounded-t-[1.25rem]`;
   return (
     <>
       <div className="px-5 pt-[2.625rem] pb-[2.313rem]">
