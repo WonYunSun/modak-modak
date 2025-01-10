@@ -11,28 +11,31 @@ interface GroupCardProps {
   hasLink: boolean;
 }
 
-const GroupCard = ({ groupInfo, hasLink=true }: GroupCardProps) => {
+const GroupCard = ({ groupInfo, hasLink = true }: GroupCardProps) => {
   const { /*id,*/ name, description, image_url, membersNum } = groupInfo;
   //todo: Link의 href는 모임방 페이지의 경로를 상의한 후 추가하기
+  const titleStyle = `${hasLink ? 'truncate' : ''} text-lg font-semibold leading-[140%]`;
+  const descriptionStyle = `${hasLink ? 'truncate' : ''} block text-gray-600 text-[0.875rem] leading-[140%]`;
+
   return (
-    <div className="bg-[#FFF] rounded-[0.75rem] shadow-group-card">
-      <div className="flex justify-start p-[0.5rem] gap-[0.563rem]">
-        <div className="h-[6rem] w-[6rem] min-w-[6rem] bg-[#F2F2F2] rounded-[0.75rem] overflow-hidden">
+    <div className="h-[7.938rem] bg-[#FFF] rounded-xl shadow-group-card">
+      <div className="h-full flex justify-start items-center px-2 py-3 gap-[0.563rem]">
+        <div className="h-24 w-24 min-w-24 bg-[#F2F2F2] rounded-xl overflow-hidden">
           <img className="w-full h-full" src={`${image_url}`} alt="group_profile" />
         </div>
-        <div className="overflow-hidden w-full flex flex-col justify-center p-[0.25rem 0rem] gap-[0.25rem]">
+        <div className="overflow-hidden w-full h-full flex flex-col justify-center py-1 gap-1">
           <div className="min-w-0 flex-auto">
-            <h4 className="truncate text-lg font-semibold leading-[140%]">{name}</h4>
-            <span className="block truncate text-gray-600 text-[0.875rem] leading-[140%]">{description}</span>
+            <h4 className={titleStyle}>{name}</h4>
+            <span className={descriptionStyle}>{description}</span>
           </div>
           <div className="h-[2rem] flex items-center justify-between">
-            <div className="flex items-center gap-[0.125rem]">
+            <div className="flex items-center gap-0.5">
               <span className="text-lg leading-[140%]">{membersNum}</span>
-              <span className="text-gray-600 text-[0.75rem] leading-[140%]">명 참여 중</span>
+              <span className="text-gray-600 text-xs leading-[140%]">명 참여 중</span>
             </div>
             {hasLink && (
               <Link href={'/'}>
-                <NextArrow/>
+                <NextArrow />
               </Link>
             )}
           </div>

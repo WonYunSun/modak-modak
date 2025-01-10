@@ -384,7 +384,7 @@ export const Alarm = ({ className }: IconProps) => {
   );
 };
 
-export const Plus = ({ className }: IconProps) => {
+export const Plus = ({ className, active }: IconProps) => {
   return (
     <svg
       className={className}
@@ -394,7 +394,13 @@ export const Plus = ({ className }: IconProps) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M12 4V20M20 12L4 12" stroke="#18181B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M12 4V20M20 12L4 12"
+        stroke={active ? '#ffffff' : '#18181B'}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 };
