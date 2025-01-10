@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {}
+@media (prefers-color-scheme: dark) {
+}
 
 @layer base {
   body {
@@ -40,7 +41,7 @@
   }
 
   .floating-btn {
-    @apply w-36 h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0_px_4px_4px_0px_rgba(0, 0, 0, 0.2)] absolute bottom-[142px] right-5;
+    @apply w-[124px] h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.2)] fixed bottom-[142px] right-5;
   }
 
   .no-floating-btn {
