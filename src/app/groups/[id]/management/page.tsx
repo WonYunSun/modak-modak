@@ -3,8 +3,15 @@ import { Copy, NextArrow } from '@components/icons';
 import ManagementCard from './_components/ManagementCard';
 import ManagementSection from './_components/ManagementSection';
 import ToggleBox from './_components/ToggleBox';
+import ManagementBtns from './_components/ManagementBtns';
 
-const ManagementPage = () => {
+interface ManagementPageProps {
+  params: {
+    id: string;
+  };
+}
+const ManagementPage = ({ params }: ManagementPageProps) => {
+  const { id } = params;
   //52f44a96-b8f7-4c6c-80b1-d657eafd3821 모닥모닥팀 아이디
   //1113b74a-2ec2-4f35-b044-4f42925cc076 얼그레이 연구회 아이디
 
@@ -32,22 +39,12 @@ const ManagementPage = () => {
             <ManagementCard label={'멤버 초대링크 복사하기'}>
               <Copy />
             </ManagementCard>
-            <ManagementCard label={'멤버 목록'}>
+            <ManagementCard label={'멤버 목록'} link={`/groups/${id}/management/members`}>
               <NextArrow />
             </ManagementCard>
           </ManagementSection>
         </div>
-        <div className="w-full">
-          <div className="h-[2.375rem] px-5 flex justify-center items-center gap-x-4 text-gray-600">
-            <button type="button" className="underline decoration-gray-600 underline-offset-2">
-              모임 삭제
-            </button>
-            {'·'}
-            <button type="button" className="underline decoration-gray-600 underline-offset-2">
-              모임 탈퇴
-            </button>
-          </div>
-        </div>
+        <ManagementBtns/>
       </div>
     </>
   );

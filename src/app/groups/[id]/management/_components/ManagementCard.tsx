@@ -12,7 +12,7 @@ const ManagementCard = ({ children, label, link = null, handleClick = () => {} }
   return (
     <>
       {link ? (
-        <Link href="/">
+        <Link href={link}>
           <div className={`w-full`} onClick={handleClick}>
             <div className="px-5 h-14 flex items-center justify-between">
               <span>{label}</span> {children}
