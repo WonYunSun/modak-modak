@@ -1,7 +1,8 @@
 import Header from '@components/common/Header';
-import ManagementCard from './_components/ManagementCard';
 import { Copy, NextArrow } from '@components/icons';
+import ManagementCard from './_components/ManagementCard';
 import ManagementSection from './_components/ManagementSection';
+import ToggleBox from './_components/ToggleBox';
 
 const ManagementPage = () => {
   //52f44a96-b8f7-4c6c-80b1-d657eafd3821 모닥모닥팀 아이디
@@ -11,7 +12,7 @@ const ManagementPage = () => {
     <>
       <Header home={false} label={'관리 페이지'} />
       <div className="pt-12 mb-36">
-        <div className="my-6 w-full flex flex-col gap-y-2 bg-gray-200">
+        <div className="mb-6 w-full flex flex-col gap-y-2 bg-gray-200">
           <ManagementSection title={'모임 관리'}>
             <ManagementCard label={'모임 프로필 변경'}>
               <NextArrow />
@@ -21,9 +22,13 @@ const ManagementPage = () => {
             </ManagementCard>
           </ManagementSection>
 
-          <ManagementSection title={'알림 관리'}>{''}</ManagementSection>
+          <ManagementSection title={'알림 관리'}>
+            <ManagementCard label={'모임방 전체 알림'}>
+              <ToggleBox isChecked={false} />
+            </ManagementCard>
+          </ManagementSection>
 
-          <ManagementSection title={'멤버 관리'}>
+          <ManagementSection title={'멤버 관리'} isLast={true}>
             <ManagementCard label={'멤버 초대링크 복사하기'}>
               <Copy />
             </ManagementCard>
@@ -33,10 +38,14 @@ const ManagementPage = () => {
           </ManagementSection>
         </div>
         <div className="w-full">
-          <div className="h-[2.375rem] px-5 flex justify-center items-center gap-x-4">
-            <button type="button">모임 삭제</button>
+          <div className="h-[2.375rem] px-5 flex justify-center items-center gap-x-4 text-gray-600">
+            <button type="button" className="underline decoration-gray-600 underline-offset-2">
+              모임 삭제
+            </button>
             {'·'}
-            <button type="button">모임 탈퇴</button>
+            <button type="button" className="underline decoration-gray-600 underline-offset-2">
+              모임 탈퇴
+            </button>
           </div>
         </div>
       </div>
