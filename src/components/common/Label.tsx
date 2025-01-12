@@ -3,11 +3,12 @@ export interface LabelProps {
   label: string;
   required?: boolean;
   description?: string;
+  className?: string;
 }
 
-const Label = ({ htmlFor, label, required, description }: LabelProps) => {
+const Label = ({ htmlFor, label, required, description, className }: LabelProps) => {
   return (
-    <div className="flex flex-col gap-1">
+    <div className={`flex flex-col gap-1 ${className}`}>
       <div className="flex">
         <label className="font-semibold text-xl leading-[140%]" htmlFor={htmlFor}>
           {label}
