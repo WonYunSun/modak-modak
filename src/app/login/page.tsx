@@ -1,37 +1,19 @@
-'use client';
-
-import Button from '@components/common/Button';
-import { Provider } from '@supabase/supabase-js';
-import { createClient } from '@utils/supabase/client';
-import React from 'react';
+import SocialLogins from './_components/SocialLogins';
 
 const LoginPage = () => {
-  const handleButtonClick = async (provider: Provider) => {
-    const supabase = await createClient();
-    supabase.auth.signInWithOAuth({
-      provider: provider
-    });
-  };
+  /**
+   * @todo
+   * 로그인 취소 될 경우 ?error=... 형태로 params 붙어서 이 페이지로 redirect
+   * 에러 상황 사용자에게 보여 줄지 정해야 함
+   * 보여줘야 한다면 토스트 훅 완성된 후에 적용 필요
+   */
 
   return (
     <div className="h-svh pt-[152px] pb-[112px] px-5">
-      <div className="flex flex-col h-full">
-        {/* <div className='flex flex-col items-center mb-[114px]'>
-          <img src='/login/onboarding1.webp' className='h-[130px] w-[130px]'></img>
-        </div> */}
-        <Button
-          className="kakao-btn mb-4"
-          label="카카오로 시작하기"
-          type="button"
-          onClick={() => handleButtonClick('kakao')}
-        ></Button>
-        <Button
-          className="google-btn"
-          label="Google로 시작하기"
-          type="button"
-          onClick={() => handleButtonClick('google')}
-        ></Button>
-      </div>
+      {/**
+       * @todo 온보딩 슬라이더 추가 필요
+       */}
+      <SocialLogins />
     </div>
   );
 };

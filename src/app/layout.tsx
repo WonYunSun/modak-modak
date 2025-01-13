@@ -1,7 +1,13 @@
 import type { Metadata } from 'next';
+
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
 import localFont from 'next/font/local';
-import './globals.css';
+
 import BottomNav from '@components/common/BottomNav';
+import Providers from '@components/providers/TQProvider';
+
+import './globals.css';
 
 const pretendard = localFont({
   src: '/fonts/PretendardVariable.woff2',
@@ -24,8 +30,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${pretendard.className} antialiased`}>
-        {children}
-        <BottomNav />
+        <Providers>
+          {children}
+          <BottomNav />
+          <ReactQueryDevtools />
+        </Providers>
       </body>
     </html>
   );
