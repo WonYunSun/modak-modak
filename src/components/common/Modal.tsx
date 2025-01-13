@@ -8,7 +8,7 @@ const Modal = ({ children }: { children: React.ReactNode }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
-    if(modalRef.current && !modalRef.current.contains(e.target as Node)) {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
       closeModal();
     }
   };
