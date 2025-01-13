@@ -297,9 +297,10 @@ export const User = ({ className, active }: IconProps) => {
   );
 };
 
-export const Comments = ({ className }: IconProps) => {
+export const Comments = ({ className, onClick }: IconProps) => {
   return (
     <svg
+      onClick={onClick}
       className={className}
       width="24"
       height="24"
