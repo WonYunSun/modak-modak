@@ -4,7 +4,7 @@ import { Comment, CommentUser } from '@components/comment/CommentCard';
 
 import { createClient } from '@utils/supabase/client';
 
-type CommentsType = Comment & { users: CommentUser };
+export type CommentsType = Comment & { users: CommentUser };
 
 const useComments = (post_id: string) => {
   const supabase = createClient();

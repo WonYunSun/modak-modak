@@ -1,11 +1,21 @@
 'use client';
 
-import Button from '@components/common/Button';
 import { useRef, useState } from 'react';
 
-const CommentInput = () => {
+import Button from '@components/common/Button';
+
+import useCommentInput from '@hooks/comment/useCommentInput';
+
+interface CommentInputProps {
+  postId: string;
+}
+
+const CommentInput = ({ postId }: CommentInputProps) => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
   const [commentValue, setCommentValue] = useState<string>('');
+
+  const mutation = useCommentInput(postId);
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -25,6 +35,18 @@ const CommentInput = () => {
     }
   };
 
+  const handleSubmit = () => {
+    if (!commentValue.trim()) return;
+    mutation.mutate(commentValue, {
+      onSuccess: () => {
+        setCommentValue('');
+        if (textAreaRef.current) {
+          textAreaRef.current.style.height = 'auto';
+        }
+      }
+    });
+  };
+
   return (
     <div className="w-[92%] bg-white absolute bottom-[5%] left-1/2 transform translate-x-[-50%] px-3 py-2 border rounded-lg h-auto flex items-center gap-2">
       <textarea
@@ -38,6 +60,7 @@ const CommentInput = () => {
       <Button
         type="button"
         label="등록"
+        onClick={handleSubmit}
         className={`w-[10%] text-sm font-semibold leading-[140%] ${
           commentValue ? '!bg-inherit text-sm !text-primary' : '!bg-inherit text-sm !text-gray-400'
         }`}

@@ -2,7 +2,7 @@
 
 import CommentCard from '@components/comment/CommentCard';
 
-import useComments from 'hooks/comment/useComments';
+import useComments from '@hooks/comment/useComments';
 
 interface CommentContentProps {
   postId: string;

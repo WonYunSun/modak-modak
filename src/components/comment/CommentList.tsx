@@ -1,8 +1,9 @@
 'use client';
 
 import { Sheet } from 'react-modal-sheet';
+
 import CommentContent from '@components/comment/CommentContent';
-import CommentInput from './CommentInput';
+import CommentInput from '@components/comment/CommentInput';
 
 interface CommentListProps {
   isOpen: boolean;
@@ -20,7 +21,7 @@ const CommentList = ({ isOpen, onClose, postId }: CommentListProps) => {
         </Sheet.Header>
         <Sheet.Content>
           <CommentContent postId={postId} />
-          <CommentInput />
+          <CommentInput postId={postId} />
         </Sheet.Content>
       </Sheet.Container>
       <Sheet.Backdrop onTap={onClose} className="!bg-black !bg-opacity-80" />
