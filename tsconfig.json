@@ -27,6 +27,7 @@
       "@ts/*": ["types/*"],
       "@hooks/*": ["hooks/*"],
       "@stores/*": ["stores/*"]
+      "@lib/*": ["lib/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src"],

@@ -10,7 +10,7 @@ const SocialLogins = () => {
     const supabase = await createClient();
     supabase.auth.signInWithOAuth({
       provider: provider,
-      options: { redirectTo: 'http://localhost:3000/api/auth/callback' }
+      options: { redirectTo: `${window.origin}/api/auth/callback` }
     });
   };
 
