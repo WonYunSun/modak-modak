@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import GroupCard from '@components/common/GroupCard';
+import GroupCard from '@components/common/groupCard/GroupCard';
 import { fetchGroupCardInfos } from '@utils/actions/home/fetchGroupList';
-import { GroupCardInfosType } from '@components/common/GroupCard';
+import { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
 
 const GroupList = () => {
   //const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886' //임시 유저 아이디 : 멤버예요
@@ -23,9 +23,9 @@ const GroupList = () => {
       <div className="flex flex-col gap-y-4">
         {groupDataList && (
           <>
-            {groupDataList.map((groupData) => {
-              return <GroupCard key={groupData.id} groupInfo={groupData} hasLink={true} />;
-            })}
+            {groupDataList.map((groupData) => (
+              <GroupCard key={groupData.id} groupInfo={groupData} hasLink={true} />
+            ))}
           </>
         )}
       </div>

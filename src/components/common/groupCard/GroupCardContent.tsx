@@ -1,17 +1,6 @@
-import Link from 'next/link';
-import { NextArrow } from '@components/icons';
-import { Database } from '@ts/supabase';
-import Image from 'next/image';
-
-type GroupType = Database['public']['Tables']['groups']['Row'];
-export interface GroupCardInfosType extends GroupType {
-  membersNum: number;
-}
-
-interface GroupCardProps {
-  groupInfo: GroupCardInfosType;
-  hasLink: boolean;
-}
+import { NextArrow } from "@components/icons";
+import Image from "next/image";
+import { GroupCardProps } from "./GroupCard";
 
 const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardProps) => {
   const { /*id,*/ name, description, image_url, membersNum } = groupInfo;
@@ -49,21 +38,4 @@ const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardProps) => {
   );
 };
 
-const GroupCard = ({ groupInfo, hasLink = true }: GroupCardProps) => {
-  //const { id } = groupInfo;
-  //todo: Link의 href는 모임방 페이지의 경로를 상의한 후 추가하기
-
-  return (
-    <>
-      {hasLink ? (
-        <Link href={'/'}>
-          <GroupCardContent groupInfo={groupInfo} hasLink={hasLink} />
-        </Link>
-      ) : (
-        <GroupCardContent groupInfo={groupInfo} hasLink={hasLink} />
-      )}
-    </>
-  );
-};
-
-export default GroupCard;
+export default GroupCardContent
