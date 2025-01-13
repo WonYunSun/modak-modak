@@ -1,32 +1,48 @@
 'use client';
-
+import { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
-
-import 'react-day-picker/style.css';
-import { useState } from 'react';
 import { ko } from 'react-day-picker/locale';
 import type { DateRange } from 'react-day-picker';
 import { CalendarIcon, ClockIcon } from '@components/icons';
+import 'react-day-picker/style.css';
 
 type ScheduleDatePickerProps = {
   onDateChange: (dateRange: { from: string; to: string }) => void;
   onTimeChange: (time: string) => void;
+  prevData: { scheduleDate: { from: string; to: string }; scheduleTime: string };
 };
-const ScheduleDatePicker = ({ onDateChange, onTimeChange }: ScheduleDatePickerProps) => {
+
+const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDatePickerProps) => {
   const [selectedRange, setSelectedRange] = useState<DateRange | undefined>();
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [isDatepickerOpen, setIsDatepickerOpen] = useState<boolean>(false);
 
-  const handleSelect = (range: DateRange | undefined) => {
-    setSelectedRange(range);
+  useEffect(() => {
+    if (prevData?.scheduleDate) {
+      setSelectedRange({
+        from: prevData.scheduleDate.from ? new Date(prevData.scheduleDate.from) : undefined,
+        to: prevData.scheduleDate.to ? new Date(prevData.scheduleDate.to) : undefined
+      });
+    }
+    setSelectedTime(prevData?.scheduleTime || '');
+  }, []);
 
-    // 선택된 날짜 범위에서 from과 to를 string으로 변환
+  const convertToUTC = (date: Date) => {
+    const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    return utcDate;
+  };
+
+  const handleSelect = (range: DateRange | undefined) => {
     if (range?.from && range?.to) {
+      const from = convertToUTC(range.from);
+      const to = convertToUTC(range.to);
+      setSelectedRange({ from, to });
       onDateChange({
-        from: range.from.toLocaleDateString(),
-        to: range.to.toLocaleDateString()
+        from: from.toISOString().split('T')[0],
+        to: to.toISOString().split('T')[0]
       });
     } else {
+      setSelectedRange(undefined);
       onDateChange({ from: '', to: '' });
     }
   };
@@ -53,14 +69,14 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange }: ScheduleDatePickerPr
           }} // 클릭 시 DatePicker 열기/닫기
           readOnly
           placeholder="날짜"
-          className=" border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[50px]"
+          className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[50px]"
         />
         {isDatepickerOpen && (
           <div className="absolute top-[100%] left-0 z-10">
             <DayPicker
               mode="range"
-              locale={ko}
               selected={selectedRange}
+              locale={ko}
               onSelect={handleSelect}
               captionLayout="label"
               dir="ltr"

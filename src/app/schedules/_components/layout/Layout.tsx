@@ -1,6 +1,6 @@
+import { ReactNode } from 'react';
 import Button from '@components/common/Button';
 
-import React, { ReactNode } from 'react';
 type LayoutProps = {
   children: ReactNode;
   isDisabled?: boolean;

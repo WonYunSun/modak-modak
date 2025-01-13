@@ -3,11 +3,11 @@
 import useFunnel from 'hooks/useFunnel';
 
 import { useEffect, useState } from 'react';
-import ScheduleNameForm from './StepComponents/ScheduleNameForm';
 import { Database } from '@ts/supabase';
+import useModalStore from 'stores/useModalStore';
 import ScheduleDateForm from './StepComponents/ScheduleDateForm';
 import ScheduleMemoForm from './StepComponents/ScheduleMemoForm';
-import useModalStore from 'stores/useModalStore';
+import ScheduleNameForm from './StepComponents/ScheduleNameForm';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
 
@@ -51,13 +51,29 @@ const NewSchedulesForm = () => {
     <>
       <Funnel headerLabel="일정 만들기">
         <Step name={steps[0]}>
-          <ScheduleNameForm onPrev={() => {}} onNext={(data) => handleNext(data, steps[1])} />
+          <ScheduleNameForm
+            onPrev={() => {}}
+            onNext={(data) => handleNext(data, steps[1])}
+            prevData={scheduleData.name}
+          />
         </Step>
         <Step name={steps[1]}>
-          <ScheduleDateForm onPrev={() => handlePrev(steps[0])} onNext={(data) => handleNext(data, steps[2])} />
+          <ScheduleDateForm
+            onPrev={() => handlePrev(steps[0])}
+            onNext={(data) => handleNext(data, steps[2])}
+            prevData={{
+              start_date: scheduleData.start_date,
+              end_date: scheduleData.end_date,
+              start_time: scheduleData.start_time
+            }}
+          />
         </Step>
         <Step name={steps[2]}>
-          <ScheduleMemoForm onPrev={() => handlePrev(steps[1])} onNext={(data) => handleNext(data, steps[3])} />
+          <ScheduleMemoForm
+            onPrev={() => handlePrev(steps[1])}
+            onNext={(data) => handleNext(data, steps[3])}
+            prevData={scheduleData.memo}
+          />
           <Modal>
             <div className="px-[1rem] py-[1.5rem] w-full mb-[1.25rem]">
               <p className="text-gray-900 font-semibold text-lg mb-[0.25rem]">일정을 만들었어요!</p>

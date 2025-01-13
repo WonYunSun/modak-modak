@@ -1,18 +1,18 @@
 'use client';
-
-import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
 import { Database } from '@ts/supabase';
 import { useState } from 'react';
+import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
 import Layout from '../layout/Layout';
 
 type ScheduleType = Database['public']['Tables']['schedules']['Row'];
 type ScheduleMemoFormProps = {
   onNext: (data: Pick<ScheduleType, 'memo'>) => void;
   onPrev: () => void;
+  prevData: ScheduleType['memo'];
 };
 
-const ScheduleMemoForm = ({ onNext, onPrev }: ScheduleMemoFormProps) => {
-  const [values, setValues] = useState({ scheduleMemo: '' });
+const ScheduleMemoForm = ({ onNext, onPrev, prevData }: ScheduleMemoFormProps) => {
+  const [values, setValues] = useState({ scheduleMemo: prevData || '' });
 
   const isDisabled = values.scheduleMemo.trim().length === 0;
 

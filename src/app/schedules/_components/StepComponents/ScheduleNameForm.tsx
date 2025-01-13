@@ -1,19 +1,19 @@
 'use client';
-
+import { Database } from '@ts/supabase';
 import { useState } from 'react';
 import Layout from '../layout/Layout';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
-import { Database } from '@ts/supabase';
 
 type ScheduleType = Database['public']['Tables']['schedules']['Row'];
 
 type ScheduleNameFormProps = {
   onNext: (data: Pick<ScheduleType, 'name'>) => void;
   onPrev: () => void;
+  prevData: ScheduleType['name'];
 };
 
-const ScheduleNameForm = ({ onNext, onPrev }: ScheduleNameFormProps) => {
-  const [values, setValues] = useState({ scheduleName: '' });
+const ScheduleNameForm = ({ onNext, onPrev, prevData }: ScheduleNameFormProps) => {
+  const [values, setValues] = useState({ scheduleName: prevData || '' });
 
   const isDisabled = values.scheduleName.trim().length === 0;
 

@@ -11,12 +11,13 @@ type ScheduleType = Database['public']['Tables']['schedules']['Row'];
 type ScheduleDateFormProps = {
   onNext: (data: Pick<ScheduleType, 'start_date' | 'end_date' | 'start_time'>) => void;
   onPrev: () => void;
+  prevData: { start_date: ScheduleType['start_date']; end_date: ScheduleType['end_date']; start_time: string };
 };
 
-const ScheduleDateForm = ({ onNext, onPrev }: ScheduleDateFormProps) => {
+const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) => {
   const [values, setValues] = useState<{ scheduleDate: { from: string; to: string }; scheduleTime: string }>({
-    scheduleDate: { from: '', to: '' },
-    scheduleTime: ''
+    scheduleDate: { from: prevData?.start_date || '', to: prevData?.end_date || '' }, // prevData를 초기값으로 설정
+    scheduleTime: prevData?.start_time || '' // prevData에서 시간 값을 가져옴
   });
 
   const handleNext = () => {
@@ -48,7 +49,14 @@ const ScheduleDateForm = ({ onNext, onPrev }: ScheduleDateFormProps) => {
     <Layout isDisabled={false} onNext={handleNext} onPrev={onPrev}>
       <div className="flex flex-col gap-4">
         <Label {...labelData} />
-        <ScheduleDatePicker onDateChange={handleDateChange} onTimeChange={handleTimeChange} />
+        <ScheduleDatePicker
+          onDateChange={handleDateChange}
+          onTimeChange={handleTimeChange}
+          prevData={{
+            scheduleDate: { from: prevData.start_date, to: prevData.end_date },
+            scheduleTime: prevData.start_time
+          }}
+        />
       </div>
     </Layout>
   );
