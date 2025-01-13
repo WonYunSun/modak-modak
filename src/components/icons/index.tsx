@@ -317,10 +317,11 @@ export const Comments = ({ className }: IconProps) => {
   );
 };
 
-export const Menu = ({ className }: IconProps) => {
+export const Menu = ({ className, onClick }: IconProps) => {
   return (
     <svg
       className={className}
+      onClick={onClick}
       width="32"
       height="32"
       viewBox="0 0 32 32"
