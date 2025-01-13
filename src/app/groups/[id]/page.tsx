@@ -1,15 +1,8 @@
-'use client';
-
-import PhotoList from '@app/groups/[id]/_components/PhotoList';
-import PostList from '@app/groups/[id]/_components/PostList';
-import ScheduleList from '@app/groups/[id]/_components/ScheduleList';
-import Tabs from '@app/groups/[id]/_components/Tabs';
 import GroupCard from '@components/common/GroupCard';
 import Header from '@components/common/Header';
-import { useTabStore } from 'stores/useTabStore';
+import TabPages from './_components/TabPages';
 
 const GroupPage = () => {
-  const { activeTab } = useTabStore();
 
   return (
     <div className="w-full">
@@ -19,7 +12,7 @@ const GroupPage = () => {
       </div>
       <div className="w-full h-[6.5rem] bg-primary-10"></div>
 
-      <div className="w-full px-5 relative -mt-[2.75rem] z-10">
+      <div className="w-full px-5 -mt-[2.75rem] z-10">
         <GroupCard
           groupInfo={{
             id: '123',
@@ -33,14 +26,7 @@ const GroupPage = () => {
       </div>
 
       {/* 탭 화면 */}
-      <div className="w-full mx-auto px-5 mt-4">
-        <Tabs />
-        <div className="">
-          {activeTab === 'posts' && <PostList />}
-          {activeTab === 'photos' && <PhotoList />}
-          {activeTab === 'schedules' && <ScheduleList />}
-        </div>
-      </div>
+      <TabPages />
     </div>
   );
 };
