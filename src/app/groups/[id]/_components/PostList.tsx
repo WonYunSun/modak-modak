@@ -2,7 +2,6 @@
 
 import Button from '@components/common/Button';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
-import CountBar from './CountBar';
 import Post from './Post';
 import { useRouter } from 'next/navigation';
 import { ModificationLine } from '@components/icons';
@@ -15,8 +14,6 @@ const PostList = () => {
       <section className="w-full flex flex-col">
         {/*검색바*/}
         <SearchBar />
-        {/*게시글 수*/}
-        <CountBar />
         {/*게시글*/}
         <Post />
         {/*플로팅 버튼*/}

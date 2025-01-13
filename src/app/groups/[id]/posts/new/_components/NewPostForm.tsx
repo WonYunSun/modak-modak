@@ -5,7 +5,7 @@ import { Plus, PlusGray } from '@components/icons';
 
 export const NewPostForm = () => {
   const handlePhoto = () => {
-    return null;    
+    return null;
   };
 
   const handleSubmit = () => {
@@ -51,3 +51,5 @@ export const NewPostForm = () => {
     </form>
   );
 };
+
+export default NewPostForm;

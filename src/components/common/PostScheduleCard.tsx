@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { DownArrow, UpArrow } from '@components/icons';
 import { Database } from '@ts/supabase';
 import { formatDate, formatTime } from '@utils/dateUtils';
-type ScheduleType = Database['public']['Tables']['schedules']['Row'];
-
+type ScheduleType = Pick<
+  Database['public']['Tables']['schedules']['Row'],
+  'name' | 'memo' | 'start_date' | 'end_date' | 'start_time'
+>;
 const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: ScheduleType) => {
   const [showDetails, setShowDetails] = useState(false);
   const labelClass = 'text-gray-500 whitespace-nowrap';
@@ -25,10 +27,10 @@ const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: Sche
         </div>
       </div>
       <div className={` ${showDetails ? 'block animate-fade-down animate-duration-200 text-xs' : 'hidden'} mt-1`}>
-        <div className={detailClass}>
+        {memo && <div className={detailClass}>
           <span className={labelClass}>메모</span>
           <span className="truncate w-full">{memo}</span>
-        </div>
+        </div>}
 
         <div className="flex items-center whitespace-nowrap">
           <span className={`${labelClass} pr-[12px]`}>일자</span>
