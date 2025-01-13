@@ -4,6 +4,8 @@ import ManagementCard from './_components/ManagementCard';
 import ManagementSection from './_components/ManagementSection';
 import ToggleBox from './_components/ToggleBox';
 import ManagementBtns from './_components/ManagementBtns';
+import ManageGroupProfile from './_components/ManageGroupProfile';
+import ChangeGroupProfileModal from './_components/ChangeGroupProfileModal';
 
 interface ManagementPageProps {
   params: {
@@ -21,12 +23,7 @@ const ManagementPage = ({ params }: ManagementPageProps) => {
       <div className="pt-12 mb-36">
         <div className="mb-6 w-full flex flex-col gap-y-2 bg-gray-200">
           <ManagementSection title={'모임 관리'}>
-            <ManagementCard label={'모임 프로필 변경'}>
-              <NextArrow />
-            </ManagementCard>
-            <ManagementCard label={'모임 대표 양도'}>
-              <NextArrow />
-            </ManagementCard>
+            <ManageGroupProfile />
           </ManagementSection>
 
           <ManagementSection title={'알림 관리'}>
@@ -44,8 +41,9 @@ const ManagementPage = ({ params }: ManagementPageProps) => {
             </ManagementCard>
           </ManagementSection>
         </div>
-        <ManagementBtns/>
+        <ManagementBtns />
       </div>
+      <ChangeGroupProfileModal />
     </>
   );
 };
