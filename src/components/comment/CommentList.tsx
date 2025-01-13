@@ -5,7 +5,7 @@ import { Sheet } from 'react-modal-sheet';
 import CommentContent from '@components/comment/CommentContent';
 import CommentInput from '@components/comment/CommentInput';
 
-import useActionModal from '@stores/useActionModal';
+import useBottomSheetStore from '@stores/useBottomSheetStore';
 
 interface CommentListProps {
   isOpen: boolean;
@@ -14,7 +14,7 @@ interface CommentListProps {
 }
 
 const CommentList = ({ isOpen, onClose, postId }: CommentListProps) => {
-  const { isActionModalOpen } = useActionModal();
+  const { isActionModalOpen } = useBottomSheetStore();
 
   return (
     <Sheet isOpen={isOpen} onClose={onClose} snapPoints={isActionModalOpen ? [0.7] : [0.6]}>

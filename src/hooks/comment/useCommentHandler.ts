@@ -17,7 +17,7 @@ const useCommentHandler = (commentId: string, postId: string) => {
   const updateComment = async (newContent: string) => {
     const { data, error } = await supabase
       .from('comments')
-      .update({ content: newContent, updated_at: new Date().toISOString() })
+      .update({ content: newContent, created_at: new Date().toISOString() })
       .eq('id', commentId)
       .select();
 

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface CommentValueState {
+interface useCommentValueState {
   checkModify: boolean;
   commentValue: string;
   commentId: string | null;
@@ -10,7 +10,7 @@ interface CommentValueState {
   reset: () => void;
 }
 
-const useCommentValue = create<CommentValueState>((set) => ({
+const useCommentValueStore = create<useCommentValueState>((set) => ({
   checkModify: false,
   commentValue: '',
   commentId: null,
@@ -20,4 +20,4 @@ const useCommentValue = create<CommentValueState>((set) => ({
   reset: () => set({ checkModify: false, commentValue: '', commentId: null })
 }));
 
-export default useCommentValue;
+export default useCommentValueStore;

@@ -18,9 +18,9 @@ const useComments = (post_id: string) => {
       users(id, nickname, profile_image)
     `
       )
-      .eq('post_id', post_id);
+      .eq('post_id', post_id)
+      .order('created_at', { ascending: false });
 
-    // 에러 처리 해주기
     if (error) throw new Error(error.message);
 
     return data;

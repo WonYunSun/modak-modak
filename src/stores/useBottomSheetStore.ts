@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
-interface useActionModalProps {
+interface useBottomSheetProps {
   isActionModalOpen: boolean;
   setActionModalOpen: (isOpen: boolean) => void;
 }
 
-const useActionModal = create<useActionModalProps>((set) => ({
+const useBottomSheetStore = create<useBottomSheetProps>((set) => ({
   isActionModalOpen: false,
   setActionModalOpen: (isOpen) => set({ isActionModalOpen: isOpen })
 }));
 
-export default useActionModal;
+export default useBottomSheetStore;
