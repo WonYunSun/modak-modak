@@ -70,6 +70,6 @@ const isPublicRoute = (pathname: string) => {
 };
 
 const needsAuthentication = (pathname: string): boolean => {
-  const paths: string[] = [];
+  const paths: string[] = ['/signup'];
   return paths.find((path) => pathname.startsWith(path)) !== undefined;
 };
