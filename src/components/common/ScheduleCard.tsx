@@ -40,9 +40,7 @@ const ScheduleCard = ({
         <div className="flex items-center whitespace-nowrap">
           <span className={`${labelClass} pr-[12px]`}>일자</span>
           <span>{formatDate(start_date)}</span>
-          {isSingleDay ? (
-            ''
-          ) : (
+          {isSingleDay && (
             <>
               <span className="px-[4px]">⁓</span>
               <span className="truncate">{formatDate(end_date)}</span>

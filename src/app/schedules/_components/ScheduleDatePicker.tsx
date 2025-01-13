@@ -1,18 +1,21 @@
 'use client';
 
 import { DayPicker } from 'react-day-picker';
+
 import 'react-day-picker/style.css';
 import { useState } from 'react';
 import { ko } from 'react-day-picker/locale';
 import type { DateRange } from 'react-day-picker';
+import { CalendarIcon, ClockIcon } from '@components/icons';
 
 type ScheduleDatePickerProps = {
   onDateChange: (dateRange: { from: string; to: string }) => void;
+  onTimeChange: (time: string) => void;
 };
-const ScheduleDatePicker = ({ onDateChange }: ScheduleDatePickerProps) => {
+const ScheduleDatePicker = ({ onDateChange, onTimeChange }: ScheduleDatePickerProps) => {
   const [selectedRange, setSelectedRange] = useState<DateRange | undefined>();
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedTime, setSelectedTime] = useState<string>('');
+  const [isDatepickerOpen, setIsDatepickerOpen] = useState<boolean>(false);
 
   const handleSelect = (range: DateRange | undefined) => {
     setSelectedRange(range);
@@ -28,43 +31,58 @@ const ScheduleDatePicker = ({ onDateChange }: ScheduleDatePickerProps) => {
     }
   };
 
-  return (
-    <div className="relative">
-      <input
-        type="text"
-        value={
-          selectedRange?.from && selectedRange?.to
-            ? `${selectedRange.from.toLocaleDateString()} ~ ${selectedRange.to.toLocaleDateString()}`
-            : ''
-        }
-        onClick={() => setIsOpen(!isOpen)} // 클릭 시 DatePicker 열기/닫기
-        readOnly
-        placeholder="날짜 범위를 선택하세요"
-        className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full"
-      />
+  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const time = e.target.value;
+    setSelectedTime(time);
+    onTimeChange(time);
+  };
 
-      {isOpen && (
-        <div className="absolute z-10 mt-1">
-          <DayPicker
-            mode="range"
-            locale={ko}
-            style={{}}
-            selected={selectedRange} // 범위 선택된 날짜
-            onSelect={handleSelect}
-            captionLayout="label"
-            dir="ltr"
-            showOutsideDays
-            timeZone="UTC"
-            weekStartsOn={1}
-            className="bg-white rounded-lg "
-            footer={
-              <button onClick={() => setIsOpen(false)} className="bg-blue-500 text-white py-1 px-4 rounded">
-                완료
-              </button>
-            }
-          />
-        </div>
-      )}
+  return (
+    <div className="space-y-4">
+      <div className="relative flex items-center">
+        <CalendarIcon className="absolute left-4 cursor-pointer" />
+        <input
+          type="text"
+          value={
+            selectedRange?.from && selectedRange?.to
+              ? `${selectedRange.from.toLocaleDateString()} ~ ${selectedRange.to.toLocaleDateString()}`
+              : ''
+          }
+          onClick={() => {
+            setIsDatepickerOpen(!isDatepickerOpen);
+          }} // 클릭 시 DatePicker 열기/닫기
+          readOnly
+          placeholder="날짜"
+          className=" border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[50px]"
+        />
+        {isDatepickerOpen && (
+          <div className="absolute top-[100%] left-0 z-10">
+            <DayPicker
+              mode="range"
+              locale={ko}
+              selected={selectedRange}
+              onSelect={handleSelect}
+              captionLayout="label"
+              dir="ltr"
+              showOutsideDays
+              timeZone="UTC"
+              weekStartsOn={1}
+              className="bg-white rounded-lg p-2.5"
+            />
+          </div>
+        )}
+      </div>
+      <div className="relative flex items-center">
+        <ClockIcon className="absolute left-4 cursor-pointer" />
+
+        <input
+          value={selectedTime}
+          onChange={handleTimeChange}
+          onClick={() => setIsDatepickerOpen(false)}
+          type="time"
+          className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[50px] "
+        />
+      </div>
     </div>
   );
 };

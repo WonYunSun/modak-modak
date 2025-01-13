@@ -9,9 +9,10 @@ type ScheduleType = Database['public']['Tables']['schedules']['Row'];
 
 type ScheduleNameFormProps = {
   onNext: (data: Pick<ScheduleType, 'name'>) => void;
+  onPrev: () => void;
 };
 
-const ScheduleNameForm = ({ onNext }: ScheduleNameFormProps) => {
+const ScheduleNameForm = ({ onNext, onPrev }: ScheduleNameFormProps) => {
   const [values, setValues] = useState({ scheduleName: '' });
 
   const isDisabled = values.scheduleName.trim().length === 0;
@@ -40,7 +41,7 @@ const ScheduleNameForm = ({ onNext }: ScheduleNameFormProps) => {
   };
 
   return (
-    <Layout isDisabled={isDisabled} onNext={handleNext}>
+    <Layout isDisabled={isDisabled} onNext={handleNext} onPrev={onPrev}>
       <LabeledTextInput {...data} />
     </Layout>
   );

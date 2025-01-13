@@ -11,6 +11,20 @@
   .inner {
     @apply px-[20px];
   }
+
+  input[type='time']::-webkit-calendar-picker-indicator {
+    display: none; /* 아이콘 숨기기 */
+  }
+
+  input[type='time']::-webkit-calendar-picker-indicator {
+    display: block;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: transparent;
+  }
 }
 
 @layer utilities {
