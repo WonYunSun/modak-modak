@@ -60,7 +60,7 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Image
-            src=""
+            src={comment.users.profile_image ? comment.users.profile_image : ''}
             width={36}
             height={36}
             className="w-9 h-9 rounded-[50%] bg-red-300"

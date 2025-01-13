@@ -1,3 +1,5 @@
+'use client';
+
 import { Sheet } from 'react-modal-sheet';
 import CommentContent from '@components/comment/CommentContent';
 
