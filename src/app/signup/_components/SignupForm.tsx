@@ -8,6 +8,7 @@ import ProfilePreview from './ProfilePreview';
 import { addUserInfo } from 'lib/signup/signup';
 import { uploadFile } from '@utils/uploadFile';
 import { createClient } from '@utils/supabase/client';
+import { useRouter } from 'next/navigation';
 
 interface FormState {
   profile: File | null;
@@ -16,6 +17,7 @@ interface FormState {
 
 const SignupForm = () => {
   const [values, setValues] = useState<FormState>({ profile: null, nickname: '' });
+  const router = useRouter();
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -28,18 +30,21 @@ const SignupForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const imageUrl = await uploadFile('profiles', 'users', values['profile']);
     try {
+      let imageUrl = '/icons/profile-image.webp';
+      if (values['profile']) {
+        imageUrl = await uploadFile('profiles', 'users', values['profile']);
+      }
       const userId = (await createClient().auth.getUser()).data.user?.id;
-      if (!userId) return alert(123);
+      if (!userId) return router.push('/login');
       await addUserInfo({
         id: userId,
         nickname: values.nickname,
         profile_image: imageUrl
       });
-      alert('완료!');
+      router.push('/signup/success');
     } catch (error) {
-      alert(error);
+      alert((error as Error).message);
     }
   };
 
