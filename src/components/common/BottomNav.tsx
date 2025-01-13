@@ -42,7 +42,7 @@ const BottomNav = () => {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 w-full h-16 bg-white flex shadow-[0px_-4px_4px_0px_rgba(0,0,0,0.1)] z-30">
+    <div className="fixed bottom-0 left-0 w-full h-16 bg-white flex shadow-[0px_-4px_4px_0px_rgba(0,0,0,0.1)] z-[30]">
       {buttons.map((button) => (
         <Link href={button.href} key={button.id} className="flex-1 flex justify-center items-center">
           <button className="flex flex-col justify-end items-center" onClick={() => setActiveButton(button.id)}>
