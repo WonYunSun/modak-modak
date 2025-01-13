@@ -1,8 +1,6 @@
 import { NextArrow } from '@components/icons';
-import { Database } from '@ts/supabase';
 import { formatDate, formatTime } from '@utils/dateUtils';
-
-type ScheduleType = Database['public']['Tables']['schedules']['Row'];
+import { ScheduleType } from '@ts/scheduleType';
 
 interface ScheduleCardProps extends ScheduleType {
   groupName?: string;

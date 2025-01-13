@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { DownArrow, UpArrow } from '@components/icons';
 import { Database } from '@ts/supabase';
 import { formatDate, formatTime } from '@utils/dateUtils';
-type ScheduleType = Database['public']['Tables']['schedules']['Row'];
+import { ScheduleType } from '@ts/scheduleType';
 
 const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: ScheduleType) => {
   const [showDetails, setShowDetails] = useState(false);

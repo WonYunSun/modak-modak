@@ -5,8 +5,7 @@ import { Database } from '@ts/supabase';
 import Layout from './../layout/Layout';
 import Label, { LabelProps } from '@components/common/Label';
 import ScheduleDatePicker from '../ScheduleDatePicker';
-
-type ScheduleType = Database['public']['Tables']['schedules']['Row'];
+import { ScheduleType } from '@ts/scheduleType';
 
 type ScheduleDateFormProps = {
   onNext: (data: Pick<ScheduleType, 'start_date' | 'end_date' | 'start_time'>) => void;

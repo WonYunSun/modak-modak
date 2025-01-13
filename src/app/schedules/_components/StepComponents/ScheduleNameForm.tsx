@@ -1,10 +1,9 @@
 'use client';
-import { Database } from '@ts/supabase';
+
 import { useState } from 'react';
 import Layout from '../layout/Layout';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
-
-type ScheduleType = Database['public']['Tables']['schedules']['Row'];
+import { ScheduleType } from '@ts/scheduleType';
 
 type ScheduleNameFormProps = {
   onNext: (data: Pick<ScheduleType, 'name'>) => void;

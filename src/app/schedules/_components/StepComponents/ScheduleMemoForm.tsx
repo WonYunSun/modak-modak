@@ -3,8 +3,8 @@ import { Database } from '@ts/supabase';
 import { useState } from 'react';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
 import Layout from '../layout/Layout';
+import { ScheduleType } from '@ts/scheduleType';
 
-type ScheduleType = Database['public']['Tables']['schedules']['Row'];
 type ScheduleMemoFormProps = {
   onNext: (data: Pick<ScheduleType, 'memo'>) => void;
   onPrev: () => void;

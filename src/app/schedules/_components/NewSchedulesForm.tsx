@@ -2,16 +2,14 @@
 
 import useFunnel from 'hooks/useFunnel';
 
-import { useEffect, useState } from 'react';
-import { Database } from '@ts/supabase';
+import { useState } from 'react';
 import useModalStore from 'stores/useModalStore';
 import ScheduleDateForm from './StepComponents/ScheduleDateForm';
 import ScheduleMemoForm from './StepComponents/ScheduleMemoForm';
 import ScheduleNameForm from './StepComponents/ScheduleNameForm';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
-
-type ScheduleType = Database['public']['Tables']['schedules']['Row'];
+import { ScheduleType } from '@ts/scheduleType';
 
 //단계 name 정의
 const steps = ['일정명', '모임일시', '메모', '완료'];
@@ -29,10 +27,6 @@ const NewSchedulesForm = () => {
     end_date: '',
     start_time: ''
   });
-
-  useEffect(() => {
-    console.log(scheduleData);
-  }, [scheduleData]);
 
   const handleNext = (data: Partial<ScheduleType>, nextStep: string) => {
     setScheduleData((prev) => ({ ...prev, ...data }));
