@@ -199,6 +199,21 @@ export const ModificationLine = () => {
   );
 };
 
+export const ModificationNoCircle = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M15.5858 4.41421C16.3668 3.63317 17.6332 3.63317 18.4142 4.41421L19.5858 5.58579C20.3668 6.36684 20.3668 7.63316 19.5858 8.41421L9.42819 18.5718C9.14899 18.851 8.79339 19.0413 8.40621 19.1188L4.29417 19.9412C4.15423 19.9692 4.03085 19.8458 4.05883 19.7058L4.88124 15.5938C4.95868 15.2066 5.14899 14.851 5.42819 14.5718L15.5858 4.41421Z"
+        stroke="#18181B"
+        stroke-width="2"
+      />
+      <path d="M14 6L18 10" stroke="#18181B" stroke-width="2" />
+    </svg>
+  );
+};
+
 export const Setting = ({ className }: IconProps) => {
   return (
     <svg
@@ -422,6 +437,14 @@ export const Plus = ({ className, active }: IconProps) => {
   );
 };
 
+export const PlusGray = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 4V20M20 12L4 12" stroke="#71717A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+};
+
 export const Search = ({ className }: IconProps) => {
   return (
     <svg
@@ -434,6 +457,27 @@ export const Search = ({ className }: IconProps) => {
     >
       <circle cx="11" cy="11" r="7" stroke="#18181B" strokeWidth="2" />
       <path d="M20 20L17 17" stroke="#18181B" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+};
+
+export const TrashCan = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 15L10 12" stroke="#FF3B30" stroke-width="2" stroke-linecap="round" />
+      <path d="M14 15L14 12" stroke="#FF3B30" stroke-width="2" stroke-linecap="round" />
+      <path
+        d="M3 7H21V7C20.0681 7 19.6022 7 19.2346 7.15224C18.7446 7.35523 18.3552 7.74458 18.1522 8.23463C18 8.60218 18 9.06812 18 10V16C18 17.8856 18 18.8284 17.4142 19.4142C16.8284 20 15.8856 20 14 20H10C8.11438 20 7.17157 20 6.58579 19.4142C6 18.8284 6 17.8856 6 16V10C6 9.06812 6 8.60218 5.84776 8.23463C5.64477 7.74458 5.25542 7.35523 4.76537 7.15224C4.39782 7 3.93188 7 3 7V7Z"
+        stroke="#FF3B30"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <path
+        d="M10.0681 3.37059C10.1821 3.26427 10.4332 3.17033 10.7825 3.10332C11.1318 3.03632 11.5597 3 12 3C12.4403 3 12.8682 3.03632 13.2175 3.10332C13.5668 3.17033 13.8179 3.26427 13.9319 3.37059"
+        stroke="#FF3B30"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
     </svg>
   );
 };
