@@ -24,8 +24,10 @@ const ProfilePreview = ({ width, height, name, setValue, imageUrl, className }: 
   };
 
   return (
+    // tailwind는 동적으로 클래스를 생성할 수 없어서 box 크기를 props로 받아와 설정할 수 없음
+    // className으로 넣어주거나 사이즈를 정해놓은 부모 박스가 필요
     <div
-      className={`w-[${width}px] h-[${height}px] relative mx-auto ${className}`}
+      className={`relative ${className}`}
       onClick={() => profileRef.current?.click()}
     >
       {profileFile ? (

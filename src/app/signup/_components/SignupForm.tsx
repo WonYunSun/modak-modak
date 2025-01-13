@@ -24,9 +24,14 @@ const SignupForm = () => {
     <form className="flex flex-col flex-grow" onSubmit={handleSubmit}>
       <section className="mt-11 mb-14">
         <Label className="mb-10" {...profileLabelProps} />
-        <ProfilePreview width={120} height={120} name="profile" setValue={handleFileChange}/>
+        <ProfilePreview
+          width={120}
+          height={120}
+          name="profile"
+          setValue={handleFileChange}
+          className="w-[120px] h-[120px] mx-auto"
+        />
       </section>
-
       <LabeledTextInput {...inputProps} value={values.nickname} onChange={handleChange} />
       <Button className="full-btn mt-auto mb-[19px]" disabled={!values.nickname} type="submit" label="가입하기" />
     </form>
