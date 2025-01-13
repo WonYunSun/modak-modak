@@ -4,13 +4,14 @@ export interface LabelProps {
   required?: boolean;
   description?: string;
   className?: string;
+  innerClass?: string;
 }
 
-const Label = ({ htmlFor, label, required, description, className }: LabelProps) => {
+const Label = ({ htmlFor, label, required, description, className, innerClass }: LabelProps) => {
   return (
     <div className={`flex flex-col gap-1 ${className}`}>
       <div className="flex">
-        <label className="font-semibold text-xl leading-[140%]" htmlFor={htmlFor}>
+        <label className={`font-semibold text-xl leading-[140%] ${innerClass}`} htmlFor={htmlFor}>
           {label}
         </label>
         {required && <p className="text-[#FF3B30] ml-1">*</p>}
