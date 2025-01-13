@@ -50,7 +50,7 @@ const MemberCard = ({ isLeader, isMe = false, mode }: MemberCardProps) => {
           <div className="w-8 h-8 rounded-[50%] overflow-hidden">
             <Image src={profile} width={100} height={100} alt={'member_profile'} />
           </div>
-          <span className="align-middle">
+          <span className="flex items-center gap-1">
             {name} {isMe && <span className="text-gray-500 text-sm">{'(나)'}</span>}
           </span>
         </div>

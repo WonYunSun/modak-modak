@@ -1,14 +1,16 @@
 'use client';
-
-import useModalStore from 'stores/useModalStore';
+//안 쓰게 될지도...?
 import ManagementCard from './ManagementCard';
 import { NextArrow } from '@components/icons';
+import { ModalModeType } from './ManagementContents';
 
-const ManageGroupProfile = () => {
-  const { openModal } = useModalStore();
+interface ManageGroupProfileProps {
+  handleOpenModal : (mode: ModalModeType)=>void;
+}
+const ManageGroupProfile = ({ handleOpenModal }: ManageGroupProfileProps) => {
 
   return (
-    <ManagementCard label={'모임 프로필 변경'} handleClick={openModal}>
+    <ManagementCard label={'모임 프로필 변경'} handleClick={()=>{handleOpenModal('changeProfile');}}>
       <NextArrow />
     </ManagementCard>
   );

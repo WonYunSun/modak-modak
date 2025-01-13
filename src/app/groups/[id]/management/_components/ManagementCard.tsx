@@ -12,13 +12,15 @@ const ManagementCard = ({ children, label, link = null, handleClick = () => {} }
   return (
     <>
       {link ? (
-        <Link href={link}>
-          <div className={`w-full`} onClick={handleClick}>
-            <div className="px-5 h-14 flex items-center justify-between">
-              <span>{label}</span> {children}
+        <div>
+          <Link href={link}>
+            <div className={`w-full`} onClick={handleClick}>
+              <div className="px-5 h-14 flex items-center justify-between">
+                <span>{label}</span> {children}
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
       ) : (
         <div className={`w-full`} onClick={handleClick}>
           <div className="px-5 h-14 flex items-center justify-between">

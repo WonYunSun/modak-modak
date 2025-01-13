@@ -1,11 +1,5 @@
 import Header from '@components/common/Header';
-import { Copy, NextArrow } from '@components/icons';
-import ManagementCard from './_components/ManagementCard';
-import ManagementSection from './_components/ManagementSection';
-import ToggleBox from './_components/ToggleBox';
-import ManagementBtns from './_components/ManagementBtns';
-import ManageGroupProfile from './_components/ManageGroupProfile';
-import ChangeGroupProfileModal from './_components/ChangeGroupProfileModal';
+import ManagementContents from './_components/ManagementContents';
 
 interface ManagementPageProps {
   params: {
@@ -20,30 +14,7 @@ const ManagementPage = ({ params }: ManagementPageProps) => {
   return (
     <>
       <Header home={false} label={'관리 페이지'} />
-      <div className="pt-12 mb-36">
-        <div className="mb-6 w-full flex flex-col gap-y-2 bg-gray-200">
-          <ManagementSection title={'모임 관리'}>
-            <ManageGroupProfile />
-          </ManagementSection>
-
-          <ManagementSection title={'알림 관리'}>
-            <ManagementCard label={'모임방 전체 알림'}>
-              <ToggleBox isChecked={false} />
-            </ManagementCard>
-          </ManagementSection>
-
-          <ManagementSection title={'멤버 관리'} isLast={true}>
-            <ManagementCard label={'멤버 초대링크 복사하기'}>
-              <Copy />
-            </ManagementCard>
-            <ManagementCard label={'멤버 목록'} link={`/groups/${id}/management/members`}>
-              <NextArrow />
-            </ManagementCard>
-          </ManagementSection>
-        </div>
-        <ManagementBtns />
-      </div>
-      <ChangeGroupProfileModal />
+      <ManagementContents id={id}/>
     </>
   );
 };
