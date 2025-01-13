@@ -5,9 +5,17 @@ import Button from '@components/common/Button';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
 import Label, { LabelProps } from '@components/common/Label';
 import ProfilePreview from './ProfilePreview';
+import { addUserInfo } from 'lib/signup/signup';
+import { uploadFile } from '@utils/uploadFile';
+import { createClient } from '@utils/supabase/client';
+
+interface FormState {
+  profile: File | null;
+  nickname: string;
+}
 
 const SignupForm = () => {
-  const [values, setValues] = useState({ profile: null, nickname: '' });
+  const [values, setValues] = useState<FormState>({ profile: null, nickname: '' });
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -18,15 +26,29 @@ const SignupForm = () => {
     setValues((prev) => ({ ...prev, [name]: file }));
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const imageUrl = await uploadFile('profiles', 'users', values['profile']);
+    try {
+      const userId = (await createClient().auth.getUser()).data.user?.id;
+      if (!userId) return alert(123);
+      await addUserInfo({
+        id: userId,
+        nickname: values.nickname,
+        profile_image: imageUrl
+      });
+      alert('완료!');
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   return (
     <form className="flex flex-col flex-grow" onSubmit={handleSubmit}>
       <section className="mt-11 mb-14">
         <Label className="mb-10" {...profileLabelProps} />
-        <ProfilePreview width={120} height={120} name="profile" setValue={handleFileChange}/>
+        <ProfilePreview width={120} height={120} name="profile" setValue={handleFileChange} />
       </section>
-
       <LabeledTextInput {...inputProps} value={values.nickname} onChange={handleChange} />
       <Button className="full-btn mt-auto mb-[19px]" disabled={!values.nickname} type="submit" label="가입하기" />
     </form>
