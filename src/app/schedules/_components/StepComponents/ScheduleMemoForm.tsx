@@ -1,5 +1,5 @@
 'use client';
-import { Database } from '@ts/supabase';
+
 import { useState } from 'react';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
 import Layout from '../layout/Layout';

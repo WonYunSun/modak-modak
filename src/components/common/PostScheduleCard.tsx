@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { DownArrow, UpArrow } from '@components/icons';
-import { Database } from '@ts/supabase';
 import { formatDate, formatTime } from '@utils/dateUtils';
 import { ScheduleType } from '@ts/scheduleType';
 

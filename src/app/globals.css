@@ -25,6 +25,10 @@
     position: absolute;
     background: transparent;
   }
+  .rdp-root {
+    --rdp-accent-color: #b94600;
+    --rdp-accent-background-color: #ffd3b8;
+  }
 }
 
 @layer utilities {
