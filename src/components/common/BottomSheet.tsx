@@ -5,10 +5,9 @@ interface BottomSheetProps {
   onClose: () => void;
   snapPoint: number[];
   children: React.ReactNode;
-  postId?: string;
 }
 
-const BottomSheet = ({ children, isOpen, onClose, snapPoint, postId }: BottomSheetProps) => {
+const BottomSheet = ({ children, isOpen, onClose, snapPoint }: BottomSheetProps) => {
   return (
     <Sheet isOpen={isOpen} onClose={onClose} snapPoints={snapPoint}>
       <Sheet.Container>

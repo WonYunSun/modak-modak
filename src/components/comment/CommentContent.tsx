@@ -17,7 +17,9 @@ const CommentContent = ({ postId }: CommentContentProps) => {
   return (
     <div className="min-h-[80%] max-h-[80%] w-[92%] mx-auto pt-5 overflow-y-scroll scrollbar-hide">
       {comments && comments?.length > 0 ? (
-        comments?.map((comment) => <CommentCard key={comment.id} comment={comment} postId={postId} />)
+        comments?.map((comment) => (
+          <CommentCard key={comment.id || new Date().toISOString()} comment={comment} postId={postId} />
+        ))
       ) : (
         <div className="flex items-center justify-center text-center pt-[6.25rem]">
           <div>
