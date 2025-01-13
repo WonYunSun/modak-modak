@@ -1,13 +1,13 @@
 'use client';
 
+import { useState } from 'react';
+import useModalStore from 'stores/useModalStore';
 import ManagementSection from './ManagementSection';
 import ManagementCard from './ManagementCard';
 import ToggleBox from './ToggleBox';
 import ManagementBtns from './ManagementBtns';
-import ManagementModal from './ManagementModal';
+import ManagementModal from './modal/ManagementModal';
 import { Copy, NextArrow } from '@components/icons';
-import { useState } from 'react';
-import useModalStore from 'stores/useModalStore';
 
 export type ModalModeType = 'changeProfile' | 'deleteGroup' | 'leaveGroup';
 interface ManagementContentsProps {

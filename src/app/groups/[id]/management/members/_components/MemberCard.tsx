@@ -1,6 +1,5 @@
-import { Menu } from '@components/icons';
 import Image from 'next/image';
-import React from 'react';
+import { Menu } from '@components/icons';
 
 interface MemberCardBtnsProps {
   isLeader: boolean;

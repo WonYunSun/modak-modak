@@ -1,8 +1,7 @@
 import Modal from '@components/common/Modal';
-import React from 'react';
-import { ModalModeType } from './ManagementContents';
-import ChangeGroupProfileModal from './ChangeGroupProfileModal';
-import DeleteGroupModal from './DeleteGroupModal';
+import { ModalModeType } from '../ManagementContents';
+import ChangeGroupProfileModal from './groupProfileModal/ChangeGroupProfileModal';
+import DeleteGroupModal from './deleteModal/DeleteGroupModal';
 import LeaveGroupModal from './LeaveGroupModal';
 
 interface ManagementModalProps {
@@ -11,8 +10,8 @@ interface ManagementModalProps {
 const ManagementModal = ({ modalMode }: ManagementModalProps) => {
   const modals = {
     changeProfile: <ChangeGroupProfileModal />,
-    deleteGroup: <DeleteGroupModal/>,
-    leaveGroup: <LeaveGroupModal/>
+    deleteGroup: <DeleteGroupModal />,
+    leaveGroup: <LeaveGroupModal />
   };
   return <Modal>{modalMode && modals[modalMode]}</Modal>;
 };

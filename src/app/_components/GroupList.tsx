@@ -12,8 +12,8 @@ const GroupList = () => {
   const [groupDataList, setGroupDataList] = useState<GroupCardInfosType[] | null>(null);
   useEffect(() => {
     const fetch = async () => {
-      const fetchedgroupDataList = await fetchGroupCardInfos({ userId });
-      if (fetchedgroupDataList) setGroupDataList(fetchedgroupDataList);
+      const fetchedGroupDataList = await fetchGroupCardInfos({ userId });
+      if (fetchedGroupDataList) setGroupDataList(fetchedGroupDataList);
     };
     fetch();
   }, []);

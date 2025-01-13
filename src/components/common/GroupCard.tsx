@@ -24,7 +24,7 @@ const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardProps) => {
           <Image
             width={100}
             height={100}
-            style={{ width: '100%', height: '100%' }}
+            className='w-full h-full'
             src={`${image_url}`}
             alt="group_profile"
           />
