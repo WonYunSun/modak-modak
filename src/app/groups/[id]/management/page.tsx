@@ -12,10 +12,10 @@ const ManagementPage = ({ params }: ManagementPageProps) => {
   //1113b74a-2ec2-4f35-b044-4f42925cc076 얼그레이 연구회 아이디
 
   return (
-    <>
+    <main>
       <Header home={false} label={'관리 페이지'} />
       <ManagementContents id={id}/>
-    </>
+    </main>
   );
 };
 

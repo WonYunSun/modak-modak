@@ -22,21 +22,24 @@ const ManagementContents = ({ id }: ManagementContentsProps) => {
     setModalMode(mode);
     openModal();
   };
+  const isLeader = true;
 
   return (
     <>
-      <div className="pt-12 mb-36">
+      <div className="pt-6 mb-36">
         <div className="mb-6 w-full flex flex-col gap-y-2 border-b bg-gray-200">
-          <ManagementSection title={'모임 관리'}>
-            <ManagementCard
-              label={'모임 프로필 변경'}
-              handleClick={() => {
-                handleOpenModal('changeProfile');
-              }}
-            >
-              <NextArrow />
-            </ManagementCard>
-          </ManagementSection>
+          {isLeader && (
+            <ManagementSection title={'모임 관리'}>
+              <ManagementCard
+                label={'모임 프로필 변경'}
+                handleClick={() => {
+                  handleOpenModal('changeProfile');
+                }}
+              >
+                <NextArrow />
+              </ManagementCard>
+            </ManagementSection>
+          )}
 
           <ManagementSection title={'알림 관리'}>
             <ManagementCard label={'모임방 전체 알림'}>
@@ -53,7 +56,7 @@ const ManagementContents = ({ id }: ManagementContentsProps) => {
             </ManagementCard>
           </ManagementSection>
         </div>
-        <ManagementBtns handleOpenModal={handleOpenModal} />
+        <ManagementBtns isLeader={isLeader} handleOpenModal={handleOpenModal} />
       </div>
       <ManagementModal modalMode={modalMode} />
     </>

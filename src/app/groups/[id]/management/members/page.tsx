@@ -5,7 +5,7 @@ const MembersPage = () => {
   return (
     <>
       <Header home={false} label={'멤버 목록'} />
-      <div className="pt-12 mb-36">
+      <div className="pt-6 mb-36">
         <MembersPageContents/>
       </div>
     </>
