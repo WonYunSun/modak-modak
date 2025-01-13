@@ -3,7 +3,6 @@
 import PostScheduleCard from '@components/common/PostScheduleCard';
 import Image from 'next/image';
 import { Comments, Menu } from '@components/icons';
-import { useFetchPosts } from 'hooks/useFetchPosts';
 import { useState } from 'react';
 import { PostActionBottomSheet } from './PostActionBottomSheet';
 
