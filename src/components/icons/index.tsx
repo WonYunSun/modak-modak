@@ -183,6 +183,22 @@ export const Modification = ({ className }: IconProps) => {
   );
 };
 
+export const ModificationLine = () => {
+  return (
+    <svg className="mb-[2px]" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M15.5858 4.41421C16.3668 3.63317 17.6332 3.63317 18.4142 4.41421L19.5858 5.58579C20.3668 6.36684 20.3668 7.63316 19.5858 8.41421L9.42819 18.5718C9.14899 18.851 8.79339 19.0413 8.40621 19.1188L4.29417 19.9412C4.15423 19.9692 4.03085 19.8458 4.05883 19.7058L4.88124 15.5938C4.95868 15.2066 5.14899 14.851 5.42819 14.5718L15.5858 4.41421Z"
+        stroke="#FFF"
+        strokeWidth="2"
+      />
+      <path d="M14 6L18 10" stroke="#FFF" strokeWidth="2" />
+      <path d="M12 20H20" stroke="#FFF" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+};
+
 export const Setting = ({ className }: IconProps) => {
   return (
     <svg

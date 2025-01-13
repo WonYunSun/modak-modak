@@ -1,7 +1,8 @@
 'use client';
 
 import useFunnel from 'hooks/useFunnel';
-import React, { useEffect, useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import ScheduleTitleForm from './StepComponents/ScheduleNameForm';
 import { Database } from '@ts/supabase';
 import ScheduleDateForm from './StepComponents/ScheduleDateForm';

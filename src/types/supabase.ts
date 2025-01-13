@@ -144,6 +144,7 @@ export type Database = {
         Row: {
           content: string | null;
           created_at: string;
+          group_id: string;
           id: string;
           schedule_id: string;
           user_id: string;
@@ -151,6 +152,7 @@ export type Database = {
         Insert: {
           content?: string | null;
           created_at?: string;
+          group_id: string;
           id?: string;
           schedule_id: string;
           user_id: string;
@@ -158,6 +160,7 @@ export type Database = {
         Update: {
           content?: string | null;
           created_at?: string;
+          group_id?: string;
           id?: string;
           schedule_id?: string;
           user_id?: string;
@@ -175,6 +178,13 @@ export type Database = {
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'posts_group_id_fkey';
+            columns: ['group_id'];
+            isOneToOne: false;
+            referencedRelation: 'groups';
             referencedColumns: ['id'];
           }
         ];
