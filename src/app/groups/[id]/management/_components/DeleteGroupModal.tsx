@@ -11,7 +11,7 @@ const DeletionSuccess = () => {
         <h4 className="mb-1 text-lg font-semibold text-gray-900">모임이 삭제되었어요</h4>
         <div className="text-gray-500">다시 뵐 수 있으면 좋겠어요!</div>
       </div>
-      <Link href="/" className='w-full mt-5'>
+      <Link href="/" className="w-full mt-5">
         <Button type={'button'} className={'full-btn'} label={'확인'} />
       </Link>
     </>
@@ -46,7 +46,7 @@ const DeletionConfirm = ({ onNextStep, onConfirmDelete }: DeletionConfirmProps) 
         <div className="w-full mb-5 text-lg font-semibold">
           모임을 삭제하시려면
           <br />
-          '삭제'라고 입력해주세요
+          {"'삭제'라고 입력해주세요"}
         </div>
         <input
           type="text"

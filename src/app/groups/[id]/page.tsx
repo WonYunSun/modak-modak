@@ -15,6 +15,7 @@ const GroupPage = () => {
       <div className="w-full px-5 -mt-[2.75rem] z-10">
         <GroupCard
           groupInfo={{
+            created_at:'',
             id: '123',
             name: '모각코!',
             description: '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
