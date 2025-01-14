@@ -1,5 +1,5 @@
-import Button from '@components/common/Button';
 import useModalStore from '@stores/useModalStore';
+import Button from '@components/common/Button';
 
 const AskLeaderTransition = () => {
   const { closeModal } = useModalStore();
