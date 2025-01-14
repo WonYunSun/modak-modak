@@ -1,10 +1,11 @@
+'use client';
 
 interface ManagementSectionProps {
   isLast?: boolean;
   title: string;
   children: React.ReactNode;
 }
-const ManagementSection = ({ title, children, isLast=false }: ManagementSectionProps) => {
+const ManagementSection = ({ title, children, isLast = false }: ManagementSectionProps) => {
   return (
     <div className={`bg-white ${isLast ? 'pt-5' : 'py-5'}`}>
       <h4 className="px-5 py-3 text-gray-900 font-bold">{title}</h4>
@@ -13,4 +14,4 @@ const ManagementSection = ({ title, children, isLast=false }: ManagementSectionP
   );
 };
 
-export default ManagementSection
+export default ManagementSection;

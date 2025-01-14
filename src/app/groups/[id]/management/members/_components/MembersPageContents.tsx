@@ -3,17 +3,23 @@
 import { useState } from 'react';
 import CurMemberList from './CurMemberList';
 import WaitingMemberList from './WaitingMemberList';
+import MembersBottomSheet from './MembersBottomSheet';
+import ManagementModal from '../../_components/modal/ManagementModal';
 
 type TabType = 'currentMembers' | 'awaitingMembers';
 
 const MembersPageContents = () => {
   const [selectedTab, setSelectedTab] = useState<TabType>('currentMembers');
+
   const handleCurMemTabClick = () => {
     setSelectedTab('currentMembers');
   };
+
   const handleAwaitMemTabClick = () => {
     setSelectedTab('awaitingMembers');
   };
+
+  const isLeaderUser = true;
 
   return (
     <>
@@ -34,7 +40,13 @@ const MembersPageContents = () => {
         </div>
       </div>
 
-      {selectedTab === 'currentMembers' ? <CurMemberList/> : <WaitingMemberList/>}
+      {selectedTab === 'currentMembers' ? (
+        <CurMemberList isLeaderUser={isLeaderUser} />
+      ) : (
+        <WaitingMemberList isLeaderUser={isLeaderUser} />
+      )}
+      <ManagementModal isLeader={isLeaderUser} modalMode={'leaderTransition'} />
+      <MembersBottomSheet />
     </>
   );
 };

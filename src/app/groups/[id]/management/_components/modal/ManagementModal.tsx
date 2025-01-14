@@ -1,3 +1,5 @@
+'use client';
+
 import Modal from '@components/common/Modal';
 import { ModalModeType } from '../ManagementContents';
 import ChangeGroupProfileModal from './changeGroupProfile/ChangeGroupProfileModal';
@@ -14,7 +16,7 @@ const ManagementModal = ({ isLeader, modalMode }: ManagementModalProps) => {
     changeProfile: <ChangeGroupProfileModal />,
     deleteGroup: <DeleteGroupModal />,
     leaveGroup: <LeaveGroupModal isLeader={isLeader} />,
-    leaderTransition: <LeaderTransitionModal />
+    leaderTransition: <LeaderTransitionModal />,
   };
   return <Modal>{modalMode && modals[modalMode]}</Modal>;
 };

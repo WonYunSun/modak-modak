@@ -1,15 +1,10 @@
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+
+dayjs.locale('ko');
+
 export const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  const dayOfWeek = new Intl.DateTimeFormat('ko-KR', { weekday: 'short' }).format(date);
-
-  // 날짜 포맷
-  const formattedDate = new Intl.DateTimeFormat('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(date);
-
-  return `${formattedDate}(${dayOfWeek})`;
+  return dayjs(dateString).format('YYYY.MM.DD (dd)');
 };
 
 export const formatTime = (timeString: string): string => {

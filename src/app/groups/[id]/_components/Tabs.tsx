@@ -6,7 +6,7 @@ const Tabs = () => {
   const { activeTab, setActiveTab } = useTabStore();
 
   return (
-    <div className="flex">
+    <div className="flex cursor-pointer">
       {/* 게시글 탭 */}
       <div
         onClick={() => setActiveTab('posts')}

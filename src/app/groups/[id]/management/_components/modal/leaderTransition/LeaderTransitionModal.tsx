@@ -1,8 +1,22 @@
+'use client';
+
+import { useState } from 'react';
+import AssureTransition from './AssureTransition';
+import TransitionSuccess from './TransitionSuccess';
 
 const LeaderTransitionModal = () => {
-  return (
-    <div>LeaderTransitionModal</div>
-  )
-}
+  const [transitionStep, setTransitionStep] = useState(1);
 
-export default LeaderTransitionModal
+  const onNextStep = () => {
+    setTransitionStep((prev) => prev + 1);
+  };
+
+  return (
+    <>
+      {transitionStep === 1 && <AssureTransition onNextStep={onNextStep} />}
+      {transitionStep === 2 && <TransitionSuccess />}
+    </>
+  );
+};
+
+export default LeaderTransitionModal;

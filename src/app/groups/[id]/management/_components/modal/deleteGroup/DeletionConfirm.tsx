@@ -1,6 +1,8 @@
-import { useState } from "react";
-import useModalStore from "stores/useModalStore";
-import Button from "@components/common/Button";
+'use client';
+
+import { useState } from 'react';
+import useModalStore from 'stores/useModalStore';
+import Button from '@components/common/Button';
 
 interface DeletionConfirmProps {
   onNextStep: () => void;

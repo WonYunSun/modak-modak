@@ -1,6 +1,12 @@
+'use client';
+
 import MemberCard from './MemberCard';
 
-const CurMemberList = () => {
+interface CurMemberListProps {
+  isLeaderUser: boolean;
+}
+const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
+  //나의 멤버카드가 리스트의 최상단에 오나?
   return (
     <div>
       <div className="pt-5 font-semibold">
@@ -9,15 +15,15 @@ const CurMemberList = () => {
         </div>
       </div>
       <div>
-        <MemberCard isLeader={true} mode={'curMembers'} />
-        <MemberCard isLeader={false} mode={'curMembers'} isMe={true}/>
-        <MemberCard isLeader={false} mode={'curMembers'} />
-        <MemberCard isLeader={false} mode={'curMembers'} />
-        <MemberCard isLeader={false} mode={'curMembers'} />
-        <MemberCard isLeader={false} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} isMe={true} />
+        <MemberCard isLeaderUser={isLeaderUser} isLeader={true} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} />
       </div>
     </div>
   );
-}
+};
 
-export default CurMemberList
+export default CurMemberList;
