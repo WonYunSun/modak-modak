@@ -5,7 +5,14 @@ import { DownArrow, UpArrow } from '@components/icons';
 import { formatDate, formatTime } from '@utils/dateUtils';
 import { ScheduleType } from '@ts/scheduleType';
 
-const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: ScheduleType) => {
+type PostScheduleCardProps = {
+  name: ScheduleType['name'];
+  memo: ScheduleType['memo'];
+  start_date: ScheduleType['start_date'];
+  end_date: ScheduleType['end_date'];
+  start_time: ScheduleType['start_time'];
+};
+const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: PostScheduleCardProps) => {
   const [showDetails, setShowDetails] = useState(false);
   const labelClass = 'text-gray-500 whitespace-nowrap';
   const detailClass = 'flex items-center gap-3';

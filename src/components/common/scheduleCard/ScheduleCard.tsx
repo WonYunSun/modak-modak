@@ -2,10 +2,15 @@ import { NextArrow } from '@components/icons';
 import { formatDate, formatTime } from '@utils/dateUtils';
 import { ScheduleType } from '@ts/scheduleType';
 
-interface ScheduleCardProps extends ScheduleType {
+type ScheduleCardProps = {
+  name: ScheduleType['name'];
+  memo: ScheduleType['memo'];
+  start_date: ScheduleType['start_date'];
+  end_date: ScheduleType['end_date'];
+  start_time: ScheduleType['start_time'];
   groupName?: string;
   hasArrow?: boolean;
-}
+};
 
 const ScheduleCard = ({
   name,

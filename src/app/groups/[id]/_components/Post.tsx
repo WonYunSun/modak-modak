@@ -82,9 +82,6 @@ const Post = () => {
               start_date={'2025-01-11'}
               end_date={'2025-01-11'}
               start_time={'19:00'}
-              created_at="2025-01-10"
-              group_id="123"
-              id="123"
             />
           </div>
           {/* 댓글*/}
