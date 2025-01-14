@@ -20,7 +20,7 @@ const useCommentInput = (postId: string) => {
 
   const createComment = async (content: string) => {
     try {
-      const user = await getUser();
+      //const user = await getUser();
 
       const { data, error } = await supabase.from('comments').insert([
         {

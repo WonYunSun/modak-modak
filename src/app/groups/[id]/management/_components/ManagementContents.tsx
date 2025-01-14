@@ -9,7 +9,7 @@ import ManagementBtns from './ManagementBtns';
 import ManagementModal from './modal/ManagementModal';
 import { Copy, NextArrow } from '@components/icons';
 
-export type ModalModeType = 'changeProfile' | 'deleteGroup' | 'leaveGroup';
+export type ModalModeType = 'changeProfile' | 'deleteGroup' | 'leaveGroup' | 'leaderTransition';
 interface ManagementContentsProps {
   id: string;
 }
@@ -58,7 +58,7 @@ const ManagementContents = ({ id }: ManagementContentsProps) => {
         </div>
         <ManagementBtns isLeader={isLeader} handleOpenModal={handleOpenModal} />
       </div>
-      <ManagementModal modalMode={modalMode} />
+      <ManagementModal isLeader={isLeader} modalMode={modalMode} />
     </>
   );
 };
