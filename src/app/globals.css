@@ -39,6 +39,42 @@
   }
 }
 
+/*토글 버튼 구현용 클래스*/
+@layer utilities {
+  .toggle-btn .switch {
+    position: relative;
+    display: inline-block;
+    width: 51px;
+    height: 31px;
+}
+.toggle-btn .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0px;
+    background-color: #F1F1F1;
+    transition: all 0.2s ease 0s;
+    border-radius: 34px;
+}
+.toggle-btn .slider::before {
+    position: absolute;
+    content: "";
+    width: 25px;
+    height: 25px;
+    left: 2px;
+    bottom: 3px;
+    background-color: white;
+    transition: all 0.2s ease 0s;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 4px 0px;
+}
+.toggle-btn input:checked + .slider {
+    background-color: #34C759;
+}
+.toggle-btn input:checked + .slider::before {
+    transform: translateX(22px);
+}
+}
+
 /* button 클래스 */
 @layer utilities {
   .full-btn {

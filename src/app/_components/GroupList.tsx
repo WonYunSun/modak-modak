@@ -1,25 +1,33 @@
-import GroupCard from '@components/common/GroupCard';
+'use client';
+
+import { useEffect, useState } from 'react';
+import GroupCard from '@components/common/groupCard/GroupCard';
+import { fetchGroupCardInfos } from '@utils/actions/home/fetchGroupList';
+import { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
 
 const GroupList = () => {
-  //그룹 리스트 화면에 모임 카드와 스크롤을 나타나게 하기 위해서 더미데이터를 넣어두었습니다.
-  const test = {
-    id: '1234',
-    name: '나의 프론트 아카데미아',
-    description: '한줄소개가 길어지면 말줄임표가 생겨요 ABCDEFGHIJ',
-    image_url:
-      'https://mblogthumb-phinf.pstatic.net/MjAxNzA2MjBfMTU4/MDAxNDk3ODg2MjUzOTI2.EbxRHMUgpGYH5rsXkNtvfG8gVXkR0prdWmefPKa4gVEg.3i5uvgyGPeCt8_2zCv5xde1FtkZw-mIdsCkP57NTszIg.PNG.alfodpwlq/2313.PNG?type=w800',
-    membersNum: 7
-  };
+  //const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886' //임시 유저 아이디 : 멤버예요
+  const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
+
+  const [groupDataList, setGroupDataList] = useState<GroupCardInfosType[] | null>(null);
+  useEffect(() => {
+    const fetch = async () => {
+      const fetchedGroupDataList = await fetchGroupCardInfos({ userId });
+      if (fetchedGroupDataList) setGroupDataList(fetchedGroupDataList);
+    };
+    fetch();
+  }, []);
+
   return (
     <>
       <div className="flex flex-col gap-y-4">
-        <GroupCard groupInfo={test} hasLink={true} />
-        <GroupCard groupInfo={test} hasLink={true} />
-        <GroupCard groupInfo={test} hasLink={true} />
-        <GroupCard groupInfo={test} hasLink={true} />
-        <GroupCard groupInfo={test} hasLink={true} />
-        <GroupCard groupInfo={test} hasLink={true} />
-        <GroupCard groupInfo={test} hasLink={true} />
+        {groupDataList && (
+          <>
+            {groupDataList.map((groupData) => (
+              <GroupCard key={groupData.id} groupInfo={groupData} hasLink={true} />
+            ))}
+          </>
+        )}
       </div>
     </>
   );

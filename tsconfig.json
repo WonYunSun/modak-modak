@@ -25,6 +25,8 @@
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
       "@ts/*": ["types/*"],
+      "@hooks/*": ["hooks/*"],
+      "@stores/*": ["stores/*"]
       "@lib/*": ["lib/*"]
     }
   },
