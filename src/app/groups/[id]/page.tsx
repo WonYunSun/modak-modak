@@ -3,7 +3,6 @@ import TabPages from './_components/TabPages';
 import { GroupCardSection } from './_components/GroupCardSection';
 
 const GroupPage = () => {
-
   return (
     <div className="w-full">
       {/* 헤더 영역 */}
