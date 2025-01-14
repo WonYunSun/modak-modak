@@ -1,6 +1,6 @@
 'use client';
 
-import PostScheduleCard from '@components/common/PostScheduleCard';
+import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import Image from 'next/image';
 import { Comments, Menu } from '@components/icons';
 import { useState } from 'react';
@@ -19,16 +19,14 @@ const Post = ({ post }: PostProps) => {
   const truncateText = (text: string | null, postId: string) => {
     if (!text) return '';
     const MAX_LENGTH = 80;
-    return text.length <= MAX_LENGTH || isExpanded[postId]
-      ? text
-      : `${text.slice(0, MAX_LENGTH)}...`;
+    return text.length <= MAX_LENGTH || isExpanded[postId] ? text : `${text.slice(0, MAX_LENGTH)}...`;
   };
 
   // 더보기 / 접기 토글 함수
   const toggleExpand = (postId: string) => {
     setIsExpanded((prev) => ({
       ...prev,
-      [postId]: !prev[postId],
+      [postId]: !prev[postId]
     }));
   };
 
@@ -83,7 +81,7 @@ const Post = ({ post }: PostProps) => {
             start_time={post.schedules.start_time}
           />
         </div>
-        
+
         {/* 댓글 */}
         <div className="flex items-center h-6 text-xs" onClick={handleComments}>
           <Comments />
