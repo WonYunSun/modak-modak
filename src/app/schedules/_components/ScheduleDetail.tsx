@@ -8,7 +8,7 @@ import { formatDate, formatTime } from '@utils/dateUtils';
 export const ScheduleDetail = ({ scheduleId }: { scheduleId: string }) => {
   const { data, isPending, isError } = useQuery({
     queryKey: ['scheduleId', scheduleId],
-    queryFn: () => fetchScheduleById(scheduleId)
+    queryFn: () => fetchScheduleById(scheduleId),
   });
 
   if (isError) return <div>Error!</div>;
