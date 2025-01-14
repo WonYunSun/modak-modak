@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import AskLeaderTransition from './AskLeaderTransition';
 import LeavingAssure from './LeavingAssure';
@@ -15,7 +17,7 @@ const LeaveGroupModal = ({ isLeader }: LeaveGroupModalProps) => {
   return (
     <div className="w-full px-5 flex flex-col items-center">
       {leavingStep === 1 && (isLeader ? <AskLeaderTransition /> : <LeavingAssure onNextStep={onNextStep} />)}
-      {leavingStep === 2 && <LeavingSuccess/>}
+      {leavingStep === 2 && <LeavingSuccess />}
     </div>
   );
 };

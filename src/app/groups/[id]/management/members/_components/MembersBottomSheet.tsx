@@ -1,3 +1,5 @@
+'use client';
+
 import useBottomSheetStore from '@stores/useBottomSheetStore';
 import useModalStore from '@stores/useModalStore';
 import BottomSheet from '@components/common/BottomSheet';

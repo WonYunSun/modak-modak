@@ -1,3 +1,5 @@
+'use client'
+
 import useBottomSheetStore from '@stores/useBottomSheetStore';
 import { Menu } from '@components/icons';
 
@@ -8,7 +10,7 @@ const ManageMembersBtn = () => {
     setActionModalOpen(true);
   };
 
-  
+
   return (
     <button onClick={onOpenBottomSheet}>
       <Menu />
