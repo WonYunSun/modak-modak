@@ -58,7 +58,7 @@ const formatTimeAgo = (dateString: string): string => {
 
 const CommentCard = ({ comment, postId }: CommentCardProps) => {
   const [openSheet, setOpenSheet] = useState<boolean>(false);
-  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [/*user*/, setUser] = useState<SupabaseUser | null>(null);
 
   const { setActionModalOpen } = useBottomSheetStore();
 
