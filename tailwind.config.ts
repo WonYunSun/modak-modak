@@ -8,8 +8,8 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/react-day-picker/**/*.{js,jsx,ts,tsx}'
-    './src/hooks/**/*.{js,ts,jsx,tsx,mdx}'
+    './node_modules/react-day-picker/**/*.{js,jsx,ts,tsx}',
+    './src/hooks/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -25,13 +25,13 @@ const config: Config = {
         'gray-500': '#71717A',
         'gray-600': '#575761',
         'gray-700': '#3F3F46',
-        'gray-900': '#18181B'
-      }
+        'gray-900': '#18181B',
+      },
     },
     boxShadow: {
-      'group-card': '0px -2px 4px 0px rgba(0, 0, 0, 0.05), 0px 4px 8px 0px rgba(0, 0, 0, 0.10)'
-    }
+      'group-card': '0px -2px 4px 0px rgba(0, 0, 0, 0.05), 0px 4px 8px 0px rgba(0, 0, 0, 0.10)',
+    },
   },
-  plugins: [tailwindcssAnimated, scrollbarHide]
+  plugins: [tailwindcssAnimated, scrollbarHide],
 };
 export default config;

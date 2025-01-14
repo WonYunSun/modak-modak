@@ -1,3 +1,5 @@
+'use client';
+
 import { ModalModeType } from './ManagementContents';
 
 interface ManagementBtnsProps {
