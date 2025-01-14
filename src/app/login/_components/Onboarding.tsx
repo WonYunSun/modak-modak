@@ -3,7 +3,7 @@
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import OnboardingContent from './OnboardingContent';
 import 'swiper/css';
-import useDotIndicator from 'hooks/useDotIndicator';
+import useDotIndicator from '@hooks/useDotIndicator';
 
 const Onboarding = () => {
   const { DotIndicator, move } = useDotIndicator({ dotCount: 3 });
