@@ -16,7 +16,7 @@ const PostList = () => {
         {/*검색바*/}
         <SearchBar />
         {/*게시글 수*/}
-        <CountBar />
+        <CountBar value={36} />
         {/*게시글*/}
         <Post />
         {/*플로팅 버튼*/}
