@@ -1,15 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'react-day-picker/dist/style.css';
 
 @layer base {
   body {
     color: #000;
     background: #fff;
   }
+  /* datepicker 커스텀 */
+  .rdp-root {
+    --rdp-accent-color: #b94600 !important;
+    --rdp-accent-background-color: #ffd3b8 !important;
+  }
 
   .inner {
     @apply px-[20px];
+  }
+
+  input[type='time']::-webkit-calendar-picker-indicator {
+    display: none; /* 아이콘 숨기기 */
+  }
+
+  input[type='time']::-webkit-calendar-picker-indicator {
+    display: block;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: transparent;
   }
 }
 
