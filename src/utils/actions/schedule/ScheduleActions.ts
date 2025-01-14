@@ -7,7 +7,7 @@ export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleT
   try {
     const supabase = await createClient();
 
-    const { data, error } = await supabase.from('schedules').insert([
+    const { data } = await supabase.from('schedules').insert([
       {
         name: scheduleData.name,
         start_date: scheduleData.start_date,
@@ -19,10 +19,16 @@ export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleT
       }
     ]);
 
-    if (error) {
-      console.error('Error inserting schedule:', error);
-      throw new Error('Failed to add schedule');
-    }
+    return data;
+  } catch (error) {
+    throw new Error(`${error}`);
+  }
+};
+
+export const fetchSchedulesBygroupId = async (groupId: string): Promise<ScheduleType[] | null> => {
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.from('schedules').select('*').eq('group_id', groupId);
 
     return data;
   } catch (error) {

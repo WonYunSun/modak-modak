@@ -1,6 +1,6 @@
 'use client';
 
-import PostScheduleCard from '@components/common/PostScheduleCard';
+import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import Image from 'next/image';
 import { Comments, Menu } from '@components/icons';
 import { useState } from 'react';
