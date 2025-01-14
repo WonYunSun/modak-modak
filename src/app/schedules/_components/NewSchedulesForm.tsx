@@ -42,7 +42,6 @@ const NewSchedulesForm = () => {
         created_at: new Date().toISOString(),
         id: ''
       };
-      console.log(completeScheduleData);
 
       addSchedule(completeScheduleData)
         .then(() => openModal())
