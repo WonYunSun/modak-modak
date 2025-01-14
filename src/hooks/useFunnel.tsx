@@ -1,6 +1,7 @@
 'use client';
-import { ReactElement, ReactNode, useState } from 'react';
+import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import FunnelHeader from '@components/common/FunnelHeader';
+import useDotIndicator from './useDotIndicator';
 
 type StepProps = {
   name: string;
@@ -23,16 +24,20 @@ const useFunnel = (defaultStep: string) => {
   //Funnel 컴포넌트에서는, 현재 step상태와 일치하는 step children을 보여주도록 할 것임
   const Funnel = ({ children, headerLabel }: FunnelProps) => {
     const targetStep = children.find((childStep) => childStep.props.name === step);
+
+    const { DotIndicator, move } = useDotIndicator({ dotCount: children.length });
+
+    useEffect(() => {
+      if (targetStep) {
+        move(children.indexOf(targetStep));
+      }
+    }, []);
+
     return (
       <div>
         <FunnelHeader label={headerLabel} />
         <div className="flex gap-2 pt-[2.25rem] pb-[2.5rem]">
-          {children.map((child, index) => (
-            <div
-              key={index}
-              className={`rounded-full ${child.props.name === step ? 'w-4 h-2 bg-primary' : 'w-2 h-2 border border-primary'}`}
-            />
-          ))}
+          <DotIndicator />
         </div>
         {targetStep}
       </div>
