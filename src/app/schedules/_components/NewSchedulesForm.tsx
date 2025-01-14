@@ -32,7 +32,7 @@ const NewSchedulesForm = () => {
     start_time: ''
   });
 
-  const handleNext = (data: Partial<ScheduleType>, nextStep: string) => {
+  const handleNext = async (data: Partial<ScheduleType>, nextStep: string) => {
     const updatedScheduleData = { ...scheduleData, ...data };
     setScheduleData(updatedScheduleData);
 
@@ -43,9 +43,12 @@ const NewSchedulesForm = () => {
         id: ''
       };
 
-      addSchedule(completeScheduleData)
-        .then(() => openModal())
-        .catch((error) => console.error('Failed to add schedule:', error));
+      try {
+        await addSchedule(completeScheduleData); // addSchedule이 완료될 때까지 기다림
+        openModal(); // addSchedule이 완료된 후 모달 열기
+      } catch (error) {
+        console.error('Failed to add schedule:', error);
+      }
     } else {
       next(nextStep);
     }
