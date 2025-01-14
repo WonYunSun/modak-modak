@@ -18,6 +18,7 @@ const ScheduleMemoForm = ({ onNext, onPrev, prevData }: ScheduleMemoFormProps) =
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
+
     setValues({ ...values, scheduleMemo: target.value });
   };
   const handleNext = () => {
