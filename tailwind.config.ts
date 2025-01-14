@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import tailwindcssAnimated from 'tailwindcss-animated';
+import scrollbarHide from 'tailwind-scrollbar-hide';
 
 const config: Config = {
   content: [
@@ -28,6 +29,6 @@ const config: Config = {
       'group-card': '0px -2px 4px 0px rgba(0, 0, 0, 0.05), 0px 4px 8px 0px rgba(0, 0, 0, 0.10)'
     }
   },
-  plugins: [tailwindcssAnimated]
+  plugins: [tailwindcssAnimated, scrollbarHide]
 };
 export default config;
