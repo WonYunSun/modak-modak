@@ -1,3 +1,4 @@
+import Onboarding from './_components/Onboarding';
 import SocialLogins from './_components/SocialLogins';
 
 const LoginPage = () => {
@@ -9,10 +10,8 @@ const LoginPage = () => {
    */
 
   return (
-    <div className="h-svh pt-[152px] pb-[112px] px-5">
-      {/**
-       * @todo 온보딩 슬라이더 추가 필요
-       */}
+    <div className="flex flex-col h-screen pb-[112px] inner">
+      <Onboarding />
       <SocialLogins />
     </div>
   );
