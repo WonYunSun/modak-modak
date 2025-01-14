@@ -14,6 +14,7 @@ const MembersPageContents = () => {
   const handleAwaitMemTabClick = () => {
     setSelectedTab('awaitingMembers');
   };
+  const isLeaderUser = true;
 
   return (
     <>
@@ -34,7 +35,11 @@ const MembersPageContents = () => {
         </div>
       </div>
 
-      {selectedTab === 'currentMembers' ? <CurMemberList/> : <WaitingMemberList/>}
+      {selectedTab === 'currentMembers' ? (
+        <CurMemberList isLeaderUser={isLeaderUser} />
+      ) : (
+        <WaitingMemberList isLeaderUser={isLeaderUser} />
+      )}
     </>
   );
 };

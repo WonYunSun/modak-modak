@@ -1,6 +1,9 @@
 import MemberCard from './MemberCard';
 
-const CurMemberList = () => {
+interface CurMemberListProps {
+  isLeaderUser: boolean;
+}
+const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
   return (
     <div>
       <div className="pt-5 font-semibold">
@@ -9,15 +12,15 @@ const CurMemberList = () => {
         </div>
       </div>
       <div>
-        <MemberCard isLeader={true} mode={'curMembers'} />
-        <MemberCard isLeader={false} mode={'curMembers'} isMe={true}/>
-        <MemberCard isLeader={false} mode={'curMembers'} />
-        <MemberCard isLeader={false} mode={'curMembers'} />
-        <MemberCard isLeader={false} mode={'curMembers'} />
-        <MemberCard isLeader={false} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} isLeader={true} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} isMe={true} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'curMembers'} />
       </div>
     </div>
   );
-}
+};
 
 export default CurMemberList

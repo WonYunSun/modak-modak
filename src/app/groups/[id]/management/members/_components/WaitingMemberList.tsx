@@ -1,6 +1,9 @@
 import MemberCard from './MemberCard';
 
-const WaitingMemberList = () => {
+interface WaitingMemberListProps {
+  isLeaderUser: boolean;
+}
+const WaitingMemberList = ({ isLeaderUser }: WaitingMemberListProps) => {
   return (
     <div>
       <div className="pt-5 font-semibold">
@@ -9,12 +12,12 @@ const WaitingMemberList = () => {
         </div>
       </div>
       <div>
-        <MemberCard isLeader={false} mode={'waiting'} />
-        <MemberCard isLeader={false} mode={'waiting'} />
-        <MemberCard isLeader={false} mode={'waiting'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} />
+        <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} />
       </div>
     </div>
   );
-}
+};
 
 export default WaitingMemberList

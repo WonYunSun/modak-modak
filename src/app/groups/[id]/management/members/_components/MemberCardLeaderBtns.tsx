@@ -1,4 +1,4 @@
-import { Menu } from "@components/icons";
+import { Menu } from '@components/icons';
 
 interface MemberCardBtnsProps {
   isLeader: boolean;
@@ -7,13 +7,8 @@ interface MemberCardBtnsProps {
 const MemberCardLeaderBtns = ({ isLeader, mode }: MemberCardBtnsProps) => {
   return (
     <>
-      {mode === 'curMembers' ? (
-        isLeader ? (
-          <span className="text-primary">대표</span>
-        ) : (
-          <Menu />
-        )
-      ) : (
+      {mode === 'curMembers' && (isLeader ? <span className="text-primary">대표</span> : <Menu />)}
+      {mode === 'waiting' && (
         <div>
           <button type="button">수락</button>
           <button type="button" className="ml-4 px-2.5 py-[0.438rem] bg-[#3B82F6] rounded-lg text-white font-semibold">
