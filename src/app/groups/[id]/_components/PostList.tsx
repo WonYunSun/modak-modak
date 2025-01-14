@@ -3,14 +3,17 @@
 import Button from '@components/common/Button';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
 import Post from './Post';
-import { useFetchGetPosts } from 'hooks/useFetchPosts';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { ModificationLine } from '@components/icons';
 import CountBar from './CountBar';
+import { useFetchGetPosts } from '@hooks/post/useFetchPosts';
 
 const PostList = () => {
   const router = useRouter();
-  const { data, isPending, isError } = useFetchGetPosts();
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
+
+  const { data, isPending, isError } = useFetchGetPosts(groupId);
 
   console.log('data', data);
 
@@ -22,7 +25,7 @@ const PostList = () => {
       {/* 검색바 */}
       <SearchBar />
       {/* 게시글 수 */}
-      <CountBar postsCount={data?.length} />
+      <CountBar postsCount={data?.length ?? 0} />
 
       {/* map으로 Post 컴포넌트 렌더링 */}
       {data?.map((post) => <Post key={post.id} post={post} />)}

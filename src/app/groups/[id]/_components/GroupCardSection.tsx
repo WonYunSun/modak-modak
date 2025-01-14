@@ -1,10 +1,9 @@
 'use client'
 
-import GroupCard from "@components/common/GroupCard"
-import { useFetchPosts } from "hooks/useFetchPosts";
+import GroupCard from "@components/common/groupCard/GroupCard"
+
 
 export const GroupCardSection = () => {
-     // const {posts, groups, isPending, isError} = useFetchPosts();
 
     return (
         <div className="w-full px-5 -mt-[2.75rem] z-10">
@@ -14,7 +13,8 @@ export const GroupCardSection = () => {
             name: '모각코!',
             description: '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
             image_url: '/',
-            membersNum: 7
+            membersNum: 7,
+            created_at: '2025-01-14'
           }}
           hasLink={false}
         />

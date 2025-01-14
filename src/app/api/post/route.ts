@@ -1,42 +1,42 @@
-import { createClient } from '@utils/supabase/server';
-import { NextResponse } from 'next/server';
+// import { createClient } from '@utils/supabase/server';
+// import { NextResponse } from 'next/server';
 
-// ✅ 게시글 불러오기
-export async function GET(request: Request) {
-  try {
-    const supabase = await createClient();
+// // ✅ 게시글 불러오기
+// export async function GET(request: Request) {
+//   try {
+//     const supabase = await createClient();
 
-    const { searchParams } = new URL(request.url);
-    const postId = searchParams.get('postId');
+//     const { searchParams } = new URL(request.url);
+//     const postId = searchParams.get('postId');
 
-    const { data, error } = await supabase
-      .from('posts')
-      .select(
-        `
-        id,
-        content,
-        schedules!inner(
-          name,
-          memo,
-          created_at,
-          start_date,
-          end_date,
-          start_time
-          )
-      `
-      )
-      .eq('id', postId)
-      .single();
+//     const { data, error } = await supabase
+//       .from('posts')
+//       .select(
+//         `
+//         id,
+//         content,
+//         schedules!inner(
+//           name,
+//           memo,
+//           created_at,
+//           start_date,
+//           end_date,
+//           start_time
+//           )
+//       `
+//       )
+//       .eq('id', postId)
+//       .single();
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+//     if (error) {
+//       return NextResponse.json({ error: error.message }, { status: 500 });
+//     }
 
-    return NextResponse.json(data, { status: 200 });
-  } catch (error) {
-    return NextResponse.json({ error: `api GET post server error: ${error}` }, { status: 500 });
-  }
-}
+//     return NextResponse.json(data, { status: 200 });
+//   } catch (error) {
+//     return NextResponse.json({ error: `api GET post server error: ${error}` }, { status: 500 });
+//   }
+// }
 
 // // ✅ 게시글 등록하기
 // export async function POST(request: Request) {
@@ -61,26 +61,26 @@ export async function GET(request: Request) {
 // }
 
 // ✅ 게시글 수정하기
-export async function PUT(request: Request) {
-  try {
-    const supabase = await createClient();
-    const body = await request.json();
-    const { id, text } = body;
+// export async function PUT(request: Request) {
+//   try {
+//     const supabase = await createClient();
+//     const body = await request.json();
+//     const { id, text } = body;
 
-    const { data, error } = await supabase
-      .from('posts')
-      .update({ text })
-      .eq('id', id);
+//     const { data, error } = await supabase
+//       .from('posts')
+//       .update({ text })
+//       .eq('id', id);
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+//     if (error) {
+//       return NextResponse.json({ error: error.message }, { status: 500 });
+//     }
 
-    return NextResponse.json({ message: '게시글 수정 완료', data }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json({ error: `api PUT posts server error: ${error}` }, { status: 500 });
-  }
-}
+//     return NextResponse.json({ message: '게시글 수정 완료', data }, { status: 200 });
+//   } catch (error) {
+//     return NextResponse.json({ error: `api PUT posts server error: ${error}` }, { status: 500 });
+//   }
+// }
 
 // // ✅ 게시글 삭제하기
 // export async function DELETE(request: Request) {

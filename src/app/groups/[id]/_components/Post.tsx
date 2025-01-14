@@ -5,24 +5,10 @@ import Image from 'next/image';
 import { Comments, Menu } from '@components/icons';
 import { useState } from 'react';
 import { PostActionBottomSheet } from './PostActionBottomSheet';
+import { PostWithRelations } from '@hooks/post/useFetchPosts';
 
 interface PostProps {
-  post: {
-    id: string;
-    content: string | null;
-    users: {
-      nickname: string;
-      profile_image: string;
-    };
-    schedules: {
-      name: string;
-      memo: string | null;
-      start_date: string;
-      end_date: string;
-      start_time: string;
-    };
-    comments: { count: number }[];
-  };
+  post: PostWithRelations;
 }
 
 const Post = ({ post }: PostProps) => {

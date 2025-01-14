@@ -3,17 +3,18 @@
 import Button from '@components/common/Button';
 import PostScheduleCard from '@components/common/PostScheduleCard';
 import { Plus, PlusGray } from '@components/icons';
-import { useFetchGetPost, useFetchPutPost } from 'hooks/useFetchPost';
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useFetchEditPost, useFetchGetPost } from '@hooks/post/useFetchPost';
+import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export const PostEditForm = () => {
   const [text, setText] = useState<string>('');
-  //const router = useRouter();
+  const router = useRouter();
   const { postId } = useParams();
-  const { data, isPending, isError } = useFetchGetPost({ postId });
-  const { mutate, isPending: isMutatePending, isError: isMutateError, isSuccess } = useFetchPutPost({ postId, text });
+  const id = Array.isArray(postId) ? postId[0] : postId;
+
+  const { data, isPending, isError } = useFetchGetPost(id);
+  const { mutate: editMutate } = useFetchEditPost(postId, text);
 
   console.log('data', data);
 
@@ -26,10 +27,14 @@ export const PostEditForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate({ postId, text: text });
-    if (isSuccess) {
-  //    router.back();
-    }
+    editMutate(
+      { postId, text },
+      {
+        onSuccess: () => {
+          router.back();
+        }
+      }
+    );
   };
 
   return (
@@ -51,7 +56,7 @@ export const PostEditForm = () => {
           className="w-full h-60 p-[0.625rem] border border-gray-300 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-700 resize-none"
           placeholder={`공유하고 싶은 추억을 자유롭게 작성해주세요\n(최대 2000자)`}
           maxLength={2000}
-          defaultValue={data.content}
+          defaultValue={data?.content ?? ''}
           onChange={handleChange}
         />
       </div>
