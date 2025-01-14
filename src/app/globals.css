@@ -1,11 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'react-day-picker/dist/style.css';
 
 @layer base {
   body {
     color: #000;
     background: #fff;
+  }
+  /* datepicker 커스텀 */
+  .rdp-root {
+    --rdp-accent-color: #b94600 !important;
+    --rdp-accent-background-color: #ffd3b8 !important;
   }
 
   .inner {
@@ -24,10 +30,6 @@
     width: 100%;
     position: absolute;
     background: transparent;
-  }
-  .rdp-root {
-    --rdp-accent-color: #b94600;
-    --rdp-accent-background-color: #ffd3b8;
   }
 }
 
