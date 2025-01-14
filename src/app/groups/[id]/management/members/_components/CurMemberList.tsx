@@ -24,4 +24,4 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
   );
 };
 
-export default CurMemberList
+export default CurMemberList;

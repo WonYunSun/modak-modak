@@ -3,6 +3,7 @@ import Button from '@components/common/Button';
 
 const TransitionSuccess = () => {
   const { closeModal } = useModalStore();
+
   return (
     <>
       <div className="w-full py-6 text-left">

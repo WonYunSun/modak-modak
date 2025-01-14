@@ -7,7 +7,7 @@ interface MemberCardBtnsProps {
 const MemberCardLeaderBtns = ({ isLeader, mode }: MemberCardBtnsProps) => {
   return (
     <>
-      {mode === 'curMembers' && (isLeader ? <span className="text-primary">대표</span> : <ManageMembersBtn/>)}
+      {mode === 'curMembers' && (isLeader ? <span className="text-primary">대표</span> : <ManageMembersBtn />)}
       {mode === 'waiting' && (
         <div>
           <button type="button">수락</button>

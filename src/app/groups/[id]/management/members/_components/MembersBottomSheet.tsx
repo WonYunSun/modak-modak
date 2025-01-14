@@ -7,13 +7,15 @@ import { Leader } from '@components/icons';
 const MembersBottomSheet = () => {
   const { openModal } = useModalStore();
   const { isActionModalOpen, setActionModalOpen } = useBottomSheetStore();
+
   const onCloseBottomSheet = () => {
     setActionModalOpen(false);
   };
-  const onModalOpen = ()=>{
+
+  const onModalOpen = () => {
     setActionModalOpen(false);
     openModal();
-  }
+  };
 
   return (
     <BottomSheet isOpen={isActionModalOpen} onClose={onCloseBottomSheet} snapPoint={[0.23]}>

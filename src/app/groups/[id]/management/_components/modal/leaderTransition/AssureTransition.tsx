@@ -2,13 +2,15 @@ import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
 
 interface AssureTransitionProps {
-    onNextStep: ()=>void;
+  onNextStep: () => void;
 }
 const AssureTransition = ({ onNextStep }: AssureTransitionProps) => {
   const { closeModal } = useModalStore();
+
   const onLeaderTransition = () => {
     onNextStep();
   };
+
   return (
     <>
       <div className="w-60 py-6 w-full text-left">

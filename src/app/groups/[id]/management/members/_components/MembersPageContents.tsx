@@ -10,12 +10,15 @@ type TabType = 'currentMembers' | 'awaitingMembers';
 
 const MembersPageContents = () => {
   const [selectedTab, setSelectedTab] = useState<TabType>('currentMembers');
+
   const handleCurMemTabClick = () => {
     setSelectedTab('currentMembers');
   };
+
   const handleAwaitMemTabClick = () => {
     setSelectedTab('awaitingMembers');
   };
+
   const isLeaderUser = true;
 
   return (
@@ -43,7 +46,7 @@ const MembersPageContents = () => {
         <WaitingMemberList isLeaderUser={isLeaderUser} />
       )}
       <ManagementModal isLeader={isLeaderUser} modalMode={'leaderTransition'} />
-      <MembersBottomSheet/>
+      <MembersBottomSheet />
     </>
   );
 };

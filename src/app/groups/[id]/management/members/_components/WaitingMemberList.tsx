@@ -20,4 +20,4 @@ const WaitingMemberList = ({ isLeaderUser }: WaitingMemberListProps) => {
   );
 };
 
-export default WaitingMemberList
+export default WaitingMemberList;
