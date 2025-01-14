@@ -1,11 +1,11 @@
 'use client';
 
-import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import Image from 'next/image';
 import { Comments, Menu } from '@components/icons';
 import { useState } from 'react';
 import { PostActionBottomSheet } from './PostActionBottomSheet';
 import { PostWithRelations } from '@hooks/post/useFetchPosts';
+import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 
 interface PostProps {
   post: PostWithRelations;
