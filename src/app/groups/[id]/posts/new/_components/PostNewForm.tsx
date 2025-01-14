@@ -3,7 +3,7 @@
 import Button from '@components/common/Button';
 import { Plus, PlusGray } from '@components/icons';
 
-export const NewPostForm = () => {
+export const PostNewForm = () => {
   const handlePhoto = () => {
     return null;
   };
@@ -46,10 +46,10 @@ export const NewPostForm = () => {
       </div>
 
       <div className="w-full fixed bottom-0 px-5 pb-2">
-        <Button label="작성완료" className="full-white-btn" disabled={true} type="submit" />
+        <Button label="작성 완료" className="full-white-btn" disabled={true} type="submit" />
       </div>
     </form>
   );
 };
 
-export default NewPostForm;
+export default PostNewForm;

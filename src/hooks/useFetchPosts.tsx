@@ -35,7 +35,7 @@ export type PostWithRelations = {
     comments: CommentCountType[];
 };
 
-export const useFetchPosts = () => {
+export const useFetchGetPosts = () => {
   const groupId = '52f44a96-b8f7-4c6c-80b1-d657eafd3821';
 
   const { data, isPending, isError } = useQuery<PostWithRelations[]>({

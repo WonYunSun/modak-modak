@@ -34,7 +34,7 @@ const BottomNav = () => {
   const pathname = usePathname();
 
   // 특정 경로에서 BottomNav를 숨김
-  const hiddenPaths = ['/login', '/signup', '/new'];
+  const hiddenPaths = ['/login', '/signup', '/new', '/edit'];
   const isHideNav = hiddenPaths.some((path) => pathname.includes(path));
 
   if (isHideNav) {

@@ -1,5 +1,5 @@
 interface CountBarProps {
-  postsCount: number;
+  postsCount: number | undefined;
 }
 
 const CountBar = ({ postsCount }: CountBarProps) => {
