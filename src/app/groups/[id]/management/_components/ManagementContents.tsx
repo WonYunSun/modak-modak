@@ -65,9 +65,8 @@ const ManagementContents = ({ id }: ManagementContentsProps) => {
       <ManagementModal isLeader={isLeader} modalMode={modalMode} />
       <LinkCopiedAlert>
         <div className="flex gap-2.5">
-          {' '}
-          <CircleOk /> <span>{'초대링크가 복사 되었어요!'}</span>{' '}
-        </div>{' '}
+          <CircleOk /> <span>{'초대링크가 복사 되었어요!'}</span>
+        </div>
       </LinkCopiedAlert>
     </>
   );

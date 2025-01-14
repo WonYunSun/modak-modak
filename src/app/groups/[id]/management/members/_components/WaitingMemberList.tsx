@@ -1,13 +1,15 @@
 'use client';
 
 import MemberCard from './MemberCard';
-import useSmallAlert from '@hooks/useSmallAlert';
 import { AddMember } from '@components/icons';
+import useSmallAlert from '@hooks/useSmallAlert';
+
 interface WaitingMemberListProps {
   isLeaderUser: boolean;
 }
 const WaitingMemberList = ({ isLeaderUser }: WaitingMemberListProps) => {
   const { SmallAlert: MemberAddedAlert, openAlert: OpenMemberAddedAlert } = useSmallAlert();
+
   return (
     <>
       <div>
