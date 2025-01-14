@@ -1,3 +1,5 @@
+'use client';
+
 import ManageMembersBtn from './ManageMembersBtn';
 
 interface MemberCardBtnsProps {

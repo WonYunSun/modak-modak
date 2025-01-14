@@ -1,3 +1,5 @@
+'use client';
+
 import MemberCard from './MemberCard';
 
 interface WaitingMemberListProps {
