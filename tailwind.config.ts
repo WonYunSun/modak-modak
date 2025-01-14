@@ -9,6 +9,7 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/react-day-picker/**/*.{js,jsx,ts,tsx}'
+    './src/hooks/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
     extend: {
