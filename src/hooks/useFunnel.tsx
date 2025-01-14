@@ -54,7 +54,7 @@ const useFunnel = (defaultStep: string) => {
     updateStep(prevStep);
   };
 
-  return { Funnel, Step, next, prev, step };
+  return { Funnel, Step, next, prev, currentStep: step };
 };
 
 export default useFunnel;

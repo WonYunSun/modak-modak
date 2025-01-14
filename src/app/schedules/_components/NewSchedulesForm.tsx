@@ -1,7 +1,5 @@
 'use client';
 
-import useFunnel from 'hooks/useFunnel';
-
 import { useState } from 'react';
 import useModalStore from 'stores/useModalStore';
 import ScheduleDateForm from './StepComponents/ScheduleDateForm';
@@ -9,17 +7,23 @@ import ScheduleMemoForm from './StepComponents/ScheduleMemoForm';
 import ScheduleNameForm from './StepComponents/ScheduleNameForm';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
+import useFunnel from 'hooks/useFunnel';
 import { ScheduleType } from '@ts/scheduleType';
+import { addSchedule } from '@utils/actions/schedule/ScheduleActions';
 
 //단계 name 정의
-const steps = ['일정명', '모임일시', '메모', '완료'];
+const steps = ['일정명', '모임일시', '메모'];
+
+//임의 groupId값
+const groupId = '52f44a96-b8f7-4c6c-80b1-d657eafd3821';
 
 const NewSchedulesForm = () => {
   const { Funnel, Step, next, prev } = useFunnel(steps[0]);
   const { openModal } = useModalStore();
+
   const [scheduleData, setScheduleData] = useState<ScheduleType>({
     created_at: '',
-    group_id: '',
+    group_id: groupId,
     id: '',
     memo: null,
     name: '',
@@ -29,9 +33,20 @@ const NewSchedulesForm = () => {
   });
 
   const handleNext = (data: Partial<ScheduleType>, nextStep: string) => {
-    setScheduleData((prev) => ({ ...prev, ...data }));
-    if (nextStep === steps[3]) {
-      openModal();
+    const updatedScheduleData = { ...scheduleData, ...data };
+    setScheduleData(updatedScheduleData);
+
+    if (nextStep === 'submitData') {
+      const completeScheduleData: ScheduleType = {
+        ...updatedScheduleData,
+        created_at: new Date().toISOString(),
+        id: ''
+      };
+      console.log(completeScheduleData);
+
+      addSchedule(completeScheduleData)
+        .then(() => openModal())
+        .catch((error) => console.error('Failed to add schedule:', error));
     } else {
       next(nextStep);
     }
@@ -65,7 +80,7 @@ const NewSchedulesForm = () => {
         <Step name={steps[2]}>
           <ScheduleMemoForm
             onPrev={() => handlePrev(steps[1])}
-            onNext={(data) => handleNext(data, steps[3])}
+            onNext={(data) => handleNext(data, 'submitData')}
             prevData={scheduleData.memo}
           />
           <Modal>
