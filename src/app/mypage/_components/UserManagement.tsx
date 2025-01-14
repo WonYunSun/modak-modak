@@ -6,6 +6,7 @@ import Modal from '@components/common/Modal';
 import useModalStore from '@stores/useModalStore';
 import LogoutModalContent from './LogoutModalContent';
 import { useState } from 'react';
+import UserDeleteModalContent from './deleteGroup/UserDeleteModalContent';
 
 type ModalStatus = 'logout' | 'delete';
 
@@ -29,7 +30,7 @@ const UserManagement = () => {
         <ManagementCard label={'로그아웃'} handleClick={handleLogoutClick} className="cursor-pointer" />
         <ManagementCard label={'회원 탈퇴'} handleClick={handleDeleteClick} className="cursor-pointer" />
       </ManagementSection>
-      <Modal>{modalStatus === 'logout' ? <LogoutModalContent /> : null}</Modal>
+      <Modal>{modalStatus === 'logout' ? <LogoutModalContent /> : <UserDeleteModalContent />}</Modal>
     </div>
   );
 };
