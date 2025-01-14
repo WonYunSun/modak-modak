@@ -2,11 +2,17 @@
 
 import { useState } from 'react';
 import { DownArrow, UpArrow } from '@components/icons';
-import { Database } from '@ts/supabase';
 import { formatDate, formatTime } from '@utils/dateUtils';
-type ScheduleType = Database['public']['Tables']['schedules']['Row'];
+import { ScheduleType } from '@ts/scheduleType';
 
-const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: ScheduleType) => {
+type PostScheduleCardProps = {
+  name: ScheduleType['name'];
+  memo: ScheduleType['memo'];
+  start_date: ScheduleType['start_date'];
+  end_date: ScheduleType['end_date'];
+  start_time: ScheduleType['start_time'];
+};
+const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: PostScheduleCardProps) => {
   const [showDetails, setShowDetails] = useState(false);
   const labelClass = 'text-gray-500 whitespace-nowrap';
   const detailClass = 'flex items-center gap-3';
@@ -33,9 +39,7 @@ const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: Sche
         <div className="flex items-center whitespace-nowrap">
           <span className={`${labelClass} pr-[12px]`}>일자</span>
           <span>{formatDate(start_date)}</span>
-          {isSingleDay ? (
-            ''
-          ) : (
+          {isSingleDay && (
             <>
               <span className="px-[4px]">⁓</span>
               <span className="truncate">{formatDate(end_date)}</span>

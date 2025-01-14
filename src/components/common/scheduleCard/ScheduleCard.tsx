@@ -1,13 +1,16 @@
 import { NextArrow } from '@components/icons';
-import { Database } from '@ts/supabase';
 import { formatDate, formatTime } from '@utils/dateUtils';
+import { ScheduleType } from '@ts/scheduleType';
 
-type ScheduleType = Database['public']['Tables']['schedules']['Row'];
-
-interface ScheduleCardProps extends ScheduleType {
+type ScheduleCardProps = {
+  name: ScheduleType['name'];
+  memo: ScheduleType['memo'];
+  start_date: ScheduleType['start_date'];
+  end_date: ScheduleType['end_date'];
+  start_time: ScheduleType['start_time'];
   groupName?: string;
   hasArrow?: boolean;
-}
+};
 
 const ScheduleCard = ({
   name,
@@ -40,9 +43,7 @@ const ScheduleCard = ({
         <div className="flex items-center whitespace-nowrap">
           <span className={`${labelClass} pr-[12px]`}>일자</span>
           <span>{formatDate(start_date)}</span>
-          {isSingleDay ? (
-            ''
-          ) : (
+          {isSingleDay && (
             <>
               <span className="px-[4px]">⁓</span>
               <span className="truncate">{formatDate(end_date)}</span>

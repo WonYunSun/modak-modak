@@ -1,5 +1,6 @@
 'use client';
 import { ReactElement, ReactNode, useState } from 'react';
+import FunnelHeader from '@components/common/FunnelHeader';
 
 type StepProps = {
   name: string;
@@ -8,6 +9,7 @@ type StepProps = {
 
 type FunnelProps = {
   children: Array<ReactElement<StepProps>>;
+  headerLabel: string;
 };
 
 const useFunnel = (defaultStep: string) => {
@@ -19,9 +21,22 @@ const useFunnel = (defaultStep: string) => {
   };
 
   //Funnel 컴포넌트에서는, 현재 step상태와 일치하는 step children을 보여주도록 할 것임
-  const Funnel = ({ children }: FunnelProps) => {
+  const Funnel = ({ children, headerLabel }: FunnelProps) => {
     const targetStep = children.find((childStep) => childStep.props.name === step);
-    return targetStep;
+    return (
+      <div>
+        <FunnelHeader label={headerLabel} />
+        <div className="flex gap-2 pt-[2.25rem] pb-[2.5rem]">
+          {children.map((child, index) => (
+            <div
+              key={index}
+              className={`rounded-full ${child.props.name === step ? 'w-4 h-2 bg-primary' : 'w-2 h-2 border border-primary'}`}
+            />
+          ))}
+        </div>
+        {targetStep}
+      </div>
+    );
   };
 
   //step 상태 업데이트 함수
@@ -39,7 +54,7 @@ const useFunnel = (defaultStep: string) => {
     updateStep(prevStep);
   };
 
-  return { Funnel, Step, next, prev, step };
+  return { Funnel, Step, next, prev, currentStep: step };
 };
 
 export default useFunnel;

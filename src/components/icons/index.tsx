@@ -155,7 +155,7 @@ export const UpArrow = ({ className }: IconProps) => {
         d="M18 14L12.7071 8.70711C12.3166 8.31658 11.6834 8.31658 11.2929 8.70711L6 14"
         stroke="#A1A1AA"
         strokeWidth="2"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
     </svg>
   );
@@ -500,19 +500,19 @@ export const Search = ({ className }: IconProps) => {
 export const TrashCan = () => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 15L10 12" stroke="#FF3B30" stroke-width="2" stroke-linecap="round" />
-      <path d="M14 15L14 12" stroke="#FF3B30" stroke-width="2" stroke-linecap="round" />
+      <path d="M10 15L10 12" stroke="#FF3B30" stroke-width="2" strokeLinecap="round" />
+      <path d="M14 15L14 12" stroke="#FF3B30" stroke-width="2" strokeLinecap="round" />
       <path
         d="M3 7H21V7C20.0681 7 19.6022 7 19.2346 7.15224C18.7446 7.35523 18.3552 7.74458 18.1522 8.23463C18 8.60218 18 9.06812 18 10V16C18 17.8856 18 18.8284 17.4142 19.4142C16.8284 20 15.8856 20 14 20H10C8.11438 20 7.17157 20 6.58579 19.4142C6 18.8284 6 17.8856 6 16V10C6 9.06812 6 8.60218 5.84776 8.23463C5.64477 7.74458 5.25542 7.35523 4.76537 7.15224C4.39782 7 3.93188 7 3 7V7Z"
         stroke="#FF3B30"
         stroke-width="2"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
       <path
         d="M10.0681 3.37059C10.1821 3.26427 10.4332 3.17033 10.7825 3.10332C11.1318 3.03632 11.5597 3 12 3C12.4403 3 12.8682 3.03632 13.2175 3.10332C13.5668 3.17033 13.8179 3.26427 13.9319 3.37059"
         stroke="#FF3B30"
         stroke-width="2"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
     </svg>
   );
@@ -565,6 +565,35 @@ export const KakaoLogo = ({ className }: IconProps) => {
     </svg>
   );
 };
+export const ClockIcon = ({ className }: IconProps) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <path
+      d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z"
+      stroke="#71717A"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M12 7V12.25L16 14" stroke="#71717A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M5 2L2 5" stroke="#71717A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M19 2L22 5" stroke="#71717A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const CalendarIcon = ({ className }: IconProps) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+    <path
+      d="M18.2222 5H5.77778C4.79594 5 4 5.79594 4 6.77778V19.2222C4 20.2041 4.79594 21 5.77778 21H18.2222C19.2041 21 20 20.2041 20 19.2222V6.77778C20 5.79594 19.2041 5 18.2222 5Z"
+      stroke="#71717A"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M16 3V7" stroke="#71717A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M8 3V7" stroke="#71717A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M4 10H20" stroke="#71717A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
 export const ProfileAlter = ({ className }: IconProps) => {
   return (
