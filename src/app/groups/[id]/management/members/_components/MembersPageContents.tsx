@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import CurMemberList from './CurMemberList';
 import WaitingMemberList from './WaitingMemberList';
+import MembersBottomSheet from './MembersBottomSheet';
+import ManagementModal from '../../_components/modal/ManagementModal';
 
 type TabType = 'currentMembers' | 'awaitingMembers';
 
@@ -40,6 +42,8 @@ const MembersPageContents = () => {
       ) : (
         <WaitingMemberList isLeaderUser={isLeaderUser} />
       )}
+      <ManagementModal isLeader={isLeaderUser} modalMode={'leaderTransition'} />
+      <MembersBottomSheet/>
     </>
   );
 };
