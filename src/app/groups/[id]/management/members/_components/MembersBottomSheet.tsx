@@ -1,0 +1,43 @@
+'use client';
+
+import useBottomSheetStore from '@stores/useBottomSheetStore';
+import useModalStore from '@stores/useModalStore';
+import BottomSheet from '@components/common/BottomSheet';
+import Button from '@components/common/Button';
+import { Leader } from '@components/icons';
+
+const MembersBottomSheet = () => {
+  const { openModal } = useModalStore();
+  const { isActionModalOpen, setActionModalOpen } = useBottomSheetStore();
+
+  const onCloseBottomSheet = () => {
+    setActionModalOpen(false);
+  };
+
+  const onModalOpen = () => {
+    setActionModalOpen(false);
+    openModal();
+  };
+
+  return (
+    <BottomSheet isOpen={isActionModalOpen} onClose={onCloseBottomSheet} snapPoint={[0.23]}>
+      <div className="my-5 rounded-xl overflow-hidden divide-y divide-gray-200">
+        <div className="bg-gray-100">
+          <Button
+            type={'button'}
+            label="리더 양도하기"
+            className={'w-full px-3 py-4 flex justify-start items-center gap-4'}
+            onClick={onModalOpen}
+          >
+            <Leader />
+          </Button>
+        </div>
+        <div className="bg-gray-100 text-[#FF3B30]">
+          <div className="px-3 py-4">멤버 내보내기</div>
+        </div>
+      </div>
+    </BottomSheet>
+  );
+};
+
+export default MembersBottomSheet;

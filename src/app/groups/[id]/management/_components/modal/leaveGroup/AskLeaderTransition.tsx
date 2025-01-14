@@ -1,3 +1,5 @@
+'use client';
+
 import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
 

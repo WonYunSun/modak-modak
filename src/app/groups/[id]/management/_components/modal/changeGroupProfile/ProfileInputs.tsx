@@ -1,4 +1,6 @@
-import TextInput from "@components/common/TextInput";
+'use client';
+
+import TextInput from '@components/common/TextInput';
 
 interface ProfileInputsProps {
   groupName: string;

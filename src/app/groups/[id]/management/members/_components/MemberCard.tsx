@@ -1,14 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 import MemberCardLeaderBtns from './MemberCardLeaderBtns';
 
 interface MemberCardProps {
-  isLeader: boolean;
+  isLeaderUser: boolean;
+  isLeader?: boolean;
   isMe?: boolean;
   mode: 'curMembers' | 'waiting';
 }
-const MemberCard = ({ isLeader, isMe = false, mode }: MemberCardProps) => {
-  const isLeaderUser = true;
-  
+const MemberCard = ({ isLeaderUser, isLeader = false, isMe = false, mode }: MemberCardProps) => {
   const profile =
     'https://sozcwgcoibigujehjxbf.supabase.co/storage/v1/object/public/profiles/users/ebcc66fe-bf21-4b73-99d1-e4f375025b80/winterhotchocolate.jpg';
   const name = '이름이에요';
