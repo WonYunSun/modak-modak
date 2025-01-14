@@ -2,7 +2,7 @@ import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
 
 interface LeavingAssure {
-  onNextStep:()=>void;
+  onNextStep: () => void;
 }
 const LeavingAssure = ({ onNextStep }: LeavingAssure) => {
   const { closeModal } = useModalStore();
@@ -25,12 +25,7 @@ const LeavingAssure = ({ onNextStep }: LeavingAssure) => {
           <Button type={'button'} className={'modal-white-btn'} label={'취소'} onClick={closeModal} />
         </div>
         <div className="w-44">
-          <Button
-            type={'button'}
-            className={'modal-full-btn'}
-            label={'탈퇴하기'}
-            onClick={onLeaveGroup}
-          />
+          <Button type={'button'} className={'modal-full-btn'} label={'탈퇴하기'} onClick={onLeaveGroup} />
         </div>
       </div>
     </>
