@@ -1,6 +1,6 @@
 'use client';
 
-import MemberCard from './MemberCard';
+//import MemberCard from './MemberCard';
 import { AddMember } from '@components/icons';
 import useSmallAlert from '@hooks/useSmallAlert';
 
@@ -8,7 +8,8 @@ interface WaitingMemberListProps {
   isLeaderUser: boolean;
 }
 const WaitingMemberList = ({ isLeaderUser }: WaitingMemberListProps) => {
-  const { SmallAlert: MemberAddedAlert, openAlert: OpenMemberAddedAlert } = useSmallAlert();
+  const { SmallAlert: MemberAddedAlert, /*openAlert: OpenMemberAddedAlert*/ } = useSmallAlert();
+  console.log(isLeaderUser); //빌드시 미사용 변수 에러가 일어나는 것을 막기 위해서 넣은 줄입니다.
 
   return (
     <>
@@ -19,9 +20,9 @@ const WaitingMemberList = ({ isLeaderUser }: WaitingMemberListProps) => {
           </div>
         </div>
         <div>
+          {/* <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} toastOpener={OpenMemberAddedAlert} />
           <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} toastOpener={OpenMemberAddedAlert} />
-          <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} toastOpener={OpenMemberAddedAlert} />
-          <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} toastOpener={OpenMemberAddedAlert} />
+          <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} toastOpener={OpenMemberAddedAlert} /> */}
         </div>
       </div>
       <MemberAddedAlert>

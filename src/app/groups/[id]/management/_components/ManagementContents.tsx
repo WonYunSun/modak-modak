@@ -9,12 +9,13 @@ import ManagementBtns from './ManagementBtns';
 import ManagementModal from './modal/ManagementModal';
 import { CircleOk, Copy, NextArrow } from '@components/icons';
 import useSmallAlert from '@hooks/useSmallAlert';
+import useIsLeader from '@hooks/management/useIsLeader';
 
 export type ModalModeType = 'changeProfile' | 'deleteGroup' | 'leaveGroup' | 'leaderTransition';
 interface ManagementContentsProps {
-  id: string;
+  groupId: string;
 }
-const ManagementContents = ({ id }: ManagementContentsProps) => {
+const ManagementContents = ({ groupId }: ManagementContentsProps) => {
   //52f44a96-b8f7-4c6c-80b1-d657eafd3821 모닥모닥팀 아이디
   //1113b74a-2ec2-4f35-b044-4f42925cc076 얼그레이 연구회 아이디
   const [modalMode, setModalMode] = useState<ModalModeType | null>(null);
@@ -26,7 +27,9 @@ const ManagementContents = ({ id }: ManagementContentsProps) => {
     openModal();
   };
 
-  const isLeader = true;
+  const { data: isLeader, isPending, isError } = useIsLeader({ groupId });
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error!</div>;
 
   return (
     <>
@@ -55,14 +58,14 @@ const ManagementContents = ({ id }: ManagementContentsProps) => {
             <ManagementCard label={'멤버 초대링크 복사하기'} handleClick={OpenLinkCopiedAlert}>
               <Copy />
             </ManagementCard>
-            <ManagementCard label={'멤버 목록'} link={`/groups/${id}/management/members`}>
+            <ManagementCard label={'멤버 목록'} link={`/groups/${groupId}/management/members`}>
               <NextArrow />
             </ManagementCard>
           </ManagementSection>
         </div>
-        <ManagementBtns isLeader={isLeader} handleOpenModal={handleOpenModal} />
+        <ManagementBtns isLeader={isLeader ? isLeader : false} handleOpenModal={handleOpenModal} />
       </div>
-      <ManagementModal isLeader={isLeader} modalMode={modalMode} />
+      <ManagementModal isLeader={isLeader ? isLeader : false} modalMode={modalMode} />
       <LinkCopiedAlert>
         <div className="flex gap-2.5">
           <CircleOk /> <span>{'초대링크가 복사 되었어요!'}</span>
