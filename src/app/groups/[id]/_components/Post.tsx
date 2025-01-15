@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { PostActionBottomSheet } from './PostActionBottomSheet';
 import { PostWithRelations } from '@hooks/post/useFetchPosts';
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
+import CommentList from '@components/comment/CommentList';
 
 interface PostProps {
   post: PostWithRelations;
@@ -14,6 +15,7 @@ interface PostProps {
 const Post = ({ post }: PostProps) => {
   const [isExpanded, setIsExpanded] = useState<{ [key: string]: boolean }>({});
   const [bottomSheetPostId, setBottomSheetPostId] = useState<string | null>(null);
+  const [isCommentOpen, setIsCommentOpen] = useState(false);
 
   // 글 내용 3줄로 줄이기 (최대 80자)
   const truncateText = (text: string | null, postId: string) => {
@@ -26,12 +28,8 @@ const Post = ({ post }: PostProps) => {
   const toggleExpand = (postId: string) => {
     setIsExpanded((prev) => ({
       ...prev,
-      [postId]: !prev[postId]
+      [postId]: !prev[postId],
     }));
-  };
-
-  const handleComments = () => {
-    return null;
   };
 
   return (
@@ -83,13 +81,16 @@ const Post = ({ post }: PostProps) => {
         </div>
 
         {/* 댓글 */}
-        <div className="flex items-center h-6 text-xs" onClick={handleComments}>
+        <div className="w-28 flex items-center h-6 text-xs" onClick={() => setIsCommentOpen(true)}>
           <Comments />
           <span className="ml-1 font-semibold">
             {post.comments.length > 0 ? `${post.comments[0].count}개 모두 보기` : '댓글 남기기'}
           </span>
         </div>
       </article>
+
+      {/* 댓글 바텀시트 */}
+      {isCommentOpen && <CommentList postId={post.id} isOpen={true} onClose={() => setIsCommentOpen(false)} />}
 
       {/* 메뉴 수정 바텀시트 */}
       {bottomSheetPostId && (

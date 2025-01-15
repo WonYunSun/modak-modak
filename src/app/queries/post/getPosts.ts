@@ -1,9 +1,25 @@
 'use server';
 
-import { PostWithRelations } from '@hooks/post/useFetchPosts';
+import { Database } from '@ts/supabase';
 import { createClient } from '@utils/supabase/server';
 
-const groupId = '52f44a96-b8f7-4c6c-80b1-d657eafd3821';
+type PostType = Pick<Database['public']['Tables']['posts']['Row'], 'id' | 'content'>;
+type GroupType = Pick<Database['public']['Tables']['groups']['Row'], 'name' | 'description'>;
+type UserType = Pick<Database['public']['Tables']['users']['Row'], 'nickname' | 'profile_image'>;
+type ScheduleType = Pick<
+  Database['public']['Tables']['schedules']['Row'],
+  'name' | 'memo' | 'start_date' | 'end_date' | 'start_time'
+>;
+type CommentCountType = { count: number };
+
+export type PostWithRelations = {
+  id: PostType['id'];
+  content: PostType['content'];
+  groups: GroupType[];
+  users: UserType[];
+  schedules: ScheduleType[];
+  comments: CommentCountType[];
+};
 
 // 게시글 리스트 불러오기
 export const getPosts = async (groupId: string): Promise<PostWithRelations[]> => {
