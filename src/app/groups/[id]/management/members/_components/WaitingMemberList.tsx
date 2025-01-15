@@ -10,6 +10,7 @@ interface WaitingMemberListProps {
 const WaitingMemberList = ({ isLeaderUser }: WaitingMemberListProps) => {
   const { SmallAlert: MemberAddedAlert, /*openAlert: OpenMemberAddedAlert*/ } = useSmallAlert();
   console.log(isLeaderUser); //빌드시 미사용 변수 에러가 일어나는 것을 막기 위해서 넣은 줄입니다.
+  
 
   return (
     <>

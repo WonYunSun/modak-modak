@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import MemberCard from './MemberCard';
 import useFetchCurMembers from '@hooks/management/useFetchCurMembers';
 
@@ -15,8 +15,8 @@ interface CurMemberListProps {
   isLeaderUser: boolean;
 }
 const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
-  const path = usePathname();
-  const groupId = path.split('/').filter((c) => c !== '')[1];
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
 
   const { data: curMemberList, isPending, isError } = useFetchCurMembers({ groupId });
   if (isPending) return <div>Loading...</div>;
@@ -26,7 +26,7 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
   const filteredLeaderData =
     isLeaderUser || !curMemberList ? null : curMemberList.others.find((member) => member.is_leader === true);
   const leaderData = filteredLeaderData ? filteredLeaderData : DEFAULTDATA;
-  
+
   //리더를 제외한 멤버들의 데이터
   const filteredData = !curMemberList ? null : curMemberList.others.filter((member) => member.is_leader !== true);
 
