@@ -8,7 +8,7 @@ import { Plus } from '@components/icons';
 
 import PhotoUpload from './PhotoUpload';
 import PostTextArea from './PostTextArea';
-import PostSubmitButton from './PostSubmitButton';
+import Button from '@components/common/Button';
 
 export const PostNewForm = () => {
   const [text, setText] = useState<string>('');
@@ -63,7 +63,12 @@ export const PostNewForm = () => {
         </div>
       </div>
 
-      <PostSubmitButton disabled={selectedFiles.length === 0} />
+      <Button
+        label="작성 완료"
+        className="full-btn fixed bottom-0 px-5 pb-2"
+        disabled={selectedFiles.length === 0}
+        type="submit"
+      />
     </form>
   );
 };
