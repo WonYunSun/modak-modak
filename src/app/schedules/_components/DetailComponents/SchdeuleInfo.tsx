@@ -17,7 +17,7 @@ export const SchdeuleInfo = ({ schedule, setIsEdit }: SchdeuleInfoType) => {
   const { openModal } = useModalStore();
   const router = useRouter();
 
-  const isSingleDay = schedule?.end_date === schedule?.start_date;
+  const isSingleDay = schedule.end_date === schedule.start_date;
 
   const deleteSchedule = async (scheduleId: string) => {
     await deleteScheduleById(scheduleId);
@@ -36,7 +36,7 @@ export const SchdeuleInfo = ({ schedule, setIsEdit }: SchdeuleInfoType) => {
           <div className="flex bg-gray-100 px-4 py-3 rounded-lg font-medium">
             <CalendarIcon className="cursor-pointer mr-2" />
             <p>{formatDate(schedule.start_date)}</p>
-            {isSingleDay && (
+            {!isSingleDay && (
               <>
                 <span className="px-[4px]">⁓</span>
                 <p className="truncate">{formatDate(schedule.end_date)}</p>
