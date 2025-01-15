@@ -55,3 +55,18 @@ export const deleteScheduleById = async (scheduleId: string) => {
     return;
   }
 };
+
+export const updateScheduleById = async (scheduleId: string, newData: ScheduleType) => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('schedules')
+    .update({ ...newData })
+    .eq('id', scheduleId)
+    .select();
+
+  if (error) {
+    console.log('스케쥴 수정 실패', error);
+    return;
+  }
+  return data;
+};

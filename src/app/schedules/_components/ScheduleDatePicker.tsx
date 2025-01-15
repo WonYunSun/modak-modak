@@ -21,7 +21,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
     if (prevData?.scheduleDate) {
       setSelectedRange({
         from: prevData.scheduleDate.from ? new Date(prevData.scheduleDate.from) : undefined,
-        to: prevData.scheduleDate.to ? new Date(prevData.scheduleDate.to) : undefined
+        to: prevData.scheduleDate.to ? new Date(prevData.scheduleDate.to) : undefined,
       });
     }
     setSelectedTime(prevData?.scheduleTime || '');
@@ -39,7 +39,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
       setSelectedRange({ from, to });
       onDateChange({
         from: from.toISOString().split('T')[0],
-        to: to.toISOString().split('T')[0]
+        to: to.toISOString().split('T')[0],
       });
     } else {
       setSelectedRange(undefined);
