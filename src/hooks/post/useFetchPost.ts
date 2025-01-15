@@ -1,5 +1,5 @@
 import { editPost } from '@app/queries/post/editPost';
-import { getPost, PostWithSchedule } from '@app/queries/post/getPostById';
+import { getPost } from '@app/queries/post/getPostById';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 // 게시글 수정 - 게시글 정보 가져오기

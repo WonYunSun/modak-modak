@@ -2,24 +2,25 @@
 
 import { useState } from 'react';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 import Button from '@components/common/Button';
-import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
+// import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import { Plus, PlusGray } from '@components/icons';
 
-import { useFetchEditPost, useFetchGetPost } from '@hooks/post/useFetchPost';
+import { useFetchGetPost } from '@hooks/post/useFetchPost';
 
 export const PostEditForm = () => {
   const [text, setText] = useState<string>('');
-  const router = useRouter();
+
+  // const router = useRouter();
   const { postId } = useParams();
   const id = Array.isArray(postId) ? postId[0] : postId;
 
   const { data, isPending, isError } = useFetchGetPost(id);
-  const { mutate: editMutate } = useFetchEditPost(postId, text);
+  // const { mutate: editMutate } = useFetchEditPost(postId, text);
 
-  console.log('data', data);
+  console.log('text', text);
 
   if (isPending) return <p>로딩 중...</p>;
   if (isError) return <p>오류가 발생했습니다.</p>;
@@ -28,7 +29,7 @@ export const PostEditForm = () => {
     setText(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = () => {
     // e.preventDefault();
     // editMutate(
     //   { postId, text },

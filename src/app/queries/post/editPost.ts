@@ -9,4 +9,5 @@ export const editPost = async (postId: string | string[], text: string) => {
   const { data, error } = await supabase.from('posts').update({ content: text }).eq('id', postId);
 
   if (error) throw new Error(`editPost 게시글 저장하는 중 에러 발생: ${error.message}`);
+  return data;
 };
