@@ -46,3 +46,12 @@ export const fetchScheduleById = async (scheduleId: string): Promise<ScheduleTyp
     throw new Error(`${error}`);
   }
 };
+
+export const deleteScheduleById = async (scheduleId: string) => {
+  const supabase = await createClient();
+  const { error } = await supabase.from('schedules').delete().eq('id', scheduleId);
+  if (error) {
+    console.log('스케쥴 삭제 실패', error);
+    return;
+  }
+};
