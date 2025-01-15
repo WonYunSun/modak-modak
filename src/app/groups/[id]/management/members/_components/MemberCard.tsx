@@ -4,12 +4,13 @@ import Image from 'next/image';
 import MemberCardLeaderBtns from './MemberCardLeaderBtns';
 
 interface MemberCardProps {
+  toastOpener?: () => void;
   isLeaderUser: boolean;
   isLeader?: boolean;
   isMe?: boolean;
   mode: 'curMembers' | 'waiting';
 }
-const MemberCard = ({ isLeaderUser, isLeader = false, isMe = false, mode }: MemberCardProps) => {
+const MemberCard = ({ toastOpener, isLeaderUser, isLeader = false, isMe = false, mode }: MemberCardProps) => {
   const profile =
     'https://sozcwgcoibigujehjxbf.supabase.co/storage/v1/object/public/profiles/users/ebcc66fe-bf21-4b73-99d1-e4f375025b80/winterhotchocolate.jpg';
   const name = '이름이에요';
@@ -26,7 +27,7 @@ const MemberCard = ({ isLeaderUser, isLeader = false, isMe = false, mode }: Memb
           </span>
         </div>
         {isLeaderUser ? (
-          <MemberCardLeaderBtns isLeader={isLeader} mode={mode} />
+          <MemberCardLeaderBtns isLeader={isLeader} mode={mode} toastOpener={toastOpener ? toastOpener : null} />
         ) : (
           <>{mode === 'curMembers' && isLeader && <span className="text-primary">대표</span>}</>
         )}

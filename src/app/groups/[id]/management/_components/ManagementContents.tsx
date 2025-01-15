@@ -7,7 +7,8 @@ import ManagementCard from './ManagementCard';
 import ToggleBox from './ToggleBox';
 import ManagementBtns from './ManagementBtns';
 import ManagementModal from './modal/ManagementModal';
-import { Copy, NextArrow } from '@components/icons';
+import { CircleOk, Copy, NextArrow } from '@components/icons';
+import useSmallAlert from '@hooks/useSmallAlert';
 
 export type ModalModeType = 'changeProfile' | 'deleteGroup' | 'leaveGroup' | 'leaderTransition';
 interface ManagementContentsProps {
@@ -18,10 +19,13 @@ const ManagementContents = ({ id }: ManagementContentsProps) => {
   //1113b74a-2ec2-4f35-b044-4f42925cc076 얼그레이 연구회 아이디
   const [modalMode, setModalMode] = useState<ModalModeType | null>(null);
   const { openModal } = useModalStore();
+  const { SmallAlert: LinkCopiedAlert, openAlert: OpenLinkCopiedAlert } = useSmallAlert();
+
   const handleOpenModal = async (mode: ModalModeType) => {
     setModalMode(mode);
     openModal();
   };
+
   const isLeader = true;
 
   return (
@@ -48,7 +52,7 @@ const ManagementContents = ({ id }: ManagementContentsProps) => {
           </ManagementSection>
 
           <ManagementSection title={'멤버 관리'} isLast={true}>
-            <ManagementCard label={'멤버 초대링크 복사하기'}>
+            <ManagementCard label={'멤버 초대링크 복사하기'} handleClick={OpenLinkCopiedAlert}>
               <Copy />
             </ManagementCard>
             <ManagementCard label={'멤버 목록'} link={`/groups/${id}/management/members`}>
@@ -59,6 +63,11 @@ const ManagementContents = ({ id }: ManagementContentsProps) => {
         <ManagementBtns isLeader={isLeader} handleOpenModal={handleOpenModal} />
       </div>
       <ManagementModal isLeader={isLeader} modalMode={modalMode} />
+      <LinkCopiedAlert>
+        <div className="flex gap-2.5">
+          <CircleOk /> <span>{'초대링크가 복사 되었어요!'}</span>
+        </div>
+      </LinkCopiedAlert>
     </>
   );
 };
