@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '../../supabase/server';
+import { createClient } from '../../utils/supabase/server';
 import { ScheduleType } from '@ts/scheduleType';
 
 export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleType[] | null> => {
@@ -15,8 +15,8 @@ export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleT
         group_id: scheduleData.group_id,
         start_time: scheduleData.start_time,
         memo: scheduleData.memo,
-        created_at: scheduleData.created_at
-      }
+        created_at: scheduleData.created_at,
+      },
     ]);
 
     return data;

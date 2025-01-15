@@ -15,6 +15,7 @@ type FunnelProps = {
 
 const useFunnel = (defaultStep: string) => {
   const [step, setStep] = useState(defaultStep);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   //step 컴포넌트 : 개별 step의 name을 받고, children을 출력할 것임.
   const Step = (props: StepProps) => {
@@ -28,9 +29,7 @@ const useFunnel = (defaultStep: string) => {
     const { DotIndicator, move } = useDotIndicator({ dotCount: children.length });
 
     useEffect(() => {
-      if (targetStep) {
-        move(children.indexOf(targetStep));
-      }
+      move(currentIndex);
     }, []);
 
     return (
@@ -52,11 +51,13 @@ const useFunnel = (defaultStep: string) => {
   //다음으로
   const next = (nextStep: string): void => {
     updateStep(nextStep);
+    setCurrentIndex((prev) => prev + 1);
   };
 
   // 이전으로
   const prev = (prevStep: string): void => {
     updateStep(prevStep);
+    setCurrentIndex((prev) => prev - 1);
   };
 
   return { Funnel, Step, next, prev, currentStep: step };
