@@ -51,7 +51,7 @@ const Post = ({ post }: PostProps) => {
           <div className="flex items-center space-x-3">
             {/* 동그란 프로필 이미지 */}
             <Image
-              src={post.users.profile_image ?? '/icons/profile-image.webp'}
+              src={post.users.profile_image}
               alt="프로필"
               width={32}
               height={32}
