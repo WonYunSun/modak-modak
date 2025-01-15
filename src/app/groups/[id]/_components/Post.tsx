@@ -23,6 +23,8 @@ interface PostProps {
   post: PostCommonType;
 }
 
+const MAX_LENGTH = 80;
+
 const Post = ({ post }: PostProps) => {
   const [isExpanded, setIsExpanded] = useState<{ [key: string]: boolean }>({});
   const [bottomSheetPostId, setBottomSheetPostId] = useState<string | null>(null);
@@ -31,7 +33,6 @@ const Post = ({ post }: PostProps) => {
   // 글 내용 3줄로 줄이기 (최대 80자)
   const truncateText = (text: string | null, postId: string) => {
     if (!text) return '';
-    const MAX_LENGTH = 80;
     return text.length <= MAX_LENGTH || isExpanded[postId] ? text : `${text.slice(0, MAX_LENGTH)}...`;
   };
 
@@ -101,7 +102,7 @@ const Post = ({ post }: PostProps) => {
       </article>
 
       {/* 댓글 바텀시트 */}
-      {isCommentOpen && <CommentList postId={post.id} isOpen={true} onClose={() => setIsCommentOpen(false)} />}
+      <CommentList postId={post.id} isOpen={isCommentOpen} onClose={() => setIsCommentOpen(false)} />
 
       {/* 메뉴 수정 바텀시트 */}
       {bottomSheetPostId && (
