@@ -1,4 +1,4 @@
-import { getPosts } from '@app/queries/post/getPosts';
+import { getPosts } from 'queries/post/getPosts';
 import { useQuery } from '@tanstack/react-query';
 
 export const useFetchGetPosts = (groupId: string) => {

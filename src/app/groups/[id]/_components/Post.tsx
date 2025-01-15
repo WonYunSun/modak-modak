@@ -8,7 +8,7 @@ import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import CommentList from '@components/comment/CommentList';
 import { PostActionBottomSheet } from './PostActionBottomSheet';
 
-import { CommentCountType, GroupType, PostType, ScheduleType, UserType } from '@app/queries/post/getPosts';
+import { CommentCountType, GroupType, PostType, ScheduleType, UserType } from 'queries/post/getPosts';
 
 export type PostCommonType = {
   id: PostType['id'];
