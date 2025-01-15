@@ -22,28 +22,30 @@ export const ScheduleDetail = ({ scheduleId }: { scheduleId: string }) => {
   return (
     <div>
       <FunnelHeader label="일정 상세" />
-      <div className="inner h-[calc(100vh-9.7rem)] flex flex-col justify-between mt-[2.18rem]">
-        <div className="space-y-4">
-          <Label label="일정명" htmlFor="" />
-          <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{data.name}</p>
-        </div>
-        <div className="space-y-4">
-          <Label label="날짜" htmlFor="" />
-          <div className="flex bg-gray-100 px-4 py-3 rounded-lg font-medium">
-            <p>{formatDate(data.start_date)}</p>
-            {isSingleDay && (
-              <>
-                <span className="px-[4px]">⁓</span>
-                <p className="truncate">{formatDate(data.end_date)}</p>
-              </>
-            )}
+      <div className="inner h-[calc(100vh-7rem)] flex flex-col justify-between mt-[2.18rem]">
+        <div className="flex flex-col gap-8">
+          <div className="space-y-4">
+            <Label label="일정명" htmlFor="" />
+            <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{data.name}</p>
           </div>
-          <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{formatTime(data.start_time)}</p>
-        </div>
+          <div className="space-y-4">
+            <Label label="날짜" htmlFor="" />
+            <div className="flex bg-gray-100 px-4 py-3 rounded-lg font-medium">
+              <p>{formatDate(data.start_date)}</p>
+              {isSingleDay && (
+                <>
+                  <span className="px-[4px]">⁓</span>
+                  <p className="truncate">{formatDate(data.end_date)}</p>
+                </>
+              )}
+            </div>
+            <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{formatTime(data.start_time)}</p>
+          </div>
 
-        <div className="space-y-4">
-          <Label label="메모" htmlFor="" />
-          <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{data.memo}</p>
+          <div className="space-y-4">
+            <Label label="메모" htmlFor="" />
+            <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{data.memo}</p>
+          </div>
         </div>
         <div className="flex gap-[8px]">
           <Button
