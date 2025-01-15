@@ -33,7 +33,7 @@ const ScheduleCard = ({
       }`}
     >
       <div className="flex flex-col w-full w-11/12">
-        <div className="pb-[4px] text-gray-600">{groupName}</div>
+        <div className="pb-1 text-gray-600">{groupName}</div>
         <div className="flex flex-col"></div>
         <p className="text-lg font-semibold leading-[140%] mb-2">{name}</p>
         <div className={detailClass}>
@@ -41,11 +41,11 @@ const ScheduleCard = ({
           <span className="truncate w-full">{memo}</span>
         </div>
         <div className="flex items-center whitespace-nowrap">
-          <span className={`${labelClass} pr-[12px]`}>일자</span>
+          <span className={`${labelClass} pr-3`}>일자</span>
           <span>{formatDate(start_date)}</span>
           {!isSingleDay && (
             <>
-              <span className="px-[4px]">⁓</span>
+              <span className="px-1">⁓</span>
               <span className="truncate">{formatDate(end_date)}</span>
             </>
           )}

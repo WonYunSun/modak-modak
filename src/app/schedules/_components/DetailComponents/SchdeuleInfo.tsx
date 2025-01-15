@@ -38,7 +38,7 @@ export const SchdeuleInfo = ({ schedule, setIsEdit }: SchdeuleInfoType) => {
             <p>{formatDate(schedule.start_date)}</p>
             {!isSingleDay && (
               <>
-                <span className="px-[4px]">⁓</span>
+                <span className="px-1">⁓</span>
                 <p className="truncate">{formatDate(schedule.end_date)}</p>
               </>
             )}
@@ -54,7 +54,7 @@ export const SchdeuleInfo = ({ schedule, setIsEdit }: SchdeuleInfoType) => {
           <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{schedule.memo}</p>
         </div>
       </div>
-      <div className="flex gap-[8px]">
+      <div className="flex gap-2">
         <Button
           label="삭제"
           className="flex-[2_2_0%] full-white-btn"
@@ -78,7 +78,7 @@ export const SchdeuleInfo = ({ schedule, setIsEdit }: SchdeuleInfoType) => {
             <p className="text-gray-900 font-semibold text-lg mb-[0.25rem]">정말 삭제하시겠어요?</p>
             <p className="text-gray-500 ">삭제하시면 되돌릴 수 없어요</p>
           </div>
-          <div className="flex gap-[8px] px-[1rem]">
+          <div className="flex gap-2 px-[1rem]">
             <Button
               label="취소"
               className="flex-[2_2_0%] full-white-btn"
