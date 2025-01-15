@@ -8,13 +8,13 @@ import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import CommentList from '@components/comment/CommentList';
 import { CommentCountType, GroupType, PostType, ScheduleType, UserType } from '@app/queries/post/getPosts';
 
-type PostCommonType = {
+export type PostCommonType = {
   id: PostType['id'];
   content: PostType['content'];
-  groups: GroupType; // ✅ 배열 제거
-  users: UserType; // ✅ 배열 제거
-  schedules: ScheduleType; // ✅ 배열 제거
-  comments: CommentCountType[]; // 댓글은 배열 유지
+  groups: GroupType;
+  users: UserType;
+  schedules: ScheduleType;
+  comments: CommentCountType[];
 };
 
 interface PostProps {
@@ -48,7 +48,7 @@ const Post = ({ post }: PostProps) => {
           <div className="flex items-center space-x-3">
             {/* 동그란 프로필 이미지 */}
             <Image
-              src={post.users.profile_image}
+              src={post.users.profile_image ?? '/icons/profile-image.webp'}
               alt="프로필"
               width={32}
               height={32}

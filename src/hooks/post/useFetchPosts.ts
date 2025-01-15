@@ -1,8 +1,8 @@
-import { getPosts, PostWithRelations } from '@app/queries/post/getPosts';
+import { getPosts, PostListType } from '@app/queries/post/getPosts';
 import { useQuery } from '@tanstack/react-query';
 
 export const useFetchGetPosts = (groupId: string) => {
-  const { data, isPending, isError } = useQuery<PostWithRelations[]>({
+  const { data, isPending, isError } = useQuery({
     queryKey: [groupId, 'posts'],
     queryFn: () => getPosts(groupId),
   });
