@@ -4,12 +4,21 @@ import Image from 'next/image';
 import { Comments, Menu } from '@components/icons';
 import { useState } from 'react';
 import { PostActionBottomSheet } from './PostActionBottomSheet';
-import { PostWithRelations } from '@hooks/post/useFetchPosts';
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import CommentList from '@components/comment/CommentList';
+import { CommentCountType, GroupType, PostType, ScheduleType, UserType } from '@app/queries/post/getPosts';
+
+type PostCommonType = {
+  id: PostType['id'];
+  content: PostType['content'];
+  groups: GroupType; // ✅ 배열 제거
+  users: UserType; // ✅ 배열 제거
+  schedules: ScheduleType; // ✅ 배열 제거
+  comments: CommentCountType[]; // 댓글은 배열 유지
+};
 
 interface PostProps {
-  post: PostWithRelations;
+  post: PostCommonType;
 }
 
 const Post = ({ post }: PostProps) => {

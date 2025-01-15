@@ -3,16 +3,16 @@
 import { Database } from '@ts/supabase';
 import { createClient } from '@utils/supabase/server';
 
-type PostType = Pick<Database['public']['Tables']['posts']['Row'], 'id' | 'content'>;
-type GroupType = Pick<Database['public']['Tables']['groups']['Row'], 'name' | 'description'>;
-type UserType = Pick<Database['public']['Tables']['users']['Row'], 'nickname' | 'profile_image'>;
-type ScheduleType = Pick<
+export type PostType = Pick<Database['public']['Tables']['posts']['Row'], 'id' | 'content'>;
+export type GroupType = Pick<Database['public']['Tables']['groups']['Row'], 'name' | 'description'>;
+export type UserType = Pick<Database['public']['Tables']['users']['Row'], 'nickname' | 'profile_image'>;
+export type ScheduleType = Pick<
   Database['public']['Tables']['schedules']['Row'],
   'name' | 'memo' | 'start_date' | 'end_date' | 'start_time'
 >;
-type CommentCountType = { count: number };
+export type CommentCountType = { count: number };
 
-export type PostWithRelations = {
+export type PostListType = {
   id: PostType['id'];
   content: PostType['content'];
   groups: GroupType[];
@@ -22,7 +22,7 @@ export type PostWithRelations = {
 };
 
 // 게시글 리스트 불러오기
-export const getPosts = async (groupId: string): Promise<PostWithRelations[]> => {
+export const getPosts = async (groupId: string): Promise<PostListType[]> => {
   const supabase = await createClient();
 
   const { data, error } = await supabase

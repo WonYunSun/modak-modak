@@ -10,12 +10,11 @@ import { useFetchGetPosts } from '@hooks/post/useFetchPosts';
 
 const PostList = () => {
   const router = useRouter();
+
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
 
   const { data, isPending, isError } = useFetchGetPosts(groupId);
-
-  console.log('data', data);
 
   if (isPending) return <p>로딩 중...</p>;
   if (isError) return <p>에러 발생!</p>;
@@ -35,7 +34,7 @@ const PostList = () => {
         label="게시글 쓰기"
         className="floating-btn"
         type="button"
-        onClick={() => router.push(`/groups/123/posts/new`)}
+        onClick={() => router.push(`/groups/${groupId}/posts/new`)}
       >
         <ModificationLine />
       </Button>
