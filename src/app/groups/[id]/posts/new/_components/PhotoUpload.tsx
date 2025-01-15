@@ -1,10 +1,12 @@
 'use client';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
 import Button from '@components/common/Button';
 import { DeletePhoto, PlusGray } from '@components/icons';
-import { Swiper, SwiperSlide } from 'swiper/react';
+
 import { isValidImageFile } from '@utils/imageFileValidation';
-import 'swiper/css';
 
 interface PhotoUploadProps {
   selectedFiles: File[];
@@ -21,7 +23,6 @@ const PhotoUpload = ({ selectedFiles, setSelectedFiles, previewUrls, setPreviewU
 
     files.forEach((file) => {
       if (isValidImageFile(file)) {
-        // ✅ 파일 객체를 그대로 전달하도록 수정
         validFiles.push(file);
       } else {
         invalidFiles.push(file.name);

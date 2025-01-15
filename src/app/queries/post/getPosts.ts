@@ -1,7 +1,8 @@
 'use server';
 
-import { Database } from '@ts/supabase';
 import { createClient } from '@utils/supabase/server';
+
+import { Database } from '@ts/supabase';
 
 export type PostType = Pick<Database['public']['Tables']['posts']['Row'], 'id' | 'content'>;
 export type GroupType = Pick<Database['public']['Tables']['groups']['Row'], 'name' | 'description'>;

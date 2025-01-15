@@ -1,8 +1,8 @@
 import FunnelHeader from '@components/common/FunnelHeader';
+
 import EditPostForm from './_components/PostEditForm';
 
 const PostEditPage = () => {
-
   return (
     <div className="w-full">
       {/* 헤더 영역 */}
@@ -11,7 +11,6 @@ const PostEditPage = () => {
       </div>
 
       <EditPostForm />
-
     </div>
   );
 };

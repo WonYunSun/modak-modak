@@ -1,7 +1,8 @@
 'use client';
 
-import { ModificationNoCircle, TrashCan } from '@components/icons';
 import { useRouter } from 'next/navigation';
+
+import { ModificationNoCircle, TrashCan } from '@components/icons';
 
 interface PostActionBottomSheetProps {
   setBottomSheetPostId: React.Dispatch<React.SetStateAction<string | null>>;

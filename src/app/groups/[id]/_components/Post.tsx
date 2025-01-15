@@ -1,11 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { Comments, Menu } from '@components/icons';
 import { useState } from 'react';
-import { PostActionBottomSheet } from './PostActionBottomSheet';
+
+import { Comments, Menu } from '@components/icons';
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import CommentList from '@components/comment/CommentList';
+import { PostActionBottomSheet } from './PostActionBottomSheet';
+
 import { CommentCountType, GroupType, PostType, ScheduleType, UserType } from '@app/queries/post/getPosts';
 
 export type PostCommonType = {

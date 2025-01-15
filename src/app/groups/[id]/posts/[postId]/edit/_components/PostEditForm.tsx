@@ -1,11 +1,14 @@
 'use client';
 
+import { useState } from 'react';
+
+import { useParams, useRouter } from 'next/navigation';
+
 import Button from '@components/common/Button';
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import { Plus, PlusGray } from '@components/icons';
+
 import { useFetchEditPost, useFetchGetPost } from '@hooks/post/useFetchPost';
-import { useParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 export const PostEditForm = () => {
   const [text, setText] = useState<string>('');
@@ -26,15 +29,15 @@ export const PostEditForm = () => {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    editMutate(
-      { postId, text },
-      {
-        onSuccess: () => {
-          router.back();
-        }
-      }
-    );
+    // e.preventDefault();
+    // editMutate(
+    //   { postId, text },
+    //   {
+    //     onSuccess: () => {
+    //       router.back();
+    //     }
+    //   }
+    // );
   };
 
   return (
@@ -72,7 +75,7 @@ export const PostEditForm = () => {
         </div>
       </div>
 
-      {/*TODO: 일정 카드 수정 필요*/}
+      {/* TODO: 일정 카드 수정 필요
       <div className="w-full px-5 mt-1">
         <PostScheduleCard
           name={data.schedules.name}
@@ -81,7 +84,7 @@ export const PostEditForm = () => {
           end_date={data.schedules.end_date}
           start_time={data.schedules.start_time}
         />
-      </div>
+      </div> */}
 
       <div className="w-full fixed bottom-0 px-5 pb-2">
         <Button label="수정 완료" className="full-btn" type="submit" />

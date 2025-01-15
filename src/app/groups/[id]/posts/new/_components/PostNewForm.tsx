@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+
 import { useUploadPost } from '@hooks/post/useUploadPost';
 
 import { Plus } from '@components/icons';
+
 import PhotoUpload from './PhotoUpload';
 import PostTextArea from './PostTextArea';
 import PostSubmitButton from './PostSubmitButton';

@@ -1,7 +1,8 @@
 'use client';
 
-import GroupCard from '@components/common/groupCard/GroupCard';
 import { useParams } from 'next/navigation';
+
+import GroupCard from '@components/common/groupCard/GroupCard';
 
 export const GroupCardSection = () => {
   const { id } = useParams();

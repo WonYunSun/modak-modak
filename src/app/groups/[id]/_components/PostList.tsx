@@ -1,11 +1,14 @@
 'use client';
 
+import { useParams, useRouter } from 'next/navigation';
+
 import Button from '@components/common/Button';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
 import Post from './Post';
-import { useParams, useRouter } from 'next/navigation';
-import { ModificationLine } from '@components/icons';
 import CountBar from './CountBar';
+
+import { ModificationLine } from '@components/icons';
+
 import { useFetchGetPosts } from '@hooks/post/useFetchPosts';
 
 const PostList = () => {
