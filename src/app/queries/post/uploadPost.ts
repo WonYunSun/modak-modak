@@ -50,7 +50,7 @@
 //       const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${data.path}`;
 //       uploadedImageUrls.push(imageUrl);
 
-//       // ✅ 3. post_images 테이블에 이미지 URL과 post_id 저장
+//       // 3. post_images 테이블에 이미지 URL과 post_id 저장
 //       const { error: imageInsertError } = await supabase.from('post_images').insert([
 //         {
 //           image_url: imageUrl,

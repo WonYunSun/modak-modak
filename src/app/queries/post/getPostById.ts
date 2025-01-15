@@ -41,7 +41,7 @@ export const getPost = async (postId: string): Promise<PostWithSchedule> => {
 
   if (error) throw new Error(`getPost 게시글 데이터 불러오는 중 에러 발생: ${error.message}`);
 
-  // ✅ 배열로 반환될 경우 첫 번째 요소를 사용
+  // 배열로 반환될 경우 첫 번째 요소를 사용
   const formattedData: PostWithSchedule = {
     id: data.id,
     content: data.content,
