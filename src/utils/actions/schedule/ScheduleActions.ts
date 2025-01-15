@@ -35,3 +35,14 @@ export const fetchSchedulesBygroupId = async (groupId: string): Promise<Schedule
     throw new Error(`${error}`);
   }
 };
+
+export const fetchScheduleById = async (scheduleId: string): Promise<ScheduleType | null> => {
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.from('schedules').select('*').eq('id', scheduleId).single();
+
+    return data;
+  } catch (error) {
+    throw new Error(`${error}`);
+  }
+};

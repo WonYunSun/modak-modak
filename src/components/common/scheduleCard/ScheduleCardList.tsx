@@ -1,10 +1,11 @@
 'use client';
 
-import { fetchSchedulesBygroupId } from '@utils/actions/schedule/ScheduleActions';
 import { useEffect, useState } from 'react';
-import { ScheduleType } from '@ts/scheduleType';
 import ScheduleCard from './ScheduleCard';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
+import CountBar from '@app/groups/[id]/_components/CountBar';
+import { fetchSchedulesBygroupId } from '@utils/actions/schedule/ScheduleActions';
+import { ScheduleType } from '@ts/scheduleType';
 
 const groupId = '52f44a96-b8f7-4c6c-80b1-d657eafd3821';
 
@@ -23,6 +24,7 @@ const ScheduleCardList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchScheduleDatas(groupId);
+
       if (data) {
         setScheduleData(data);
       }
@@ -33,6 +35,7 @@ const ScheduleCardList = () => {
   return (
     <div>
       <SearchBar />
+      <CountBar value={scheduleData.length} />
       <div className="mt-4 mb-20">
         {scheduleData.map((schedule, index) => (
           <div className="mb-5" key={index}>

@@ -1,5 +1,7 @@
-import Link from "next/link";
-import Button from "@components/common/Button";
+'use client';
+
+import Link from 'next/link';
+import Button from '@components/common/Button';
 
 const LeavingSuccess = () => {
   return (
@@ -13,6 +15,6 @@ const LeavingSuccess = () => {
       </Link>
     </>
   );
-}
+};
 
-export default LeavingSuccess
+export default LeavingSuccess;

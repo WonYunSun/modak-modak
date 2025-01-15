@@ -1,5 +1,7 @@
-import Link from "next/link";
-import Button from "@components/common/Button";
+'use client';
+
+import Link from 'next/link';
+import Button from '@components/common/Button';
 
 const DeletionSuccess = () => {
   //버튼을 안 누르고 모달을 나가도 홈페이지로 튕기게 할 방법은 없을까

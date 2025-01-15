@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import DeletionAssure from './DeletionAssure';
 import DeletionConfirm from './DeletionConfirm';

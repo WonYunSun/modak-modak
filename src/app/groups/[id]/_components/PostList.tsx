@@ -25,7 +25,7 @@ const PostList = () => {
       {/* 검색바 */}
       <SearchBar />
       {/* 게시글 수 */}
-      <CountBar postsCount={data?.length ?? 0} />
+      <CountBar value={data?.length ?? 0} />
 
       {/* map으로 Post 컴포넌트 렌더링 */}
       {data?.map((post) => <Post key={post.id} post={post} />)}
