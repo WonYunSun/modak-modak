@@ -1,8 +1,8 @@
 'use server';
 
 import { createClient } from '../../utils/supabase/server';
-import { Database } from '@ts/supabase';
 import { GroupsType } from '../home/fetchGroupInfo';
+import { Database } from '@ts/supabase';
 
 export type GroupMembersType = Database['public']['Tables']['group_members']['Row'];
 
