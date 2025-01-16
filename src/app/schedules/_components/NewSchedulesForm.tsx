@@ -9,7 +9,7 @@ import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
 import useFunnel from 'hooks/useFunnel';
 import { ScheduleType } from '@ts/scheduleType';
-import { addSchedule } from '@utils/actions/schedule/ScheduleActions';
+import { addSchedule } from 'queries/schedule/ScheduleActions';
 
 //단계 name 정의
 const steps = ['일정명', '모임일시', '메모'];
@@ -29,7 +29,7 @@ const NewSchedulesForm = () => {
     name: '',
     start_date: '',
     end_date: '',
-    start_time: ''
+    start_time: '',
   });
 
   const handleNext = async (data: Partial<ScheduleType>, nextStep: string) => {
@@ -40,7 +40,7 @@ const NewSchedulesForm = () => {
       const completeScheduleData: ScheduleType = {
         ...updatedScheduleData,
         created_at: new Date().toISOString(),
-        id: ''
+        id: '',
       };
 
       try {
@@ -75,7 +75,7 @@ const NewSchedulesForm = () => {
             prevData={{
               start_date: scheduleData.start_date,
               end_date: scheduleData.end_date,
-              start_time: scheduleData.start_time
+              start_time: scheduleData.start_time,
             }}
           />
         </Step>

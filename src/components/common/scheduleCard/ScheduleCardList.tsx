@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import ScheduleCard from './ScheduleCard';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
 import CountBar from '@app/groups/[id]/_components/CountBar';
-import { fetchSchedulesBygroupId } from '@utils/actions/schedule/ScheduleActions';
+import { fetchSchedulesBygroupId } from 'queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
 
 const groupId = '52f44a96-b8f7-4c6c-80b1-d657eafd3821';

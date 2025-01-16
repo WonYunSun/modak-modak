@@ -1,10 +1,11 @@
 'use client';
 
-import { useTabStore } from 'stores/useTabStore';
+interface TabsProps {
+  activeTab: string;
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const Tabs = () => {
-  const { activeTab, setActiveTab } = useTabStore();
-
+const Tabs = ({ activeTab, setActiveTab }: TabsProps) => {
   return (
     <div className="flex cursor-pointer">
       {/* 게시글 탭 */}
