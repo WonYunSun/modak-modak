@@ -1,7 +1,7 @@
 'use server';
 
 import { createClient } from '@utils/supabase/server';
-import { GroupsType } from '../home/fetchGroupInfo';
+import { GroupsType } from '@queries/home/fetchGroupInfo';
 import { Database } from '@ts/supabase';
 
 export type GroupMembersType = Database['public']['Tables']['group_members']['Row'];
@@ -43,7 +43,8 @@ export const fetchWaitingMembers = async ({ groupId }: FetchMembersParams): Prom
       .from('group_members')
       .select(`group_id, is_approved, is_leader, users( id, nickname, profile_image)`)
       .eq('group_id', groupId)
-      .eq('is_approved', false);
+      .eq('is_approved', false)
+      .order('created_at', { ascending: false }); //
 
     return data as CurMemberType[] | null;
   } catch (error) {

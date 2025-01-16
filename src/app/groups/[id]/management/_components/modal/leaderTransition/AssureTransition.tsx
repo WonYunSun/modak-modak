@@ -10,6 +10,7 @@ const AssureTransition = ({ onNextStep }: AssureTransitionProps) => {
   const { closeModal } = useModalStore();
 
   const onLeaderTransition = () => {
+    //뮤테이션 훅이 돌아가야 할 위치
     onNextStep();
   };
 

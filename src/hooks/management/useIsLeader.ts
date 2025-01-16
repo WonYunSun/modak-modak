@@ -12,7 +12,7 @@ const useIsLeader = ({ groupId }: UseIsLeaderParams) => {
   const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
 
   const { data, isPending, isError } = useQuery({
-    queryKey: [`isLeader-${groupId}-${userId}`],
+    queryKey: ['isLeader', groupId, userId],
     queryFn: async () => {
       const data = await fetchLeaderInfo({ groupId });
 

@@ -12,13 +12,13 @@ const useFetchCurMembers = ({ groupId }: UseFetchCurMembersParams) => {
   const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
 
   const { data, isPending, isError } = useQuery({
-    queryKey: [`fetchCurMembers-${groupId}-${userId}`],
+    queryKey: ['fetchCurMembers', groupId, userId],
     queryFn: async () => {
       const data = await fetchCurMembers({ groupId });
       if (data) {
         const me = data.find((member) => member.users.id === userId) as CurMemberType;
         const others = data.filter((member) => member.users.id !== userId);
-        return {me, others}
+        return { me, others };
       }
       return null;
     },
