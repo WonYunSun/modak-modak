@@ -22,6 +22,20 @@ const useFunnel = (defaultStep: string, length: number) => {
     move(currentIndex);
   }, [currentIndex]);
 
+  //새로고침 또는 페이지 떠날 때때 알럿
+  const preventClose = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, []);
+
   //step 컴포넌트 : 개별 step의 name을 받고, children을 출력할 것임.
   const Step = (props: StepProps) => {
     return <>{props.children}</>;
