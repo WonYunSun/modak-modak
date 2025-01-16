@@ -11,8 +11,12 @@ import { ModificationLine } from '@components/icons';
 
 import { useFetchGetPosts } from '@hooks/post/useFetchPosts';
 
+import { useNewPostStore } from '@stores/useNewPostStore';
+
 const PostList = () => {
   const router = useRouter();
+
+  const { reset } = useNewPostStore();
 
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -37,7 +41,10 @@ const PostList = () => {
         label="게시글 쓰기"
         className="floating-btn"
         type="button"
-        onClick={() => router.push(`/groups/${groupId}/posts/new`)}
+        onClick={() => {
+          router.push(`/groups/${groupId}/posts/new`);
+          reset();
+        }}
       >
         <ModificationLine />
       </Button>
