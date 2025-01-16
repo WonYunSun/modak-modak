@@ -172,9 +172,9 @@ export const Modification = ({ className }: IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <g filter="url(#filter0_d_527_14166)">
-        <rect x="5" y="5" width="42" height="42" rx="21" fill="white" shape-rendering="crispEdges" />
+        <rect x="5" y="5" width="42" height="42" rx="21" fill="white" shapeRendering="crispEdges" />
         <path
-          fill-rule="evenodd"
+          fillRule="evenodd"
           clipRule="evenodd"
           d="M30.0858 17.9142C30.8668 17.1332 32.1332 17.1332 32.9142 17.9142L34.0858 19.0858C34.8668 19.8668 34.8668 21.1332 34.0858 21.9142L23.9282 32.0718C23.649 32.351 23.2934 32.5413 22.9062 32.6188L18.7942 33.4412C18.6542 33.4692 18.5308 33.3458 18.5588 33.2058L19.3812 29.0938C19.4587 28.7066 19.649 28.351 19.9282 28.0718L30.0858 17.9142Z"
           stroke="#18181B"
@@ -190,9 +190,9 @@ export const Modification = ({ className }: IconProps) => {
           width="52"
           height="52"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
