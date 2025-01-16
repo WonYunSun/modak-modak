@@ -15,7 +15,7 @@ const SocialLogins = () => {
   };
 
   return (
-    <div className="flex flex-col mt-auto">
+    <div className="flex flex-col">
       <Button
         className="kakao-btn mb-4"
         label="카카오로 시작하기"
