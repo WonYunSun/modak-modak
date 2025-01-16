@@ -13,7 +13,7 @@ const Layout = ({ children, isDisabled = false, onNext, onPrev, NextBtnlabel = '
     <div>
       <div className="h-[calc(100vh-10.25rem)] flex flex-col justify-between">
         {children}
-        <div className="flex gap-[8px]">
+        <div className="flex gap-2">
           <Button
             label="이전"
             className="flex-[2_2_0%] full-white-btn"

@@ -21,7 +21,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
     if (prevData?.scheduleDate) {
       setSelectedRange({
         from: prevData.scheduleDate.from ? new Date(prevData.scheduleDate.from) : undefined,
-        to: prevData.scheduleDate.to ? new Date(prevData.scheduleDate.to) : undefined
+        to: prevData.scheduleDate.to ? new Date(prevData.scheduleDate.to) : undefined,
       });
     }
     setSelectedTime(prevData?.scheduleTime || '');
@@ -39,7 +39,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
       setSelectedRange({ from, to });
       onDateChange({
         from: from.toISOString().split('T')[0],
-        to: to.toISOString().split('T')[0]
+        to: to.toISOString().split('T')[0],
       });
     } else {
       setSelectedRange(undefined);
@@ -69,7 +69,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
           }} // 클릭 시 DatePicker 열기/닫기
           readOnly
           placeholder="날짜"
-          className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[50px]"
+          className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[3.12rem]"
         />
         {isDatepickerOpen && (
           <div className="absolute top-[100%] left-0 z-10">
@@ -96,7 +96,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
           onChange={handleTimeChange}
           onClick={() => setIsDatepickerOpen(false)}
           type="time"
-          className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[50px] "
+          className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[3.12rem] "
         />
       </div>
     </div>
