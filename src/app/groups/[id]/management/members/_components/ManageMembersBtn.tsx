@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
 import useBottomSheetStore from '@stores/useBottomSheetStore';
-import { Menu } from '@components/icons';
-import { UsersType } from '@queries/home/fetchGroupInfo';
 import useUserToManageStore from '@stores/useUserToManage';
+import { UsersType } from '@queries/home/fetchGroupInfo';
+import { Menu } from '@components/icons';
 
 interface ManageMembersBtnProps {
   memberId: UsersType['id'];
@@ -11,7 +11,7 @@ interface ManageMembersBtnProps {
 const ManageMembersBtn = ({ memberId }: ManageMembersBtnProps) => {
   const { setActionModalOpen } = useBottomSheetStore();
   const { setSelectedUser } = useUserToManageStore();
-  
+
   const onOpenBottomSheet = () => {
     setSelectedUser(memberId);
     setActionModalOpen(true);

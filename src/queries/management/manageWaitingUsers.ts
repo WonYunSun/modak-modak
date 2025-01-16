@@ -25,11 +25,7 @@ export const refuseNewUser = async ({ groupId, waitingUserId }: manageWatingUser
   try {
     const supabase = await createClient();
 
-    await supabase
-      .from('group_members')
-      .delete()
-      .eq('group_id', groupId)
-      .eq('user_id', waitingUserId);
+    await supabase.from('group_members').delete().eq('group_id', groupId).eq('user_id', waitingUserId);
   } catch (error) {
     throw new Error(`${error}`);
   }

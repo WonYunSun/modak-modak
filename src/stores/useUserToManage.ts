@@ -5,6 +5,7 @@ type UserToManageStoreType = {
   selectedUser: UsersType['id'];
   setSelectedUser: (userId: UsersType['id']) => void;
 };
+
 const useUserToManageStore = create<UserToManageStoreType>((set) => ({
   selectedUser: '',
   setSelectedUser: (userId) => set({ selectedUser: userId }),

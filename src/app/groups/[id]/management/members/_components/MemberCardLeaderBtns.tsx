@@ -1,10 +1,10 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import ManageMembersBtn from '@app/groups/[id]/management/members/_components/ManageMembersBtn';
 import usePermitNewUser from '@hooks/management/usePermitNewUser';
 import useRefuseNewUser from '@hooks/management/useRefuseNewMember';
 import { UsersType } from '@queries/home/fetchGroupInfo';
-import { useParams } from 'next/navigation';
 
 interface MemberCardBtnsProps {
   memberId: UsersType['id'];

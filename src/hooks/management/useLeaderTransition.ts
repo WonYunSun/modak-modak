@@ -1,3 +1,5 @@
+'use client';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { leaderTransition } from '@queries/management/leaderTransition';
 import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';

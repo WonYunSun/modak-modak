@@ -1,8 +1,8 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';
 import { refuseNewUser } from '@queries/management/manageWaitingUsers';
+import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';
 
 interface UsePermitNewUserParams {
   groupId: GroupsType['id'];
@@ -15,7 +15,9 @@ const useRefuseNewUser = ({ groupId, waitingUserId }: UsePermitNewUserParams) =>
   const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
 
   const { mutate } = useMutation({
-    mutationFn: async () => { return await refuseNewUser({ groupId, waitingUserId }); },
+    mutationFn: async () => {
+      return await refuseNewUser({ groupId, waitingUserId });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['fetchWaitingMembers', groupId, userId] });
     },
