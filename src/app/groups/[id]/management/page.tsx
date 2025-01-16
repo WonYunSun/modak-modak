@@ -1,5 +1,5 @@
 import Header from '@components/common/Header';
-import ManagementContents from './_components/ManagementContents';
+import ManagementContents from '@app/groups/[id]/management/_components/ManagementContents';
 
 interface ManagementPageProps {
   params: {
@@ -14,7 +14,7 @@ const ManagementPage = ({ params }: ManagementPageProps) => {
   return (
     <main>
       <Header home={false} label={'관리 페이지'} />
-      <ManagementContents id={id}/>
+      <ManagementContents groupId={id} />
     </main>
   );
 };

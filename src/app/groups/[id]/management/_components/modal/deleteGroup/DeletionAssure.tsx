@@ -1,7 +1,7 @@
 'use client'
 
 import Button from "@components/common/Button";
-import useModalStore from "stores/useModalStore";
+import useModalStore from "@stores/useModalStore";
 
 interface DeletionAssureProps {
   onNextStep: () => void;

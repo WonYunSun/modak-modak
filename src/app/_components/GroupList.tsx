@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import GroupCard from '@components/common/groupCard/GroupCard';
-import { fetchGroupCardInfos } from '@utils/actions/home/fetchGroupList';
+import { fetchGroupCardInfos } from 'queries/home/fetchGroupInfo';
 import { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
 
 const GroupList = () => {

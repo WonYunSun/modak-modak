@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import DeletionAssure from './DeletionAssure';
-import DeletionConfirm from './DeletionConfirm';
-import DeletionSuccess from './DeletionSuccess';
+import DeletionAssure from '@app/groups/[id]/management/_components/modal/deleteGroup/DeletionAssure';
+import DeletionConfirm from '@app/groups/[id]/management/_components/modal/deleteGroup/DeletionConfirm';
+import DeletionSuccess from '@app/groups/[id]/management/_components/modal/deleteGroup/DeletionSuccess';
 
 const DeleteGroupModal = () => {
   const [deletionStep, setDeletionStep] = useState(1);
