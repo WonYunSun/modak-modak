@@ -5,10 +5,10 @@ import { useState } from 'react';
 import Button from '@components/common/Button';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
 import Label, { LabelProps } from '@components/common/Label';
-import ProfilePreview from './ProfilePreview';
-import { addUserInfo } from '@lib/signup/signup';
 import { uploadFile } from '@utils/uploadFile';
 import { createClient } from '@utils/supabase/client';
+import { addUserInfo } from '@queries/users/users';
+import ProfilePreview from '@app/signup/_components/ProfilePreview';
 
 export interface UserFormState {
   profile: File | null;
