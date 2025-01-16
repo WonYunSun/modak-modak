@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import AskLeaderTransition from './AskLeaderTransition';
-import LeavingAssure from './LeavingAssure';
-import LeavingSuccess from './LeavingSuccess';
+import AskLeaderTransition from '@app/groups/[id]/management/_components/modal/leaveGroup/AskLeaderTransition';
+import LeavingAssure from '@app/groups/[id]/management/_components/modal/leaveGroup/LeavingAssure';
+import LeavingSuccess from '@app/groups/[id]/management/_components/modal/leaveGroup/LeavingSuccess';
 
 interface LeaveGroupModalProps {
   isLeader: boolean;

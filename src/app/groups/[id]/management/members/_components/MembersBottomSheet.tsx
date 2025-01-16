@@ -20,7 +20,7 @@ const MembersBottomSheet = () => {
   };
 
   return (
-    <BottomSheet isOpen={isActionModalOpen} onClose={onCloseBottomSheet} snapPoint={[0.23]}>
+    <BottomSheet isOpen={isActionModalOpen} onClose={onCloseBottomSheet} snapPoint={[0.16]}>
       <div className="my-5 rounded-xl overflow-hidden divide-y divide-gray-200">
         <div className="bg-gray-100">
           <Button
@@ -31,9 +31,6 @@ const MembersBottomSheet = () => {
           >
             <Leader />
           </Button>
-        </div>
-        <div className="bg-gray-100 text-[#FF3B30]">
-          <div className="px-3 py-4">멤버 내보내기</div>
         </div>
       </div>
     </BottomSheet>
