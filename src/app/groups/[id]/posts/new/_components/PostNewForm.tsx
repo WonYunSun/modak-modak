@@ -58,7 +58,10 @@ export const PostNewForm = () => {
       <PostTextArea textareaRef={textareaRef} />
 
       <div className="w-full h-2 bg-[#F1F1F1] mt-[3.75rem]"></div>
-      <div className="w-full h-7 flex items-center px-5 my-3">
+      <div
+        className="w-full h-7 flex items-center px-5 my-3"
+        onClick={() => router.push(`/groups/${id}/posts/new/select`)}
+      >
         <Plus className="w-6 h-6 mr-2" />
         <div className="flex">
           <label className="font-semibold text-base">일정 선택하기</label>
