@@ -43,8 +43,6 @@ const PhotoUpload = ({ selectedFiles, setSelectedFiles, previewUrls, setPreviewU
     setPreviewUrls((prev) => prev.filter((_, index) => index !== indexToDelete));
   };
 
-  console.log('selectedFiles', selectedFiles);
-
   return (
     <div className="w-full flex mt-[4.5rem] px-5">
       {/* 파일 선택 버튼 */}
