@@ -1,14 +1,14 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { permitNewUser } from '@queries/management/manageWaitingUsers';
+import { permitNewMember } from '@queries/management/manageWaitingMembers';
 import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';
 
-interface UsePermitNewUserParams {
+interface UsePermitNewMemberParams {
   groupId: GroupsType['id'];
   waitingUserId: UsersType['id'];
 }
-const usePermitNewUser = ({ groupId, waitingUserId }: UsePermitNewUserParams) => {
+const usePermitNewMember = ({ groupId, waitingUserId }: UsePermitNewMemberParams) => {
   const queryClient = useQueryClient();
 
   //const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886' //임시 유저 아이디 : 멤버예요
@@ -16,7 +16,7 @@ const usePermitNewUser = ({ groupId, waitingUserId }: UsePermitNewUserParams) =>
 
   const { mutate } = useMutation({
     mutationFn: async () => {
-      return await permitNewUser({ groupId, waitingUserId });
+      return await permitNewMember({ groupId, waitingUserId });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['fetchWaitingMembers', groupId, userId] });
@@ -27,4 +27,4 @@ const usePermitNewUser = ({ groupId, waitingUserId }: UsePermitNewUserParams) =>
   return mutate;
 };
 
-export default usePermitNewUser;
+export default usePermitNewMember;

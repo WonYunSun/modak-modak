@@ -7,7 +7,7 @@ interface manageWatingUserParams {
   groupId: GroupsType['id'];
   waitingUserId: UsersType['id'];
 }
-export const permitNewUser = async ({ groupId, waitingUserId }: manageWatingUserParams) => {
+export const permitNewMember = async ({ groupId, waitingUserId }: manageWatingUserParams) => {
   try {
     const supabase = await createClient();
 
@@ -21,7 +21,7 @@ export const permitNewUser = async ({ groupId, waitingUserId }: manageWatingUser
   }
 };
 
-export const refuseNewUser = async ({ groupId, waitingUserId }: manageWatingUserParams) => {
+export const refuseNewMember = async ({ groupId, waitingUserId }: manageWatingUserParams) => {
   try {
     const supabase = await createClient();
 

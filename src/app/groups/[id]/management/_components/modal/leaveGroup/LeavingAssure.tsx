@@ -1,5 +1,6 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
 
@@ -7,6 +8,8 @@ interface LeavingAssure {
   onNextStep: () => void;
 }
 const LeavingAssure = ({ onNextStep }: LeavingAssure) => {
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
   const { closeModal } = useModalStore();
   const onLeaveGroup = () => {
     onNextStep();

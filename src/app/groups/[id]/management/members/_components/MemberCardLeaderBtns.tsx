@@ -2,8 +2,8 @@
 
 import { useParams } from 'next/navigation';
 import ManageMembersBtn from '@app/groups/[id]/management/members/_components/ManageMembersBtn';
-import usePermitNewUser from '@hooks/management/usePermitNewUser';
-import useRefuseNewUser from '@hooks/management/useRefuseNewMember';
+import usePermitNewMember from '@hooks/management/usePermitNewMember';
+import useRefuseNewMember from '@hooks/management/useRefuseNewMember';
 import { UsersType } from '@queries/home/fetchGroupInfo';
 
 interface MemberCardBtnsProps {
@@ -15,17 +15,16 @@ interface MemberCardBtnsProps {
 const MemberCardLeaderBtns = ({ memberId, isLeader, mode, toastOpener }: MemberCardBtnsProps) => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
-  const permitNewUser = usePermitNewUser({ groupId, waitingUserId: memberId });
-  const refuseNewUser = useRefuseNewUser({ groupId, waitingUserId: memberId });
+  const permitNewMember = usePermitNewMember({ groupId, waitingUserId: memberId });
+  const refuseNewMember = useRefuseNewMember({ groupId, waitingUserId: memberId });
 
   const onPermit = async () => {
-    permitNewUser();
+    permitNewMember();
     if (toastOpener) toastOpener();
   };
 
   const onRefuse = async () => {
-    console.log('hi');
-    refuseNewUser();
+    refuseNewMember();
   };
 
   return (
