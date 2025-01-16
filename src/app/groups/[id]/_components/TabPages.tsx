@@ -13,7 +13,7 @@ const TabPages = () => {
     <div className="w-full mx-auto px-5 mt-8">
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="">
-        {activeTab === 'posts' && <PostList />}
+        {activeTab === 'posts' && <PostList setActiveTab={setActiveTab} />}
         {activeTab === 'photos' && <PhotoList />}
         {activeTab === 'schedules' && <ScheduleList />}
       </div>

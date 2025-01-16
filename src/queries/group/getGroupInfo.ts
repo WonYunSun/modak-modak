@@ -4,7 +4,7 @@ import { createClient } from '@utils/supabase/server';
 
 import { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
 
-// 게시글 불러오기
+// 모임 불러오기
 export const getGroupInfo = async (groupId: string): Promise<GroupCardInfosType> => {
   const supabase = await createClient();
 
@@ -21,9 +21,10 @@ export const getGroupInfo = async (groupId: string): Promise<GroupCardInfosType>
   `
     )
     .eq('id', groupId)
+    // TODO: is approved 인 유저 체크
     .single();
 
-  if (error) throw new Error(`getGroupInfo 그룹 정보 불러오는 중 에러 발생: ${error.message}`);
+  if (error) throw new Error(`getGroupInfo 모임 정보 불러오는 중 에러 발생: ${error.message}`);
 
   const formattedData = {
     id: data.id,
