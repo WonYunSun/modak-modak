@@ -1,6 +1,6 @@
 'use client';
 
-import ManageMembersBtn from './ManageMembersBtn';
+import ManageMembersBtn from "@app/groups/[id]/management/members/_components/ManageMembersBtn";
 
 interface MemberCardBtnsProps {
   toastOpener: (() => void) | null;

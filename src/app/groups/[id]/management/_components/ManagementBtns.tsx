@@ -1,6 +1,6 @@
 'use client';
 
-import { ModalModeType } from './ManagementContents';
+import { ModalModeType } from "@app/groups/[id]/management/_components/ManagementContents";
 
 interface ManagementBtnsProps {
   isLeader: boolean;

@@ -1,8 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { GroupsType } from 'queries/home/fetchGroupInfo';
-import { fetchLeaderInfo } from 'queries/management/fetchMembers';
+import { GroupsType } from '@queries/home/fetchGroupInfo';
+import { fetchLeaderInfo } from '@queries/management/fetchMembers';
 
 interface UseIsLeaderParams {
   groupId: GroupsType['id'];

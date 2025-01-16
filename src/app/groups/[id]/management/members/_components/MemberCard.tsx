@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import MemberCardLeaderBtns from './MemberCardLeaderBtns';
-import { CurMemberType } from 'queries/management/fetchMembers';
+import MemberCardLeaderBtns from '@app/groups/[id]/management/members/_components/MemberCardLeaderBtns';
+import { CurMemberType } from '@queries/management/fetchMembers';
 
 interface MemberCardProps {
   memberData: CurMemberType;

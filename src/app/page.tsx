@@ -1,7 +1,7 @@
 import Header from '@components/common/Header';
 import Button from '@components/common/Button';
 import { Plus } from '@components/icons';
-import HomeContents from './_components/HomeContents';
+import HomeContents from '@app/_components/HomeContents';
 
 const HomePage = () => {
   //헤더 색 변화 아직 미구현
