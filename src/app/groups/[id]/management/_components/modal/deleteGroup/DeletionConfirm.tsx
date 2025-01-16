@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
-import { useParams } from 'next/navigation';
 import useDeleteGroup from '@hooks/management/useDeleteGroup';
 
 interface DeletionConfirmProps {

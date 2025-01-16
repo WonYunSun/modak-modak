@@ -2,8 +2,8 @@
 
 import useBottomSheetStore from '@stores/useBottomSheetStore';
 import useUserToManageStore from '@stores/useUserToManage';
-import { UsersType } from '@queries/home/fetchGroupInfo';
 import { Menu } from '@components/icons';
+import { UsersType } from '@queries/home/fetchGroupInfo';
 
 interface ManageMembersBtnProps {
   memberId: UsersType['id'];

@@ -1,7 +1,7 @@
 'use client'
 
-import { fetchGroupCardInfos } from "@queries/home/fetchGroupInfo";
 import { useQuery } from "@tanstack/react-query";
+import { fetchGroupCardInfos } from "@queries/home/fetchGroupInfo";
 
 const useFetchGroupList = () => {
   //const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886' //임시 유저 아이디 : 멤버예요

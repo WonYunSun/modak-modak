@@ -2,9 +2,9 @@
 
 import { useParams } from 'next/navigation';
 import useModalStore from '@stores/useModalStore';
+import useUserToManageStore from '@stores/useUserToManage';
 import Button from '@components/common/Button';
 import useLeaderTransition from '@hooks/management/useLeaderTransition';
-import useUserToManageStore from '@stores/useUserToManage';
 
 interface AssureTransitionProps {
   onNextStep: () => void;
