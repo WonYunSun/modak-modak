@@ -24,14 +24,6 @@ export const NoPost = ({ setActiveTab }: TabsProps) => {
           <GreaterThan />
         </div>
       </div>
-      <Button
-        label="게시글 쓰기"
-        className="floating-btn"
-        type="button"
-        onClick={() => router.push(`/groups/${groupId}/posts/new`)}
-      >
-        <ModificationLine />
-      </Button>
     </>
   );
 };
