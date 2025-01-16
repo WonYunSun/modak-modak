@@ -7,9 +7,9 @@ import ScheduleMemoForm from './StepComponents/ScheduleMemoForm';
 import ScheduleNameForm from './StepComponents/ScheduleNameForm';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
-import useFunnel from 'hooks/useFunnel';
+import { addSchedule } from '@queries/schedule/ScheduleActions';
+import useFunnel from '@hooks/useFunnel';
 import { ScheduleType } from '@ts/scheduleType';
-import { addSchedule } from 'queries/schedule/ScheduleActions';
 
 //단계 name 정의
 const steps = ['일정명', '모임일시', '메모'];
