@@ -1,8 +1,9 @@
 'use server';
 
 import { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
-import { createClient } from '../../supabase/server';
+import { createClient } from '@utils/supabase/server';
 import { Database } from '@ts/supabase';
+
 
 export type GroupMembersType = Database['public']['Tables']['group_members']['Row'];
 export type GroupsType = Database['public']['Tables']['groups']['Row'];
@@ -12,7 +13,7 @@ interface FetchEnteredGroupListParams {
   userId: UsersType['id'];
 }
 export const fetchEnteredGroupList = async ({
-  userId
+  userId,
 }: FetchEnteredGroupListParams): Promise<GroupMembersType[] | null> => {
   try {
     const supabase = await createClient();
@@ -57,7 +58,7 @@ interface FetchGroupCardInfosParams {
   userId: UsersType['id'];
 }
 export const fetchGroupCardInfos = async ({
-  userId
+  userId,
 }: FetchGroupCardInfosParams): Promise<GroupCardInfosType[] | null> => {
   try {
     const enteredGroupList = await fetchEnteredGroupList({ userId });

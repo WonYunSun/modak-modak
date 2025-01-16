@@ -1,14 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import CurMemberList from './CurMemberList';
 import WaitingMemberList from './WaitingMemberList';
 import MembersBottomSheet from './MembersBottomSheet';
 import ManagementModal from '../../_components/modal/ManagementModal';
+import useIsLeader from '@hooks/management/useIsLeader';
 
 type TabType = 'currentMembers' | 'awaitingMembers';
 
 const MembersPageContents = () => {
+  const path = usePathname();
+  const groupId = path.split('/').filter((segment) => segment !== '')[1];
+
   const [selectedTab, setSelectedTab] = useState<TabType>('currentMembers');
 
   const handleCurMemTabClick = () => {
@@ -19,7 +24,9 @@ const MembersPageContents = () => {
     setSelectedTab('awaitingMembers');
   };
 
-  const isLeaderUser = true;
+  const { data: isLeaderUser, isPending, isError } = useIsLeader({ groupId });
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error!</div>;
 
   return (
     <>
@@ -41,11 +48,11 @@ const MembersPageContents = () => {
       </div>
 
       {selectedTab === 'currentMembers' ? (
-        <CurMemberList isLeaderUser={isLeaderUser} />
+        <CurMemberList isLeaderUser={isLeaderUser ? isLeaderUser : false} />
       ) : (
-        <WaitingMemberList isLeaderUser={isLeaderUser} />
+        <WaitingMemberList isLeaderUser={isLeaderUser ? isLeaderUser : false} />
       )}
-      <ManagementModal isLeader={isLeaderUser} modalMode={'leaderTransition'} />
+      <ManagementModal isLeader={isLeaderUser ? isLeaderUser : false} modalMode={'leaderTransition'} />
       <MembersBottomSheet />
     </>
   );

@@ -2,18 +2,26 @@
 
 import Image from 'next/image';
 import MemberCardLeaderBtns from './MemberCardLeaderBtns';
+import { CurMemberType } from 'queries/management/fetchMembers';
 
 interface MemberCardProps {
+  memberData: CurMemberType;
   toastOpener?: () => void;
   isLeaderUser: boolean;
   isLeader?: boolean;
   isMe?: boolean;
   mode: 'curMembers' | 'waiting';
 }
-const MemberCard = ({ toastOpener, isLeaderUser, isLeader = false, isMe = false, mode }: MemberCardProps) => {
-  const profile =
-    'https://sozcwgcoibigujehjxbf.supabase.co/storage/v1/object/public/profiles/users/ebcc66fe-bf21-4b73-99d1-e4f375025b80/winterhotchocolate.jpg';
-  const name = '이름이에요';
+const MemberCard = ({
+  memberData,
+  toastOpener,
+  isLeaderUser,
+  isLeader = false,
+  isMe = false,
+  mode,
+}: MemberCardProps) => {
+  const {users} = memberData;
+  const { nickname, profile_image: profile } = users;
 
   return (
     <div className="w-full border-b border-gray-200">
@@ -23,7 +31,7 @@ const MemberCard = ({ toastOpener, isLeaderUser, isLeader = false, isMe = false,
             <Image src={profile} width={100} height={100} alt={'member_profile'} />
           </div>
           <span className="flex items-center gap-1">
-            {name} {isMe && <span className="text-gray-500 text-sm">{'(나)'}</span>}
+            {nickname} {isMe && <span className="text-gray-500 text-sm">{'(나)'}</span>}
           </span>
         </div>
         {isLeaderUser ? (
