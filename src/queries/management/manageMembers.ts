@@ -21,11 +21,14 @@ export const permitNewMember = async ({ groupId, waitingUserId }: manageWatingUs
   }
 };
 
-export const refuseNewMember = async ({ groupId, waitingUserId }: manageWatingUserParams) => {
+interface deleteMemberParams extends Omit<manageWatingUserParams, 'waitingUserId'> {
+  memberId: UsersType['id'];
+}
+export const deleteMember = async ({ groupId, memberId }: deleteMemberParams) => {
   try {
     const supabase = await createClient();
 
-    await supabase.from('group_members').delete().eq('group_id', groupId).eq('user_id', waitingUserId);
+    await supabase.from('group_members').delete().eq('group_id', groupId).eq('user_id', memberId);
   } catch (error) {
     throw new Error(`${error}`);
   }

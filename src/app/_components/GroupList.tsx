@@ -1,22 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import GroupCard from '@components/common/groupCard/GroupCard';
-import { fetchGroupCardInfos } from 'queries/home/fetchGroupInfo';
-import { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
+import useFetchGroupList from '@hooks/home/useFetchGroupList';
 
 const GroupList = () => {
-  //const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886' //임시 유저 아이디 : 멤버예요
-  const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
 
-  const [groupDataList, setGroupDataList] = useState<GroupCardInfosType[] | null>(null);
-  useEffect(() => {
-    const fetch = async () => {
-      const fetchedGroupDataList = await fetchGroupCardInfos({ userId });
-      if (fetchedGroupDataList) setGroupDataList(fetchedGroupDataList);
-    };
-    fetch();
-  }, []);
+  const { data:groupDataList, isPending, isError } = useFetchGroupList();
+  if(isPending) return <div>Loading...</div>;
+  if (isError) return <div>Loading...</div>;
 
   return (
     <>

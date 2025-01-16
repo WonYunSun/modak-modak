@@ -11,6 +11,7 @@ const LeavingAssure = ({ onNextStep }: LeavingAssure) => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
   const { closeModal } = useModalStore();
+  
   const onLeaveGroup = () => {
     onNextStep();
   };

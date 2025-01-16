@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { permitNewMember } from '@queries/management/manageWaitingMembers';
+import { permitNewMember } from '@queries/management/manageMembers';
 import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';
 
 interface UsePermitNewMemberParams {
