@@ -9,6 +9,7 @@ import CommentList from '@components/comment/CommentList';
 import { PostActionBottomSheet } from './PostActionBottomSheet';
 
 import { CommentCountType, GroupType, PostType, ScheduleType, UserType } from 'queries/post/getPosts';
+import { DeleteModal } from '@app/groups/[id]/_components/DeleteModal';
 
 export type PostCommonType = {
   id: PostType['id'];
@@ -29,6 +30,7 @@ const Post = ({ post }: PostProps) => {
   const [isExpanded, setIsExpanded] = useState<{ [key: string]: boolean }>({});
   const [bottomSheetPostId, setBottomSheetPostId] = useState<string | null>(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   // 글 내용 3줄로 줄이기 (최대 80자)
   const truncateText = (text: string | null, postId: string) => {
@@ -106,8 +108,14 @@ const Post = ({ post }: PostProps) => {
 
       {/* 메뉴 수정 바텀시트 */}
       {bottomSheetPostId && (
-        <PostActionBottomSheet setBottomSheetPostId={setBottomSheetPostId} postId={bottomSheetPostId} />
+        <PostActionBottomSheet
+          setBottomSheetPostId={setBottomSheetPostId}
+          postId={bottomSheetPostId}
+          setDeleteModal={setDeleteModal}
+        />
       )}
+
+      {deleteModal && <DeleteModal postId={post.id} setDeleteModal={setDeleteModal} />}
     </>
   );
 };
