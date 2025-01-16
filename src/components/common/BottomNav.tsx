@@ -11,22 +11,22 @@ const buttons = [
     label: '홈',
     iconOff: <Home className="w-6 h-6" active={false} />,
     iconOn: <Home className="w-6 h-6" active={true} />,
-    href: '/'
+    href: '/',
   },
   {
     id: 'chat',
     label: '채팅',
     iconOff: <Chat className="w-6 h-6" active={false} />,
     iconOn: <Chat className="w-6 h-6" active={true} />,
-    href: '/chat'
+    href: '/chat',
   },
   {
     id: 'mypage',
     label: '마이페이지',
     iconOff: <User className="w-6 h-6" active={false} />,
     iconOn: <User className="w-6 h-6" active={true} />,
-    href: '/mypage'
-  }
+    href: '/mypage',
+  },
 ];
 
 const BottomNav = () => {
@@ -34,7 +34,9 @@ const BottomNav = () => {
   const pathname = usePathname();
 
   // 특정 경로에서 BottomNav를 숨김
-  const hiddenPaths = ['/login', '/signup', '/new', '/edit'];
+
+  const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule'];
+
   const isHideNav = hiddenPaths.some((path) => pathname.includes(path));
 
   if (isHideNav) {

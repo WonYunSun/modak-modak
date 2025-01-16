@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '../../supabase/server';
+import { createClient } from '../../utils/supabase/server';
 import { ScheduleType } from '@ts/scheduleType';
 
 export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleType[] | null> => {
@@ -15,8 +15,8 @@ export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleT
         group_id: scheduleData.group_id,
         start_time: scheduleData.start_time,
         memo: scheduleData.memo,
-        created_at: scheduleData.created_at
-      }
+        created_at: scheduleData.created_at,
+      },
     ]);
 
     return data;
@@ -45,4 +45,28 @@ export const fetchScheduleById = async (scheduleId: string): Promise<ScheduleTyp
   } catch (error) {
     throw new Error(`${error}`);
   }
+};
+
+export const deleteScheduleById = async (scheduleId: string) => {
+  const supabase = await createClient();
+  const { error } = await supabase.from('schedules').delete().eq('id', scheduleId);
+  if (error) {
+    console.log('스케쥴 삭제 실패', error);
+    return;
+  }
+};
+
+export const updateScheduleById = async (scheduleId: string, newData: ScheduleType) => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('schedules')
+    .update({ ...newData })
+    .eq('id', scheduleId)
+    .select();
+
+  if (error) {
+    console.log('스케쥴 수정 실패', error);
+    return;
+  }
+  return data;
 };
