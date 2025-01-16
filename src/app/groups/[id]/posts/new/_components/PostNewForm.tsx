@@ -8,9 +8,12 @@ import PostTextArea from './PostTextArea';
 import Button from '@components/common/Button';
 import { useParams, useRouter } from 'next/navigation';
 import useUploadPost from '@hooks/post/useUploadPost';
+import { useNewPostStore } from '@stores/useNewPostStore';
+import PostSelectCard from '@app/groups/[id]/posts/new/select/_components/PostSelectCard';
 
 export const PostNewForm = () => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { content, reset } = useNewPostStore();
+
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
@@ -26,7 +29,6 @@ export const PostNewForm = () => {
   const scheduleId = 'f81975bf-c02a-4bbd-9633-6f669c248ac9';
 
   const handleUploadPost = async () => {
-    const content = textareaRef.current?.value || '';
     // FormData 사용
     const formData = new FormData();
     formData.append('userId', userId);
@@ -68,6 +70,7 @@ export const PostNewForm = () => {
           <p className="text-[#FF3B30] ml-1">*</p>
         </div>
       </div>
+      <PostSelectCard />
       <Button
         label="작성 완료"
         className="full-btn fixed bottom-0 px-5 pb-2"

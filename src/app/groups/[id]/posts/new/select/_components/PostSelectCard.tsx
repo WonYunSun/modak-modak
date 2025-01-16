@@ -17,7 +17,7 @@ const PostSelectCard = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      const { schedule } = await getSingleSchedule(selectedScheduleId);
+      const schedule = await getSingleSchedule(selectedScheduleId);
       setSchedule(schedule);
     };
 
