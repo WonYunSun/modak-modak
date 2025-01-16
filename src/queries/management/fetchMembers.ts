@@ -44,7 +44,7 @@ export const fetchWaitingMembers = async ({ groupId }: FetchMembersParams): Prom
       .select(`group_id, is_approved, is_leader, users( id, nickname, profile_image)`)
       .eq('group_id', groupId)
       .eq('is_approved', false)
-      .order('created_at', { ascending: false }); //
+      .order('created_at', { ascending: false });
 
     return data as CurMemberType[] | null;
   } catch (error) {
