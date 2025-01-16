@@ -1,69 +1,64 @@
-// 'use server';
+'use server';
 
-// import { createClient } from '@utils/supabase/server';
+import { createClient } from '@utils/supabase/server';
 
-// // Supabase 게시글 및 이미지 업로드
-// export const uploadPost = async ({
-//   userId,
-//   content,
-//   scheduleId,
-//   groupId,
-//   files
-// }: {
-//   userId: string;
-//   content: string;
-//   scheduleId: string;
-//   groupId: string;
-//   files: File[];
-// }) => {
-//   const supabase = createClient();
+export const uploadPost = async (formData: FormData): Promise<{ success: boolean }> => {
+  const supabase = await createClient();
 
-//   try {
-//     // 1. 게시글 추가 (posts 테이블)
-//     const { data: postData, error: postError } = await supabase
-//       .from('posts')
-//       .insert([
-//         {
-//           user_id: userId,
-//           content,
-//           schedule_id: scheduleId,
-//           group_id: groupId
-//         }
-//       ])
-//       .select('id')
-//       .single(); // 새로 생성된 post의 id를 가져옴
+  try {
+    const userId = formData.get('userId') as string;
+    const content = formData.get('content') as string | null;
+    const scheduleId = formData.get('scheduleId') as string;
+    const groupId = formData.get('groupId') as string;
+    const files = formData.getAll('files') as File[];
 
-//     if (postError) throw new Error(`uploadPost 게시글 업로드 실패: ${postError.message}`);
+    if (!userId || !scheduleId || !groupId || files.length === 0) {
+      throw new Error('uploadPost: 필수 데이터가 입력되지 않았습니다.');
+    }
 
-//     const postId = postData.id;
+    // 게시글 데이터 추가 (posts 테이블)
+    const { data: postData, error: postError } = await supabase
+      .from('posts')
+      .insert({
+        user_id: userId,
+        content: content || null,
+        schedule_id: scheduleId,
+        group_id: groupId,
+      })
+      .select('id')
+      .single();
 
-//     // 2. 이미지 업로드 (post_images 테이블)
-//     const uploadedImageUrls: string[] = [];
+    if (postError || !postData) throw new Error('uploadPost: 게시글 등록 중 오류 발생');
 
-//     for (const file of files) {
-//       // Supabase 스토리지에 이미지 업로드
-//       const { data, error } = await supabase.storage.from('images').upload(`public/post-photos/${file.name}`, file);
+    // 파일 Storage 업로드
+    const uploadedFileUrls: string[] = await Promise.all(
+      files.map(async (file) => {
+        const fileExt = file.name.split('.').pop(); // 파일 확장자
+        const uniqueFileName = `${crypto.randomUUID()}.${fileExt}`; // 파일 고유 이름
+        const filePath = `posts/${groupId}/${uniqueFileName}`; // 이미지 파일 버킷 내 저장 위치
 
-//       if (error) throw new Error(`이미지 업로드 실패: ${error.message}`);
+        const { error: uploadError } = await supabase.storage.from('post-photos').upload(filePath, file);
 
-//       // 이미지 경로 저장
-//       const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${data.path}`;
-//       uploadedImageUrls.push(imageUrl);
+        if (uploadError) throw new Error('uploadPost: 이미지 파일 버킷 업로드 중 오류 발생');
 
-//       // 3. post_images 테이블에 이미지 URL과 post_id 저장
-//       const { error: imageInsertError } = await supabase.from('post_images').insert([
-//         {
-//           image_url: imageUrl,
-//           post_id: postId
-//         }
-//       ]);
+        return filePath;
+      })
+    );
 
-//       if (imageInsertError) throw new Error(`uploadPost 이미지 경로 저장 실패: ${imageInsertError.message}`);
-//     }
+    // ✅ 이미지 URL을 post_images 테이블에 저장
+    const insertImagePromises = uploadedFileUrls.map((url) =>
+      supabase.from('post_images').insert({
+        post_id: postData.id,
+        image_url: url,
+      })
+    );
+    const imageResults = await Promise.all(insertImagePromises);
+    const imageErrors = imageResults.find((res) => res.error);
+    if (imageErrors) throw new Error('uploadPost: 이미지 테이블 저장 중 오류 발생');
 
-//     return { success: true, postId };
-//   } catch (error: any) {
-//     console.error('업로드 오류:', error);
-//     throw new Error(error.message);
-//   }
-// };
+    return { success: true };
+  } catch (error) {
+    console.error('uploadPost: 게시글 업로드 실패:', error);
+    throw new Error('uploadPost: 게시글 업로드에 실패했습니다.');
+  }
+};
