@@ -1,12 +1,11 @@
 'use client';
 
+import { useDropzone } from 'react-dropzone';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
 import Button from '@components/common/Button';
 import { DeletePhoto, PlusGray } from '@components/icons';
-
-import { isValidImageFile } from '@utils/imageFileValidation';
 
 interface PhotoUploadProps {
   selectedFiles: File[];
@@ -15,59 +14,59 @@ interface PhotoUploadProps {
   setPreviewUrls: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
+const MAX_FILES = 10; // 최대 파일 수
+
 const PhotoUpload = ({ selectedFiles, setSelectedFiles, previewUrls, setPreviewUrls }: PhotoUploadProps) => {
-  const handleSelectPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(event.target.files || []);
-    const validFiles: File[] = [];
-    const invalidFiles: string[] = [];
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/jpeg': ['.jpeg', '.jpg'],
+      'image/png': ['.png'],
+      'image/gif': ['.gif'],
+      'image/svg+xml': ['.svg'],
+    },
+    onDrop: (acceptedFiles) => {
+      const totalFiles = selectedFiles.length + acceptedFiles.length;
 
-    files.forEach((file) => {
-      if (isValidImageFile(file)) {
-        validFiles.push(file);
-      } else {
-        invalidFiles.push(file.name);
+      if (totalFiles > MAX_FILES) {
+        alert(`최대 ${MAX_FILES}개의 파일만 업로드할 수 있습니다.`);
+        return;
       }
-    });
 
-    if (invalidFiles.length > 0) {
-      alert(`업로드 불가능한 파일이 있습니다: \n${invalidFiles.join(', ')}`);
-      return;
-    }
-
-    const remainingSlots = 10 - selectedFiles.length;
-    if (validFiles.length > remainingSlots) {
-      alert('최대 10개의 이미지만 선택할 수 있습니다.');
-      validFiles.splice(remainingSlots);
-    }
-
-    const newUrls = validFiles.map((file) => URL.createObjectURL(file));
-
-    setSelectedFiles([...selectedFiles, ...validFiles]);
-    setPreviewUrls([...previewUrls, ...newUrls]);
-  };
+      const newUrls = acceptedFiles.map((file) => URL.createObjectURL(file));
+      setSelectedFiles((prev) => [...prev, ...acceptedFiles]);
+      setPreviewUrls((prev) => [...prev, ...newUrls]);
+    },
+  });
 
   const handleDelete = (indexToDelete: number) => {
     setSelectedFiles((prev) => prev.filter((_, index) => index !== indexToDelete));
     setPreviewUrls((prev) => prev.filter((_, index) => index !== indexToDelete));
   };
 
+  console.log('selectedFiles', selectedFiles);
+
   return (
     <div className="w-full flex mt-[4.5rem] px-5">
-      <label className="w-[5.25rem] aspect-square bg-[#F1F1F1] flex items-center justify-center mr-[1px]">
-        <input type="file" multiple accept="image/*" onChange={handleSelectPhoto} className="hidden" />
-        <div className="flex flex-col">
-          {/* + 아이콘 */}
+      {/* 파일 선택 버튼 */}
+      <div
+        {...getRootProps()}
+        className="flex items-center justify-center w-[5.25rem] h-[5.25rem] bg-[#F1F1F1] cursor-pointer flex-shrink-0 mr-[1px]"
+      >
+        <input {...getInputProps()} type="file" multiple accept="image/jpeg, image/png, image/gif, image/svg+xml" />
+        <div className="flex flex-col items-center">
           <PlusGray />
-          <div className="text-gray-500 text-[10px] w-6 flex justify-center">{previewUrls.length}/10</div>
+          <div className="text-gray-500 text-[10px] w-6 flex justify-center">
+            {previewUrls.length}/{MAX_FILES}
+          </div>
         </div>
-      </label>
+      </div>
+
       {/* Swiper 슬라이더 (미리보기) */}
       {previewUrls.length > 0 && (
         <Swiper spaceBetween={1} slidesPerView={'auto'} className="flex w-full justify-start">
           {previewUrls.map((url, index) => (
             <SwiperSlide key={index} style={{ flex: '0 0 auto', width: '5.25rem' }}>
               <img src={url} alt={`미리보기-${index}`} className="w-[5.25rem] aspect-square object-cover" />
-              {/* 삭제 버튼 */}
               <Button
                 label=""
                 type="button"
