@@ -10,12 +10,11 @@ const DeleteGroupModal = () => {
   const onNextStep = () => {
     setDeletionStep((prev) => prev + 1);
   };
-  const onConfirmDelete = () => {};
 
   return (
     <div className="w-full px-5 flex flex-col items-center">
       {deletionStep === 1 && <DeletionAssure onNextStep={onNextStep} />}
-      {deletionStep === 2 && <DeletionConfirm onNextStep={onNextStep} onConfirmDelete={onConfirmDelete} />}
+      {deletionStep === 2 && <DeletionConfirm onNextStep={onNextStep} />}
       {deletionStep === 3 && <DeletionSuccess />}
     </div>
   );

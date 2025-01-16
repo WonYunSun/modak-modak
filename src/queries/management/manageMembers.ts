@@ -3,11 +3,11 @@
 import { createClient } from '@utils/supabase/server';
 import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';
 
-interface manageWatingUserParams {
+interface ManageWatingUserParams {
   groupId: GroupsType['id'];
   waitingUserId: UsersType['id'];
 }
-export const permitNewMember = async ({ groupId, waitingUserId }: manageWatingUserParams) => {
+export const permitNewMember = async ({ groupId, waitingUserId }: ManageWatingUserParams) => {
   try {
     const supabase = await createClient();
 
@@ -21,10 +21,10 @@ export const permitNewMember = async ({ groupId, waitingUserId }: manageWatingUs
   }
 };
 
-interface deleteMemberParams extends Omit<manageWatingUserParams, 'waitingUserId'> {
+interface DeleteMemberParams extends Omit<ManageWatingUserParams, 'waitingUserId'> {
   memberId: UsersType['id'];
 }
-export const deleteMember = async ({ groupId, memberId }: deleteMemberParams) => {
+export const deleteMember = async ({ groupId, memberId }: DeleteMemberParams) => {
   try {
     const supabase = await createClient();
 
