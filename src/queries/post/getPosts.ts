@@ -12,6 +12,7 @@ export type ScheduleType = Pick<
   'name' | 'memo' | 'start_date' | 'end_date' | 'start_time'
 >;
 export type CommentCountType = { count: number };
+export type PostImageType = { image_url: string };
 
 export type PostListType = {
   id: PostType['id'];
@@ -19,7 +20,8 @@ export type PostListType = {
   groups: GroupType;
   users: UserType;
   schedules: ScheduleType;
-  comments: CommentCountType[];
+  comments: CommentCountType;
+  post_images: PostImageType[];
 };
 
 // 게시글 리스트 불러오기
@@ -35,7 +37,8 @@ export const getPosts = async (groupId: string): Promise<PostListType[]> => {
       groups!inner(name, description),
       users!inner(nickname, profile_image),
       schedules!inner(name, memo, start_date, end_date, start_time),
-      comments(count)
+      comments(count),
+      post_images(image_url)
   `
     )
     .eq('group_id', groupId)
@@ -62,7 +65,8 @@ export const getPosts = async (groupId: string): Promise<PostListType[]> => {
           groups: Array.isArray(post.groups) ? post.groups[0] : post.groups,
           users: Array.isArray(post.users) ? post.users[0] : post.users,
           schedules: Array.isArray(post.schedules) ? post.schedules[0] : post.schedules,
-          comments: post.comments,
+          comments: Array.isArray(post.comments) ? post.comments[0] : post.comments,
+          post_images: post.post_images,
         }))
       : [];
 

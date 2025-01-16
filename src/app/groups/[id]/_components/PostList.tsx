@@ -19,7 +19,7 @@ const PostList = () => {
 
   const { data, isPending, isError } = useFetchGetPosts(groupId);
 
-  if (isPending) return <p>로딩 중...</p>;
+  if (isPending) return null;
   if (isError) return <p>에러 발생!</p>;
 
   return (
