@@ -3,9 +3,9 @@ import { QueryObserverResult } from '@tanstack/react-query';
 import Button from '@components/common/Button';
 import Label from '@components/common/Label';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
-import ScheduleDatePicker from '../ScheduleDatePicker';
 import { updateScheduleById } from 'queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
+import ScheduleDatePicker from '@app/schedules/_components/ScheduleDatePicker';
 
 interface SchdeuleEditType {
   schedule: ScheduleType;
