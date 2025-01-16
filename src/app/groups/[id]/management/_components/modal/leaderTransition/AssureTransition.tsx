@@ -2,14 +2,24 @@
 
 import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
+import useLeaderTransition from '@hooks/management/useLeaderTransition';
+import { useParams } from 'next/navigation';
+import useUserToManageStore from '@stores/useUserToManage';
 
 interface AssureTransitionProps {
   onNextStep: () => void;
 }
 const AssureTransition = ({ onNextStep }: AssureTransitionProps) => {
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
   const { closeModal } = useModalStore();
+  const { selectedUser, setSelectedUser } = useUserToManageStore();
 
-  const onLeaderTransition = () => {
+  const changeLeader = useLeaderTransition({ groupId, newLeaderId:selectedUser});
+
+  const onLeaderTransition = async () => {
+    changeLeader();
+    setSelectedUser('');
     onNextStep();
   };
 

@@ -41,7 +41,7 @@ const MemberCard = ({
           </span>
         </div>
         {isLeaderUser ? (
-          <MemberCardLeaderBtns isLeader={isLeader} mode={mode} toastOpener={toastOpener ? toastOpener : null} />
+          <MemberCardLeaderBtns memberId={memberData.users.id} isLeader={isLeader} mode={mode} toastOpener={toastOpener ? toastOpener : null} />
         ) : (
           <>{mode === 'curMembers' && isLeader && <span className="text-primary">대표</span>}</>
         )}

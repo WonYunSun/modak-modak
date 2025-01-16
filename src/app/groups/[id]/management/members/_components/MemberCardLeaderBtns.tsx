@@ -1,19 +1,22 @@
 'use client';
 
 import ManageMembersBtn from "@app/groups/[id]/management/members/_components/ManageMembersBtn";
+import { UsersType } from "@queries/home/fetchGroupInfo";
 
 interface MemberCardBtnsProps {
+  memberId: UsersType['id'];
   toastOpener: (() => void) | null;
   isLeader: boolean;
   mode: 'curMembers' | 'waiting';
 }
-const MemberCardLeaderBtns = ({ isLeader, mode, toastOpener }: MemberCardBtnsProps) => {
+const MemberCardLeaderBtns = ({ memberId, isLeader, mode, toastOpener }: MemberCardBtnsProps) => {
   const onPermit = () => {
     if (toastOpener) toastOpener();
   };
   return (
     <>
-      {mode === 'curMembers' && (isLeader ? <span className="text-primary">대표</span> : <ManageMembersBtn />)}
+      {mode === 'curMembers' &&
+        (isLeader ? <span className="text-primary">대표</span> : <ManageMembersBtn memberId={memberId} />)}
       {mode === 'waiting' && (
         <div>
           <button type="button" onClick={onPermit}>
