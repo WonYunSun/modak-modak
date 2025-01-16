@@ -1,8 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { GroupsType } from '@queries/home/fetchGroupInfo';
 import { CurMemberType, fetchCurMembers } from '@queries/management/fetchMembers';
+import { GroupsType } from '@queries/home/fetchGroupInfo';
 
 interface UseFetchCurMembersParams {
   groupId: GroupsType['id'];

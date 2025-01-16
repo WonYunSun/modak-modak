@@ -1,8 +1,8 @@
 'use client';
 
-import { GroupsType } from '@queries/home/fetchGroupInfo';
 import { fetchWaitingMembers } from '@queries/management/fetchMembers';
 import { useQuery } from '@tanstack/react-query';
+import { GroupsType } from '@queries/home/fetchGroupInfo';
 
 interface UseFetchWaitingMembersParams {
   groupId: GroupsType['id'];
