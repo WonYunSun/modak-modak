@@ -2,13 +2,12 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteMember } from '@queries/management/manageMembers';
-import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';
+import { GroupsType } from '@queries/home/fetchGroupInfo';
 
 interface UseLeaveGroupParams {
   groupId: GroupsType['id'];
-  memberId: UsersType['id'];
 }
-const useLeaveGroup = ({ groupId, memberId }: UseLeaveGroupParams) => {
+const useLeaveGroup = ({ groupId }: UseLeaveGroupParams) => {
   const queryClient = useQueryClient();
 
   //const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886' //임시 유저 아이디 : 멤버예요
@@ -16,7 +15,7 @@ const useLeaveGroup = ({ groupId, memberId }: UseLeaveGroupParams) => {
 
   const { mutate } = useMutation({
     mutationFn: async () => {
-      return await deleteMember({ groupId, memberId });
+      return await deleteMember({ groupId, memberId: userId });
     },
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: ['fetchWaitingMembers', groupId, userId] });
