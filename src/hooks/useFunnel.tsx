@@ -13,9 +13,14 @@ type FunnelProps = {
   headerLabel: string;
 };
 
-const useFunnel = (defaultStep: string) => {
+const useFunnel = (defaultStep: string, length: number) => {
   const [step, setStep] = useState(defaultStep);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { DotIndicator, move } = useDotIndicator({ dotCount: length });
+
+  useEffect(() => {
+    move(currentIndex);
+  }, [currentIndex]);
 
   //step 컴포넌트 : 개별 step의 name을 받고, children을 출력할 것임.
   const Step = (props: StepProps) => {
@@ -25,12 +30,6 @@ const useFunnel = (defaultStep: string) => {
   //Funnel 컴포넌트에서는, 현재 step상태와 일치하는 step children을 보여주도록 할 것임
   const Funnel = ({ children, headerLabel }: FunnelProps) => {
     const targetStep = children.find((childStep) => childStep.props.name === step);
-
-    const { DotIndicator, move } = useDotIndicator({ dotCount: children.length });
-
-    useEffect(() => {
-      move(currentIndex);
-    }, []);
 
     return (
       <div>

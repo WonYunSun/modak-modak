@@ -18,7 +18,7 @@ const steps = ['일정명', '모임일시', '메모'];
 const groupId = '52f44a96-b8f7-4c6c-80b1-d657eafd3821';
 
 const NewSchedulesForm = () => {
-  const { Funnel, Step, next, prev } = useFunnel(steps[0]);
+  const { Funnel, Step, next, prev } = useFunnel(steps[0], 3);
   const { openModal } = useModalStore();
 
   const [scheduleData, setScheduleData] = useState<ScheduleType>({
