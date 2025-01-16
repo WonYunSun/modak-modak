@@ -10,13 +10,13 @@ import { addUserInfo } from '@lib/signup/signup';
 import { uploadFile } from '@utils/uploadFile';
 import { createClient } from '@utils/supabase/client';
 
-interface FormState {
+export interface UserFormState {
   profile: File | null;
   nickname: string;
 }
 
 const SignupForm = () => {
-  const [values, setValues] = useState<FormState>({ profile: null, nickname: '' });
+  const [values, setValues] = useState<UserFormState>({ profile: null, nickname: '' });
   const router = useRouter();
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -40,7 +40,7 @@ const SignupForm = () => {
       await addUserInfo({
         id: userId,
         nickname: values.nickname,
-        profile_image: imageUrl
+        profile_image: imageUrl,
       });
       router.push('/signup/success');
     } catch (error) {
@@ -75,14 +75,14 @@ const inputProps: Omit<LabeledTextInputProps, 'onChange' | 'value'> = {
   label: '닉네임',
   required: true,
   description: '사용하실 닉네임을 적어주세요',
-  htmlFor: 'nickname'
+  htmlFor: 'nickname',
 };
 
 const profileLabelProps: LabelProps = {
   label: '프로필 사진',
   required: false,
   description: '나를 나타내는 사진을 등록해주세요',
-  htmlFor: 'profile'
+  htmlFor: 'profile',
 };
 
 export default SignupForm;
