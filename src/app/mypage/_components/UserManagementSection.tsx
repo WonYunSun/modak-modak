@@ -1,18 +1,16 @@
 'use client';
 
+import useModalStore from '@stores/useModalStore';
 import ManagementCard from '@app/groups/[id]/management/_components/ManagementCard';
 import ManagementSection from '@app/groups/[id]/management/_components/ManagementSection';
-import Modal from '@components/common/Modal';
-import useModalStore from '@stores/useModalStore';
-import LogoutModalContent from './LogoutModalContent';
-import { useState } from 'react';
-import UserDeleteModalContent from './deleteGroup/UserDeleteModalContent';
+import { ModalStatus } from '@app/mypage/_components/PageComponent';
 
-type ModalStatus = 'logout' | 'delete';
+interface UserManagementProps {
+  setModalStatus: (state: ModalStatus) => void;
+}
 
-const UserManagement = () => {
+const UserManagement = ({ setModalStatus }: UserManagementProps) => {
   const { openModal } = useModalStore();
-  const [modalStatus, setModalStatus] = useState<ModalStatus>('logout');
 
   const handleLogoutClick = () => {
     setModalStatus('logout');
@@ -30,7 +28,6 @@ const UserManagement = () => {
         <ManagementCard label={'로그아웃'} handleClick={handleLogoutClick} className="cursor-pointer" />
         <ManagementCard label={'회원 탈퇴'} handleClick={handleDeleteClick} className="cursor-pointer" />
       </ManagementSection>
-      <Modal>{modalStatus === 'logout' ? <LogoutModalContent /> : <UserDeleteModalContent />}</Modal>
     </div>
   );
 };

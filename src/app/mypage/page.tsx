@@ -1,7 +1,7 @@
-import UserManagement from './_components/UserManagement';
+import PageComponent from '@app/mypage/_components/PageComponent';
 
 const Mypage = () => {
-  return <UserManagement />;
+  return <PageComponent />;
 };
 
 export default Mypage;
