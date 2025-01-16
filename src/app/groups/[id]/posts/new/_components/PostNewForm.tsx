@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { Plus } from '@components/icons';
 import PhotoUpload from './PhotoUpload';
@@ -42,6 +42,8 @@ export const PostNewForm = () => {
     });
     uploadPostMutation(formData);
     router.push(`/groups/${groupId}`);
+
+    reset();
   };
 
   return (

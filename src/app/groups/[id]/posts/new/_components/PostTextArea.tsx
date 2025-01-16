@@ -8,7 +8,6 @@ const PostTextArea = () => {
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
-    console.log(content);
   };
 
   return (
