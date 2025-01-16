@@ -55,7 +55,7 @@ export const PostNewForm = () => {
         previewUrls={previewUrls}
         setPreviewUrls={setPreviewUrls}
       />
-      <PostTextArea textareaRef={textareaRef} />
+      <PostTextArea />
 
       <div className="w-full h-2 bg-[#F1F1F1] mt-[3.75rem]"></div>
       <div
