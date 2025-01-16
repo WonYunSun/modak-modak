@@ -1,6 +1,6 @@
 import React from 'react';
-import GroupList from './GroupList';
-import NoGroup from './NoGroup';
+import GroupList from '@app/_components/GroupList';
+import NoGroup from '@app/_components/NoGroup';
 
 const HomeContents = () => {
   const isGroup = true;

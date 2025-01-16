@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import AssureTransition from './AssureTransition';
-import TransitionSuccess from './TransitionSuccess';
+import AssureTransition from '@app/groups/[id]/management/_components/modal/leaderTransition/AssureTransition';
+import TransitionSuccess from '@app/groups/[id]/management/_components/modal/leaderTransition/TransitionSuccess';
 
 const LeaderTransitionModal = () => {
   const [transitionStep, setTransitionStep] = useState(1);

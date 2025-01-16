@@ -1,15 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import useModalStore from 'stores/useModalStore';
-import ManagementSection from './ManagementSection';
-import ManagementCard from './ManagementCard';
-import ToggleBox from './ToggleBox';
-import ManagementBtns from './ManagementBtns';
-import ManagementModal from './modal/ManagementModal';
+import useModalStore from '@stores/useModalStore';
+import ManagementSection from '@app/groups/[id]/management/_components/ManagementSection';
+import ManagementCard from '@app/groups/[id]/management/_components/ManagementCard';
+import ToggleBox from '@app/groups/[id]/management/_components/ToggleBox';
+import ManagementBtns from '@app/groups/[id]/management/_components/ManagementBtns';
+import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
 import { CircleOk, Copy, NextArrow } from '@components/icons';
 import useSmallAlert from '@hooks/useSmallAlert';
 import useIsLeader from '@hooks/management/useIsLeader';
+
 
 export type ModalModeType = 'changeProfile' | 'deleteGroup' | 'leaveGroup' | 'leaderTransition';
 interface ManagementContentsProps {

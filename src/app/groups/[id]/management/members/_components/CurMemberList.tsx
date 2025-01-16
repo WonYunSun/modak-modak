@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import MemberCard from './MemberCard';
+import MemberCard from '@app/groups/[id]/management/members/_components/MemberCard';
 import useFetchCurMembers from '@hooks/management/useFetchCurMembers';
 
 const DEFAULTDATA = {
