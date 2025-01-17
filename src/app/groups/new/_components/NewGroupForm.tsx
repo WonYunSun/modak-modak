@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
 import GroupNameForm from '@app/groups/new/_components/stepComponents/GroupNameForm';
@@ -11,7 +12,6 @@ import useFunnel from '@hooks/useFunnel';
 import useUser from '@hooks/useUser';
 import { addGroup } from '@queries/group/postGroup';
 import { GroupsType } from '@queries/home/fetchGroupInfo';
-import { useRouter } from 'next/navigation';
 
 //단계 name 정의
 const steps = ['모임명', '모임사진', '미리보기'];
