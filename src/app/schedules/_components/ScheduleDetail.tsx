@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchScheduleById } from 'queries/schedule/ScheduleActions';
 import FunnelHeader from '@components/common/FunnelHeader';
-import { SchdeuleInfo } from './DetailComponents/SchdeuleInfo';
-import { ScheduleEdit } from './DetailComponents/ScheduleEdit';
+import { ScheduleEdit } from '@app/schedules/_components/detailComponents/ScheduleEdit';
+import { SchdeuleInfo } from '@app/schedules/_components/detailComponents/SchdeuleInfo';
 
 export const ScheduleDetail = ({ scheduleId }: { scheduleId: string }) => {
   const [isEdit, setIsEdit] = useState(false);

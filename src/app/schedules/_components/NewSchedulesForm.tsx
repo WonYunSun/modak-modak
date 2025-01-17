@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import useModalStore from 'stores/useModalStore';
-import ScheduleDateForm from './StepComponents/ScheduleDateForm';
-import ScheduleMemoForm from './StepComponents/ScheduleMemoForm';
-import ScheduleNameForm from './StepComponents/ScheduleNameForm';
+import ScheduleDateForm from './stepComponents/ScheduleDateForm';
+import ScheduleMemoForm from './stepComponents/ScheduleMemoForm';
+import ScheduleNameForm from './stepComponents/ScheduleNameForm';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
 import { addSchedule } from '@queries/schedule/ScheduleActions';
