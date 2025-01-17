@@ -10,7 +10,7 @@ import ProfileUpdateModalContent from '@app/mypage/_components/modalContents/Pro
 
 export type ModalStatus = 'logout' | 'delete' | 'profileUpdate';
 
-const PageComponent = () => {
+const MyPageComponent = () => {
   const [modalStatus, setModalStatus] = useState<ModalStatus>('logout');
   const modalContents = {
     logout: <LogoutModalContent />,
@@ -27,4 +27,4 @@ const PageComponent = () => {
   );
 };
 
-export default PageComponent;
+export default MyPageComponent;

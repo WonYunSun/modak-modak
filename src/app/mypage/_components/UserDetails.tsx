@@ -15,6 +15,7 @@ const UserDetails = () => {
           height={56}
           alt="profile image"
           className="rounded-full w-full h-full"
+          priority={true}
         />
       </div>
       <span className="leading-[140%] font-semibold text-lg">{user?.user_metadata.nickname}</span>

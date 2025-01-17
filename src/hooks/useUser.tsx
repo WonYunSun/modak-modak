@@ -1,16 +1,16 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createClient } from '@utils/supabase/client';
-import { useEffect } from 'react';
 
 const supabase = createClient();
 
 const fetchUser = async () => {
-  const { data, error } = await supabase.auth.getUser();
+  const { data, error } = await supabase.auth.getSession();
   if (error) throw new Error('failed to fetch user');
-  return data.user;
+  return data.session?.user;
 };
 
 const useUser = () => {
