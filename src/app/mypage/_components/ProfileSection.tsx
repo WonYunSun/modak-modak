@@ -3,8 +3,8 @@
 import useModalStore from '@stores/useModalStore';
 import ManagementSection from '@app/groups/[id]/management/_components/ManagementSection';
 import { Modification } from '@components/icons';
-import { ModalStatus } from '@app/mypage/_components/PageComponent';
 import UserDetails from '@app/mypage/_components/UserDetails';
+import { ModalStatus } from '@app/mypage/_components/MyPageComponent';
 
 interface ProfileSectionProps {
   setModalStatus: (state: ModalStatus) => void;

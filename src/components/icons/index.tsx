@@ -714,3 +714,15 @@ export const CircleOk = ({ className }: IconProps) => {
     </svg>
   );
 };
+
+export const GreaterThan = () => {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M8.33398 15L12.7447 10.5893C13.0702 10.2638 13.0702 9.73618 12.7447 9.41074L8.33398 5"
+        stroke="#18181B"
+        stroke-linecap="round"
+      />
+    </svg>
+  );
+};

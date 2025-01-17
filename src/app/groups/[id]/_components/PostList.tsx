@@ -9,11 +9,16 @@ import CountBar from './CountBar';
 
 import { ModificationLine } from '@components/icons';
 
-import { useFetchGetPosts } from '@hooks/post/useFetchPosts';
+import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
+import { NoPost } from '@app/groups/[id]/_components/NoPost';
 
 import { useNewPostStore } from '@stores/useNewPostStore';
 
-const PostList = () => {
+export interface TabsProps {
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const PostList = ({ setActiveTab }: TabsProps) => {
   const router = useRouter();
 
   const { reset } = useNewPostStore();
@@ -23,7 +28,7 @@ const PostList = () => {
 
   const { data, isPending, isError } = useFetchGetPosts(groupId);
 
-  if (isPending) return <p>로딩 중...</p>;
+  if (isPending) return null;
   if (isError) return <p>에러 발생!</p>;
 
   return (
@@ -33,8 +38,12 @@ const PostList = () => {
       {/* 게시글 수 */}
       <CountBar value={data?.length ?? 0} />
 
-      {/* map으로 Post 컴포넌트 렌더링 */}
-      {data?.map((post) => <Post key={post.id} post={post} />)}
+      {/* data 없는 경우 NoPost 랜더링 또는 Post 랜더링 */}
+      {!data || data.length === 0 ? (
+        <NoPost setActiveTab={setActiveTab} />
+      ) : (
+        data.map((post) => <Post key={post.id} post={post} />)
+      )}
 
       {/* 플로팅 버튼 */}
       <Button

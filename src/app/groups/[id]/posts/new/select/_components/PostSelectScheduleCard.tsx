@@ -10,7 +10,7 @@ import { ScheduleType } from '@ts/scheduleType';
 
 import getSingleSchedule from '@queries/post/getSingleSchedule';
 
-const PostSelectCard = () => {
+const PostSelectScheduleCard = () => {
   const { selectedScheduleId } = useNewPostStore();
 
   const [schedule, setSchedule] = useState<ScheduleType | null>();
@@ -27,7 +27,7 @@ const PostSelectCard = () => {
   }, [selectedScheduleId]);
 
   return (
-    <div className="mt-5 p-5">
+    <div className="px-5">
       {schedule && (
         <ScheduleCard
           name={schedule.name}
@@ -42,4 +42,4 @@ const PostSelectCard = () => {
   );
 };
 
-export default PostSelectCard;
+export default PostSelectScheduleCard;
