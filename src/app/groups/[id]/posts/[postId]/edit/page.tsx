@@ -1,6 +1,5 @@
 import FunnelHeader from '@components/common/FunnelHeader';
-
-import EditPostForm from './_components/PostEditForm';
+import PostEditForm from '@app/groups/[id]/posts/[postId]/edit/_components/PostEditForm';
 
 const PostEditPage = () => {
   return (
@@ -10,7 +9,7 @@ const PostEditPage = () => {
         <FunnelHeader label="게시글 수정" />
       </div>
 
-      <EditPostForm />
+      <PostEditForm />
     </div>
   );
 };

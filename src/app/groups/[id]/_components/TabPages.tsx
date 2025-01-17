@@ -1,10 +1,11 @@
 'use client';
 
-import Tabs from './Tabs';
-import PostList from './PostList';
-import PhotoList from './PhotoList';
-import ScheduleList from './ScheduleList';
 import { useState } from 'react';
+
+import Tabs from '@app/groups/[id]/_components/Tabs';
+import PhotoList from '@app/groups/[id]/_components/PhotoList';
+import PostList from '@app/groups/[id]/_components/PostList';
+import ScheduleList from '@app/groups/[id]/_components/ScheduleList';
 
 const TabPages = () => {
   const [activeTab, setActiveTab] = useState('posts');
