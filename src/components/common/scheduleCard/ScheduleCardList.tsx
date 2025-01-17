@@ -1,13 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import ScheduleCard from './ScheduleCard';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
 import CountBar from '@app/groups/[id]/_components/CountBar';
 import { fetchSchedulesBygroupId } from 'queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
-
-const groupId = '52f44a96-b8f7-4c6c-80b1-d657eafd3821';
 
 const fetchScheduleDatas = async (groupId: string) => {
   try {
@@ -19,6 +18,9 @@ const fetchScheduleDatas = async (groupId: string) => {
 };
 
 const ScheduleCardList = () => {
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
+
   const [scheduleData, setScheduleData] = useState<ScheduleType[]>([]);
 
   useEffect(() => {
