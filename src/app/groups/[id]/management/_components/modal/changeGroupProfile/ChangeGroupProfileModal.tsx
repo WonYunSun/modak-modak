@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+//import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import ProfileInputs from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileInputs';
 import ProfileConfirmBtns from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileConfirmBtns';
@@ -8,6 +9,9 @@ import { Modification } from '@components/icons';
 
 const ChangeGroupProfileModal = () => {
   //모임 정보를 state에 초기값으로 저장하도록 하기
+  // const { id } = useParams();
+  // const groupId = Array.isArray(id) ? id[0] : id;
+
   const [groupName, setGroupName] = useState('모임명이에요');
   const [description, setDescription] = useState('한줄소개예요');
 

@@ -13,9 +13,7 @@ const useFetchWaitingMembers = ({ groupId }: UseFetchWaitingMembersParams) => {
 
   const { data, isPending, isError } = useQuery({
     queryKey: ['fetchWaitingMembers', groupId, userId],
-    queryFn: async () => {
-      return await fetchWaitingMembers({ groupId });
-    },
+    queryFn: () => fetchWaitingMembers({ groupId }),
   });
 
   return { data, isPending, isError };

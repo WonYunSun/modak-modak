@@ -11,9 +11,7 @@ const useDeleteGroup = ({ groupId }: UseDeleteGroupParams) => {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: async () => {
-      return await deleteGroup({ groupId });
-    },
+    mutationFn: () => deleteGroup({ groupId }),
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: [groupId] });
       queryClient.invalidateQueries({ queryKey: ['fetchGroupList'] });
