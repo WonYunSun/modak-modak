@@ -21,7 +21,7 @@ export const getGroupInfo = async (groupId: string): Promise<GroupCardInfosType>
   `
     )
     .eq('id', groupId)
-    // TODO: is approved 인 유저 체크
+    .filter('group_members.is_approved', 'eq', true) // is_approved 조건 추가
     .single();
 
   if (error) throw new Error(`getGroupInfo 모임 정보 불러오는 중 에러 발생: ${error.message}`);
