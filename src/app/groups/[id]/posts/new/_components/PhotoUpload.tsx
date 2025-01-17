@@ -71,6 +71,8 @@ const PhotoUpload = () => {
               </Button>
             </SwiperSlide>
           ))}
+          {/* 미리보기 우측 그라디언트 효과 */}
+          <div className="absolute top-0 right-0 w-[28px] h-[5.25rem] pointer-events-none bg-gradient-to-r from-transparent to-white z-10"></div>
         </Swiper>
       )}
     </div>
