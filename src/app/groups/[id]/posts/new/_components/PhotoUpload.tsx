@@ -4,19 +4,15 @@ import { useDropzone } from 'react-dropzone';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
+import { useNewPostStore } from '@stores/useNewPostStore';
 import Button from '@components/common/Button';
 import { DeletePhoto, PlusGray } from '@components/icons';
 
-interface PhotoUploadProps {
-  selectedFiles: File[];
-  setSelectedFiles: React.Dispatch<React.SetStateAction<File[]>>;
-  previewUrls: string[];
-  setPreviewUrls: React.Dispatch<React.SetStateAction<string[]>>;
-}
-
 const MAX_FILES = 10; // 최대 파일 수
 
-const PhotoUpload = ({ selectedFiles, setSelectedFiles, previewUrls, setPreviewUrls }: PhotoUploadProps) => {
+const PhotoUpload = () => {
+  const { selectedFiles, previewUrls, setSelectedFiles, setPreviewUrls } = useNewPostStore();
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'image/jpeg': ['.jpeg', '.jpg'],
@@ -31,16 +27,16 @@ const PhotoUpload = ({ selectedFiles, setSelectedFiles, previewUrls, setPreviewU
         alert(`최대 ${MAX_FILES}개의 파일만 업로드할 수 있습니다.`);
         return;
       }
-
       const newUrls = acceptedFiles.map((file) => URL.createObjectURL(file));
-      setSelectedFiles((prev) => [...prev, ...acceptedFiles]);
-      setPreviewUrls((prev) => [...prev, ...newUrls]);
+      setSelectedFiles([...selectedFiles, ...acceptedFiles]);
+      setPreviewUrls([...previewUrls, ...newUrls]);
     },
   });
 
+  // 선택한 index에 해당하는 이미지 미리보기 파일과 이미지 파일 삭제
   const handleDelete = (indexToDelete: number) => {
-    setSelectedFiles((prev) => prev.filter((_, index) => index !== indexToDelete));
-    setPreviewUrls((prev) => prev.filter((_, index) => index !== indexToDelete));
+    setSelectedFiles(selectedFiles.filter((_, index) => index !== indexToDelete));
+    setPreviewUrls(previewUrls.filter((_, index) => index !== indexToDelete));
   };
 
   return (
@@ -75,6 +71,8 @@ const PhotoUpload = ({ selectedFiles, setSelectedFiles, previewUrls, setPreviewU
               </Button>
             </SwiperSlide>
           ))}
+          {/* 미리보기 우측 그라디언트 효과 */}
+          <div className="absolute top-0 right-0 w-[28px] h-[5.25rem] pointer-events-none bg-gradient-to-r from-transparent to-white z-10"></div>
         </Swiper>
       )}
     </div>

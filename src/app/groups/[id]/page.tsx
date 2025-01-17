@@ -1,7 +1,7 @@
 import Header from '@components/common/Header';
 
-import TabPages from './_components/TabPages';
-import { GroupCardSection } from './_components/GroupCardSection';
+import TabPages from '@app/groups/[id]/_components/TabPages';
+import { GroupCardSection } from '@app/groups/[id]/_components/GroupCardSection';
 
 const GroupPage = () => {
   return (

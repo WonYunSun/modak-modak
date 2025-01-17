@@ -1,15 +1,16 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createClient } from '@utils/supabase/client';
 
 const supabase = createClient();
 
 const fetchUser = async () => {
-  const { data, error } = await supabase.auth.getUser();
+  const { data, error } = await supabase.auth.getSession();
   if (error) throw new Error('failed to fetch user');
-  return data.user;
+  return data.session?.user;
 };
 
 const useUser = () => {
@@ -22,6 +23,21 @@ const useUser = () => {
     queryFn: fetchUser,
   });
   const router = useRouter();
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'USER_UPDATED') {
+        queryClient.setQueryData(['user'], session?.user);
+      }
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
   if (isError) router.push('/login');
   return { user, isPending, isError };
 };

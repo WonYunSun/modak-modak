@@ -7,9 +7,10 @@ import { Comments, Menu } from '@components/icons';
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import CommentList from '@components/comment/CommentList';
 import { PostActionBottomSheet } from './PostActionBottomSheet';
-
-import { CommentCountType, GroupType, PostType, ScheduleType, UserType } from 'queries/post/getPosts';
 import { DeleteModal } from '@app/groups/[id]/_components/DeleteModal';
+import { PhotoSlider } from '@app/groups/[id]/_components/PhotoSlider';
+
+import { CommentCountType, GroupType, PostImageType, PostType, ScheduleType, UserType } from 'queries/post/getPosts';
 
 export type PostCommonType = {
   id: PostType['id'];
@@ -17,7 +18,8 @@ export type PostCommonType = {
   groups: GroupType;
   users: UserType;
   schedules: ScheduleType;
-  comments: CommentCountType[];
+  comments: CommentCountType;
+  post_images: PostImageType[];
 };
 
 interface PostProps {
@@ -48,7 +50,7 @@ const Post = ({ post }: PostProps) => {
 
   return (
     <>
-      <article key={post.id} className="w-full mt-5 flex flex-col">
+      <article key={post.id} className="w-full mt-5 flex flex-col mb-2">
         <div className="flex items-center justify-between w-full h-8 mb-3">
           <div className="flex items-center space-x-3">
             {/* 동그란 프로필 이미지 */}
@@ -69,7 +71,7 @@ const Post = ({ post }: PostProps) => {
         </div>
 
         {/* 사진 컴포넌트 */}
-        <div className="w-full aspect-square mb-3 bg-slate-200"></div>
+        <PhotoSlider photo={post.post_images} />
 
         {/* 글 내용 */}
         <div className="w-full text-sm mb-3">
@@ -84,21 +86,19 @@ const Post = ({ post }: PostProps) => {
         </div>
 
         {/* 일정 카드 */}
-        <div className="w-full mb-3">
-          <PostScheduleCard
-            name={post.schedules.name}
-            memo={post.schedules.memo}
-            start_date={post.schedules.start_date}
-            end_date={post.schedules.end_date}
-            start_time={post.schedules.start_time}
-          />
-        </div>
+        <PostScheduleCard
+          name={post.schedules.name}
+          memo={post.schedules.memo}
+          start_date={post.schedules.start_date}
+          end_date={post.schedules.end_date}
+          start_time={post.schedules.start_time}
+        />
 
         {/* 댓글 */}
-        <div className="w-28 flex items-center h-6 text-xs" onClick={() => setIsCommentOpen(true)}>
+        <div className="w-28 flex items-center h-6 text-xs mt-3" onClick={() => setIsCommentOpen(true)}>
           <Comments />
           <span className="ml-1 font-semibold">
-            {post.comments.length > 0 ? `${post.comments[0].count}개 모두 보기` : '댓글 남기기'}
+            {post.comments.count > 0 ? `${post.comments.count}개 모두 보기` : '댓글 남기기'}
           </span>
         </div>
       </article>
