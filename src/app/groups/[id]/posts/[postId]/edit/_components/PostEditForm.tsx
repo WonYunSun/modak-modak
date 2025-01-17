@@ -14,6 +14,7 @@ import 'swiper/css';
 
 import { useNewPostStore } from '@stores/useNewPostStore';
 import { useFetchEditPost } from '@hooks/post/useFetchEditPost';
+import Spinner from '@components/common/Spinner';
 
 export const PostEditForm = () => {
   const [text, setText] = useState<string>('');
@@ -42,7 +43,7 @@ export const PostEditForm = () => {
     }
   }, [data]);
 
-  if (isPending) return <p>로딩 중...</p>;
+  if (isPending) return <Spinner />;
   if (isError) return <p>오류가 발생했습니다.</p>;
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

@@ -1,20 +1,21 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
+import CountBar from '@app/groups/[id]/_components/CountBar';
+import Post from '@app/groups/[id]/_components/Post';
 import Button from '@components/common/Button';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
-import Post from './Post';
-import CountBar from './CountBar';
+import Loading from '@components/common/Spinner';
 
 import { ModificationLine } from '@components/icons';
 
 import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
-import { NoPost } from '@app/groups/[id]/_components/NoPost';
-import { useState } from 'react';
-import { NoSearch } from '@app/groups/[id]/_components/NoSearch';
-
 import { useNewPostStore } from '@stores/useNewPostStore';
+
+import { NoPost } from '@app/groups/[id]/_components/NoPost';
+import { NoSearch } from '@app/groups/[id]/_components/NoSearch';
 
 export interface TabsProps {
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
@@ -32,7 +33,7 @@ const PostList = ({ setActiveTab }: TabsProps) => {
 
   const { data, isPending, isError } = useFetchGetPosts(groupId);
 
-  if (isPending) return null;
+  if (isPending) return <Loading />;
   if (isError) return <p>에러 발생!</p>;
 
   // 검색어에 따라 게시글 필터링

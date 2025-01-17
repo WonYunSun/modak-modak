@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import GroupCard from '@components/common/groupCard/GroupCard';
 
 import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
+import Loading from '@components/common/Spinner';
 
 export const GroupCardSection = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ export const GroupCardSection = () => {
 
   const { data, isPending, isError } = useFetchGetGroup(groupId);
 
-  if (isPending) return <p>로딩 중...</p>;
+  if (isPending) return null;
 
   if (isError || !data) {
     <span>모임 정보를 불러오는데 문제가 발생했습니다.</span>;
