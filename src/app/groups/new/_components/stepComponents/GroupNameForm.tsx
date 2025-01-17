@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Layout from '@app/schedules/_components/layout/Layout';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
+import Layout from '@app/groups/[id]/schedules/_components/layout/Layout';
 import { GroupsType } from '@queries/home/fetchGroupInfo';
 
 type GroupNameFormProps = {
