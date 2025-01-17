@@ -8,7 +8,7 @@ import Button from '@components/common/Button';
 // import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import { Plus, PlusGray } from '@components/icons';
 
-import { useFetchGetPost } from '@hooks/post/useFetchPost';
+import { useFetchGetPost } from '@hooks/post/useFetchGetPost';
 
 export const PostEditForm = () => {
   const [text, setText] = useState<string>('');

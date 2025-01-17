@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 
 import GroupCard from '@components/common/groupCard/GroupCard';
 
-import { useFetchGetGroup } from '@hooks/group/useFetchGroup';
+import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
 
 export const GroupCardSection = () => {
   const { id } = useParams();
