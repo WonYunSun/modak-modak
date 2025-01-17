@@ -1,13 +1,15 @@
 'use client';
 
 import { Plus } from '@components/icons';
-import PhotoUpload from './PhotoUpload';
-import PostTextArea from './PostTextArea';
 import Button from '@components/common/Button';
 import { useParams, useRouter } from 'next/navigation';
+
 import useUploadPost from '@hooks/post/useUploadPost';
 import { useNewPostStore } from '@stores/useNewPostStore';
+
 import PostSelectScheduleCard from '@app/groups/[id]/posts/new/select/_components/PostSelectScheduleCard';
+import PhotoUpload from '@app/groups/[id]/posts/new/_components/PhotoUpload';
+import PostTextArea from '@app/groups/[id]/posts/new/_components/PostTextArea';
 
 export const PostNewForm = () => {
   const { content, selectedScheduleId, selectedFiles, reset } = useNewPostStore();

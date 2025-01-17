@@ -1,5 +1,7 @@
 import { NextArrow } from '@components/icons';
+
 import { formatDate, formatTime } from '@utils/dateUtils';
+
 import { ScheduleType } from '@ts/scheduleType';
 
 type ScheduleCardProps = {

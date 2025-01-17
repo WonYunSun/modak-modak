@@ -1,6 +1,6 @@
 import FunnelHeader from '@components/common/FunnelHeader';
 
-import PostNewForm from './_components/PostNewForm';
+import PostNewForm from '@app/groups/[id]/posts/new/_components/PostNewForm';
 
 const PostNewPage = () => {
   return (
