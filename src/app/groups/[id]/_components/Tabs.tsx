@@ -3,11 +3,12 @@
 interface TabsProps {
   activeTab: string;
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  isScrolled?: boolean;
 }
 
-const Tabs = ({ activeTab, setActiveTab }: TabsProps) => {
+const Tabs = ({ activeTab, setActiveTab, isScrolled }: TabsProps) => {
   return (
-    <div className="flex cursor-pointer">
+    <div className={`sticky top-12 left-0 flex cursor-pointer transition-colors ${isScrolled ? 'bg-white' : ''}`}>
       {/* 게시글 탭 */}
       <div
         onClick={() => setActiveTab('posts')}
