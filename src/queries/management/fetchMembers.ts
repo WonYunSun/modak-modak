@@ -44,7 +44,7 @@ export const fetchWaitingMembers = async ({ groupId }: FetchMembersParams): Prom
       .select(`group_id, is_approved, is_leader, users( id, nickname, profile_image)`)
       .eq('group_id', groupId)
       .eq('is_approved', false)
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: true });
 
     return data as CurMemberType[] | null;
   } catch (error) {
@@ -70,18 +70,3 @@ export const fetchLeaderInfo = async ({ groupId }: FetchLeaderInfoParams): Promi
     throw new Error(`${error}`);
   }
 };
-
-// interface FetchUserInfoParams {
-//   userId: UsersType['id'];
-//   groupId: GroupsType['id'];
-// }
-// export const fetchUserInfo = async ({ userId, groupId }: FetchUserInfoParams): Promise<GroupMembersType | null> => {
-//   try {
-//     const supabase = await createClient();
-//     const { data } = await supabase.from('group_members').select().eq('group_id', groupId).eq('id', userId).single();
-
-//     return data;
-//   } catch (error) {
-//     throw new Error(`${error}`);
-//   }
-// };
