@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import MemberCardLeaderBtns from './MemberCardLeaderBtns';
-import { CurMemberType } from 'queries/management/fetchMembers';
+import MemberCardLeaderBtns from '@app/groups/[id]/management/members/_components/MemberCardLeaderBtns';
+import { CurMemberType } from '@queries/management/fetchMembers';
 
 interface MemberCardProps {
   memberData: CurMemberType;
@@ -20,22 +20,27 @@ const MemberCard = ({
   isMe = false,
   mode,
 }: MemberCardProps) => {
-  const {users} = memberData;
+  const { users } = memberData;
   const { nickname, profile_image: profile } = users;
 
   return (
     <div className="w-full border-b border-gray-200">
       <div className="px-5 h-16 flex bg-gray-100 justify-between items-center">
         <div className="flex gap-4">
-          <div className="w-8 h-8 rounded-[50%] overflow-hidden">
-            <Image src={profile} width={100} height={100} alt={'member_profile'} />
+          <div className="w-8 h-8 rounded-full overflow-hidden">
+            <Image src={profile} width={56} height={56} alt={'member_profile'} className="rounded-full w-full h-full" />
           </div>
           <span className="flex items-center gap-1">
             {nickname} {isMe && <span className="text-gray-500 text-sm">{'(나)'}</span>}
           </span>
         </div>
         {isLeaderUser ? (
-          <MemberCardLeaderBtns isLeader={isLeader} mode={mode} toastOpener={toastOpener ? toastOpener : null} />
+          <MemberCardLeaderBtns
+            memberId={memberData.users.id}
+            isLeader={isLeader}
+            mode={mode}
+            toastOpener={toastOpener ? toastOpener : null}
+          />
         ) : (
           <>{mode === 'curMembers' && isLeader && <span className="text-primary">대표</span>}</>
         )}

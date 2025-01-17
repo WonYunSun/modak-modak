@@ -10,7 +10,7 @@ const LoginPage = () => {
    */
 
   return (
-    <div className="flex flex-col h-screen pb-[112px] inner">
+    <div className="flex flex-col h-screen pb-[112px] pt-[119px] inner overflow-y-auto">
       <Onboarding />
       <SocialLogins />
     </div>

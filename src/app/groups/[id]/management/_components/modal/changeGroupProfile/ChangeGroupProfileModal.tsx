@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import ProfileInputs from './ProfileInputs';
-import ProfileConfirmBtns from './ProfileConfirmBtns';
+import ProfileInputs from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileInputs';
+import ProfileConfirmBtns from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileConfirmBtns';
 import { Modification } from '@components/icons';
 
 const ChangeGroupProfileModal = () => {

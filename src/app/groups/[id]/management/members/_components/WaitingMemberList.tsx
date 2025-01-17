@@ -1,29 +1,43 @@
 'use client';
 
-//import MemberCard from './MemberCard';
-import { AddMember } from '@components/icons';
+import { useParams } from 'next/navigation';
+import MemberCard from '@app/groups/[id]/management/members/_components/MemberCard';
+import useFetchWaitingMembers from '@hooks/management/useFetchWaitingMembers';
 import useSmallAlert from '@hooks/useSmallAlert';
+import { AddMember } from '@components/icons';
 
 interface WaitingMemberListProps {
   isLeaderUser: boolean;
 }
 const WaitingMemberList = ({ isLeaderUser }: WaitingMemberListProps) => {
-  const { SmallAlert: MemberAddedAlert, /*openAlert: OpenMemberAddedAlert*/ } = useSmallAlert();
-  console.log(isLeaderUser); //빌드시 미사용 변수 에러가 일어나는 것을 막기 위해서 넣은 줄입니다.
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
+  const { SmallAlert: MemberAddedAlert, openAlert: OpenMemberAddedAlert } = useSmallAlert();
   
+  const { data, isPending, isError } = useFetchWaitingMembers({ groupId });
+  
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error!</div>;
 
   return (
     <>
       <div>
         <div className="pt-5 font-semibold">
           <div className="px-5 py-3 flex items-center gap-2">
-            <span>대기 멤버</span> <span className="text-primary">3</span>
+            <span>대기 멤버</span> <span className="text-primary">{data ? data.length : 0}</span>
           </div>
         </div>
         <div>
-          {/* <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} toastOpener={OpenMemberAddedAlert} />
-          <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} toastOpener={OpenMemberAddedAlert} />
-          <MemberCard isLeaderUser={isLeaderUser} mode={'waiting'} toastOpener={OpenMemberAddedAlert} /> */}
+          {data &&
+            data.map((member) => (
+              <MemberCard
+                key={member.users.id}
+                memberData={member}
+                isLeaderUser={isLeaderUser}
+                mode={'waiting'}
+                toastOpener={OpenMemberAddedAlert}
+              />
+            ))}
         </div>
       </div>
       <MemberAddedAlert>

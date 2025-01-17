@@ -1,5 +1,5 @@
 import Header from '@components/common/Header';
-import MembersPageContents from './_components/MembersPageContents';
+import MembersPageContents from '@app/groups/[id]/management/members/_components/MembersPageContents';
 
 const MembersPage = () => {
   return (
