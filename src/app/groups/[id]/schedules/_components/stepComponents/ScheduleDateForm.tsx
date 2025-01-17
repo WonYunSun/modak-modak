@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Layout from '../layout/Layout';
 import Label, { LabelProps } from '@components/common/Label';
-import ScheduleDatePicker from '../ScheduleDatePicker';
+import ScheduleDatePicker from '@app/groups/[id]/schedules/_components/ScheduleDatePicker';
 import { ScheduleType } from '@ts/scheduleType';
 
 type ScheduleDateFormProps = {
