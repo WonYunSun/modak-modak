@@ -4,7 +4,7 @@ import { GreaterThan } from '@components/icons';
 
 import { TabsProps } from '@app/groups/[id]/_components/PostList';
 
-export const NoPost = ({ setActiveTab }: TabsProps) => {
+const NoPost = ({ setActiveTab }: TabsProps) => {
   return (
     <>
       <div className="mx-auto mt-[3.375rem] text-center justify-center">
@@ -22,3 +22,5 @@ export const NoPost = ({ setActiveTab }: TabsProps) => {
     </>
   );
 };
+
+export default NoPost;

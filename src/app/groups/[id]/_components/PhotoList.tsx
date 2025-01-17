@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 import Button from '@components/common/Button';
 import Spinner from '@components/common/Spinner';
+import NoPhoto from '@app/groups/[id]/_components/NoPhoto';
 import { ModificationLine } from '@components/icons';
-import { NoPhoto } from '@app/groups/[id]/_components/NoPhoto';
 
 import { useFetchPhotos } from '@hooks/photo/useFetchPhotos';
 

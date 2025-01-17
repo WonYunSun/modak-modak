@@ -14,8 +14,8 @@ import { ModificationLine } from '@components/icons';
 import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
 import { useNewPostStore } from '@stores/useNewPostStore';
 
-import { NoPost } from '@app/groups/[id]/_components/NoPost';
-import { NoSearch } from '@app/groups/[id]/_components/NoSearch';
+import NoPost from '@app/groups/[id]/_components/NoPost';
+import NoSearch from '@app/groups/[id]/_components/NoSearch';
 
 export interface TabsProps {
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;

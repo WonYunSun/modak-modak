@@ -65,8 +65,8 @@ const Post = ({ post }: PostProps) => {
             <span className="text-base font-semibold text-gray-900">{post.users.nickname}</span>
           </div>
           {/* 메뉴 아이콘 */}
-          <div onClick={() => setBottomSheetPostId(post.id)}>
-            <Menu />
+          <div onClick={() => setBottomSheetPostId(post.id)} className="flex h-10 w-10">
+            <Menu className="m-auto" />
           </div>
         </div>
 
