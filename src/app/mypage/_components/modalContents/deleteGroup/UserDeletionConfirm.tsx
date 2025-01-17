@@ -1,24 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
-import useModalStore from '@stores/useModalStore';
+import useModalStore from 'stores/useModalStore';
 import Button from '@components/common/Button';
-import useDeleteGroup from '@hooks/management/useDeleteGroup';
 
-interface DeletionConfirmProps {
+interface UserDeletionConfirmProps {
   onNextStep: () => void;
+  onConfirmDelete: () => void;
 }
-const DeletionConfirm = ({ onNextStep }: DeletionConfirmProps) => {
-  const { id } = useParams();
-  const groupId = Array.isArray(id) ? id[0] : id;
-  const { closeModal } = useModalStore();
-  const deleteGroup = useDeleteGroup({ groupId });
-
+const UserDeletionConfirm = ({ onNextStep, onConfirmDelete }: UserDeletionConfirmProps) => {
   const [confirmationInput, setConfirmationInput] = useState('');
+  const { closeModal } = useModalStore();
 
-  const onDeleteGroup = async () => {
-    deleteGroup();
+  const onDeleteGroup = () => {
+    onConfirmDelete();
     onNextStep();
   };
 
@@ -26,14 +21,14 @@ const DeletionConfirm = ({ onNextStep }: DeletionConfirmProps) => {
     <>
       <div className="w-60 py-6 w-full text-left">
         <div className="w-full mb-5 text-lg font-semibold">
-          모임을 삭제하시려면
+          회원을 탈퇴하시려면
           <br />
-          {"'삭제'라고 입력해주세요"}
+          {"'탈퇴'라고 입력해주세요"}
         </div>
         <input
           type="text"
-          placeholder="삭제라는 글자를 입력해주세요"
-          className="px-4 py-3 text-base rounded-lg border border-solid border-gray-300 focus:outline-gray-700"
+          placeholder="탈퇴 라는 글자를 입력해주세요"
+          className="px-4 py-3 text-base rounded-lg border border-solid border-gray-300 focus:outline-gray-700 w-full"
           onChange={(e) => {
             setConfirmationInput(e.currentTarget.value);
           }}
@@ -47,9 +42,9 @@ const DeletionConfirm = ({ onNextStep }: DeletionConfirmProps) => {
           <Button
             type={'button'}
             className={'modal-full-btn'}
-            label={'삭제'}
+            label={'탈퇴'}
             onClick={onDeleteGroup}
-            disabled={confirmationInput === '삭제' ? false : true}
+            disabled={confirmationInput !== '탈퇴'}
           />
         </div>
       </div>
@@ -57,4 +52,4 @@ const DeletionConfirm = ({ onNextStep }: DeletionConfirmProps) => {
   );
 };
 
-export default DeletionConfirm;
+export default UserDeletionConfirm;
