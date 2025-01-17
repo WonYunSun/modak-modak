@@ -1,15 +1,10 @@
 'use client';
 
+import { GreaterThan } from '@components/icons';
+
 import { TabsProps } from '@app/groups/[id]/_components/PostList';
-import Button from '@components/common/Button';
-import { GreaterThan, ModificationLine } from '@components/icons';
-import { useParams, useRouter } from 'next/navigation';
 
 export const NoPost = ({ setActiveTab }: TabsProps) => {
-  const router = useRouter();
-  const { id } = useParams();
-  const groupId = Array.isArray(id) ? id[0] : id;
-
   return (
     <>
       <div className="mx-auto mt-[3.375rem] text-center justify-center">

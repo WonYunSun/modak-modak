@@ -43,6 +43,7 @@ const PostList = ({ setActiveTab }: TabsProps) => {
   return (
     <section className="w-full flex flex-col mb-28">
       {/* 검색바 */}
+      {/* 검색 기능 고도화 및 작동 방식 논의 필요 */}
       <SearchBar search={search} setSearch={setSearch} />
       {/* 게시글 수 */}
       <CountBar value={!data || data.length === 0 ? 0 : (filteredPosts?.length ?? 0)} />

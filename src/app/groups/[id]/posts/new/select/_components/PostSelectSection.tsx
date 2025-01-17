@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from 'next/navigation';
 
-import SearchBar from '@app/groups/[id]/_components/SearchBar';
+// import SearchBar from '@app/groups/[id]/_components/SearchBar';
 
 import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
 
@@ -29,7 +29,7 @@ const PostSelectSection = ({ schedules }: PostSelectSectionProps) => {
     <section>
       <div className="p-5">
         {/* TODO: 일정 검색 기능 추가  */}
-        <SearchBar />
+        {/* <SearchBar /> */}
         <div className="pt-[26px] text-sm font-normal leading-[140%] text-black">
           총 <span className="text-primary">{schedules?.length}</span>개
         </div>
