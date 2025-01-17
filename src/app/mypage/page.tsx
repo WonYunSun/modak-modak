@@ -1,7 +1,7 @@
-import PageComponent from '@app/mypage/_components/PageComponent';
+import MyPageComponent from '@app/mypage/_components/MyPageComponent';
 
 const Mypage = () => {
-  return <PageComponent />;
+  return <MyPageComponent />;
 };
 
 export default Mypage;

@@ -1,11 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProfileConfirmBtns from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileConfirmBtns';
 import ProfilePreview from '@app/signup/_components/ProfilePreview';
 import { UserFormState } from '@app/signup/_components/SignupForm';
 import TextInput from '@components/common/TextInput';
+import useUser from '@hooks/useUser';
+import { updateUser } from '@queries/users/users';
+import { uploadFile } from '@utils/uploadFile';
+import { createClient } from '@utils/supabase/client';
 
 const ProfileUpdateModalContent = () => {
+  const { user, isPending } = useUser();
   const [values, setValues] = useState<UserFormState>({ profile: null, nickname: '' });
+  const [imageUrl, setImageUrl] = useState<string>('/icons/profile-image.webp');
+
+  useEffect(() => {
+    if (!isPending && user) {
+      setValues({
+        profile: null,
+        nickname: user.user_metadata.nickname || '',
+      });
+      setImageUrl(user.user_metadata.profile_image);
+    }
+  }, [isPending, user]);
+
+  if (isPending) return null;
 
   const handleTextChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -16,7 +34,21 @@ const ProfileUpdateModalContent = () => {
     setValues((prev) => ({ ...prev, [name]: file }));
   };
 
-  const onConfirmChange = () => {};
+  const onConfirmChange = async () => {
+    const supabase = createClient();
+    let imageUrl: string = user?.user_metadata.profile_image;
+    try {
+      if (values['profile']) {
+        imageUrl = await uploadFile('profiles', 'users', values['profile']);
+      }
+      await updateUser({ nickname: values.nickname, profile_image: imageUrl });
+      await supabase.auth.updateUser({
+        data: { nickname: values.nickname, profile_image: imageUrl },
+      });
+    } catch (error) {
+      alert((error as Error).message);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center w-full">
@@ -28,7 +60,8 @@ const ProfileUpdateModalContent = () => {
           name="profile"
           setValue={handleFileChange}
           className="w-[84px] h-[84px]"
-          innerClass='bottom-[-10px] right-[-10px]'
+          innerClass="bottom-[-10px] right-[-10px]"
+          imageUrl={imageUrl}
         />
       </div>
       <div className="w-64 px-2">
