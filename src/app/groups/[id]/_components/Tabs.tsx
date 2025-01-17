@@ -8,7 +8,7 @@ interface TabsProps {
 
 const Tabs = ({ activeTab, setActiveTab, isScrolled }: TabsProps) => {
   return (
-    <div className={`sticky top-12 left-0 flex cursor-pointer transition-colors ${isScrolled ? 'bg-white' : ''}`}>
+    <div className={`sticky top-12 left-0 flex cursor-pointer transition-all ${isScrolled ? 'bg-white z-20' : ''}`}>
       {/* 게시글 탭 */}
       <div
         onClick={() => setActiveTab('posts')}
