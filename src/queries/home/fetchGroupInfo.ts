@@ -4,7 +4,6 @@ import { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
 import { createClient } from '@utils/supabase/server';
 import { Database } from '@ts/supabase';
 
-
 export type GroupMembersType = Database['public']['Tables']['group_members']['Row'];
 export type GroupsType = Database['public']['Tables']['groups']['Row'];
 export type UsersType = Database['public']['Tables']['users']['Row'];
@@ -45,7 +44,7 @@ interface fetchGroupMembersNumParams {
 export const fetchGroupMembersNum = async ({ groupId }: fetchGroupMembersNumParams): Promise<number | Error> => {
   try {
     const supabase = await createClient();
-    const { data } = await supabase.from('group_members').select().eq('group_id', groupId);
+    const { data } = await supabase.from('group_members').select().eq('group_id', groupId).eq('is_approved', true);
 
     if (data) return data.length;
     return new Error(`fetchGroupMembersNum: data.length is null`);

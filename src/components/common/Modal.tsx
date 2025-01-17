@@ -3,13 +3,18 @@
 import { useRef } from 'react';
 import useModalStore from 'stores/useModalStore';
 
-const Modal = ({ children }: { children: React.ReactNode }) => {
+interface ModalProps {
+  children: React.ReactNode;
+  onClickOutSide?: () => void;
+}
+const Modal = ({ children, onClickOutSide }: ModalProps) => {
   const { isOpen, closeModal } = useModalStore();
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      closeModal();
+      if (onClickOutSide) onClickOutSide();
+        closeModal();
     }
   };
 
