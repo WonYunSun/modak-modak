@@ -18,15 +18,11 @@ const HomeSection = () => {
 
     const options = {
       rootMargin: '-48px 0px 0px 0px',
-      threshold: [0, 1],
+      threshold: 0,
     };
 
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].boundingClientRect.top <= 48) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(!entries[0].isIntersecting);
     }, options);
 
     if (targetInstanceRef) {
