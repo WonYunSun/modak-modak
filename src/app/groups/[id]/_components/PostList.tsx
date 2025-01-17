@@ -9,7 +9,7 @@ import CountBar from './CountBar';
 
 import { ModificationLine } from '@components/icons';
 
-import { useFetchGetPosts } from '@hooks/post/useFetchPosts';
+import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
 import { NoPost } from '@app/groups/[id]/_components/NoPost';
 
 import { useNewPostStore } from '@stores/useNewPostStore';
