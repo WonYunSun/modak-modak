@@ -6,11 +6,11 @@ import { useState } from 'react';
 import { Comments, Menu } from '@components/icons';
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import CommentList from '@components/comment/CommentList';
-import { PostActionBottomSheet } from './PostActionBottomSheet';
 import { DeleteModal } from '@app/groups/[id]/_components/DeleteModal';
 import { PhotoSlider } from '@app/groups/[id]/_components/PhotoSlider';
 
 import { CommentCountType, GroupType, PostImageType, PostType, ScheduleType, UserType } from 'queries/post/getPosts';
+import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBottomSheet';
 
 export type PostCommonType = {
   id: PostType['id'];
