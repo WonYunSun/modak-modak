@@ -1,7 +1,8 @@
 'use client';
 
-import { useNewPostStore } from '@stores/useNewPostStore';
 import { ChangeEvent } from 'react';
+
+import { useNewPostStore } from '@stores/useNewPostStore';
 
 const PostTextArea = () => {
   const { content, setContent } = useNewPostStore();
