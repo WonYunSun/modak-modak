@@ -1,19 +1,24 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
+import useDeleteGroup from '@hooks/management/useDeleteGroup';
 
 interface DeletionConfirmProps {
   onNextStep: () => void;
-  onConfirmDelete: () => void;
 }
-const DeletionConfirm = ({ onNextStep, onConfirmDelete }: DeletionConfirmProps) => {
-  const [confirmationInput, setConfirmationInput] = useState('');
+const DeletionConfirm = ({ onNextStep }: DeletionConfirmProps) => {
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
   const { closeModal } = useModalStore();
+  const deleteGroup = useDeleteGroup({ groupId });
 
-  const onDeleteGroup = () => {
-    onConfirmDelete();
+  const [confirmationInput, setConfirmationInput] = useState('');
+
+  const onDeleteGroup = async () => {
+    deleteGroup();
     onNextStep();
   };
 

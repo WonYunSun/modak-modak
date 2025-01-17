@@ -14,12 +14,16 @@ import { NoPost } from '@app/groups/[id]/_components/NoPost';
 import { useState } from 'react';
 import { NoSearch } from '@app/groups/[id]/_components/NoSearch';
 
+import { useNewPostStore } from '@stores/useNewPostStore';
+
 export interface TabsProps {
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const PostList = ({ setActiveTab }: TabsProps) => {
   const router = useRouter();
+
+  const { reset } = useNewPostStore();
 
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -57,7 +61,10 @@ const PostList = ({ setActiveTab }: TabsProps) => {
         label="게시글 쓰기"
         className="floating-btn"
         type="button"
-        onClick={() => router.push(`/groups/${groupId}/posts/new`)}
+        onClick={() => {
+          router.push(`/groups/${groupId}/posts/new`);
+          reset();
+        }}
       >
         <ModificationLine />
       </Button>
