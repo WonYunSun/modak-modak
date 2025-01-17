@@ -688,7 +688,7 @@ export const AddMember = ({ className }: IconProps) => {
         d="M18 15V21M15 18H21M13.5 14.5H9.4C7.16 14.5 6.04 14.5 5.184 14.936C4.43139 15.3195 3.81949 15.9314 3.436 16.684C3 17.54 3 18.66 3 20.9V21.5H13.5"
         stroke="white"
         stroke-width="1.5"
-        stroke-linecap="round"
+        strokeLinecap="round"
         stroke-linejoin="round"
       />
     </svg>
@@ -709,7 +709,7 @@ export const CircleOk = ({ className }: IconProps) => {
         d="M7 13.5L9.64645 16.1464C9.84171 16.3417 10.1583 16.3417 10.3536 16.1464L17 9.5M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z"
         stroke="white"
         stroke-width="1.5"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
     </svg>
   );
@@ -721,7 +721,7 @@ export const GreaterThan = () => {
       <path
         d="M8.33398 15L12.7447 10.5893C13.0702 10.2638 13.0702 9.73618 12.7447 9.41074L8.33398 5"
         stroke="#18181B"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
     </svg>
   );
