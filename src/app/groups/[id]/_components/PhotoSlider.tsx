@@ -22,7 +22,7 @@ export const PhotoSlider = ({ photo }: photoProps) => {
   };
 
   return (
-    <div className="w-full aspect-square mb-3 relative">
+    <div className="w-full aspect-square mb-3 relative z-0">
       {/* 슬라이드 */}
       <Swiper
         onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex + 1)} // 현재 슬라이드 번호 업데이트
