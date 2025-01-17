@@ -8,16 +8,19 @@ import GroupImageForm from '@app/groups/new/_components/stepComponents/GroupImag
 import GroupPreview from '@app/groups/new/_components/stepComponents/GroupPreview';
 import useModalStore from '@stores/useModalStore';
 import useFunnel from '@hooks/useFunnel';
+import useUser from '@hooks/useUser';
 import { addGroup } from '@queries/group/postGroup';
 import { GroupsType } from '@queries/home/fetchGroupInfo';
+import { useRouter } from 'next/navigation';
 
 //단계 name 정의
 const steps = ['모임명', '모임사진', '미리보기'];
-const userId = 'ebcc66fe-bf21-4b73-99d1-e4f375025b80';
 
 const NewGroupForm = () => {
   const { Funnel, Step, next, prev } = useFunnel(steps[0], 3);
+
   const { openModal } = useModalStore();
+
   const [groupData, setGruopData] = useState<GroupsType>({
     created_at: '',
     description: '',
@@ -25,6 +28,9 @@ const NewGroupForm = () => {
     image_url: '',
     name: '',
   });
+
+  const { user } = useUser();
+  const router = useRouter();
 
   const handleNext = async (data: Partial<GroupsType>, nextStep: string) => {
     const updatedGroupData = { ...groupData, ...data };
@@ -39,12 +45,16 @@ const NewGroupForm = () => {
       id: '',
     };
 
-    await addGroup(completeGroupData, userId);
+    await addGroup(completeGroupData, user?.id);
     openModal();
   };
 
   const handlePrev = (prevStep: string) => {
     prev(prevStep);
+  };
+
+  const goToHome = () => {
+    router.replace('/');
   };
 
   return (
@@ -66,7 +76,7 @@ const NewGroupForm = () => {
         </Step>
         <Step name={steps[2]}>
           <GroupPreview onPrev={() => handlePrev(steps[1])} onNext={handleSubmit} prevData={groupData} />
-          <Modal onClickOutSide={() => {}}>
+          <Modal onClickOutSide={goToHome}>
             <div className="px-[1rem] py-[1.5rem] w-full mb-[1.25rem] text-center">
               <p className="text-gray-900 font-semibold text-lg mb-[0.25rem]">
                 축하합니다!
@@ -85,7 +95,7 @@ const NewGroupForm = () => {
               className="modal-full-btn mb-3"
               onClick={() => {}}
             ></Button>
-            <Button label="홈으로 이동" type="button" className="modal-white-btn" onClick={() => {}}></Button>
+            <Button label="홈으로 이동" type="button" className="modal-white-btn" onClick={goToHome}></Button>
           </Modal>
         </Step>
       </Funnel>

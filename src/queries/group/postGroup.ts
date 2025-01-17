@@ -3,7 +3,7 @@
 import { createClient } from '@utils/supabase/server';
 import { GroupsType } from 'queries/home/fetchGroupInfo';
 
-export const addGroup = async (groupData: GroupsType, userId: string): Promise<void> => {
+export const addGroup = async (groupData: GroupsType, userId?: string): Promise<void> => {
   try {
     const supabase = await createClient();
 
