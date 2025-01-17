@@ -10,8 +10,6 @@ import { NoPhoto } from '@app/groups/[id]/_components/NoPhoto';
 
 import { useFetchPhotos } from '@hooks/photo/useFetchPhotos';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-
 const PhotoList = () => {
   const router = useRouter();
   const { id } = useParams();
@@ -20,10 +18,6 @@ const PhotoList = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const { data, isPending, isError } = useFetchPhotos(groupId);
-
-  const getImageURL = (url: string) => {
-    return `${supabaseUrl}/storage/v1/object/public/post-photos/${url}`;
-  };
 
   const handleImageClick = (imageUrl: string) => {
     setSelectedImage(imageUrl);
@@ -51,7 +45,7 @@ const PhotoList = () => {
               className="relative w-[calc(25%-0.75px)] aspect-square bg-white"
               onClick={() => handleImageClick(image.image_url)}
             >
-              <Image src={getImageURL(image.image_url)} alt={`이미지-${index}`} layout="fill" objectFit="cover" />
+              <Image src={image.image_url} alt={`이미지-${index}`} layout="fill" objectFit="cover" />
             </div>
           ))
         )}
@@ -63,7 +57,7 @@ const PhotoList = () => {
           onClick={handleClose}
         >
           <div className="relative w-[80%] h-auto">
-            <Image src={getImageURL(selectedImage)} alt="Image" layout="responsive" width={1} height={1} />
+            <Image src={selectedImage} alt="Image" layout="responsive" width={1} height={1} />
           </div>
         </div>
       )}

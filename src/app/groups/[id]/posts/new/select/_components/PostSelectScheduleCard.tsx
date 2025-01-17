@@ -16,13 +16,13 @@ const PostSelectScheduleCard = () => {
   const [schedule, setSchedule] = useState<ScheduleType | null>();
 
   useEffect(() => {
-    const getPost = async () => {
+    const getSelectedSchedule = async () => {
       const schedule = await getSingleSchedule(selectedScheduleId);
       setSchedule(schedule);
     };
 
     if (selectedScheduleId) {
-      getPost();
+      getSelectedSchedule();
     }
   }, [selectedScheduleId]);
 

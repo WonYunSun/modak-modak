@@ -12,14 +12,8 @@ interface photoProps {
   photo: PostImageType[];
 }
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-
 export const PhotoSlider = ({ photo }: photoProps) => {
   const [currentIndex, setCurrentIndex] = useState(1);
-
-  const getImageURL = (url: string) => {
-    return `${supabaseUrl}/storage/v1/object/public/post-photos/${url}`;
-  };
 
   return (
     <div className="w-full aspect-square mb-3 relative z-0">
@@ -31,7 +25,7 @@ export const PhotoSlider = ({ photo }: photoProps) => {
         {photo.map((image, index) => (
           <SwiperSlide key={index}>
             <Image
-              src={getImageURL(image.image_url)}
+              src={image.image_url}
               alt={`Photo ${index + 1}`}
               layout="fill"
               objectFit="cover"

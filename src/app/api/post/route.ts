@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { createClient } from '@utils/supabase/server';
 
 export async function POST(req: NextRequest) {
@@ -38,19 +39,21 @@ export async function POST(req: NextRequest) {
 
     // 파일 Storage 업로드
     const uploadedFileUrls: string[] = await Promise.all(
-      files.map(async (file) => {
+      files.map(async (file, index) => {
         const fileExt = file.name.split('.').pop(); // 파일 확장자
-        const uniqueFileName = `${crypto.randomUUID()}.${fileExt}`; // 파일 고유 이름
+        const uniqueFileName = `${Date.now()}-${index}.${fileExt}`; // 파일 고유 이름
         // 이미지 파일 버킷 내 저장 위치
         const filePath = `${groupId}/${uniqueFileName}`;
-        const { error: uploadError } = await supabase.storage.from('post-photos').upload(filePath, file);
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('post-photos')
+          .upload(filePath, file);
 
         if (uploadError) {
           console.error('파일 버킷 업로드 오류:', uploadError);
           throw new Error('파일 업로드 중 오류가 발생했습니다.');
         }
-
-        return filePath;
+        // publicURL 반환
+        return supabase.storage.from('post-photos').getPublicUrl(uploadData.path).data.publicUrl;
       })
     );
 

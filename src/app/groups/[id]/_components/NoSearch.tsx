@@ -10,3 +10,5 @@ export const NoSearch = () => {
     </>
   );
 };
+
+export default NoSearch;

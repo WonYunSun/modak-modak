@@ -24,7 +24,7 @@ export const PostNewForm = () => {
   // TODO: userId, scheduleId 연결 필요
   const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886';
 
-  const handleUploadPost = async () => {
+  const handleUploadPost = () => {
     // FormData 사용
     const formData = new FormData();
     formData.append('userId', userId);
@@ -71,7 +71,7 @@ export const PostNewForm = () => {
 
       <PostSelectScheduleCard />
 
-      <div className="fixed w-full px-5">
+      <div className="fixed w-full px-5 bottom-0">
         <Button
           label="작성 완료"
           className="full-btn"

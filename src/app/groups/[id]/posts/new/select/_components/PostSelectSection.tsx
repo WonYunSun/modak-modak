@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 // import SearchBar from '@app/groups/[id]/_components/SearchBar';
 
@@ -19,10 +19,16 @@ const PostSelectSection = ({ schedules }: PostSelectSectionProps) => {
 
   const router = useRouter();
   const params = useParams();
+  const pathname = usePathname();
 
   const handleScheduleSelect = (scheduleId: string) => {
     setSelectedScheduleId(scheduleId as string);
-    router.push(`/groups/${params.id}/posts/new`);
+
+    if (pathname.includes('/edit')) {
+      router.push(`/groups/${params.id}/posts/${params.postId}/edit`);
+    } else {
+      router.push(`/groups/${params.id}/posts/new`);
+    }
   };
 
   return (
