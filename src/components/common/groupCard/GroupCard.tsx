@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Database } from '@ts/supabase';
 import GroupCardContent from './GroupCardContent';
+import { Database } from '@ts/supabase';
 
 type GroupType = Database['public']['Tables']['groups']['Row'];
 export interface GroupCardInfosType extends GroupType {
@@ -13,13 +13,12 @@ export interface GroupCardProps {
 }
 
 const GroupCard = ({ groupInfo, hasLink = true }: GroupCardProps) => {
-  //const { id } = groupInfo;
-  //todo: Link의 href는 모임방 페이지의 경로를 상의한 후 추가하기
+  const { id } = groupInfo;
 
   return (
     <>
       {hasLink ? (
-        <Link href={'/'}>
+        <Link href={`/groups/${id}`}>
           <GroupCardContent groupInfo={groupInfo} hasLink={hasLink} />
         </Link>
       ) : (

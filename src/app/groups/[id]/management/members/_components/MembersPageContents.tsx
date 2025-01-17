@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import CurMemberList from '@app/groups/[id]/management/members/_components/CurMemberList';
 import WaitingMemberList from '@app/groups/[id]/management/members/_components/WaitingMemberList';
 import MembersBottomSheet from '@app/groups/[id]/management/members/_components/MembersBottomSheet';
@@ -11,8 +11,8 @@ import useIsLeader from '@hooks/management/useIsLeader';
 type TabType = 'currentMembers' | 'awaitingMembers';
 
 const MembersPageContents = () => {
-  const path = usePathname();
-  const groupId = path.split('/').filter((segment) => segment !== '')[1];
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
 
   const [selectedTab, setSelectedTab] = useState<TabType>('currentMembers');
 

@@ -1,10 +1,9 @@
-import { NextArrow } from "@components/icons";
 import Image from "next/image";
 import { GroupCardProps } from "./GroupCard";
+import { NextArrow } from "@components/icons";
 
 const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardProps) => {
-  const { /*id,*/ name, description, image_url, membersNum } = groupInfo;
-  //todo: Link의 href는 모임방 페이지의 경로를 상의한 후 추가하기
+  const { name, description, image_url, membersNum } = groupInfo;
 
   return (
     <div className="h-[7.938rem] bg-[#FFF] rounded-xl shadow-group-card">
