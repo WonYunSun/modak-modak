@@ -1,20 +1,7 @@
-import Header from '@components/common/Header';
-import Button from '@components/common/Button';
-import { Plus } from '@components/icons';
-import HomeContents from '@app/_components/HomeContents';
+import HomeSection from '@app/_components/HomeSection';
 
 const HomePage = () => {
-  //헤더 색 변화 아직 미구현
-
-  return (
-    <div className="bg-primary-10">
-      <Header hasSetting={false} home={true} />
-      <HomeContents />
-      <Button label={'모임 만들기'} className={'floating-btn'} type={'button'}>
-        <Plus className={'w-4 h-4'} active={true} />
-      </Button>
-    </div>
-  );
+  return <HomeSection />;
 };
 
 export default HomePage;
