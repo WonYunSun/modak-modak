@@ -1,8 +1,9 @@
 'use client';
 
+import { useParams, useRouter } from 'next/navigation';
+
 import Button from '@components/common/Button';
 import { ModificationLine } from '@components/icons';
-import { useParams, useRouter } from 'next/navigation';
 
 export const NoPhoto = () => {
   const router = useRouter();

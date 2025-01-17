@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import ScheduleCard from './ScheduleCard';
-import SearchBar from '@app/groups/[id]/_components/SearchBar';
 import CountBar from '@app/groups/[id]/_components/CountBar';
 import { fetchSchedulesBygroupId } from 'queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
@@ -34,7 +33,7 @@ const ScheduleCardList = () => {
 
   return (
     <div>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <CountBar value={scheduleData.length} />
       <div className="mt-4 mb-20">
         {scheduleData.map((schedule, index) => (
