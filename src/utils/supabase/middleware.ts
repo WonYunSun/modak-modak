@@ -8,7 +8,7 @@ export async function updateSession(request: NextRequest) {
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
       cookies: {
         getAll() {
@@ -70,6 +70,6 @@ const isPublicRoute = (pathname: string) => {
 };
 
 const needsAuthentication = (pathname: string): boolean => {
-  const paths: string[] = ['/signup'];
+  const paths: string[] = ['/signup', '/mypage'];
   return paths.find((path) => pathname.startsWith(path)) !== undefined;
 };

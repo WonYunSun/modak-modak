@@ -9,7 +9,7 @@ const Onboarding = () => {
   const { DotIndicator, move } = useDotIndicator({ dotCount: 3 });
 
   return (
-    <div className="flex flex-col items-center justify-center flex-grow">
+    <div className="flex flex-col items-center justify-center mb-[114px]">
       <div className="w-[211px] h-[239px] mb-[47px]">
         <Swiper
           slidesPerView={1}
