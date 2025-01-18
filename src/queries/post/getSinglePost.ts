@@ -4,11 +4,12 @@ import { createClient } from '@utils/supabase/server';
 
 import { Database } from '@ts/supabase';
 
-type PostType = Pick<Database['public']['Tables']['posts']['Row'], 'id' | 'content' | 'schedule_id'>;
+type PostType = Pick<Database['public']['Tables']['posts']['Row'], 'id' | 'user_id' | 'content' | 'schedule_id'>;
 type PostImageType = Pick<Database['public']['Tables']['post_images']['Row'], 'image_url'>;
 
 export type PostWithSchedule = {
   id: PostType['id'];
+  user_id: PostType['user_id'];
   content: string;
   schedule_id: PostType['schedule_id'];
   post_images: PostImageType[];
@@ -23,6 +24,7 @@ export const getSinglePost = async (postId: string): Promise<PostWithSchedule> =
     .select(
       `
       id,
+      user_id,
       content,
       schedule_id,
       post_images(image_url)

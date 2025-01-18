@@ -8,9 +8,11 @@ import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import CommentList from '@components/comment/CommentList';
 import { DeleteModal } from '@app/groups/[id]/_components/DeleteModal';
 import { PhotoSlider } from '@app/groups/[id]/_components/PhotoSlider';
+import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBottomSheet';
+
+import useUser from '@hooks/useUser';
 
 import { CommentCountType, GroupType, PostImageType, PostType, ScheduleType, UserType } from 'queries/post/getPosts';
-import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBottomSheet';
 
 export type PostCommonType = {
   id: PostType['id'];
@@ -33,7 +35,7 @@ const Post = ({ post }: PostProps) => {
   const [bottomSheetPostId, setBottomSheetPostId] = useState<string | null>(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-
+  const { user } = useUser();
   // 글 내용 3줄로 줄이기 (최대 80자)
   const truncateText = (text: string | null, postId: string) => {
     if (!text) return '';
@@ -64,10 +66,12 @@ const Post = ({ post }: PostProps) => {
             {/* 닉네임 */}
             <span className="text-base font-semibold text-gray-900">{post.users.nickname}</span>
           </div>
-          {/* 메뉴 아이콘 */}
-          <div onClick={() => setBottomSheetPostId(post.id)} className="flex h-10 w-10">
-            <Menu className="m-auto" />
-          </div>
+          {/* 메뉴 아이콘(작성자id와 접속id 일치하는 경우만 보인다) */}
+          {user?.id === post.users.id && (
+            <div onClick={() => setBottomSheetPostId(post.id)} className="flex h-10 w-10">
+              <Menu className="m-auto" />
+            </div>
+          )}
         </div>
 
         {/* 사진 컴포넌트 */}

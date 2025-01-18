@@ -24,7 +24,7 @@ const useUploadPost = () => {
     onSuccess: (data) => {
       const { groupId } = data;
       queryClient.invalidateQueries([groupId, 'posts'] as InvalidateQueryFilters);
-      console.log('업로드 성공:');
+      console.log('업로드 성공');
     },
     onError: (error: Error) => {
       console.error('useUploadPost: 업로드 실패:', error.message);

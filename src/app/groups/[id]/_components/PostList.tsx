@@ -55,6 +55,7 @@ const PostList = ({ setActiveTab }: TabsProps) => {
       ) : !filteredPosts || filteredPosts.length === 0 ? (
         <NoSearch /> // 검색 결과가 없을 때
       ) : (
+        // Post 컴포넌트 랜더링
         filteredPosts.map((post) => <Post key={post.id} post={post} />) // 검색 결과가 있을 때
       )}
 

@@ -8,6 +8,7 @@ import Button from '@components/common/Button';
 import { Plus } from '@components/icons';
 
 import { useFetchGetPost } from '@hooks/post/useFetchGetPost';
+import useUser from '@hooks/useUser';
 import PostSelectScheduleCard from '@app/groups/[id]/posts/new/select/_components/PostSelectScheduleCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -27,10 +28,16 @@ export const PostEditForm = () => {
   const editPostId = Array.isArray(postId) ? postId[0] : postId;
 
   const { data, isPending, isError } = useFetchGetPost(editPostId);
+  const { user } = useUser();
   const { mutate: editPostMutation } = useFetchEditPost(groupId, editPostId);
 
   // 일정 선택 후에도 입력한 데이터 변화 없도록 세팅
   useEffect(() => {
+    // 게시글 수정 페이지에 url로 접근한 경우, 글 작성자 외 접근 차단
+    if (data?.user_id !== user?.id) {
+      return router.push(`/groups/${groupId}`);
+    }
+
     // 랜더링 시 일정 id 전역으로 세팅
     if (data?.schedule_id && !selectedScheduleId) {
       setSelectedScheduleId(data.schedule_id);
@@ -74,6 +81,7 @@ export const PostEditForm = () => {
 
     reset();
   };
+  //TODO: 로그인 사용자와 글쓴사람 일치하지 않는 경우 처리 필요
 
   return (
     <form

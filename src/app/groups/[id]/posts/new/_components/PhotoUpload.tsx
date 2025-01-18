@@ -57,7 +57,7 @@ const PhotoUpload = () => {
 
       {/* Swiper 슬라이더 (미리보기) */}
       {previewUrls.length > 0 && (
-        <Swiper spaceBetween={1} slidesPerView={'auto'}>
+        <Swiper spaceBetween={1} slidesPerView={'auto'} className="w-full justify-start">
           {previewUrls.map((url, index) => (
             <SwiperSlide key={index} style={{ flex: '0 0 auto', width: '5.25rem' }}>
               <img src={url} alt={`미리보기-${index}`} className="w-[5.25rem] aspect-square object-cover" />

@@ -1,10 +1,12 @@
 'use client';
 
-import { Plus } from '@components/icons';
-import Button from '@components/common/Button';
 import { useParams, useRouter } from 'next/navigation';
 
+import { Plus } from '@components/icons';
+import Button from '@components/common/Button';
+
 import useUploadPost from '@hooks/post/useUploadPost';
+import useUser from '@hooks/useUser';
 import { useNewPostStore } from '@stores/useNewPostStore';
 
 import PostSelectScheduleCard from '@app/groups/[id]/posts/new/select/_components/PostSelectScheduleCard';
@@ -19,15 +21,17 @@ export const PostNewForm = () => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
 
-  const { mutate: uploadPostMutation } = useUploadPost();
+  // 로그인 유저 확인
+  const { user } = useUser();
+  // if (isPending) return <Spinner />;
 
-  // TODO: userId, scheduleId 연결 필요
-  const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886';
+  // 게시글 업로드 로직
+  const { mutate: uploadPostMutation } = useUploadPost();
 
   const handleUploadPost = () => {
     // FormData 사용
     const formData = new FormData();
-    formData.append('userId', userId);
+    formData.append('userId', user!.id);
     formData.append('content', content);
     formData.append('scheduleId', selectedScheduleId);
     formData.append('groupId', groupId);
