@@ -37,9 +37,8 @@ export const PostNewForm = () => {
       formData.append('files', file);
     });
     uploadPostMutation(formData);
-    router.push(`/groups/${groupId}`);
-
     reset();
+    router.push(`/groups/${groupId}`);
   };
 
   return (

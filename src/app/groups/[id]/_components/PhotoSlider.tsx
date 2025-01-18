@@ -27,9 +27,10 @@ export const PhotoSlider = ({ photo }: photoProps) => {
             <Image
               src={image.image_url}
               alt={`Photo ${index + 1}`}
-              layout="fill"
-              objectFit="cover"
-              priority // 첫 번째 이미지는 우선 로드
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority={index === 0} // 첫번째 이미지만 즉시 로드
             />
           </SwiperSlide>
         ))}

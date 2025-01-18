@@ -46,7 +46,14 @@ const PhotoList = () => {
               className="relative w-[calc(25%-0.75px)] aspect-square bg-white"
               onClick={() => handleImageClick(image.image_url)}
             >
-              <Image src={image.image_url} alt={`이미지-${index}`} layout="fill" objectFit="cover" />
+              <Image
+                src={image.image_url}
+                alt={`이미지-${index}`}
+                fill
+                sizes="25vw"
+                className="object-cover"
+                priority={index < 20}
+              />
             </div>
           ))
         )}
@@ -58,7 +65,7 @@ const PhotoList = () => {
           onClick={handleClose}
         >
           <div className="relative w-[80%] h-auto">
-            <Image src={selectedImage} alt="Image" layout="responsive" width={1} height={1} />
+            <Image src={selectedImage} alt="Image" className="w-full h-auto" width={1} height={1} />
           </div>
         </div>
       )}
