@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '../../utils/supabase/server';
+import { createClient } from '@utils/supabase/server';
 import { GroupMembersType, GroupsType, UsersType } from '@ts/supabaseTableRowTypes';
 
 export interface QueryJoinGroupParams {

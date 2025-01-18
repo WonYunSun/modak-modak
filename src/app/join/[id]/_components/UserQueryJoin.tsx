@@ -1,14 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import useIsAlreadyJoin from '@hooks/join/useIsAlreadyJoin';
 import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 import { UsersType } from '@ts/supabaseTableRowTypes';
-import Link from 'next/link';
+
 
 const JOINSTATE = {
-  member: '이미 가입한 모임이예요',
+  member: '이미 가입한 모임이에요',
   waiting: '이미 가입 신청했어요',
   joinable: '모임 가입하기',
 };
@@ -40,7 +41,7 @@ const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
               {JOINSTATE[joinStateData]}
             </button>
           ) : (
-            <button type="button" className="disabled-btn" disabled={true}>
+            <button type="button" className="full-btn disabled-btn" disabled={true}>
               {JOINSTATE[joinStateData]}
             </button>
           )}
