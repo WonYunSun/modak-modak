@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import ManageMembersBtn from '@app/groups/[id]/management/members/_components/ManageMembersBtn';
 import usePermitNewMember from '@hooks/management/usePermitNewMember';
 import useRefuseNewMember from '@hooks/management/useRefuseNewMember';
-import { UsersType } from '@queries/home/fetchGroupInfo';
+import { UsersType } from '@ts/supabaseTableRowTypes';
 
 interface MemberCardBtnsProps {
   memberId: UsersType['id'];

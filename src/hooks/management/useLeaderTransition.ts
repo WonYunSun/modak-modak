@@ -2,7 +2,8 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { leaderTransition } from '@queries/management/leaderTransition';
-import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';
+import { GroupsType, UsersType } from '@ts/supabaseTableRowTypes';
+import useUser from '@hooks/useUser';
 
 interface UseLeaderTransitionParams {
   groupId: GroupsType['id'];
@@ -11,8 +12,11 @@ interface UseLeaderTransitionParams {
 const useLeaderTransition = ({ groupId, newLeaderId }: UseLeaderTransitionParams) => {
   const queryClient = useQueryClient();
 
-  //const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886' //임시 유저 아이디 : 멤버예요
-  const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
+  //유저 아이디 사용
+  const { user, isPending: userPending, isError: userError } = useUser();
+  const userId = user ? user.id : '';
+
+  if (userError) throw new Error(`user error : ${userError}`);
 
   const { mutate } = useMutation({
     mutationFn: () => leaderTransition({ groupId, leaderId: userId, newLeaderId }),
