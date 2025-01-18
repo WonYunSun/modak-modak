@@ -8,9 +8,9 @@ import { useEffect } from 'react';
 const supabase = createClient();
 
 const fetchUser = async () => {
-  const { data, error } = await supabase.auth.getUser();
+  const { data, error } = await supabase.auth.getSession();
   if (error) throw new Error('failed to fetch user');
-  return data.user;
+  return data.session?.user;
 };
 
 const useUser = () => {
@@ -21,6 +21,7 @@ const useUser = () => {
   } = useQuery({
     queryKey: ['user'],
     queryFn: fetchUser,
+    staleTime: 60 * 5 * 1000,
   });
   const router = useRouter();
   const queryClient = useQueryClient();

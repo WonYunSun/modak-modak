@@ -7,10 +7,11 @@ import LogoutModalContent from '@app/mypage/_components/modalContents/LogoutModa
 import UserDeleteModalContent from '@app/mypage/_components/modalContents/deleteGroup/UserDeleteModalContent';
 import Modal from '@components/common/Modal';
 import ProfileUpdateModalContent from '@app/mypage/_components/modalContents/ProfileUpdateModalContent';
+import MySchedule from '@app/mypage/_components/MySchedule';
 
 export type ModalStatus = 'logout' | 'delete' | 'profileUpdate';
 
-const PageComponent = () => {
+const MyPageComponent = () => {
   const [modalStatus, setModalStatus] = useState<ModalStatus>('logout');
   const modalContents = {
     logout: <LogoutModalContent />,
@@ -21,10 +22,11 @@ const PageComponent = () => {
   return (
     <>
       <ProfileSection setModalStatus={setModalStatus} />
+      <MySchedule />
       <UserManagement setModalStatus={setModalStatus} />
       <Modal>{modalContents[modalStatus]}</Modal>
     </>
   );
 };
 
-export default PageComponent;
+export default MyPageComponent;

@@ -1,7 +1,8 @@
 'use server';
 
-import { createClient } from '../../utils/supabase/server';
 import { ScheduleType } from '@ts/scheduleType';
+import { createClient } from '@utils/supabase/server';
+import dayjs from 'dayjs';
 
 export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleType[] | null> => {
   try {
@@ -68,5 +69,31 @@ export const updateScheduleById = async (scheduleId: string, newData: ScheduleTy
     console.log('스케쥴 수정 실패', error);
     return;
   }
+  return data;
+};
+
+export const getMySchedules = async (): Promise<ScheduleType[]> => {
+  const supabase = await createClient();
+  const today = dayjs();
+  const userId = (await supabase.auth.getUser()).data.user?.id;
+
+  const { data: groupIds, error: membersError } = await supabase
+    .from('group_members')
+    .select('group_id')
+    .eq('user_id', userId)
+    .eq('is_approved', true);
+  if (membersError) throw new Error('');
+
+  const { data, error: scheduleError } = await supabase
+    .from('schedules')
+    .select()
+    .gte('start_date', today.format('YYYY-MM-DD'))
+    .lte('start_date', today.add(27, 'day').format('YYYY-MM-DD'))
+    .in(
+      'group_id',
+      groupIds.map((object) => object.group_id)
+    )
+    .order('start_date');
+  if (scheduleError) throw new Error();
   return data;
 };

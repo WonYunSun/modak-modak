@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         white: '#FFFFFF',
         primary: '#B94600',
+        'primary-2-300': '#FF741F',
         'primary-10': '#FFF2EB',
         'gray-50': '#F1F1F1',
         'gray-100': '#F4F4F5',
@@ -26,6 +27,7 @@ const config: Config = {
         'gray-600': '#575761',
         'gray-700': '#3F3F46',
         'gray-900': '#18181B',
+        'base-red': '#FF3B30',
       },
     },
     boxShadow: {
