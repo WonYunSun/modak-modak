@@ -71,7 +71,7 @@ const Post = ({ post }: PostProps) => {
         </div>
 
         {/* 사진 컴포넌트 */}
-        <PhotoSlider photo={post.post_images} />
+        <PhotoSlider photoList={post.post_images} />
 
         {/* 글 내용 */}
         <div className="w-full text-sm mb-3">

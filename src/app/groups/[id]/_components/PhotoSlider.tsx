@@ -9,10 +9,10 @@ import { PostImageType } from 'queries/post/getPosts';
 import Image from 'next/image';
 
 interface photoProps {
-  photo: PostImageType[];
+  photoList: PostImageType[];
 }
 
-export const PhotoSlider = ({ photo }: photoProps) => {
+export const PhotoSlider = ({ photoList }: photoProps) => {
   const [currentIndex, setCurrentIndex] = useState(1);
 
   return (
@@ -22,7 +22,7 @@ export const PhotoSlider = ({ photo }: photoProps) => {
         onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex + 1)} // 현재 슬라이드 번호 업데이트
         className="w-full h-full"
       >
-        {photo.map((image, index) => (
+        {photoList.map((image, index) => (
           <SwiperSlide key={index}>
             <Image
               src={image.image_url}
@@ -38,7 +38,8 @@ export const PhotoSlider = ({ photo }: photoProps) => {
 
       {/* 페이지네이션 */}
       <div className="absolute bottom-4 right-3 bg-[#00000033] rounded-[12px] text-xs px-2 py-1 z-10">
-        <span className="text-[#FAFAFA]">{currentIndex}</span> <span className="text-gray-400">/ {photo.length}</span>
+        <span className="text-[#FAFAFA]">{currentIndex}</span>{' '}
+        <span className="text-gray-400">/ {photoList.length}</span>
       </div>
     </div>
   );
