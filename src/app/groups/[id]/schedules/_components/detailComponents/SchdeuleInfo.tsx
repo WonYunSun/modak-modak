@@ -14,7 +14,7 @@ interface ScheduleInfoType {
 }
 
 export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
-  const { openModal } = useModalStore();
+  const { openModal, closeModal } = useModalStore();
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -62,7 +62,9 @@ export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
           className="flex-[2_2_0%] full-white-btn"
           type="button"
           disabled={false}
-          onClick={() => openModal()}
+          onClick={() => {
+            openModal();
+          }}
         />
         <Button
           label="수정하기"
@@ -86,7 +88,9 @@ export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
               className="flex-[2_2_0%] full-white-btn"
               type="button"
               disabled={false}
-              onClick={() => {}}
+              onClick={() => {
+                closeModal();
+              }}
             />
             <Button
               label="확인"
@@ -95,6 +99,7 @@ export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
               disabled={false}
               onClick={() => {
                 deleteSchedule(schedule.id);
+                closeModal();
               }}
             />
           </div>

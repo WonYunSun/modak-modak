@@ -6,6 +6,8 @@ import { fetchScheduleById } from 'queries/schedule/ScheduleActions';
 import FunnelHeader from '@components/common/FunnelHeader';
 import { ScheduleEdit } from '@app/groups/[id]/schedules/_components/detailComponents/ScheduleEdit';
 import { ScheduleInfo } from '@app/groups/[id]/schedules/_components/detailComponents/SchdeuleInfo';
+import GlobalLoading from '@app/GlobalLoading';
+import GlobalError from '@app/GlobalError';
 
 export const ScheduleDetail = ({ scheduleId }: { scheduleId: string }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -14,9 +16,9 @@ export const ScheduleDetail = ({ scheduleId }: { scheduleId: string }) => {
     queryFn: () => fetchScheduleById(scheduleId),
   });
 
-  if (isError) return <div>Error!</div>;
-  if (isPending) return <div>Pending...</div>;
-  if (!data) return <div>잘못된 접근입니다.</div>;
+  if (isError) return <GlobalError />;
+  if (isPending) return <GlobalLoading />;
+  if (!data) return <GlobalError />;
 
   return (
     <div>
