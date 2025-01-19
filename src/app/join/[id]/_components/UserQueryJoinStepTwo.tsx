@@ -1,9 +1,16 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import Button from '@components/common/Button';
 
 const UserQueryJoinStepTwo = () => {
+  const router = useRouter();
+
+  const onClickHome = () => {
+    router.push('/');
+  };
+
   return (
     <div className="pt-[48px] w-full h-full flex flex-col gap-8">
       <div className="w-full h-[calc(100vh-110px)] text-center flex items-center justify-center">
@@ -25,11 +32,7 @@ const UserQueryJoinStepTwo = () => {
         </div>
       </div>
       <div className="px-5 w-full absolute bottom-11">
-        <Link href={'/'}>
-          <button type="button" className="full-btn">
-            홈페이지로 가기
-          </button>
-        </Link>
+        <Button type="button" className="full-btn" onClick={onClickHome} label="홈페이지로 가기" />
       </div>
     </div>
   );

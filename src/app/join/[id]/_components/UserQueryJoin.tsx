@@ -21,7 +21,6 @@ interface UserQueryJoinProps {
 }
 const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
   const searchParams = useSearchParams();
-  console.log(searchParams);
   const initiaStep = searchParams.size ? 2 : 1;
   const [joinStep, setJoinStep] = useState(initiaStep);
 

@@ -1,15 +1,15 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import Button from '@components/common/Button';
-
 import Image from 'next/image';
+
+import Button from '@components/common/Button';
 
 const NonUserQueryJoin = () => {
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
-  const onQueryJoin = async () => {
+  const onQueryJoin = () => {
     router.push(`/login?referrer=join&data=${groupId}`);
   };
 

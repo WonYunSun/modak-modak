@@ -1,18 +1,22 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-
+import { useRouter } from 'next/navigation';
 import HomeContents from '@app/_components/HomeContents';
-
 import Button from '@components/common/Button';
 import Header from '@components/common/Header';
 import { Plus } from '@components/icons';
-import Link from 'next/link';
+
 
 const HomeSection = () => {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   const targetRef = useRef<HTMLDivElement | null>(null);
+
+  const onCreateGroup = () => {
+    router.push('/groups/new');
+  };
 
   useEffect(() => {
     const targetInstanceRef = targetRef.current;
@@ -41,11 +45,9 @@ const HomeSection = () => {
     <div className="bg-primary-10">
       <Header hasSetting={false} home={true} isScrolled={isScrolled} />
       <HomeContents ref={targetRef} />
-      <Link href={'/groups/new'}>
-        <Button label={'모임 만들기'} className={'floating-btn z-40'} type={'button'}>
-          <Plus className={'w-4 h-4'} active={true} />
-        </Button>
-      </Link>
+      <Button label={'모임 만들기'} className={'floating-btn z-40'} type={'button'} onClick={onCreateGroup}>
+        <Plus className={'w-4 h-4'} active={true} />
+      </Button>
     </div>
   );
 };
