@@ -1,12 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import ScheduleCard from './ScheduleCard';
 import CountBar from '@app/groups/[id]/_components/CountBar';
 import { fetchSchedulesBygroupId } from 'queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
-
-const groupId = '52f44a96-b8f7-4c6c-80b1-d657eafd3821';
 
 const fetchScheduleDatas = async (groupId: string) => {
   try {
@@ -18,6 +17,9 @@ const fetchScheduleDatas = async (groupId: string) => {
 };
 
 const ScheduleCardList = () => {
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
+  const router = useRouter();
   const [scheduleData, setScheduleData] = useState<ScheduleType[]>([]);
 
   useEffect(() => {
@@ -31,13 +33,16 @@ const ScheduleCardList = () => {
     fetchData();
   }, []);
 
+  const goToScheduleDetail = (scheduleId: string) => {
+    router.push(`/groups/${groupId}/schedules/${scheduleId}`);
+  };
   return (
     <div>
       {/* <SearchBar /> */}
       <CountBar value={scheduleData.length} />
       <div className="mt-4 mb-20">
         {scheduleData.map((schedule, index) => (
-          <div className="mb-5" key={index}>
+          <div className="mb-5" key={index} onClick={() => goToScheduleDetail(schedule.id)}>
             <ScheduleCard
               name={schedule.name}
               memo={schedule.memo}

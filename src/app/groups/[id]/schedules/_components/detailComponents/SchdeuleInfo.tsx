@@ -1,19 +1,19 @@
-import Button from '@components/common/Button';
-import Label from '@components/common/Label';
 import { useRouter } from 'next/navigation';
 import { CalendarIcon, ClockIcon } from '@components/icons';
 import useModalStore from '@stores/useModalStore';
-import { ScheduleType } from '@ts/scheduleType';
-import { formatDate, formatTime } from '@utils/dateUtils';
-import { deleteScheduleById } from 'queries/schedule/ScheduleActions';
+import Button from '@components/common/Button';
+import Label from '@components/common/Label';
 import Modal from '@components/common/Modal';
+import { formatDate, formatTime } from '@utils/dateUtils';
+import { deleteScheduleById } from '@queries/schedule/ScheduleActions';
+import { ScheduleType } from '@ts/scheduleType';
 
-interface SchdeuleInfoType {
+interface ScheduleInfoType {
   schedule: ScheduleType;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const SchdeuleInfo = ({ schedule, setIsEdit }: SchdeuleInfoType) => {
+export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
   const { openModal } = useModalStore();
   const router = useRouter();
 

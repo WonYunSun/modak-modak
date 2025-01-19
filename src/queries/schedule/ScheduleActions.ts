@@ -28,7 +28,11 @@ export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleT
 export const fetchSchedulesBygroupId = async (groupId: string): Promise<ScheduleType[] | null> => {
   try {
     const supabase = await createClient();
-    const { data } = await supabase.from('schedules').select('*').eq('group_id', groupId);
+    const { data } = await supabase
+      .from('schedules')
+      .select('*')
+      .eq('group_id', groupId)
+      .order('start_date', { ascending: true });
 
     return data;
   } catch (error) {

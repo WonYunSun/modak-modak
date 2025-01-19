@@ -3,17 +3,17 @@ import { QueryObserverResult } from '@tanstack/react-query';
 import Button from '@components/common/Button';
 import Label from '@components/common/Label';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
-import ScheduleDatePicker from '../ScheduleDatePicker';
+import ScheduleDatePicker from '@app/groups/[id]/schedules/_components/ScheduleDatePicker';
 import { updateScheduleById } from 'queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
 
-interface SchdeuleEditType {
+interface ScheduleEditType {
   schedule: ScheduleType;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   refetch: () => Promise<QueryObserverResult<ScheduleType | null, Error>>;
 }
 
-export const ScheduleEdit = ({ schedule, setIsEdit, refetch }: SchdeuleEditType) => {
+export const ScheduleEdit = ({ schedule, setIsEdit, refetch }: ScheduleEditType) => {
   const [values, setValues] = useState(schedule);
 
   const handleChange = (key: keyof ScheduleType) => (e: React.FormEvent<HTMLInputElement>) => {

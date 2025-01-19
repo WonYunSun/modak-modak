@@ -1,25 +1,28 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import useModalStore from 'stores/useModalStore';
-import ScheduleDateForm from './StepComponents/ScheduleDateForm';
-import ScheduleMemoForm from './StepComponents/ScheduleMemoForm';
-import ScheduleNameForm from './StepComponents/ScheduleNameForm';
+import ScheduleNameForm from '@app/groups/[id]/schedules/_components/stepComponents/ScheduleNameForm';
+import ScheduleDateForm from '@app/groups/[id]/schedules/_components/stepComponents/ScheduleDateForm';
+import ScheduleMemoForm from '@app/groups/[id]/schedules/_components/stepComponents/ScheduleMemoForm';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
-import useFunnel from 'hooks/useFunnel';
+import { addSchedule } from '@queries/schedule/ScheduleActions';
+import useFunnel from '@hooks/useFunnel';
 import { ScheduleType } from '@ts/scheduleType';
-import { addSchedule } from 'queries/schedule/ScheduleActions';
 
 //단계 name 정의
 const steps = ['일정명', '모임일시', '메모'];
 
 //임의 groupId값
-const groupId = '52f44a96-b8f7-4c6c-80b1-d657eafd3821';
 
 const NewSchedulesForm = () => {
-  const { Funnel, Step, next, prev } = useFunnel(steps[0]);
+  const { Funnel, Step, next, prev } = useFunnel(steps[0], 3);
   const { openModal } = useModalStore();
+  const router = useRouter();
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
 
   const [scheduleData, setScheduleData] = useState<ScheduleType>({
     created_at: '',
@@ -58,6 +61,10 @@ const NewSchedulesForm = () => {
     prev(prevStep);
   };
 
+  const goToGroup = () => {
+    router.replace(`/groups/${groupId}`);
+  };
+
   return (
     <>
       <Funnel headerLabel="일정 만들기">
@@ -85,12 +92,16 @@ const NewSchedulesForm = () => {
             onNext={(data) => handleNext(data, 'submitData')}
             prevData={scheduleData.memo}
           />
-          <Modal>
+          <Modal onClickOutSide={goToGroup}>
             <div className="px-[1rem] py-[1.5rem] w-full mb-[1.25rem]">
               <p className="text-gray-900 font-semibold text-lg mb-[0.25rem]">일정을 만들었어요!</p>
-              <p className="text-gray-500 ">소중한 추억도 공유해주세요</p>
+              <p className="text-gray-500 ">
+                일정에 관한 게시글도 업로드해서
+                <br />
+                모임원들에게 자유롭게 공유해주세요
+              </p>
             </div>
-            <Button label="확인" type="button" className="modal-full-btn" onClick={() => {}}></Button>
+            <Button label="확인" type="button" className="modal-full-btn" onClick={goToGroup}></Button>
           </Modal>
         </Step>
       </Funnel>
