@@ -819,3 +819,35 @@ export const Cancel = ({ className, onClick }: IconProps) => {
     </svg>
   );
 };
+
+export const SlimDownArrow = ({ className }: IconProps) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width="17"
+      height="16"
+      viewBox="0 0 17 16"
+      fill="none"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M2.69526 4.86128C2.95561 4.60093 3.37772 4.60093 3.63807 4.86128L8.5 9.72321L13.3619 4.86128C13.6223 4.60093 14.0444 4.60093 14.3047 4.86128C14.5651 5.12163 14.5651 5.54374 14.3047 5.80409L9.44281 10.666C8.92211 11.1867 8.07789 11.1867 7.55719 10.666L2.69526 5.80409C2.43491 5.54374 2.43491 5.12163 2.69526 4.86128Z"
+        fill="#18181B"
+        stroke="white"
+        strokeWidth="0.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const RedDot = ({ className }: IconProps) => {
+  return (
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
+      <circle cx="2" cy="2" r="2" fill="#EB5900" />
+    </svg>
+  );
+};

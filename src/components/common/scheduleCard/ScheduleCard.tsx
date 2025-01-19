@@ -32,7 +32,7 @@ const ScheduleCard = ({
 
   return (
     <div
-      className={`box-border border border-gray-300 rounded-xl flex justify-between items-center pl-5 pr-2 py-2 gap-[0.5rem] cursor-pointer ${
+      className={`w-full box-border border border-gray-300 rounded-xl flex justify-between items-center pl-5 pr-2 py-2 gap-[0.5rem]  ${
         isExpired ? 'bg-gray-100' : ''
       }`}
     >
