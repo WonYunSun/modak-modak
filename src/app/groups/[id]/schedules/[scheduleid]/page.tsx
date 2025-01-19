@@ -8,7 +8,6 @@ type Props = {
 };
 
 const page = ({ params }: Props) => {
-  console.log(params.scheduleid);
   return <ScheduleDetail scheduleId={params.scheduleid} />;
 };
 

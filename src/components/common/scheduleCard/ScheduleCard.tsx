@@ -25,12 +25,14 @@ const ScheduleCard = ({
 }: ScheduleCardProps) => {
   const labelClass = 'text-gray-500 whitespace-nowrap'; // 라벨 스타일
   const detailClass = 'flex items-center gap-3 text-xs';
-  const isExpired = new Date(end_date) < new Date();
+  // start_time을 날짜 형식에 맞게 결합하여 Date 객체로 변환
+  const combinedDate = new Date(`${end_date}T${start_time}`);
+  const isExpired = combinedDate < new Date();
   const isSingleDay = end_date === start_date;
 
   return (
     <div
-      className={`box-border border border-gray-300 rounded-xl flex justify-between items-center pl-5 pr-2 py-2 gap-[0.5rem]  ${
+      className={`box-border border border-gray-300 rounded-xl flex justify-between items-center pl-5 pr-2 py-2 gap-[0.5rem] cursor-pointer ${
         isExpired ? 'bg-gray-100' : ''
       }`}
     >

@@ -19,7 +19,7 @@ const steps = ['일정명', '모임일시', '메모'];
 
 const NewSchedulesForm = () => {
   const { Funnel, Step, next, prev } = useFunnel(steps[0], 3);
-  const { openModal } = useModalStore();
+  const { openModal, closeModal } = useModalStore();
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -101,7 +101,15 @@ const NewSchedulesForm = () => {
                 모임원들에게 자유롭게 공유해주세요
               </p>
             </div>
-            <Button label="확인" type="button" className="modal-full-btn" onClick={goToGroup}></Button>
+            <Button
+              label="확인"
+              type="button"
+              className="modal-full-btn"
+              onClick={() => {
+                goToGroup();
+                closeModal();
+              }}
+            ></Button>
           </Modal>
         </Step>
       </Funnel>

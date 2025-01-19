@@ -1,7 +1,7 @@
 'use server';
 
 import { createClient } from '@utils/supabase/server';
-import { GroupsType } from 'queries/home/fetchGroupInfo';
+import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 export const addGroup = async (groupData: GroupsType, userId?: string): Promise<void> => {
   try {
