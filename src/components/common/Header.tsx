@@ -30,7 +30,6 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
         {home ? (
           <Image src="/icons/modakLogo.webp" width={80} height={34} alt="Modak Modak Logo" className="w-20 h-10" />
         ) : (
-          // <PrevArrow onClick={handleNavigation} className={groupName && isScrolled ? 'w-[78px]' : ''} />
           <div className="w-20 p-2 flex items-center justify-start">
             <PrevArrow onClick={handleNavigation} className="w-6 h-6" />
           </div>
