@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import Button from '@components/common/Button';
+import { useParams, useSearchParams } from 'next/navigation';
+import UserQueryJoinStepOne from '@app/join/[id]/_components/UserQueryJoinStepOne';
+import UserQueryJoinStepTwo from '@app/join/[id]/_components/UserQueryJoinStepTwo';
+import GlobalLoading from '@app/GlobalLoading';
+import GlobalError from '@app/GlobalError';
 import useIsAlreadyJoin from '@hooks/join/useIsAlreadyJoin';
 import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 import { UsersType } from '@ts/supabaseTableRowTypes';
@@ -18,7 +20,9 @@ interface UserQueryJoinProps {
   userId: UsersType['id'];
 }
 const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
-  const [joinStep, setJoinStep] = useState(1);
+  const searchParams = useSearchParams();
+  const initiaStep = searchParams.size ? 2 : 1;
+  const [joinStep, setJoinStep] = useState(initiaStep);
 
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -29,34 +33,22 @@ const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
     setJoinStep(2);
   };
 
-  if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error!</div>;
+  if (isPending) return <GlobalLoading />;
+  if (isError) return <GlobalError />;
 
   return (
-    <div className="px-5 w-full absolute bottom-0">
+    <>
       {joinStep === 1 && joinStateData && (
         <>
-          {joinStateData === 'joinable' ? (
-            <Button type="button" className="full-btn" onClick={onQueryJoin} label={JOINSTATE[joinStateData]} />
-          ) : (
-            <Button
-              type="button"
-              className="full-btn"
-              onClick={onQueryJoin}
-              label={JOINSTATE[joinStateData]}
-              disabled={true}
-            />
-          )}
+          <UserQueryJoinStepOne
+            onQueryJoin={onQueryJoin}
+            buttonLabel={JOINSTATE[joinStateData]}
+            isJoinable={!!(joinStateData === 'joinable')}
+          />
         </>
       )}
-      {joinStep === 2 && (
-        <Link href={'/'}>
-          <button type="button" className="full-btn">
-            홈페이지로 가기
-          </button>
-        </Link>
-      )}
-    </div>
+      {joinStep === 2 && <UserQueryJoinStepTwo />}
+    </>
   );
 };
 

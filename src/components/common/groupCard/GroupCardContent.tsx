@@ -2,9 +2,13 @@ import Image from 'next/image';
 
 import { NextArrow } from '@components/icons';
 
-import { GroupCardProps } from '@components/common/groupCard/GroupCard';
+import { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
 
-const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardProps) => {
+interface GroupCardContentProps {
+  groupInfo: GroupCardInfosType;
+  hasLink?: boolean;
+}
+const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardContentProps) => {
   const { name, description, image_url, membersNum } = groupInfo;
 
   return (

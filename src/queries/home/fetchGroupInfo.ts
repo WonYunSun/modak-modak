@@ -4,15 +4,17 @@ import { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
 import { createClient } from '@utils/supabase/server';
 import { GroupMembersType, GroupsType, UsersType } from '@ts/supabaseTableRowTypes';
 
-interface FetchEnteredGroupListParams {
+interface FetchUserGroupListParams {
   userId: UsersType['id'];
+  isApproved: boolean;
 }
-export const fetchEnteredGroupList = async ({
+export const fetchUserGroupList = async ({
   userId,
-}: FetchEnteredGroupListParams): Promise<GroupMembersType[] | null> => {
+  isApproved,
+}: FetchUserGroupListParams): Promise<GroupMembersType[] | null> => {
   try {
     const supabase = await createClient();
-    const { data } = await supabase.from('group_members').select().eq('user_id', userId).eq('is_approved', true);
+    const { data } = await supabase.from('group_members').select().eq('user_id', userId).eq('is_approved', isApproved);
 
     return data;
   } catch (error) {
@@ -51,16 +53,18 @@ export const fetchGroupMembersNum = async ({ groupId }: fetchGroupMembersNumPara
 
 interface FetchGroupCardInfosParams {
   userId: UsersType['id'];
+  isApproved?: boolean;
 }
 export const fetchGroupCardInfos = async ({
   userId,
+  isApproved = true,
 }: FetchGroupCardInfosParams): Promise<GroupCardInfosType[] | null> => {
   try {
-    const enteredGroupList = await fetchEnteredGroupList({ userId });
-    if (!enteredGroupList) return null;
+    const userGroupList = await fetchUserGroupList({ userId, isApproved });
+    if (!userGroupList) return null;
 
     const groupCardInfos = await Promise.all(
-      enteredGroupList.map(async (groupParticipationData) => {
+      userGroupList.map(async (groupParticipationData) => {
         const { group_id: groupId } = groupParticipationData;
 
         //유저가 멤버로 참여한 방의 데이터를 순회하므로, 멤버의 숫자가 null일 수 없습니다

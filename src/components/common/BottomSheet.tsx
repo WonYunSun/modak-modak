@@ -15,7 +15,7 @@ const BottomSheet = ({ children, isOpen, onClose, snapPoint }: BottomSheetProps)
           <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mt-3" />
         </Sheet.Header>
         <Sheet.Content>
-          <div className="w-full h-full px-4 py-5">{children}</div>
+          <div className="w-full h-full p-5">{children}</div>
         </Sheet.Content>
       </Sheet.Container>
       <Sheet.Backdrop onTap={onClose} />
