@@ -7,6 +7,7 @@ import HomeContents from '@app/_components/HomeContents';
 import Button from '@components/common/Button';
 import Header from '@components/common/Header';
 import { Plus } from '@components/icons';
+import Link from 'next/link';
 
 const HomeSection = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -40,9 +41,11 @@ const HomeSection = () => {
     <div className="bg-primary-10">
       <Header hasSetting={false} home={true} isScrolled={isScrolled} />
       <HomeContents ref={targetRef} />
-      <Button label={'모임 만들기'} className={'floating-btn'} type={'button'}>
-        <Plus className={'w-4 h-4'} active={true} />
-      </Button>
+      <Link href={'/groups/new'}>
+        <Button label={'모임 만들기'} className={'floating-btn'} type={'button'}>
+          <Plus className={'w-4 h-4'} active={true} />
+        </Button>
+      </Link>
     </div>
   );
 };

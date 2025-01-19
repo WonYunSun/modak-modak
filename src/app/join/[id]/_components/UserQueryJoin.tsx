@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import Button from '@components/common/Button';
+import UserQueryJoinStepOne from '@app/join/[id]/_components/UserQueryJoinStepOne';
+import UserQueryJoinStepTwo from '@app/join/[id]/_components/UserQueryJoinStepTwo';
 import useIsAlreadyJoin from '@hooks/join/useIsAlreadyJoin';
 import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 import { UsersType } from '@ts/supabaseTableRowTypes';
@@ -33,30 +33,19 @@ const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
   if (isError) return <div>Error!</div>;
 
   return (
-    <div className="px-5 w-full absolute bottom-0">
+    <>
       {joinStep === 1 && joinStateData && (
         <>
-          {joinStateData === 'joinable' ? (
-            <Button type="button" className="full-btn" onClick={onQueryJoin} label={JOINSTATE[joinStateData]} />
-          ) : (
-            <Button
-              type="button"
-              className="full-btn"
-              onClick={onQueryJoin}
-              label={JOINSTATE[joinStateData]}
-              disabled={true}
-            />
-          )}
+          <UserQueryJoinStepTwo />
+          {/* <UserQueryJoinStepOne
+            onQueryJoin={onQueryJoin}
+            buttonLabel={JOINSTATE[joinStateData]}
+            isJoinable={!!(joinStateData === 'joinable')}
+          /> */}
         </>
       )}
-      {joinStep === 2 && (
-        <Link href={'/'}>
-          <button type="button" className="full-btn">
-            홈페이지로 가기
-          </button>
-        </Link>
-      )}
-    </div>
+      {joinStep === 2 && <UserQueryJoinStepTwo />}
+    </>
   );
 };
 
