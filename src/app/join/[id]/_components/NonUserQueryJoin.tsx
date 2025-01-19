@@ -2,8 +2,6 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import Button from '@components/common/Button';
-import GroupCard from '@components/common/groupCard/GroupCard';
-import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
 
 import Image from 'next/image';
 
