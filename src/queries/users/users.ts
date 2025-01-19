@@ -1,7 +1,7 @@
 'use server';
 
-import { Database } from '@ts/supabase';
 import { createClient } from '@utils/supabase/server';
+import { Database } from '@ts/supabase';
 
 type UserUpdate = Database['public']['Tables']['users']['Update'];
 type UserInsert = Database['public']['Tables']['users']['Insert'];
@@ -19,7 +19,7 @@ export const addUserInfo = async (user: UserInsert) => {
 export const deleteUser = async () => {
   const supabase = await createClient();
   const userId = (await supabase.auth.getUser()).data.user?.id;
-  if (!userId) throw new Error();
+  if (!userId) throw new Error('탈퇴를 실패했습니다.');
   const { error } = await supabase.auth.admin.deleteUser(userId);
   if (error) throw error;
 };
@@ -30,5 +30,5 @@ export const updateUser = async (toUpdate: UserUpdate) => {
   if (!user) throw new Error();
   const userId = user.data.user?.id;
   const { error } = await supabase.from('users').update(toUpdate).eq('id', userId);
-  if (error) throw new Error();
+  if (error) throw new Error('업데이트를 실패했습니다.');
 };

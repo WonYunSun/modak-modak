@@ -48,7 +48,11 @@ const BottomNav = () => {
       {buttons.map((button) => (
         <Link href={button.href} key={button.id} className="flex-1 flex justify-center items-center">
           <button className="flex flex-col justify-end items-center" onClick={() => setActiveButton(button.id)}>
-            {activeButton === button.id ? button.iconOn : button.iconOff}
+            <div
+              className={`w-16 h-8 rounded-xl flex items-center justify-center ${activeButton === button.id ? 'bg-primary-10' : ''}`}
+            >
+              {activeButton === button.id ? button.iconOn : button.iconOff}
+            </div>
             <div className={`text-sm ${activeButton === button.id ? 'text-primary' : 'text-gray-500'}`}>
               {button.label}
             </div>

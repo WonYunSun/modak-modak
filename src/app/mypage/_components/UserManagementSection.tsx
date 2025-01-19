@@ -3,7 +3,7 @@
 import useModalStore from '@stores/useModalStore';
 import ManagementCard from '@app/groups/[id]/management/_components/ManagementCard';
 import ManagementSection from '@app/groups/[id]/management/_components/ManagementSection';
-import { ModalStatus } from '@app/mypage/_components/PageComponent';
+import { ModalStatus } from '@app/mypage/_components/MyPageComponent';
 
 interface UserManagementProps {
   setModalStatus: (state: ModalStatus) => void;

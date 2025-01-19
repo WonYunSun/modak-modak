@@ -2,15 +2,25 @@
 
 import { useParams } from 'next/navigation';
 
+import { useEffect } from 'react';
+
 import GroupCard from '@components/common/groupCard/GroupCard';
 
-import { useFetchGetGroupInfo } from '@hooks/group/useFetchGroup';
+import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
+
+import useHeaderStore from '@stores/useHeaderStore';
 
 export const GroupCardSection = () => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
 
-  const { data, isPending, isError } = useFetchGetGroupInfo(groupId);
+  const setGroupName = useHeaderStore((state) => state.setGroupName);
+
+  const { data, isPending, isError } = useFetchGetGroup(groupId);
+
+  useEffect(() => {
+    setGroupName(data?.name as string);
+  }, [data?.name, setGroupName]);
 
   if (isPending) return <p>로딩 중...</p>;
 

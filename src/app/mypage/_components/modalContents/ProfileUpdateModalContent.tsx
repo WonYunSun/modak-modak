@@ -38,7 +38,7 @@ const ProfileUpdateModalContent = () => {
     const supabase = createClient();
     let imageUrl: string = user?.user_metadata.profile_image;
     try {
-      if (values['profile'] || imageUrl !== '/icons/profile-image.webp') {
+      if (values['profile']) {
         imageUrl = await uploadFile('profiles', 'users', values['profile']);
       }
       await updateUser({ nickname: values.nickname, profile_image: imageUrl });
