@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Layout from './../layout/Layout';
+import Layout from '../layout/Layout';
 import Label, { LabelProps } from '@components/common/Label';
-import ScheduleDatePicker from '../ScheduleDatePicker';
+import ScheduleDatePicker from '@app/groups/[id]/schedules/_components/ScheduleDatePicker';
 import { ScheduleType } from '@ts/scheduleType';
 
 type ScheduleDateFormProps = {
@@ -15,7 +15,7 @@ type ScheduleDateFormProps = {
 const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) => {
   const [values, setValues] = useState<{ scheduleDate: { from: string; to: string }; scheduleTime: string }>({
     scheduleDate: { from: prevData?.start_date || '', to: prevData?.end_date || '' }, // prevData를 초기값으로 설정
-    scheduleTime: prevData?.start_time || '' // prevData에서 시간 값을 가져옴
+    scheduleTime: prevData?.start_time || '', // prevData에서 시간 값을 가져옴
   });
 
   const handleNext = () => {
@@ -25,7 +25,7 @@ const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) =
     onNext({
       start_date: from || '',
       end_date: to || '',
-      start_time: time || ''
+      start_time: time || '',
     });
   };
 
@@ -40,7 +40,7 @@ const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) =
     label: '모임 일시',
     required: true,
     description: '만나는 날짜와 시간을 적어주세요',
-    htmlFor: 'scheduleName'
+    htmlFor: 'scheduleName',
   };
 
   return (
@@ -52,7 +52,7 @@ const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) =
           onTimeChange={handleTimeChange}
           prevData={{
             scheduleDate: { from: prevData.start_date, to: prevData.end_date },
-            scheduleTime: prevData.start_time
+            scheduleTime: prevData.start_time,
           }}
         />
       </div>

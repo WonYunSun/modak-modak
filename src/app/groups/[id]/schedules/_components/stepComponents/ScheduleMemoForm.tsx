@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
-import Layout from '../layout/Layout';
+
 import { ScheduleType } from '@ts/scheduleType';
+import Layout from '@app/groups/[id]/schedules/_components/layout/Layout';
 
 type ScheduleMemoFormProps = {
   onNext: (data: Pick<ScheduleType, 'memo'>) => void;
@@ -35,7 +36,7 @@ const ScheduleMemoForm = ({ onNext, onPrev, prevData }: ScheduleMemoFormProps) =
     label: '메모',
     required: true,
     description: '최대 20자까지 입력',
-    htmlFor: 'scheduleMemo'
+    htmlFor: 'scheduleMemo',
   };
 
   return (
