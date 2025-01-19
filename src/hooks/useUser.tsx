@@ -9,7 +9,7 @@ const supabase = createClient();
 const fetchUser = async () => {
   const { data, error } = await supabase.auth.getSession();
   if (error) throw new Error('failed to fetch user');
-  return data.session?.user;
+  return data.session ? data.session.user : null;
 };
 
 const useUser = () => {

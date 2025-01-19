@@ -44,7 +44,7 @@ const ChangeGroupProfileModal = () => {
 
   if (isPending)
     return (
-      <div className="h-[445px] p-5 flex flex-col items-center justify-center">
+      <div className="h-[444px] p-5 flex flex-col items-center justify-center">
         <div>Loading...</div>
       </div>
     );

@@ -2,6 +2,8 @@
 
 import { useParams } from 'next/navigation';
 import MemberCard from '@app/groups/[id]/management/members/_components/MemberCard';
+import GlobalLoading from '@app/GlobalLoading';
+import GlobalError from '@app/GlobalError';
 import useFetchCurMembers from '@hooks/management/useFetchCurMembers';
 
 const DEFAULTDATA = {
@@ -19,8 +21,8 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
   const groupId = Array.isArray(id) ? id[0] : id;
 
   const { data: curMemberList, isPending, isError } = useFetchCurMembers({ groupId });
-  if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error!</div>;
+  if (isPending) return <GlobalLoading/>;
+  if (isError) return <GlobalError/>;
 
   //유저가 리더가 아닐 때 멤버 데이터에서 리더 데이터를 뽑아내기
   const filteredLeaderData =
