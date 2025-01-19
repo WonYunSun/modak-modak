@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import Button from '@components/common/Button';
 import useIsAlreadyJoin from '@hooks/join/useIsAlreadyJoin';
 import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 import { UsersType } from '@ts/supabaseTableRowTypes';
-
 
 const JOINSTATE = {
   member: '이미 가입한 모임이에요',
@@ -37,13 +37,15 @@ const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
       {joinStep === 1 && joinStateData && (
         <>
           {joinStateData === 'joinable' ? (
-            <button type="button" className="full-btn" onClick={onQueryJoin}>
-              {JOINSTATE[joinStateData]}
-            </button>
+            <Button type="button" className="full-btn" onClick={onQueryJoin} label={JOINSTATE[joinStateData]} />
           ) : (
-            <button type="button" className="full-btn disabled-btn" disabled={true}>
-              {JOINSTATE[joinStateData]}
-            </button>
+            <Button
+              type="button"
+              className="full-btn"
+              onClick={onQueryJoin}
+              label={JOINSTATE[joinStateData]}
+              disabled={true}
+            />
           )}
         </>
       )}
