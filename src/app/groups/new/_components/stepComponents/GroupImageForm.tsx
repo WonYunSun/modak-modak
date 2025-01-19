@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Layout from '@app/groups/[id]/schedules/_components/layout/Layout';
 import Label from '@components/common/Label';
 import { uploadFile } from '@utils/uploadFile';
-import { GroupsType } from '@queries/home/fetchGroupInfo';
+import { GroupsType } from '@ts/supabaseTableRowTypes';
 import { Modification } from '@components/icons';
 
 type GroupImageFormProps = {

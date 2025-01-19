@@ -1,7 +1,7 @@
 import Layout from '@app/groups/[id]/schedules/_components/layout/Layout';
 import GroupCard from '@components/common/groupCard/GroupCard';
 import Label from '@components/common/Label';
-import { GroupsType } from 'queries/home/fetchGroupInfo';
+import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 type GroupPreviewProps = {
   onNext: () => void;

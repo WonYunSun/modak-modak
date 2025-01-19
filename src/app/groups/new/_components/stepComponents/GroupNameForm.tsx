@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LabeledTextInput, { LabeledTextInputProps } from '@components/common/LabeledTextInput';
 import Layout from '@app/groups/[id]/schedules/_components/layout/Layout';
-import { GroupsType } from '@queries/home/fetchGroupInfo';
+import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 type GroupNameFormProps = {
   onNext: (data: Pick<GroupsType, 'name' | 'description'>) => void;
