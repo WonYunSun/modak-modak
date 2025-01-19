@@ -12,7 +12,6 @@ interface UsePermitNewMemberParams {
 const usePermitNewMember = ({ groupId, waitingUserId }: UsePermitNewMemberParams) => {
   const queryClient = useQueryClient();
 
-  //유저 아이디 사용
   const { user, isError: userError } = useUser();
   const userId = user ? user.id : null;
 

@@ -15,6 +15,7 @@ interface UpdateGroupProfile {
   groupId: GroupsType['id'];
 }
 const useUpdateGroupProfile = ({ groupId }: UpdateGroupProfile) => {
+
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
@@ -27,11 +28,11 @@ const useUpdateGroupProfile = ({ groupId }: UpdateGroupProfile) => {
       return;
     },
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: [groupId] });
+      queryClient.removeQueries({ queryKey: ['useFetchGetGroup', groupId] });
     },
   });
 
-  return mutate;
+  return { mutate };
 };
 
 export default useUpdateGroupProfile;
