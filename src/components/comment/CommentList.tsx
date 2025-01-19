@@ -17,7 +17,7 @@ const CommentList = ({ isOpen, onClose, postId }: CommentListProps) => {
   const { isActionModalOpen } = useBottomSheetStore();
 
   return (
-    <Sheet isOpen={isOpen} onClose={onClose} snapPoints={isActionModalOpen ? [0.7] : [0.6]}>
+    <Sheet isOpen={isOpen} onClose={onClose} snapPoints={isActionModalOpen ? [0.9] : [0.6]}>
       <Sheet.Container>
         <Sheet.Header>
           <div className="w-[5.625rem] h-[0.375rem] rounded-xl mx-auto mt-[0.563rem] bg-[#e4e4e7]" />
