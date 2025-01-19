@@ -7,13 +7,13 @@ import ScheduleDatePicker from '@app/groups/[id]/schedules/_components/ScheduleD
 import { updateScheduleById } from 'queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
 
-interface SchdeuleEditType {
+interface ScheduleEditType {
   schedule: ScheduleType;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   refetch: () => Promise<QueryObserverResult<ScheduleType | null, Error>>;
 }
 
-export const ScheduleEdit = ({ schedule, setIsEdit, refetch }: SchdeuleEditType) => {
+export const ScheduleEdit = ({ schedule, setIsEdit, refetch }: ScheduleEditType) => {
   const [values, setValues] = useState(schedule);
 
   const handleChange = (key: keyof ScheduleType) => (e: React.FormEvent<HTMLInputElement>) => {

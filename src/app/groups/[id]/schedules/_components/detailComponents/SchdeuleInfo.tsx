@@ -8,12 +8,12 @@ import { formatDate, formatTime } from '@utils/dateUtils';
 import { deleteScheduleById } from '@queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
 
-interface SchdeuleInfoType {
+interface ScheduleInfoType {
   schedule: ScheduleType;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const SchdeuleInfo = ({ schedule, setIsEdit }: SchdeuleInfoType) => {
+export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
   const { openModal } = useModalStore();
   const router = useRouter();
 
