@@ -42,7 +42,7 @@ const HomeSection = () => {
       <Header hasSetting={false} home={true} isScrolled={isScrolled} />
       <HomeContents ref={targetRef} />
       <Link href={'/groups/new'}>
-        <Button label={'모임 만들기'} className={'floating-btn'} type={'button'}>
+        <Button label={'모임 만들기'} className={'floating-btn z-40'} type={'button'}>
           <Plus className={'w-4 h-4'} active={true} />
         </Button>
       </Link>

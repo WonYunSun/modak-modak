@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import UserQueryJoinStepOne from '@app/join/[id]/_components/UserQueryJoinStepOne';
 import UserQueryJoinStepTwo from '@app/join/[id]/_components/UserQueryJoinStepTwo';
 import GlobalLoading from '@app/GlobalLoading';
@@ -20,7 +20,10 @@ interface UserQueryJoinProps {
   userId: UsersType['id'];
 }
 const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
-  const [joinStep, setJoinStep] = useState(1);
+  const searchParams = useSearchParams();
+  console.log(searchParams);
+  const initiaStep = searchParams.size ? 2 : 1;
+  const [joinStep, setJoinStep] = useState(initiaStep);
 
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;

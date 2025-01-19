@@ -26,12 +26,12 @@ const UserQueryJoinStepOne = ({ onQueryJoin, buttonLabel, isJoinable }: UserQuer
           alt="join-page-icon"
           className="m-auto mb-8"
         />
-        <h4 className="text-gray-800 text-2xl font-bold">모임에 초대되셨어요!</h4>
-        <div className="text-lg text-gray-700">
-          <span>모임에 가입하고</span>
+        <h4 className="text-gray-800 text-2xl font-bold mb-5">모임에 초대되셨어요!</h4>
+        <span className="text-lg text-gray-700">
+          모임에 가입하고
           <br />
-          <span>추억을 자유롭게 공유해주세요</span>
-        </div>
+          추억을 자유롭게 공유해주세요
+        </span>
       </div>
       <div className="w-full h-[45vh] rounded-t-[1.25rem] bg-white">
         {groupInfo && (

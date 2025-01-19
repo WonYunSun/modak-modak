@@ -2,7 +2,7 @@ import { LoadingIcon1, LoadingIcon2 } from '@components/icons';
 
 const GlobalLoading = () => {
   return (
-    <div className="h-screen">
+    <div className="h-screen w-screen absolute top-0 z-50 bg-white">
       <div className="flex justify-center items-center h-full">
         <div className="flex flex-col items-center">
           <div className="relative">
