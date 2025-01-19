@@ -22,7 +22,7 @@ const LeaveGroupModal = ({ lastStepSetter, isLeader }: LeaveGroupModalProps) => 
   }, [leavingStep]);
 
   return (
-    <div className="w-full px-5 flex flex-col items-center">
+    <div className="w-full px-4 flex flex-col items-center">
       {leavingStep === 1 && (isLeader ? <AskLeaderTransition /> : <LeavingAssure onNextStep={onNextStep} />)}
       {leavingStep === 2 && <LeavingSuccess />}
     </div>
