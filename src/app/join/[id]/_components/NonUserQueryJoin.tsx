@@ -1,9 +1,9 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import Button from '@components/common/Button';
 import GroupCard from '@components/common/groupCard/GroupCard';
 import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
-import { useParams } from 'next/navigation';
 
 const NonUserQueryJoin = () => {
   const { id } = useParams();
