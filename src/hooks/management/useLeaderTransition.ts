@@ -15,9 +15,7 @@ const useLeaderTransition = ({ groupId, newLeaderId }: UseLeaderTransitionParams
   const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
 
   const { mutate } = useMutation({
-    mutationFn: async () => {
-      await leaderTransition({ groupId, leaderId: userId, newLeaderId });
-    },
+    mutationFn: () => leaderTransition({ groupId, leaderId: userId, newLeaderId }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['isLeader', groupId, userId] });
       queryClient.invalidateQueries({ queryKey: ['fetchCurMembers', groupId, userId] });

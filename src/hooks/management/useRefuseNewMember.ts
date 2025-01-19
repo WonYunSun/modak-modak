@@ -15,9 +15,7 @@ const useRefuseNewMember = ({ groupId, waitingUserId }: UseRefuseNewMemberParams
   const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
 
   const { mutate } = useMutation({
-    mutationFn: async () => {
-      return await deleteMember({ groupId, memberId: waitingUserId });
-    },
+    mutationFn: () => deleteMember({ groupId, memberId: waitingUserId }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['fetchWaitingMembers', groupId, userId] });
     },

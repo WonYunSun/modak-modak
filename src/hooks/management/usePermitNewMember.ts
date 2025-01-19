@@ -15,9 +15,7 @@ const usePermitNewMember = ({ groupId, waitingUserId }: UsePermitNewMemberParams
   const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
 
   const { mutate } = useMutation({
-    mutationFn: async () => {
-      return await permitNewMember({ groupId, waitingUserId });
-    },
+    mutationFn: () => permitNewMember({ groupId, waitingUserId }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['fetchWaitingMembers', groupId, userId] });
       queryClient.invalidateQueries({ queryKey: ['fetchCurMembers', groupId, userId] });

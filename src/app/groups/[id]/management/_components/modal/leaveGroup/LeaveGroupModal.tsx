@@ -8,7 +8,7 @@ import LeavingSuccess from '@app/groups/[id]/management/_components/modal/leaveG
 const LASTSTEP = 2;
 
 interface LeaveGroupModalProps {
-  lastStepSetter: ()=>void;
+  lastStepSetter: () => void;
   isLeader: boolean;
 }
 const LeaveGroupModal = ({ lastStepSetter, isLeader }: LeaveGroupModalProps) => {
@@ -16,10 +16,10 @@ const LeaveGroupModal = ({ lastStepSetter, isLeader }: LeaveGroupModalProps) => 
   const onNextStep = () => {
     setLeavingStep((prev) => prev + 1);
   };
-  
-  useEffect(()=>{
-    if(leavingStep===LASTSTEP) lastStepSetter();
-  }, [leavingStep])
+
+  useEffect(() => {
+    if (leavingStep === LASTSTEP) lastStepSetter();
+  }, [leavingStep]);
 
   return (
     <div className="w-full px-5 flex flex-col items-center">
