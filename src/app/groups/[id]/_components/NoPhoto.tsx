@@ -1,10 +1,11 @@
 'use client';
 
-import Button from '@components/common/Button';
-import { ModificationLine } from '@components/icons';
 import { useParams, useRouter } from 'next/navigation';
 
-export const NoPhoto = () => {
+import Button from '@components/common/Button';
+import { ModificationLine } from '@components/icons';
+
+const NoPhoto = () => {
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -27,3 +28,5 @@ export const NoPhoto = () => {
     </>
   );
 };
+
+export default NoPhoto;

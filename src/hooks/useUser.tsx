@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createClient } from '@utils/supabase/client';
@@ -22,7 +21,6 @@ const useUser = () => {
     queryKey: ['user'],
     queryFn: fetchUser,
   });
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -38,7 +36,6 @@ const useUser = () => {
     };
   }, []);
 
-  if (isError) router.push('/login');
   return { user, isPending, isError };
 };
 

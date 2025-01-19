@@ -1,7 +1,8 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import GroupList from '@app/_components/GroupList';
 import NoGroup from '@app/_components/NoGroup';
+import HomeTitle from '@app/_components/HomeTitle';
 
 const HomeContents = forwardRef<HTMLDivElement>((_, ref) => {
   const isGroup = true;
@@ -9,9 +10,8 @@ const HomeContents = forwardRef<HTMLDivElement>((_, ref) => {
 
   return (
     <>
-      <div className="px-5 pt-[2.625rem] pb-[2.313rem]">
-        <h4 className="pb-2 text-xl font-semibold">{'ooo'}님, 안녕하세요.</h4>
-        <span className="text-gray-700">소중한 추억을 공유해주실래요?</span>
+      <div className="px-5 pt-[2.625rem] pb-[2.313rem] min-h-[8.7rem]">
+        <HomeTitle />
       </div>
       <div ref={ref} />
       <div className={GroupListBoxStyle}>

@@ -1,6 +1,8 @@
-import Image from "next/image";
-import { GroupCardProps } from "./GroupCard";
-import { NextArrow } from "@components/icons";
+import Image from 'next/image';
+
+import { NextArrow } from '@components/icons';
+
+import { GroupCardProps } from '@components/common/groupCard/GroupCard';
 
 const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardProps) => {
   const { name, description, image_url, membersNum } = groupInfo;
@@ -12,9 +14,10 @@ const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardProps) => {
           <Image
             width={100}
             height={100}
-            className='w-full h-full'
+            className="w-full h-full"
             src={`${image_url}`}
             alt="group_profile"
+            priority={!hasLink}
           />
         </div>
         <div className="overflow-hidden w-full h-full flex flex-col justify-center py-1 gap-1">
@@ -37,4 +40,4 @@ const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardProps) => {
   );
 };
 
-export default GroupCardContent
+export default GroupCardContent;

@@ -1,7 +1,7 @@
 'use server';
 
 import { createClient } from '@utils/supabase/server';
-import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';
+import { GroupsType, UsersType } from '@ts/supabaseTableRowTypes';
 
 interface ManageWatingUserParams {
   groupId: GroupsType['id'];

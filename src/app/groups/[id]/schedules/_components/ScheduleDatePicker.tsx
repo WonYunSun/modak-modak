@@ -83,7 +83,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
               showOutsideDays
               timeZone="UTC"
               weekStartsOn={1}
-              className="bg-white rounded-lg p-2.5"
+              className="bg-white rounded-lg p-2.5 drop-shadow-md"
             />
           </div>
         )}

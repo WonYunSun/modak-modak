@@ -1,14 +1,15 @@
 'use client';
 
-import { NoPhoto } from '@app/groups/[id]/_components/NoPhoto';
-import Button from '@components/common/Button';
-import { ModificationLine } from '@components/icons';
-import { useFetchPhotos } from '@hooks/photo/useFetchPhotos';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+import Button from '@components/common/Button';
+import Spinner from '@components/common/Spinner';
+import NoPhoto from '@app/groups/[id]/_components/NoPhoto';
+import { ModificationLine } from '@components/icons';
+
+import { useFetchPhotos } from '@hooks/photo/useFetchPhotos';
 
 const PhotoList = () => {
   const router = useRouter();
@@ -19,10 +20,6 @@ const PhotoList = () => {
 
   const { data, isPending, isError } = useFetchPhotos(groupId);
 
-  const getImageURL = (url: string) => {
-    return `${supabaseUrl}/storage/v1/object/public/post-photos/${url}`;
-  };
-
   const handleImageClick = (imageUrl: string) => {
     setSelectedImage(imageUrl);
   };
@@ -31,7 +28,7 @@ const PhotoList = () => {
     setSelectedImage(null);
   };
 
-  if (isPending) return <p>로딩 중</p>;
+  if (isPending) return <Spinner />;
 
   if (isError) return <p>에러 발생!</p>;
 
@@ -49,7 +46,7 @@ const PhotoList = () => {
               className="relative w-[calc(25%-0.75px)] aspect-square bg-white"
               onClick={() => handleImageClick(image.image_url)}
             >
-              <Image src={getImageURL(image.image_url)} alt={`이미지-${index}`} layout="fill" objectFit="cover" />
+              <Image src={image.image_url} alt={`이미지-${index}`} layout="fill" objectFit="cover" />
             </div>
           ))
         )}
@@ -61,7 +58,7 @@ const PhotoList = () => {
           onClick={handleClose}
         >
           <div className="relative w-[80%] h-auto">
-            <Image src={getImageURL(selectedImage)} alt="Image" layout="responsive" width={1} height={1} />
+            <Image src={selectedImage} alt="Image" layout="responsive" width={1} height={1} />
           </div>
         </div>
       )}

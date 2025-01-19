@@ -10,10 +10,10 @@ interface PostSelectPageProps {
   };
 }
 
-const PostSelectPage = async ({ params }: PostSelectPageProps) => {
+const PostNewSelectPage = async ({ params }: PostSelectPageProps) => {
   const schedules: ScheduleType[] = await getSchedule(params.id);
 
   return <PostSelectSection schedules={schedules} />;
 };
 
-export default PostSelectPage;
+export default PostNewSelectPage;
