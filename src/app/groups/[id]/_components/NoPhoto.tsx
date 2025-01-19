@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Button from '@components/common/Button';
 import { ModificationLine } from '@components/icons';
 
-export const NoPhoto = () => {
+const NoPhoto = () => {
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -28,3 +28,5 @@ export const NoPhoto = () => {
     </>
   );
 };
+
+export default NoPhoto;

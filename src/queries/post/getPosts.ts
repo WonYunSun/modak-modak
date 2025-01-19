@@ -6,7 +6,7 @@ import { Database } from '@ts/supabase';
 
 export type PostType = Pick<Database['public']['Tables']['posts']['Row'], 'id' | 'content'>;
 export type GroupType = Pick<Database['public']['Tables']['groups']['Row'], 'name' | 'description'>;
-export type UserType = Pick<Database['public']['Tables']['users']['Row'], 'nickname' | 'profile_image'>;
+export type UserType = Pick<Database['public']['Tables']['users']['Row'], 'id' | 'nickname' | 'profile_image'>;
 export type ScheduleType = Pick<
   Database['public']['Tables']['schedules']['Row'],
   'name' | 'memo' | 'start_date' | 'end_date' | 'start_time'
@@ -35,7 +35,7 @@ export const getPosts = async (groupId: string): Promise<PostListType[]> => {
       id, 
       content,
       groups!inner(name, description),
-      users!inner(nickname, profile_image),
+      users!inner(id, nickname, profile_image),
       schedules!inner(name, memo, start_date, end_date, start_time),
       comments(count),
       post_images(image_url)

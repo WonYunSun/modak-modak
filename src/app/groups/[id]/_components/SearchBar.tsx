@@ -22,7 +22,6 @@ const SearchBar = ({ search, setSearch }: searchProps) => {
           className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-500"
           onClick={() => {
             setSearch('');
-            console.log('Search cleared:', search);
           }}
         />
       )}

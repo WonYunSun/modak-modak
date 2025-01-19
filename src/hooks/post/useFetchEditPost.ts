@@ -1,17 +1,23 @@
-import { editPost } from '@queries/post/editPost';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useFetchEditPost = (postId: string | string[], text: string) => {
+import { editPost } from '@queries/post/editPost';
+
+export interface EditPostProps {
+  postId: string;
+  content: string;
+  scheduleId: string;
+}
+
+export const useFetchEditPost = (groupId: string, editPostId: string) => {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
-    mutationFn: async () => {
-      await editPost(postId, text);
+  return useMutation({
+    mutationFn: async (payload: EditPostProps) => {
+      await editPost(payload);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: postId });
+      queryClient.invalidateQueries({ queryKey: [editPostId] });
+      queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
     },
   });
-
-  return { mutate };
 };

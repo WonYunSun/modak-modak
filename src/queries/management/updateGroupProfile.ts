@@ -3,6 +3,7 @@
 import { createClient } from '@utils/supabase/server';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
 
+
 export type GroupProfileDataType = {
   groupName: GroupsType['name'];
   description: GroupsType['description'];
