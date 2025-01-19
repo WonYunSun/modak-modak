@@ -1,6 +1,5 @@
 import ManagementSection from '@app/groups/[id]/management/_components/ManagementSection';
 import ScheduleCalendar from '@app/mypage/_components/ScheduleCalendar';
-import Header from '@components/common/Header';
 
 const MySchedule = () => {
   return (

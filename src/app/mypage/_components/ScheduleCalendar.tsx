@@ -7,6 +7,7 @@ import ScheduleCardList from '@app/mypage/_components/ScheduleCardList';
 import useMySchedule from '@hooks/schedule/useMySchedule';
 import { createCalendar, DayInfo, firstWeekSchedules, getSelectedDay, select } from '@lib/scheduleCalendar';
 import { MyScheduleData } from '@queries/schedule/ScheduleActions';
+import { RedDot } from '@components/icons';
 
 const ScheduleCalendar = () => {
   const [calendar, setCalendar] = useState<DayInfo[][]>([]);
@@ -32,29 +33,35 @@ const ScheduleCalendar = () => {
   };
 
   return (
-    <div className="mt-2 px-5">
-      <Swiper slidesPerView={1} spaceBetween={10} className="w-full h-14 mb-2">
-        {calendar.map((week, idx) => (
-          <SwiperSlide key={idx}>
-            <div className="flex">
-              {week.map(({ id, dayOfWeek, date, isToday, isSelected, isSunday, hasSchedule }) => (
-                <div className="flex-1" key={id} onClick={() => handleDayClick(id)}>
-                  <div
-                    className={`flex flex-col items-center rounded-full m-[1px]
+    <div className="py-2 px-5">
+      <div className="h-14 mb-2">
+        <Swiper slidesPerView={1} spaceBetween={10} className="w-full h-14">
+          {calendar.map((week, idx) => (
+            <SwiperSlide key={idx}>
+              <div className="flex justify-center">
+                {week.map(({ id, dayOfWeek, date, isToday, isSelected, isSunday, hasSchedule }) => (
+                  <div className="flex justify-center flex-1" key={id} onClick={() => handleDayClick(id)}>
+                    <div
+                      className={`flex flex-col items-center rounded-full text-center border w-12 h-12 text-gray-500
                         ${isToday && 'bg-[#FFD3B8]'}
-                        ${isSelected && 'border border-primary-2-300 m-0'}`}
-                  >
-                    <span className={`${isSunday ? 'text-base-red' : ''} ${hasSchedule ? 'text-base-red' : ''}`}>
-                      {dayOfWeek}
-                    </span>
-                    <span>{date}</span>
+                        ${isSelected ? 'border-primary-2-300' : 'border-transparent'}`}
+                    >
+                      <span
+                        className={`w-4 h-10 text-xs font-normal mt-1 mx-4
+                          ${isSunday ? 'text-base-red' : ''}`}
+                      >
+                        {hasSchedule && <RedDot className="ml-auto" />}
+                        {dayOfWeek}
+                      </span>
+                      <span className="w-4 h-5 text-sm font-semibold mb-1">{date}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+                ))}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
       <ScheduleCardList schedules={getSchedules()} />
     </div>
   );

@@ -37,6 +37,7 @@ const merge = ({ calendar, splitSchedules }: mergeParams): DayInfo[][] => {
     week.map((day) => {
       if (splitSchedules.has(day.id)) {
         day.schedules = [...splitSchedules.get(day.id)!];
+        day.hasSchedule = true;
       }
       return day;
     })
@@ -105,7 +106,7 @@ export const select = (calendar: DayInfo[][], id: string) => {
 export const firstWeekSchedules = (calendar: DayInfo[][]) => {
   if (calendar.length <= 0) return [];
   const scheduledDays = calendar[0].filter((day) => day.schedules.length > 0);
-  let schedules = scheduledDays.reduce<MyScheduleData[]>((acc, day) => {
+  const schedules = scheduledDays.reduce<MyScheduleData[]>((acc, day) => {
     day.schedules.forEach((schedule) => {
       if (!acc.find((prevSchedule) => prevSchedule.id === schedule.id)) {
         acc.push(schedule);
