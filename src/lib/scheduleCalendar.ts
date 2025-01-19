@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { ScheduleType } from '@ts/scheduleType';
+import { MyScheduleData } from '@queries/schedule/ScheduleActions';
 
 dayjs.locale('ko');
 
@@ -12,11 +12,11 @@ export interface DayInfo {
   isSelected: boolean;
   hasSchedule: boolean;
   isSunday: boolean;
-  schedules: ScheduleType[];
+  schedules: MyScheduleData[];
 }
 
 interface createParams {
-  schedules: ScheduleType[];
+  schedules: MyScheduleData[];
 }
 
 export const createCalendar = ({ schedules }: createParams): DayInfo[][] => {
@@ -29,7 +29,7 @@ export const createCalendar = ({ schedules }: createParams): DayInfo[][] => {
 
 interface mergeParams {
   calendar: DayInfo[][];
-  splitSchedules: Map<string, ScheduleType[]>;
+  splitSchedules: Map<string, MyScheduleData[]>;
 }
 
 const merge = ({ calendar, splitSchedules }: mergeParams): DayInfo[][] => {
@@ -43,8 +43,8 @@ const merge = ({ calendar, splitSchedules }: mergeParams): DayInfo[][] => {
   );
 };
 
-const splitScheduleByDay = (schedules: ScheduleType[]): Map<string, ScheduleType[]> => {
-  const split = new Map<string, ScheduleType[]>();
+const splitScheduleByDay = (schedules: MyScheduleData[]): Map<string, MyScheduleData[]> => {
+  const split = new Map<string, MyScheduleData[]>();
 
   schedules.forEach((schedule) => {
     let startDate = dayjs(schedule.start_date);
@@ -100,4 +100,26 @@ export const select = (calendar: DayInfo[][], id: string) => {
       return newDay;
     });
   });
+};
+
+export const firstWeekSchedules = (calendar: DayInfo[][]) => {
+  if (calendar.length <= 0) return [];
+  const scheduledDays = calendar[0].filter((day) => day.schedules.length > 0);
+  let schedules = scheduledDays.reduce<MyScheduleData[]>((acc, day) => {
+    day.schedules.forEach((schedule) => {
+      if (!acc.find((prevSchedule) => prevSchedule.id === schedule.id)) {
+        acc.push(schedule);
+      }
+    });
+    return acc;
+  }, []);
+  return schedules;
+};
+
+export const getSelectedDay = (calendar: DayInfo[][]) => {
+  let selectedDay: DayInfo | undefined;
+  calendar.forEach((week) => {
+    if (!selectedDay) selectedDay = week.find((day) => day.isSelected);
+  });
+  return selectedDay;
 };

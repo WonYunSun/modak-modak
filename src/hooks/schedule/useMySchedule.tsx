@@ -1,35 +1,30 @@
-// import { useQuery } from '@tanstack/react-query';
-// import { getMySchedules } from '@queries/schedule/ScheduleActions';
-// import { useEffect, useState } from 'react';
-// import { createCalendar, DayInfo, select } from '@lib/scheduleCalendar';
+import { useQuery } from '@tanstack/react-query';
+import useUser from '@hooks/useUser';
+import { getMySchedules, MyScheduleData } from '@queries/schedule/ScheduleActions';
 
-// const useMySchedule = () => {
-//   const [calendar, setCalendar] = useState<DayInfo[][]>([]);
-//   const {
-//     data: schedules,
-//     isPending,
-//     isError,
-//   } = useQuery({
-//     queryKey: ['mySchedule'],
-//     queryFn: async () => await getMySchedules(),
-//     enabled: calendar.length === 0,
-//     staleTime: 60 * 5 * 1000,
-//   });
+interface MySchedule {
+  schedules: MyScheduleData[];
+  isPending: boolean;
+  isError: boolean;
+}
 
-//   useEffect(() => {
-//     if (!isPending && schedules && schedules.length > 0) {
-//       setCalendar(createCalendar({ schedules }));
-//     }
-//   }, [schedules]);
+const useMySchedule = (): MySchedule => {
+  const { user, isPending: isUserPending, isError: isUserError } = useUser();
+  const {
+    data: schedules,
+    isPending: isSchedulePending,
+    isError: isScheduleError,
+  } = useQuery({
+    queryKey: ['mySchedule'],
+    queryFn: () => getMySchedules(user!.id),
+    enabled: !!user,
+  });
 
-//   const selectDay = (id: string) => setCalendar(select(calendar, id));
+  return {
+    schedules,
+    isPending: isUserPending || isSchedulePending,
+    isError: isUserError || isScheduleError,
+  } as MySchedule;
+};
 
-//   return {
-//     calendar,
-//     selectDay,
-//     isPending,
-//     isError,
-//   };
-// };
-
-// export default useMySchedule;
+export default useMySchedule;

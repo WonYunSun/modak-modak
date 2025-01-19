@@ -1,8 +1,9 @@
 'use server';
 
-import { ScheduleType } from '@ts/scheduleType';
-import { createClient } from '@utils/supabase/server';
 import dayjs from 'dayjs';
+import { createClient } from '@utils/supabase/server';
+import { Database } from '@ts/supabase';
+import { ScheduleType } from '@ts/scheduleType';
 
 export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleType[] | null> => {
   try {
@@ -72,10 +73,13 @@ export const updateScheduleById = async (scheduleId: string, newData: ScheduleTy
   return data;
 };
 
-export const getMySchedules = async (): Promise<ScheduleType[]> => {
+export interface MyScheduleData extends ScheduleType {
+  groups: Partial<Database['public']['Tables']['groups']['Row']>;
+}
+
+export const getMySchedules = async (userId: string): Promise<MyScheduleData[]> => {
   const supabase = await createClient();
   const today = dayjs();
-  const userId = (await supabase.auth.getUser()).data.user?.id;
 
   const { data: groupIds, error: membersError } = await supabase
     .from('group_members')
@@ -86,7 +90,7 @@ export const getMySchedules = async (): Promise<ScheduleType[]> => {
 
   const { data, error: scheduleError } = await supabase
     .from('schedules')
-    .select()
+    .select('groups(name), *')
     .gte('start_date', today.format('YYYY-MM-DD'))
     .lte('start_date', today.add(27, 'day').format('YYYY-MM-DD'))
     .in(
