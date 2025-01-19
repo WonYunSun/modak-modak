@@ -13,7 +13,7 @@ const useLeaderTransition = ({ groupId, newLeaderId }: UseLeaderTransitionParams
   const queryClient = useQueryClient();
 
   //유저 아이디 사용
-  const { user, isPending: , isError: userError } = useUser();
+  const { user, isError: userError } = useUser();
   const userId = user ? user.id : '';
 
   if (userError) throw new Error(`user error : ${userError}`);

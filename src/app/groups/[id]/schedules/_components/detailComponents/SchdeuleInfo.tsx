@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { CalendarIcon, ClockIcon } from '@components/icons';
 import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
@@ -14,14 +14,16 @@ interface ScheduleInfoType {
 }
 
 export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
-  const { openModal } = useModalStore();
+  const { openModal, closeModal } = useModalStore();
   const router = useRouter();
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
 
   const isSingleDay = schedule.end_date === schedule.start_date;
 
   const deleteSchedule = async (scheduleId: string) => {
     await deleteScheduleById(scheduleId);
-    router.replace('/groups/52f44a96-b8f7-4c6c-80b1-d657eafd3821');
+    router.replace(`/groups/${groupId}`);
   };
 
   return (
@@ -60,7 +62,9 @@ export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
           className="flex-[2_2_0%] full-white-btn"
           type="button"
           disabled={false}
-          onClick={() => openModal()}
+          onClick={() => {
+            openModal();
+          }}
         />
         <Button
           label="수정하기"
@@ -84,7 +88,9 @@ export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
               className="flex-[2_2_0%] full-white-btn"
               type="button"
               disabled={false}
-              onClick={() => {}}
+              onClick={() => {
+                closeModal();
+              }}
             />
             <Button
               label="확인"
@@ -93,6 +99,7 @@ export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
               disabled={false}
               onClick={() => {
                 deleteSchedule(schedule.id);
+                closeModal();
               }}
             />
           </div>
