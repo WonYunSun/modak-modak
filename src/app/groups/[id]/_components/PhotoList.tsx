@@ -1,12 +1,14 @@
 'use client';
 
-import { NoPhoto } from '@app/groups/[id]/_components/NoPhoto';
-import Button from '@components/common/Button';
-import { ModificationLine } from '@components/icons';
-import { useFetchPhotos } from '@hooks/photo/useFetchPhotos';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+import Button from '@components/common/Button';
+import { ModificationLine } from '@components/icons';
+import { NoPhoto } from '@app/groups/[id]/_components/NoPhoto';
+
+import { useFetchPhotos } from '@hooks/photo/useFetchPhotos';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 
