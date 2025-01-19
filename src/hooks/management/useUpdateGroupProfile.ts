@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateGroupProfile } from '@queries/management/updateGroupProfile';
 import { uploadFile } from '@utils/uploadFile';
-import { GroupsType } from '@queries/home/fetchGroupInfo';
+import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 export type GroupProfileMutationDataType = {
   groupName: GroupsType['name'];

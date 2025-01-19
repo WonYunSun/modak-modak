@@ -2,7 +2,8 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteMember } from '@queries/management/manageMembers';
-import { GroupsType, UsersType } from '@queries/home/fetchGroupInfo';
+import { GroupsType, UsersType } from '@ts/supabaseTableRowTypes';
+import useUser from '@hooks/useUser';
 
 interface UseRefuseNewMemberParams {
   groupId: GroupsType['id'];
@@ -10,9 +11,11 @@ interface UseRefuseNewMemberParams {
 }
 const useRefuseNewMember = ({ groupId, waitingUserId }: UseRefuseNewMemberParams) => {
   const queryClient = useQueryClient();
+  //유저 아이디 사용
+  const { user, isError: userError } = useUser();
+  const userId = user ? user.id : null;
 
-  //const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886' //임시 유저 아이디 : 멤버예요
-  const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
+  if (userError) throw new Error(`user error : ${userError}`);
 
   const { mutate } = useMutation({
     mutationFn: () => deleteMember({ groupId, memberId: waitingUserId }),

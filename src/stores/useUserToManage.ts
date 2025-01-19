@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { UsersType } from '@queries/home/fetchGroupInfo';
+import { UsersType } from '@ts/supabaseTableRowTypes';
 
 type UserToManageStoreType = {
   selectedUser: UsersType['id'];

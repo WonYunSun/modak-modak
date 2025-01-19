@@ -1,20 +1,17 @@
 'use server';
 
 import { createClient } from '@utils/supabase/server';
-import { GroupsType } from '@queries/home/fetchGroupInfo';
-import { Database } from '@ts/supabase';
-
-export type GroupMembersType = Database['public']['Tables']['group_members']['Row'];
+import { GroupMembersType, GroupsType, UsersType } from '@ts/supabaseTableRowTypes';
 
 export interface filteredUsers {
-  id: string;
-  nickname: string;
-  profile_image: string;
+  id: UsersType['id'];
+  nickname: UsersType['nickname'];
+  profile_image: UsersType['profile_image'];
 }
 export interface CurMemberType {
-  group_id: string;
-  is_approved: boolean;
-  is_leader: boolean;
+  group_id: GroupsType['id'];
+  is_approved: GroupMembersType['is_approved'];
+  is_leader: GroupMembersType['is_leader'];
   users: filteredUsers;
 }
 

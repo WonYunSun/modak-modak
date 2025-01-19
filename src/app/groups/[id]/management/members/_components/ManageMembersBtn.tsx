@@ -3,7 +3,7 @@
 import useBottomSheetStore from '@stores/useBottomSheetStore';
 import useUserToManageStore from '@stores/useUserToManage';
 import { Menu } from '@components/icons';
-import { UsersType } from '@queries/home/fetchGroupInfo';
+import { UsersType } from '@ts/supabaseTableRowTypes';
 
 interface ManageMembersBtnProps {
   memberId: UsersType['id'];
