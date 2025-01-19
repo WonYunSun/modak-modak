@@ -11,7 +11,7 @@ import useModalStore from '@stores/useModalStore';
 import useFunnel from '@hooks/useFunnel';
 import useUser from '@hooks/useUser';
 import { addGroup } from '@queries/group/postGroup';
-import { GroupsType } from '@queries/home/fetchGroupInfo';
+import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 //단계 name 정의
 const steps = ['모임명', '모임사진', '미리보기'];
@@ -19,7 +19,7 @@ const steps = ['모임명', '모임사진', '미리보기'];
 const NewGroupForm = () => {
   const { Funnel, Step, next, prev } = useFunnel(steps[0], 3);
 
-  const { openModal } = useModalStore();
+  const { openModal, closeModal } = useModalStore();
 
   const [groupData, setGruopData] = useState<GroupsType>({
     created_at: '',
@@ -95,7 +95,15 @@ const NewGroupForm = () => {
               className="modal-full-btn mb-3"
               onClick={() => {}}
             ></Button>
-            <Button label="홈으로 이동" type="button" className="modal-white-btn" onClick={goToHome}></Button>
+            <Button
+              label="홈으로 이동"
+              type="button"
+              className="modal-white-btn"
+              onClick={() => {
+                goToHome();
+                closeModal();
+              }}
+            ></Button>
           </Modal>
         </Step>
       </Funnel>
