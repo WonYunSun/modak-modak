@@ -22,7 +22,7 @@ export const GroupCardSection = () => {
     setGroupName(data?.name as string);
   }, [data?.name, setGroupName]);
 
-  if (isPending) return <p>로딩 중...</p>;
+  if (isPending) return null;
 
   if (isError || !data) {
     <span>모임 정보를 불러오는데 문제가 발생했습니다.</span>;

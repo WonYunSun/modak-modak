@@ -2,7 +2,8 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteMember } from '@queries/management/manageMembers';
-import { GroupsType } from '@queries/home/fetchGroupInfo';
+import { GroupsType } from '@ts/supabaseTableRowTypes';
+import useUser from '@hooks/useUser';
 
 interface UseLeaveGroupParams {
   groupId: GroupsType['id'];
@@ -10,13 +11,14 @@ interface UseLeaveGroupParams {
 const useLeaveGroup = ({ groupId }: UseLeaveGroupParams) => {
   const queryClient = useQueryClient();
 
-  //const userId = 'af747db7-11c9-4bbc-800b-9c02eb04a886' //임시 유저 아이디 : 멤버예요
-  const userId = '6f565124-cfc9-46ef-b5ed-220680b11db3'; //임시 유저 아이디 : 관리자예요
+  //유저 아이디 사용
+  const { user, isError: userError } = useUser();
+  const userId = user ? user.id : '';
+
+  if (userError) throw new Error(`user error : ${userError}`);
 
   const { mutate } = useMutation({
-    mutationFn: async () => {
-      return await deleteMember({ groupId, memberId: userId });
-    },
+    mutationFn: () => deleteMember({ groupId, memberId: userId }),
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: ['fetchWaitingMembers', groupId, userId] });
       queryClient.removeQueries({ queryKey: ['fetchCurMembers', groupId, userId] });

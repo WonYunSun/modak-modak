@@ -23,6 +23,12 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
   const { openModal } = useModalStore();
   const { SmallAlert: LinkCopiedAlert, openAlert: OpenLinkCopiedAlert } = useSmallAlert();
 
+  const onCopyInvitationLink = ()=>{
+    const origin = window.location.origin;
+    navigator.clipboard.writeText(`${origin}/join/${groupId}`);
+    OpenLinkCopiedAlert();
+  }
+
   const handleOpenModal = async (mode: ModalModeType) => {
     setModalMode(mode);
     openModal();
@@ -35,7 +41,7 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
   return (
     <>
       <div className="pt-6 mb-36">
-        <div className="mb-6 w-full flex flex-col gap-y-2 border-b bg-gray-200">
+        <div className="mb-6 w-full flex flex-col border-b divide-y-8 divide-gray-200">
           {isLeader && (
             <ManagementSection title={'모임 관리'}>
               <ManagementCard
@@ -56,7 +62,7 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
           </ManagementSection>
 
           <ManagementSection title={'멤버 관리'} isLast={true}>
-            <ManagementCard label={'멤버 초대링크 복사하기'} handleClick={OpenLinkCopiedAlert}>
+            <ManagementCard label={'멤버 초대링크 복사하기'} handleClick={onCopyInvitationLink}>
               <Copy />
             </ManagementCard>
             <ManagementCard label={'멤버 목록'} link={`/groups/${groupId}/management/members`}>

@@ -29,6 +29,17 @@ const config: Config = {
         'gray-900': '#18181B',
         'base-red': '#FF3B30',
       },
+      keyframes: {
+        fade: {
+          '0%': { opacity: '0' }, // 투명
+          '50%': { opacity: '1' }, // 불투명
+          '100%': { opacity: '0' }, // 다시 투명
+        },
+      },
+
+      animation: {
+        fade: 'fade 2s ease-in-out infinite', // 2초 지속, 부드럽게 반복
+      },
     },
     boxShadow: {
       'group-card': '0px -2px 4px 0px rgba(0, 0, 0, 0.05), 0px 4px 8px 0px rgba(0, 0, 0, 0.10)',
