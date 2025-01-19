@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import GroupCardContent from './GroupCardContent';
+
 import { Database } from '@ts/supabase';
+
+import GroupCardContent from '@components/common/groupCard/GroupCardContent';
 
 type GroupType = Database['public']['Tables']['groups']['Row'];
 export interface GroupCardInfosType extends GroupType {

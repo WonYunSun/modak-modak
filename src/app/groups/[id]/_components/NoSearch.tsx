@@ -1,6 +1,6 @@
 'use client';
 
-export const NoSearch = () => {
+const NoSearch = () => {
   return (
     <>
       <div className="mx-auto mt-[3.375rem] text-center justify-center">
@@ -10,3 +10,5 @@ export const NoSearch = () => {
     </>
   );
 };
+
+export default NoSearch;

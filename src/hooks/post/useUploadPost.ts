@@ -24,15 +24,10 @@ const useUploadPost = () => {
     onSuccess: (data) => {
       const { groupId } = data;
       queryClient.invalidateQueries([groupId, 'posts'] as InvalidateQueryFilters);
-      console.log('업로드 성공:', data);
-
-      // TODO: alert창 수정 필요
-      alert('게시글이 등록되었습니다!');
+      console.log('업로드 성공');
     },
     onError: (error: Error) => {
       console.error('useUploadPost: 업로드 실패:', error.message);
-      // TODO: alert창 수정 필요
-      alert(`게시글 등록에 실패했습니다.: ${error.message}`);
     },
   });
 };
