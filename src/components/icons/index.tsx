@@ -500,18 +500,18 @@ export const Search = ({ className }: IconProps) => {
 export const TrashCan = () => {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 15L10 12" stroke="#FF3B30" stroke-width="2" strokeLinecap="round" />
-      <path d="M14 15L14 12" stroke="#FF3B30" stroke-width="2" strokeLinecap="round" />
+      <path d="M10 15L10 12" stroke="#FF3B30" strokeWidth="2" strokeLinecap="round" />
+      <path d="M14 15L14 12" stroke="#FF3B30" strokeWidth="2" strokeLinecap="round" />
       <path
         d="M3 7H21V7C20.0681 7 19.6022 7 19.2346 7.15224C18.7446 7.35523 18.3552 7.74458 18.1522 8.23463C18 8.60218 18 9.06812 18 10V16C18 17.8856 18 18.8284 17.4142 19.4142C16.8284 20 15.8856 20 14 20H10C8.11438 20 7.17157 20 6.58579 19.4142C6 18.8284 6 17.8856 6 16V10C6 9.06812 6 8.60218 5.84776 8.23463C5.64477 7.74458 5.25542 7.35523 4.76537 7.15224C4.39782 7 3.93188 7 3 7V7Z"
         stroke="#FF3B30"
-        stroke-width="2"
+        strokeWidth="2"
         strokeLinecap="round"
       />
       <path
         d="M10.0681 3.37059C10.1821 3.26427 10.4332 3.17033 10.7825 3.10332C11.1318 3.03632 11.5597 3 12 3C12.4403 3 12.8682 3.03632 13.2175 3.10332C13.5668 3.17033 13.8179 3.26427 13.9319 3.37059"
         stroke="#FF3B30"
-        stroke-width="2"
+        strokeWidth="2"
         strokeLinecap="round"
       />
     </svg>
@@ -681,13 +681,13 @@ export const AddMember = ({ className }: IconProps) => {
       <path
         d="M9.5 10.5C9.95963 10.5 10.4148 10.4095 10.8394 10.2336C11.264 10.0577 11.6499 9.79988 11.9749 9.47487C12.2999 9.14987 12.5577 8.76403 12.7336 8.33939C12.9095 7.91475 13 7.45963 13 7C13 6.54037 12.9095 6.08525 12.7336 5.66061C12.5577 5.23597 12.2999 4.85013 11.9749 4.52513C11.6499 4.20012 11.264 3.94231 10.8394 3.76642C10.4148 3.59053 9.95963 3.5 9.5 3.5C8.57174 3.5 7.6815 3.86875 7.02513 4.52513C6.36875 5.1815 6 6.07174 6 7C6 7.92826 6.36875 8.8185 7.02513 9.47487C7.6815 10.1313 8.57174 10.5 9.5 10.5Z"
         stroke="white"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         stroke-linejoin="round"
       />
       <path
         d="M18 15V21M15 18H21M13.5 14.5H9.4C7.16 14.5 6.04 14.5 5.184 14.936C4.43139 15.3195 3.81949 15.9314 3.436 16.684C3 17.54 3 18.66 3 20.9V21.5H13.5"
         stroke="white"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         strokeLinecap="round"
         stroke-linejoin="round"
       />
@@ -708,7 +708,7 @@ export const CircleOk = ({ className }: IconProps) => {
       <path
         d="M7 13.5L9.64645 16.1464C9.84171 16.3417 10.1583 16.3417 10.3536 16.1464L17 9.5M12 22.5C17.5228 22.5 22 18.0228 22 12.5C22 6.97715 17.5228 2.5 12 2.5C6.47715 2.5 2 6.97715 2 12.5C2 18.0228 6.47715 22.5 12 22.5Z"
         stroke="white"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         strokeLinecap="round"
       />
     </svg>
@@ -813,7 +813,7 @@ export const Cancel = ({ className, onClick }: IconProps) => {
       <path
         d="M12.657 12.657L1.34326 1.34326M12.657 1.34326L1.34326 12.657"
         stroke="#A1A1AA"
-        stroke-width="2"
+        strokeWidth="2"
         stroke-linecap="round"
       />
     </svg>
