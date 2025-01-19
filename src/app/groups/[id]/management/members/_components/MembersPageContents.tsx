@@ -6,7 +6,10 @@ import CurMemberList from '@app/groups/[id]/management/members/_components/CurMe
 import WaitingMemberList from '@app/groups/[id]/management/members/_components/WaitingMemberList';
 import MembersBottomSheet from '@app/groups/[id]/management/members/_components/MembersBottomSheet';
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
+import GlobalLoading from '@app/GlobalLoading';
+import GlobalError from '@app/GlobalError';
 import useIsLeader from '@hooks/management/useIsLeader';
+
 
 type TabType = 'currentMembers' | 'awaitingMembers';
 
@@ -25,8 +28,8 @@ const MembersPageContents = () => {
   };
 
   const { data: isLeaderUser, isPending, isError } = useIsLeader({ groupId });
-  if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error!</div>;
+  if (isPending) return <GlobalLoading/>;
+  if (isError) return <GlobalError/>;
 
   return (
     <>
