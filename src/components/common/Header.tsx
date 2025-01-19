@@ -30,7 +30,10 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
         {home ? (
           <Image src="/icons/modakLogo.webp" width={80} height={34} alt="Modak Modak Logo" className="w-20 h-10" />
         ) : (
-          <PrevArrow onClick={handleNavigation} className={groupName && isScrolled ? 'w-[78px]' : ''} />
+          // <PrevArrow onClick={handleNavigation} className={groupName && isScrolled ? 'w-[78px]' : ''} />
+          <div className="w-20 p-2 flex items-center justify-start">
+            <PrevArrow onClick={handleNavigation} className="w-6 h-6" />
+          </div>
         )}
 
         {label && <h3 className="text-xl font-semibold leading-[140%] text-gray-900">{label}</h3>}
@@ -40,9 +43,15 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
           </h3>
         )}
 
-        <div className="flex items-center justify-between gap-[10px] p-[10px]">
-          <Notification className="cursor-pointer" />
-          {hasSetting && <Setting className="cursor-pointer" />}
+        <div className="flex items-center justify-between">
+          <div className="w-10 p-2">
+            <Notification className="cursor-pointer" />
+          </div>
+          {hasSetting && (
+            <div className="w-10 p-2">
+              <Setting className="cursor-pointer" />
+            </div>
+          )}
         </div>
       </div>
     </header>
