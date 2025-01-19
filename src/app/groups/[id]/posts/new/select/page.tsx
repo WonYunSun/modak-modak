@@ -1,6 +1,6 @@
 import PostSelectSection from '@app/groups/[id]/posts/new/select/_components/PostSelectSection';
 
-import { getSchedule } from '@queries/post/getSchedule';
+import { getSchedules } from '@queries/post/getSchedules';
 
 import { ScheduleType } from '@ts/scheduleType';
 
@@ -11,7 +11,7 @@ interface PostSelectPageProps {
 }
 
 const PostNewSelectPage = async ({ params }: PostSelectPageProps) => {
-  const schedules: ScheduleType[] = await getSchedule(params.id);
+  const schedules: ScheduleType[] = await getSchedules(params.id);
 
   return <PostSelectSection schedules={schedules} />;
 };

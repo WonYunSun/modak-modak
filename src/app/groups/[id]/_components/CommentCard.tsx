@@ -3,6 +3,7 @@
 import Image from 'next/image';
 
 import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 
 import BottomSheet from '@components/common/BottomSheet';
 import Button from '@components/common/Button';
@@ -57,6 +58,9 @@ const formatTimeAgo = (dateString: string): string => {
 };
 
 const CommentCard = ({ comment, postId }: CommentCardProps) => {
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
+
   const [openSheet, setOpenSheet] = useState<boolean>(false);
   const [user, setUser] = useState<SupabaseUser | null>(null);
 
@@ -64,7 +68,7 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
 
   const { setCheckModify, setCommentValue, setCommentId } = useCommentValueStore();
 
-  const { deleteCommentMutation } = useCommentHandler(comment.id, postId);
+  const { deleteCommentMutation } = useCommentHandler(comment.id, postId, groupId);
 
   useEffect(() => {
     const getUser = async () => {

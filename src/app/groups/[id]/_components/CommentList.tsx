@@ -2,8 +2,8 @@
 
 import { Sheet } from 'react-modal-sheet';
 
-import CommentContent from '@components/comment/CommentContent';
-import CommentInput from '@components/comment/CommentInput';
+import CommentContent from '@app/groups/[id]/_components/CommentContent';
+import CommentInput from '@app/groups/[id]/_components/CommentInput';
 
 import useBottomSheetStore from '@stores/useBottomSheetStore';
 
