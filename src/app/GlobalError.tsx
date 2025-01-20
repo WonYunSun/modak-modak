@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import Button from '@components/common/Button';
-import { WraningIcon } from '@components/icons';
+import { WarningIcon } from '@components/icons';
 
 const GlobalError = () => {
   const router = useRouter();
@@ -19,7 +19,7 @@ const GlobalError = () => {
     <div className="h-screen w-screen absolute top-0 bg-[#FFF2EB] z-50">
       <div className="flex justify-center items-center h-full">
         <div className="flex flex-col items-center text-center">
-          <WraningIcon />
+          <WarningIcon />
           <p className="pt-3 text-xl text-gray-900 font-bold">다시한번 확인해주세요</p>
           <p className="pt-4 text-xs text-gray-600">
             존재하지 않는 주소를 입력하셨거나

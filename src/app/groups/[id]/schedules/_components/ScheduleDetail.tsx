@@ -21,7 +21,7 @@ export const ScheduleDetail = ({ scheduleId }: { scheduleId: string }) => {
   if (!data) return <GlobalError />;
 
   return (
-    <div>
+    <div className="inner">
       <FunnelHeader label={isEdit ? '일정 수정' : '일정 상세'} />
       {isEdit ? (
         <ScheduleEdit schedule={data} setIsEdit={setIsEdit} refetch={refetch} />

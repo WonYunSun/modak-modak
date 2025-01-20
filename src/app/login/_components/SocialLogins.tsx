@@ -1,16 +1,24 @@
 'use client';
 
-import Button from '@components/common/Button';
+import { useSearchParams } from 'next/navigation';
 import { Provider } from '@supabase/supabase-js';
+import Button from '@components/common/Button';
 import { GoogleLogo, KakaoLogo } from '@components/icons';
 import { createClient } from '@utils/supabase/client';
 
 const SocialLogins = () => {
+  const params = useSearchParams();
+
   const handleButtonClick = async (provider: Provider) => {
-    const supabase = await createClient();
+    const supabase = createClient();
+    let redirectUrl = `${window.origin}/api/auth/callback`;
+    const referrer = params.get('referrer');
+    if (referrer === 'join') {
+      redirectUrl += `?referrer=${referrer}&data=${params.get('data')}`;
+    }
     supabase.auth.signInWithOAuth({
       provider: provider,
-      options: { redirectTo: `${window.origin}/api/auth/callback` }
+      options: { redirectTo: redirectUrl },
     });
   };
 

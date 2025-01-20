@@ -789,7 +789,7 @@ export const LoadingIcon2 = ({ className }: IconProps) => {
     </svg>
   );
 };
-export const WraningIcon = ({ className }: IconProps) => {
+export const WarningIcon = ({ className }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

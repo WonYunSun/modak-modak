@@ -27,7 +27,7 @@ export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
   };
 
   return (
-    <div className="inner h-[calc(100vh-7rem)] flex flex-col justify-between mt-[2.18rem]">
+    <div className="h-[calc(100vh-7rem)] flex flex-col justify-between mt-[2.18rem]">
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
           <Label label="일정명" htmlFor="" />

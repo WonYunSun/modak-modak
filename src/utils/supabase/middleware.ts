@@ -27,6 +27,12 @@ export async function updateSession(request: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser();
 
+    if (user && !user.user_metadata.nickname && !pathname.startsWith('/signup')) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/signup';
+      return NextResponse.redirect(url);
+    }
+
     // 인증이 필요한 페이지인데 로그인하지 않은 경우 로그인 페이지로 이동
     if (!user && needsAuthentication(pathname)) {
       const url = request.nextUrl.clone();
@@ -83,12 +89,12 @@ export async function updateSession(request: NextRequest) {
 }
 
 const isPublicRoute = (pathname: string) => {
-  const paths: string[] = ['/api/auth/', '/signup/success'];
+  const paths: string[] = ['/api/auth/', '/signup/success', '/join'];
   if (pathname === '/') return true;
   return paths.find((path) => pathname.startsWith(path)) !== undefined;
 };
 
 const needsAuthentication = (pathname: string): boolean => {
-  const paths: string[] = ['/signup', '/mypage', '/groups'];
+  const paths: string[] = ['/mypage', '/groups'];
   return paths.find((path) => pathname.startsWith(path)) !== undefined;
 };
