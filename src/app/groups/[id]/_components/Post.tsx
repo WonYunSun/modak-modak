@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { Comments, Menu } from '@components/icons';
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
-import CommentList from '@components/comment/CommentList';
+import CommentList from '@app/groups/[id]/_components/CommentList';
 import { DeleteModal } from '@app/groups/[id]/_components/DeleteModal';
 import { PhotoSlider } from '@app/groups/[id]/_components/PhotoSlider';
 import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBottomSheet';
