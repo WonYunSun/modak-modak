@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import ScheduleCardList from '@app/mypage/_components/ScheduleCardList';
+import { RedDot } from '@components/icons';
 import useMySchedule from '@hooks/schedule/useMySchedule';
 import { createCalendar, DayInfo, firstWeekSchedules, getSelectedDay, select } from '@lib/scheduleCalendar';
 import { MyScheduleData } from '@queries/schedule/ScheduleActions';
-import { RedDot } from '@components/icons';
 
 const ScheduleCalendar = () => {
   const [calendar, setCalendar] = useState<DayInfo[][]>([]);
