@@ -11,7 +11,7 @@ const useCommentInput = (postId: string) => {
   const getUser = async () => {
     const {
       data: { user },
-      error: userError
+      error: userError,
     } = await supabase.auth.getUser();
     if (userError) throw userError;
 
@@ -20,16 +20,15 @@ const useCommentInput = (postId: string) => {
 
   const createComment = async (content: string) => {
     try {
-      //const user = await getUser();
+      const user = await getUser();
 
       const { data, error } = await supabase.from('comments').insert([
         {
           content,
           post_id: postId,
-          // user_id: user.id,
-          user_id: 'ebcc66fe-bf21-4b73-99d1-e4f375025b80',
-          created_at: new Date().toISOString()
-        }
+          user_id: user?.id,
+          created_at: new Date().toISOString(),
+        },
       ]);
       if (error) throw error;
       return data;
@@ -52,15 +51,14 @@ const useCommentInput = (postId: string) => {
         {
           content: newContent,
           post_id: postId,
-          // user_id: user.id,
-          user_id: 'ebcc66fe-bf21-4b73-99d1-e4f375025b80',
+          user_id: user?.id,
           created_at: new Date().toISOString(),
           users: {
             id: user?.id,
             nickname: user?.user_metadata?.nickname,
-            profile_image: user?.user_metadata?.profile_image
-          }
-        }
+            profile_image: user?.user_metadata?.profile_image,
+          },
+        },
       ]);
 
       return { previousComments };
@@ -70,7 +68,7 @@ const useCommentInput = (postId: string) => {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
-    }
+    },
   });
 
   return mutation;

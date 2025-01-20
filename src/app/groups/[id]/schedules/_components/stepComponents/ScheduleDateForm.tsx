@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Layout from '../layout/Layout';
 import Label, { LabelProps } from '@components/common/Label';
 import ScheduleDatePicker from '@app/groups/[id]/schedules/_components/ScheduleDatePicker';
@@ -13,15 +13,30 @@ type ScheduleDateFormProps = {
 };
 
 const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) => {
-  const [values, setValues] = useState<{ scheduleDate: { from: string; to: string }; scheduleTime: string }>({
-    scheduleDate: { from: prevData?.start_date || '', to: prevData?.end_date || '' }, // prevData를 초기값으로 설정
-    scheduleTime: prevData?.start_time || '', // prevData에서 시간 값을 가져옴
+  const [values, setValues] = useState<{
+    scheduleDate: { from: string; to: string };
+    scheduleTime: string;
+  }>({
+    scheduleDate: { from: prevData?.start_date || '', to: prevData?.end_date || '' },
+    scheduleTime: prevData?.start_time || '',
   });
+
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    const { from, to } = values.scheduleDate;
+    const time = values.scheduleTime;
+    // 날짜와 시간이 모두 입력되었는지 확인
+    if (from && to && time) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [values]);
 
   const handleNext = () => {
     const { from, to } = values.scheduleDate;
     const time = values.scheduleTime;
-    // undefined일 경우 빈 문자열로 처리
     onNext({
       start_date: from || '',
       end_date: to || '',
@@ -32,6 +47,7 @@ const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) =
   const handleDateChange = (dateRange: { from: string; to: string }) => {
     setValues({ ...values, scheduleDate: dateRange });
   };
+
   const handleTimeChange = (time: string) => {
     setValues({ ...values, scheduleTime: time });
   };
@@ -44,7 +60,7 @@ const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) =
   };
 
   return (
-    <Layout isDisabled={false} onNext={handleNext} onPrev={onPrev}>
+    <Layout isDisabled={isDisabled} onNext={handleNext} onPrev={onPrev}>
       <div className="flex flex-col gap-4">
         <Label {...labelData} />
         <ScheduleDatePicker

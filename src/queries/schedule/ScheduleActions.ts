@@ -1,6 +1,8 @@
 'use server';
 
-import { createClient } from '../../utils/supabase/server';
+import dayjs from 'dayjs';
+import { createClient } from '@utils/supabase/server';
+import { Database } from '@ts/supabase';
 import { ScheduleType } from '@ts/scheduleType';
 
 export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleType[] | null> => {
@@ -32,7 +34,7 @@ export const fetchSchedulesBygroupId = async (groupId: string): Promise<Schedule
       .from('schedules')
       .select('*')
       .eq('group_id', groupId)
-      .order('start_date', { ascending: true });
+      .order('start_date', { ascending: false });
 
     return data;
   } catch (error) {
@@ -72,5 +74,34 @@ export const updateScheduleById = async (scheduleId: string, newData: ScheduleTy
     console.log('스케쥴 수정 실패', error);
     return;
   }
+  return data;
+};
+
+export interface MyScheduleData extends ScheduleType {
+  groups: Partial<Database['public']['Tables']['groups']['Row']>;
+}
+
+export const getMySchedules = async (userId: string): Promise<MyScheduleData[]> => {
+  const supabase = await createClient();
+  const today = dayjs();
+
+  const { data: groupIds, error: membersError } = await supabase
+    .from('group_members')
+    .select('group_id')
+    .eq('user_id', userId)
+    .eq('is_approved', true);
+  if (membersError) throw new Error('');
+
+  const { data, error: scheduleError } = await supabase
+    .from('schedules')
+    .select('groups(name), *')
+    .gte('start_date', today.format('YYYY-MM-DD'))
+    .lte('start_date', today.add(27, 'day').format('YYYY-MM-DD'))
+    .in(
+      'group_id',
+      groupIds.map((object) => object.group_id)
+    )
+    .order('start_date');
+  if (scheduleError) throw new Error();
   return data;
 };

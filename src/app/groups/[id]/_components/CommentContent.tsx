@@ -1,6 +1,6 @@
 'use client';
 
-import CommentCard from '@components/comment/CommentCard';
+import CommentCard from '@app/groups/[id]/_components/CommentCard';
 
 import useComments from '@hooks/comment/useComments';
 

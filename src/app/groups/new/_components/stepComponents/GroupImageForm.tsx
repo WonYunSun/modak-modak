@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Layout from '@app/groups/[id]/schedules/_components/layout/Layout';
 import Label from '@components/common/Label';
 import { uploadFile } from '@utils/uploadFile';
-import { GroupsType } from '@ts/supabaseTableRowTypes';
 import { Modification } from '@components/icons';
+import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 type GroupImageFormProps = {
   onNext: (data: Pick<GroupsType, 'image_url'>) => void;
@@ -12,8 +12,12 @@ type GroupImageFormProps = {
   prevData: { imgurl: GroupsType['image_url'] };
 };
 
+const DEFULAT_GROUP_IMG =
+  'https://sozcwgcoibigujehjxbf.supabase.co/storage/v1/object/public/profiles/groups/group-defaultImg.webp?t=2025-01-19T12%3A42%3A37.508Z';
 const GroupImageForm = ({ onNext, onPrev, prevData }: GroupImageFormProps) => {
-  const [values, setValues] = useState({ imgurl: prevData.imgurl || '/icons/group-image.webp' });
+  const [values, setValues] = useState({
+    imgurl: prevData.imgurl || DEFULAT_GROUP_IMG,
+  });
 
   const handleNext = () => {
     onNext({ image_url: values.imgurl });

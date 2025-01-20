@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { useParams } from 'next/navigation';
-import { useQueryClient, InvalidateQueryFilters } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import Button from '@components/common/Button';
 
@@ -35,7 +35,7 @@ export const DeleteModal = ({ postId, setDeleteModal }: modalProps) => {
         // <SmallAlert>게시글이 삭제되었습니다.</SmallAlert>
         // TODO: smallAlert 세팅 문의
         // 앨범 querykey 삭제 추가
-        queryClient.invalidateQueries([groupId, 'posts'] as InvalidateQueryFilters);
+        queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
         setDeleteModal(false);
       }
     } catch (error) {

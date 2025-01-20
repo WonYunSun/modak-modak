@@ -2,10 +2,10 @@
 
 import { forwardRef, useState } from 'react';
 
+import Tabs from '@app/groups/[id]/_components/Tabs';
 import PhotoList from '@app/groups/[id]/_components/PhotoList';
 import PostList from '@app/groups/[id]/_components/PostList';
-import ScheduleList from '@app/groups/[id]/_components/ScheduleList';
-import Tabs from '@app/groups/[id]/_components/Tabs';
+import ScheduleCardList from '@app/groups/[id]/_components/ScheduleCardList';
 
 interface TabPagesProps {
   isScrolled: boolean;
@@ -21,7 +21,7 @@ const TabPages = forwardRef<HTMLDivElement, TabPagesProps>(({ isScrolled }, ref)
       <div className="">
         {activeTab === 'posts' && <PostList setActiveTab={setActiveTab} />}
         {activeTab === 'photos' && <PhotoList />}
-        {activeTab === 'schedules' && <ScheduleList />}
+        {activeTab === 'schedules' && <ScheduleCardList />}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { InvalidateQueryFilters, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const useUploadPost = () => {
   const queryClient = useQueryClient();
@@ -23,7 +23,7 @@ const useUploadPost = () => {
     },
     onSuccess: (data) => {
       const { groupId } = data;
-      queryClient.invalidateQueries([groupId, 'posts'] as InvalidateQueryFilters);
+      queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
       console.log('업로드 성공');
     },
     onError: (error: Error) => {

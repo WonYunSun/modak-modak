@@ -3,6 +3,7 @@
 import Image from 'next/image';
 
 import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 
 import BottomSheet from '@components/common/BottomSheet';
 import Button from '@components/common/Button';
@@ -41,7 +42,7 @@ const formatTimeAgo = (dateString: string): string => {
     일: 86400,
     시간: 3600,
     분: 60,
-    초: 1
+    초: 1,
   };
 
   // 각 간격별로 확인
@@ -57,14 +58,17 @@ const formatTimeAgo = (dateString: string): string => {
 };
 
 const CommentCard = ({ comment, postId }: CommentCardProps) => {
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
+
   const [openSheet, setOpenSheet] = useState<boolean>(false);
-  const [/*user*/, setUser] = useState<SupabaseUser | null>(null);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
 
   const { setActionModalOpen } = useBottomSheetStore();
 
   const { setCheckModify, setCommentValue, setCommentId } = useCommentValueStore();
 
-  const { deleteCommentMutation } = useCommentHandler(comment.id, postId);
+  const { deleteCommentMutation } = useCommentHandler(comment.id, postId, groupId);
 
   useEffect(() => {
     const getUser = async () => {
@@ -72,7 +76,7 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
         const supabase = createClient();
         const {
           data: { user },
-          error
+          error,
         } = await supabase.auth.getUser();
 
         if (error) {
@@ -125,9 +129,8 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
           <h4 className="text-base font-semibold leading-[140%]">{comment.users?.nickname}</h4>
           <span className="text-xs font-normal leading-[140%] text-gray-500">{formatTimeAgo(comment.created_at)}</span>
         </div>
-        <Menu className="w-6 h-6 cursor-pointer" onClick={handleSheetOpen} />
-        {/* {user && user.id === comment.user_id && <Menu className="w-6 h-6 cursor-pointer" onClick={handleSheetOpen} />} */}
-        <BottomSheet isOpen={openSheet} onClose={handleSheetClose} snapPoint={[0.2]}>
+        {user && user.id === comment.user_id && <Menu className="w-6 h-6 cursor-pointer" onClick={handleSheetOpen} />}
+        <BottomSheet isOpen={openSheet} onClose={handleSheetClose} snapPoint={[0.25]}>
           <div className="w-full h-full bg-white rounded-xl divide-y flex flex-col justify-start overflow-hidden">
             <Button
               type="button"
