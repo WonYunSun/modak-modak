@@ -5,8 +5,9 @@ import useModalStore from '@stores/useModalStore';
 
 interface ProfileConfirmBtnsProps {
   onConfirm: () => void;
+  disabled?: boolean;
 }
-const ProfileConfirmBtns = ({ onConfirm }: ProfileConfirmBtnsProps) => {
+const ProfileConfirmBtns = ({ onConfirm, disabled = false }: ProfileConfirmBtnsProps) => {
   const { closeModal } = useModalStore();
   const onConfirmChange = () => {
     onConfirm();
@@ -19,7 +20,13 @@ const ProfileConfirmBtns = ({ onConfirm }: ProfileConfirmBtnsProps) => {
         <Button type={'button'} className={'modal-white-btn'} label={'취소'} onClick={closeModal} />
       </div>
       <div className="w-[12.313rem]">
-        <Button type={'button'} className={'modal-full-btn'} label={'완료'} onClick={onConfirmChange} />
+        <Button
+          type={'button'}
+          className={'modal-full-btn'}
+          label={'완료'}
+          onClick={onConfirmChange}
+          disabled={disabled}
+        />
       </div>
     </>
   );

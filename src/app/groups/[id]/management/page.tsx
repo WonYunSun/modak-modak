@@ -11,7 +11,7 @@ const ManagementPage = ({ params }: ManagementPageProps) => {
 
   return (
     <main>
-      <Header home={false} label={'관리 페이지'} />
+      <Header home={false} label={'관리 페이지'} isScrolled={true}/>
       <ManagementContents groupId={id} />
     </main>
   );
