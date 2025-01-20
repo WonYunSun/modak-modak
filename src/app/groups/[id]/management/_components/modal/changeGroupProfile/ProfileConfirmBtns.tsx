@@ -5,9 +5,9 @@ import useModalStore from '@stores/useModalStore';
 
 interface ProfileConfirmBtnsProps {
   onConfirm: () => void;
-  disabled: boolean;
+  disabled?: boolean;
 }
-const ProfileConfirmBtns = ({ onConfirm, disabled }: ProfileConfirmBtnsProps) => {
+const ProfileConfirmBtns = ({ onConfirm, disabled = false }: ProfileConfirmBtnsProps) => {
   const { closeModal } = useModalStore();
   const onConfirmChange = () => {
     onConfirm();
