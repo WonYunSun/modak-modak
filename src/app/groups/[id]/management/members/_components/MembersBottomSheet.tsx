@@ -25,7 +25,7 @@ const MembersBottomSheet = () => {
         <div className="bg-gray-100">
           <Button
             type={'button'}
-            label="리더 양도하기"
+            label="대표 양도하기"
             className={'w-full px-3 py-4 flex justify-start items-center gap-4'}
             onClick={onModalOpen}
           >
