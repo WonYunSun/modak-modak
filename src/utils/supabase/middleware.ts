@@ -3,32 +3,28 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
-    request
+    request,
   });
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-          supabaseResponse = NextResponse.next({
-            request
-          });
-          cookiesToSet.forEach(({ name, value, options }) => supabaseResponse.cookies.set(name, value, options));
-        }
-      }
-    }
-  );
+  const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    cookies: {
+      getAll() {
+        return request.cookies.getAll();
+      },
+      setAll(cookiesToSet) {
+        cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+        supabaseResponse = NextResponse.next({
+          request,
+        });
+        cookiesToSet.forEach(({ name, value, options }) => supabaseResponse.cookies.set(name, value, options));
+      },
+    },
+  });
 
   const pathname = request.nextUrl.pathname;
   if (!isPublicRoute(pathname)) {
     const {
-      data: { user }
+      data: { user },
     } = await supabase.auth.getUser();
 
     // 인증이 필요한 페이지인데 로그인하지 않은 경우 로그인 페이지로 이동
@@ -70,6 +66,6 @@ const isPublicRoute = (pathname: string) => {
 };
 
 const needsAuthentication = (pathname: string): boolean => {
-  const paths: string[] = ['/signup', '/mypage'];
+  const paths: string[] = ['/signup', '/mypage', '/groups'];
   return paths.find((path) => pathname.startsWith(path)) !== undefined;
 };
