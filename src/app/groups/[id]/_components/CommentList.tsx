@@ -17,8 +17,8 @@ const CommentList = ({ isOpen, onClose, postId }: CommentListProps) => {
   const { isActionModalOpen } = useBottomSheetStore();
 
   return (
-    <Sheet isOpen={isOpen} onClose={onClose} snapPoints={isActionModalOpen ? [0.9] : [0.6]}>
-      <Sheet.Container>
+    <Sheet isOpen={isOpen} onClose={onClose} className={`${isActionModalOpen ? 'bottom-open transition-all' : ''}`}>
+      <Sheet.Container className="comment-list">
         <Sheet.Header>
           <div className="w-[5.625rem] h-[0.375rem] rounded-xl mx-auto mt-[0.563rem] bg-[#e4e4e7]" />
           <h3 className="w-full mx-auto mt-9 text-xl text-center font-bold leading-[140%]">댓글</h3>
