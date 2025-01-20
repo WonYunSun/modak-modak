@@ -44,7 +44,8 @@ export async function updateSession(request: NextRequest) {
 
     // 그룹 페이지에 접근 시 그룹 멤버 여부 확인
     if (pathname.startsWith('/groups/')) {
-      const groupId = pathname.split('/groups/')[1];
+      const match = pathname.match(/^\/groups\/([^/]+)/); // groups/ 뒤에 오는 첫 번째 경로 추출
+      const groupId = match ? match[1] : null;
 
       if (groupId) {
         const { data: membership, error } = await supabase
