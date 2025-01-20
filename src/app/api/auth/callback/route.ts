@@ -24,7 +24,7 @@ export const GET = async (request: Request) => {
 };
 
 interface joinGroupParams {
-  supabase: SupabaseClient<any, 'public', any>;
+  supabase: SupabaseClient;
   data: string | null;
 }
 

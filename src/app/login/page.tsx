@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Onboarding from './_components/Onboarding';
 import SocialLogins from './_components/SocialLogins';
 
@@ -12,7 +13,9 @@ const LoginPage = () => {
   return (
     <div className="flex flex-col h-screen pb-[112px] pt-[119px] inner overflow-y-auto">
       <Onboarding />
-      <SocialLogins />
+      <Suspense>
+        <SocialLogins />
+      </Suspense>
     </div>
   );
 };
