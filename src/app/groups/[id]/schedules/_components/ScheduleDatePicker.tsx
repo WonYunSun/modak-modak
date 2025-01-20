@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { ko } from 'react-day-picker/locale';
 import type { DateRange } from 'react-day-picker';
@@ -16,6 +16,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
   const [selectedRange, setSelectedRange] = useState<DateRange | undefined>();
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [isDatepickerOpen, setIsDatepickerOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (prevData?.scheduleDate) {
@@ -25,6 +26,23 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
       });
     }
     setSelectedTime(prevData?.scheduleTime || '');
+  }, []);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    // 클릭된 요소가 dropdownRef 내부에 있지 않다면 닫기
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsDatepickerOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    // 전역 클릭 이벤트 감지
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // 정리(clean-up) 함수로 이벤트 리스너 제거
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const convertToUTC = (date: Date) => {
@@ -66,13 +84,13 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
           }
           onClick={() => {
             setIsDatepickerOpen(!isDatepickerOpen);
-          }} // 클릭 시 DatePicker 열기/닫기
+          }}
           readOnly
           placeholder="날짜"
           className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[3.12rem]"
         />
         {isDatepickerOpen && (
-          <div className="absolute top-[100%] left-0 z-10">
+          <div className="absolute top-[100%] left-0 z-10" ref={dropdownRef}>
             <DayPicker
               mode="range"
               selected={selectedRange}

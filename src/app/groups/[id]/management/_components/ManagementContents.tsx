@@ -7,6 +7,8 @@ import ManagementCard from '@app/groups/[id]/management/_components/ManagementCa
 import ToggleBox from '@app/groups/[id]/management/_components/ToggleBox';
 import ManagementBtns from '@app/groups/[id]/management/_components/ManagementBtns';
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
+import GlobalLoading from '@app/GlobalLoading';
+import GlobalError from '@app/GlobalError';
 import { CircleOk, Copy, NextArrow } from '@components/icons';
 import useSmallAlert from '@hooks/useSmallAlert';
 import useIsLeader from '@hooks/management/useIsLeader';
@@ -17,17 +19,15 @@ interface ManagementContentsProps {
   groupId: string;
 }
 const ManagementContents = ({ groupId }: ManagementContentsProps) => {
-  //52f44a96-b8f7-4c6c-80b1-d657eafd3821 모닥모닥팀 아이디
-  //1113b74a-2ec2-4f35-b044-4f42925cc076 얼그레이 연구회 아이디
   const [modalMode, setModalMode] = useState<ModalModeType | null>(null);
   const { openModal } = useModalStore();
   const { SmallAlert: LinkCopiedAlert, openAlert: OpenLinkCopiedAlert } = useSmallAlert();
 
-  const onCopyInvitationLink = ()=>{
+  const onCopyInvitationLink = () => {
     const origin = window.location.origin;
     navigator.clipboard.writeText(`${origin}/join/${groupId}`);
     OpenLinkCopiedAlert();
-  }
+  };
 
   const handleOpenModal = async (mode: ModalModeType) => {
     setModalMode(mode);
@@ -35,8 +35,9 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
   };
 
   const { data: isLeader, isPending, isError } = useIsLeader({ groupId });
-  if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error!</div>;
+
+  if (isPending) return <GlobalLoading />;
+  if (isError) return <GlobalError/>;
 
   return (
     <>

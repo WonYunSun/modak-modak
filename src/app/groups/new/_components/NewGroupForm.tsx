@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
+import { CircleOk } from '@components/icons';
 import GroupNameForm from '@app/groups/new/_components/stepComponents/GroupNameForm';
 import GroupImageForm from '@app/groups/new/_components/stepComponents/GroupImageForm';
 import GroupPreview from '@app/groups/new/_components/stepComponents/GroupPreview';
@@ -11,6 +12,7 @@ import useModalStore from '@stores/useModalStore';
 import useFunnel from '@hooks/useFunnel';
 import useUser from '@hooks/useUser';
 import { addGroup } from '@queries/group/postGroup';
+import useSmallAlert from '@hooks/useSmallAlert';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 //단계 name 정의
@@ -19,7 +21,7 @@ const steps = ['모임명', '모임사진', '미리보기'];
 const NewGroupForm = () => {
   const { Funnel, Step, next, prev } = useFunnel(steps[0], 3);
 
-  const { openModal } = useModalStore();
+  const { openModal, closeModal } = useModalStore();
 
   const [groupData, setGruopData] = useState<GroupsType>({
     created_at: '',
@@ -28,6 +30,9 @@ const NewGroupForm = () => {
     image_url: '',
     name: '',
   });
+
+  const [newGroupId, setNewGroupId] = useState('');
+  const { SmallAlert: LinkCopiedAlert, openAlert: OpenLinkCopiedAlert } = useSmallAlert();
 
   const { user } = useUser();
   const router = useRouter();
@@ -45,7 +50,9 @@ const NewGroupForm = () => {
       id: '',
     };
 
-    await addGroup(completeGroupData, user?.id);
+    const newGroupId = await addGroup(completeGroupData, user?.id);
+
+    setNewGroupId(newGroupId);
     openModal();
   };
 
@@ -55,6 +62,12 @@ const NewGroupForm = () => {
 
   const goToHome = () => {
     router.replace('/');
+  };
+
+  const onCopyInvitationLink = () => {
+    const origin = window.location.origin;
+    navigator.clipboard.writeText(`${origin}/join/${newGroupId}`);
+    OpenLinkCopiedAlert();
   };
 
   return (
@@ -89,13 +102,28 @@ const NewGroupForm = () => {
                 소중한 추억을 기록하고 공유해보세요
               </p>
             </div>
+            <LinkCopiedAlert>
+              <div className="flex gap-2.5">
+                <CircleOk /> <span>{'초대링크가 복사 되었어요!'}</span>
+              </div>
+            </LinkCopiedAlert>
             <Button
               label="친구 초대할 링크 복사하기"
               type="button"
               className="modal-full-btn mb-3"
-              onClick={() => {}}
+              onClick={() => {
+                onCopyInvitationLink();
+              }}
             ></Button>
-            <Button label="홈으로 이동" type="button" className="modal-white-btn" onClick={goToHome}></Button>
+            <Button
+              label="홈으로 이동"
+              type="button"
+              className="modal-white-btn"
+              onClick={() => {
+                goToHome();
+                closeModal();
+              }}
+            ></Button>
           </Modal>
         </Step>
       </Funnel>

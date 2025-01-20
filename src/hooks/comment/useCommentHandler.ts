@@ -4,7 +4,7 @@ import { createClient } from '@utils/supabase/client';
 
 import { CommentsType } from '@hooks/comment/useComments';
 
-const useCommentHandler = (commentId: string, postId: string) => {
+const useCommentHandler = (commentId: string, postId: string, groupId: string) => {
   const queryClient = useQueryClient();
   const supabase = createClient();
 
@@ -44,7 +44,8 @@ const useCommentHandler = (commentId: string, postId: string) => {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
-    }
+      queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
+    },
   });
 
   const updateCommentMutation = useMutation({
@@ -65,7 +66,7 @@ const useCommentHandler = (commentId: string, postId: string) => {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
-    }
+    },
   });
 
   return { deleteCommentMutation, updateCommentMutation };

@@ -1,4 +1,6 @@
 import { useRef } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
 
 import Button from '@components/common/Button';
 
@@ -12,13 +14,18 @@ interface CommentInputProps {
 }
 
 const CommentInput = ({ postId }: CommentInputProps) => {
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
+
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const { checkModify, commentValue, commentId, setCommentValue, reset } = useCommentValueStore();
 
   const createMutation = useCommentInput(postId);
 
-  const { updateCommentMutation } = useCommentHandler(commentId || '', postId);
+  const { updateCommentMutation } = useCommentHandler(commentId || '', postId, groupId);
+
+  const queryClient = useQueryClient();
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -48,16 +55,17 @@ const CommentInput = ({ postId }: CommentInputProps) => {
           if (textAreaRef.current) {
             textAreaRef.current.style.height = 'auto';
           }
-        }
+        },
       });
     } else {
       createMutation.mutate(commentValue, {
         onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
           setCommentValue('');
           if (textAreaRef.current) {
             textAreaRef.current.style.height = 'auto';
           }
-        }
+        },
       });
     }
   };

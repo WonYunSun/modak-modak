@@ -1,4 +1,4 @@
-'client';
+'use client';
 
 import useUser from '@hooks/useUser';
 

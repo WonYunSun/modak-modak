@@ -9,7 +9,6 @@ interface UseIsLeaderParams {
   groupId: GroupsType['id'];
 }
 const useIsLeader = ({ groupId }: UseIsLeaderParams) => {
-  //유저 아이디 사용
   const { user, isError: userError } = useUser();
   const userId = user ? user.id : null;
 
