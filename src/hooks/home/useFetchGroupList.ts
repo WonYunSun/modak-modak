@@ -13,7 +13,8 @@ const useFetchGroupList = () => {
   const { data, isPending, isError } = useQuery({
     queryKey: ['fetchGroupList', userId],
     queryFn: async () => {
-      if (userId) return await fetchGroupCardInfos({ userId });
+      const data = userId ? await fetchGroupCardInfos({ userId }) : null;
+      if (data) return data.length ? data : null
     },
   });
 

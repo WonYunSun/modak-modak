@@ -7,7 +7,7 @@ import ProfileInputs from '@app/groups/[id]/management/_components/modal/changeG
 import ProfileConfirmBtns from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileConfirmBtns';
 import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
 import useUpdateGroupProfile from '@hooks/management/useUpdateGroupProfile';
-import { Modification, WarningIcon  } from '@components/icons';
+import { Modification, WarningIcon } from '@components/icons';
 import Spinner from '@components/common/Spinner';
 
 const ChangeGroupProfileModal = () => {
@@ -93,7 +93,10 @@ const ChangeGroupProfileModal = () => {
         />
       </div>
       <div className="w-full mt-6 flex gap-2 justify-center">
-        <ProfileConfirmBtns onConfirm={onConfirmUpdate} />
+        <ProfileConfirmBtns
+          onConfirm={onConfirmUpdate}
+          disabled={!!(groupName === '' || description === '')}
+        />
       </div>
     </div>
   );
