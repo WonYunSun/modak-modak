@@ -25,9 +25,12 @@ const ScheduleCard = ({
 }: ScheduleCardProps) => {
   const labelClass = 'text-gray-500 whitespace-nowrap'; // 라벨 스타일
   const detailClass = 'flex items-center gap-3 text-xs';
-  // start_time을 날짜 형식에 맞게 결합하여 Date 객체로 변환
-  const combinedDate = new Date(`${end_date}T${start_time}`);
-  const isExpired = combinedDate < new Date();
+  // end_date와 오늘 날짜 비교
+  const today = new Date(); // 오늘 날짜와 시간
+  today.setHours(0, 0, 0, 0);
+  const endDate = new Date(end_date); // 일정 끝나는 시간
+  endDate.setHours(0, 0, 0, 0);
+  const isExpired = endDate < today;
   const isSingleDay = end_date === start_date;
 
   return (
