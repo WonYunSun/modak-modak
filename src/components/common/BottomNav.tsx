@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import useNavStore from 'stores/useNavStore';
 import { usePathname } from 'next/navigation';
+
+import useNavStore from 'stores/useNavStore';
+
 import { Home, Chat, User } from '@components/icons';
 
 const buttons = [
@@ -18,7 +20,7 @@ const buttons = [
     label: '채팅',
     iconOff: <Chat className="w-6 h-6" active={false} />,
     iconOn: <Chat className="w-6 h-6" active={true} />,
-    href: '/chat',
+    href: '/',
   },
   {
     id: 'mypage',
@@ -35,7 +37,7 @@ const BottomNav = () => {
 
   // 특정 경로에서 BottomNav를 숨김
 
-  const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule', '/join'];
+  const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule', '/join', '/mypage'];
 
   const isHideNav = hiddenPaths.some((path) => pathname.includes(path));
 
@@ -46,17 +48,26 @@ const BottomNav = () => {
   return (
     <div className="fixed bottom-0 left-0 w-full h-16 bg-white flex shadow-[0px_-4px_4px_0px_rgba(0,0,0,0.1)] z-[30]">
       {buttons.map((button) => (
-        <Link href={button.href} key={button.id} className="flex-1 flex justify-center items-center">
-          <button className="flex flex-col justify-end items-center" onClick={() => setActiveButton(button.id)}>
+        <Link
+          href={button.href}
+          key={button.id}
+          className="flex-1 flex justify-center items-center"
+          onClick={
+            button.id !== 'chat'
+              ? () => setActiveButton(button.id)
+              : () => alert('아직 서비스 준비 중입니다!😊 조금만 기다려 주세요.')
+          }
+        >
+          <div className="flex flex-col justify-end items-center">
             <div
-              className={`w-16 h-8 rounded-xl flex items-center justify-center ${activeButton === button.id ? 'bg-primary-10' : ''}`}
+              className={`w-16 h-8 rounded-full flex items-center justify-center ${activeButton === button.id ? 'bg-primary-10' : ''}`}
             >
               {activeButton === button.id ? button.iconOn : button.iconOff}
             </div>
             <div className={`text-sm ${activeButton === button.id ? 'text-primary' : 'text-gray-500'}`}>
               {button.label}
             </div>
-          </button>
+          </div>
         </Link>
       ))}
     </div>

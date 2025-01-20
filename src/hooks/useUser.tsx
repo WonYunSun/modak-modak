@@ -20,6 +20,7 @@ const useUser = () => {
   } = useQuery({
     queryKey: ['user'],
     queryFn: fetchUser,
+    staleTime: 60 * 5 * 1000,
   });
   const queryClient = useQueryClient();
 
