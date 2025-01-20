@@ -12,8 +12,8 @@ import useModalStore from '@stores/useModalStore';
 import useFunnel from '@hooks/useFunnel';
 import useUser from '@hooks/useUser';
 import { addGroup } from '@queries/group/postGroup';
-import { GroupsType } from '@ts/supabaseTableRowTypes';
 import useSmallAlert from '@hooks/useSmallAlert';
+import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 //단계 name 정의
 const steps = ['모임명', '모임사진', '미리보기'];
