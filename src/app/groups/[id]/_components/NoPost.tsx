@@ -1,10 +1,14 @@
 'use client';
 
+import { useParams, useRouter } from 'next/navigation';
+
 import { GreaterThan } from '@components/icons';
 
-import { TabsProps } from '@app/groups/[id]/_components/PostList';
+const NoPost = () => {
+  const router = useRouter();
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
 
-const NoPost = ({ setActiveTab }: TabsProps) => {
   return (
     <>
       <div className="mx-auto mt-[3.375rem] text-center justify-center">
@@ -13,7 +17,7 @@ const NoPost = ({ setActiveTab }: TabsProps) => {
         <p className="text-gray-700 text-lg">일정 선택이 필수이니 등록해볼까요?</p>
         <div
           className="mx-auto flex mt-[1.375rem] border-b-[1px] border-gray-900 w-[7.75rem]"
-          onClick={() => setActiveTab('schedules')}
+          onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
         >
           <span className="text-gray-900 text-sm ">일정 등록 바로가기</span>
           <GreaterThan />
