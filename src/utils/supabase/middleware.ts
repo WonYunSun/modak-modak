@@ -41,6 +41,28 @@ export async function updateSession(request: NextRequest) {
     if (user && pathname.startsWith('/signup') && user.user_metadata.nickname) {
       return NextResponse.redirect(request.nextUrl.origin);
     }
+
+    // 그룹 페이지에 접근 시 그룹 멤버 여부 확인
+    if (pathname.startsWith('/groups/')) {
+      const groupId = pathname.split('/groups/')[1];
+
+      if (groupId) {
+        const { data: membership, error } = await supabase
+          .from('group_members')
+          .select('id')
+          .eq('group_id', groupId)
+          .eq('user_id', user?.id)
+          .eq('is_approved', true)
+          .single();
+
+        // 그룹 멤버가 아닌 경우 접근 제한
+        if (error || !membership) {
+          const url = request.nextUrl.clone();
+          url.pathname = '/';
+          return NextResponse.redirect(url);
+        }
+      }
+    }
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.
