@@ -75,7 +75,7 @@ const NewGroupForm = () => {
       <Funnel headerLabel="모임 만들기">
         <Step name={steps[0]}>
           <GroupNameForm
-            onPrev={() => {}}
+            onPrev={goToHome}
             onNext={(data) => handleNext(data, steps[1])}
             prevData={{ name: groupData.name, description: groupData.description }}
           />
