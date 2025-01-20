@@ -3,7 +3,7 @@
 import { createClient } from '@utils/supabase/server';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
 
-export const addGroup = async (groupData: GroupsType, userId?: string): Promise<void> => {
+export const addGroup = async (groupData: GroupsType, userId?: string): Promise<string> => {
   try {
     const supabase = await createClient();
 
@@ -35,6 +35,7 @@ export const addGroup = async (groupData: GroupsType, userId?: string): Promise<
     if (memberInsertError) {
       throw new Error('그룹 멤버 추가에 실패했습니다.');
     }
+    return groupId;
   } catch (error) {
     console.error(error);
     throw new Error(`${error}`);
