@@ -5,8 +5,23 @@ import { NextResponse, type NextRequest } from 'next/server';
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
+    request,
   });
 
+  const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    cookies: {
+      getAll() {
+        return request.cookies.getAll();
+      },
+      setAll(cookiesToSet) {
+        cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+        supabaseResponse = NextResponse.next({
+          request,
+        });
+        cookiesToSet.forEach(({ name, value, options }) => supabaseResponse.cookies.set(name, value, options));
+      },
+    },
+  });
   const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
     cookies: {
       getAll() {
@@ -25,6 +40,7 @@ export async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   if (!isPublicRoute(pathname)) {
     const {
+      data: { user },
       data: { user },
     } = await supabase.auth.getUser();
 
@@ -47,6 +63,28 @@ export async function updateSession(request: NextRequest) {
     // 유저 추가 정보 입력이 필요하지 않은데 회원가입 페이지에 접근하려는 경우 home으로 이동
     if (user && pathname.startsWith('/signup') && user.user_metadata.nickname) {
       return NextResponse.redirect(request.nextUrl.origin);
+    }
+
+    // 그룹 페이지에 접근 시 그룹 멤버 여부 확인
+    if (pathname.startsWith('/groups/')) {
+      const groupId = pathname.split('/groups/')[1];
+
+      if (groupId) {
+        const { data: membership, error } = await supabase
+          .from('group_members')
+          .select('id')
+          .eq('group_id', groupId)
+          .eq('user_id', user?.id)
+          .eq('is_approved', true)
+          .single();
+
+        // 그룹 멤버가 아닌 경우 접근 제한
+        if (error || !membership) {
+          const url = request.nextUrl.clone();
+          url.pathname = '/';
+          return NextResponse.redirect(url);
+        }
+      }
     }
   }
 

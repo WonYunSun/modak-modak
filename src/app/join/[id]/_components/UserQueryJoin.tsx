@@ -21,7 +21,11 @@ interface UserQueryJoinProps {
 }
 const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
   const searchParams = useSearchParams();
-  const initiaStep = searchParams.size ? 2 : 1;
+  
+  //회원가입과 멤버 신청을 마친 비로그인 유저 판별
+  const isJoinSuccessful = searchParams.get('is_successful');
+  const initiaStep = isJoinSuccessful ? 2 : 1;
+  
   const [joinStep, setJoinStep] = useState(initiaStep);
 
   const { id } = useParams();

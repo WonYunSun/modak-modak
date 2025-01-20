@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Comment, CommentUser } from '@components/comment/CommentCard';
+import { Comment, CommentUser } from '@app/groups/[id]/_components/CommentCard';
 
 import { createClient } from '@utils/supabase/client';
 
@@ -29,10 +29,10 @@ const useComments = (post_id: string) => {
   const {
     data: comments,
     isPending,
-    isError
+    isError,
   } = useQuery({
     queryKey: ['comments', post_id],
-    queryFn: () => fetchComments(post_id)
+    queryFn: () => fetchComments(post_id),
   });
 
   return { comments, isPending, isError };
