@@ -7,9 +7,8 @@ import { createClient } from '@utils/supabase/client';
 const supabase = createClient();
 
 const fetchUser = async () => {
-  const { data, error } = await supabase.auth.getSession();
-  if (error) throw new Error('failed to fetch user');
-  return data.session ? data.session.user : null;
+  const { data } = await supabase.auth.getUser();
+  return data.user ? data.user : null;
 };
 
 const useUser = () => {
@@ -20,7 +19,6 @@ const useUser = () => {
   } = useQuery({
     queryKey: ['user'],
     queryFn: fetchUser,
-    staleTime: 60 * 5 * 1000,
   });
   const queryClient = useQueryClient();
 
@@ -30,6 +28,8 @@ const useUser = () => {
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'USER_UPDATED') {
         queryClient.setQueryData(['user'], session?.user);
+      } else if (event === 'SIGNED_OUT') {
+        queryClient.removeQueries({ queryKey: ['user'] });
       }
     });
     return () => {
