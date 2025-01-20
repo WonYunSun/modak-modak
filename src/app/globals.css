@@ -46,18 +46,18 @@
     display: inline-block;
     width: 51px;
     height: 31px;
-}
-.toggle-btn .slider {
+  }
+  .toggle-btn .slider {
     position: absolute;
     cursor: pointer;
     inset: 0px;
-    background-color: #F1F1F1;
+    background-color: #f1f1f1;
     transition: all 0.2s ease 0s;
     border-radius: 34px;
-}
-.toggle-btn .slider::before {
+  }
+  .toggle-btn .slider::before {
     position: absolute;
-    content: "";
+    content: '';
     width: 25px;
     height: 25px;
     left: 2px;
@@ -66,13 +66,28 @@
     transition: all 0.2s ease 0s;
     border-radius: 50%;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 4px 0px;
-}
-.toggle-btn input:checked + .slider {
-    background-color: #34C759;
-}
-.toggle-btn input:checked + .slider::before {
+  }
+  .toggle-btn input:checked + .slider {
+    background-color: #34c759;
+  }
+  .toggle-btn input:checked + .slider::before {
     transform: translateX(22px);
+  }
 }
+
+.react-modal-sheet-container.comment-list {
+  height: 548px !important;
+}
+
+.react-modal-sheet-container.bottom-sheet {
+  height: 187px !important;
+}
+
+.bottom-open {
+  top: 0 !important;
+  bottom: 100px !important;
+  left: 0 !important;
+  right: 0 !important;
 }
 
 /* button 클래스 */
