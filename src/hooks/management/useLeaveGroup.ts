@@ -11,7 +11,6 @@ interface UseLeaveGroupParams {
 const useLeaveGroup = ({ groupId }: UseLeaveGroupParams) => {
   const queryClient = useQueryClient();
 
-  //유저 아이디 사용
   const { user, isError: userError } = useUser();
   const userId = user ? user.id : '';
 

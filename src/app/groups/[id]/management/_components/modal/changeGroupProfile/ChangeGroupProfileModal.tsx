@@ -7,13 +7,14 @@ import ProfileInputs from '@app/groups/[id]/management/_components/modal/changeG
 import ProfileConfirmBtns from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileConfirmBtns';
 import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
 import useUpdateGroupProfile from '@hooks/management/useUpdateGroupProfile';
-import { Modification } from '@components/icons';
+import { Modification, WraningIcon } from '@components/icons';
+import Spinner from '@components/common/Spinner';
 
 const ChangeGroupProfileModal = () => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
   const { data, isPending, isError } = useFetchGetGroup(groupId);
-  const updateGroupProfile = useUpdateGroupProfile({ groupId });
+  const { mutate: updateGroupProfile } = useUpdateGroupProfile({ groupId });
 
   const [groupProfileImg, setGroupProfileImg] = useState<File | null>(null);
   const [groupProfileImgUrl, setGroupProfileImgUrl] = useState('');
@@ -44,25 +45,31 @@ const ChangeGroupProfileModal = () => {
 
   if (isPending)
     return (
-      <div className="h-[444px] p-5 flex flex-col items-center justify-center">
-        <div>Loading...</div>
+      <div className="h-[484px] p-5 flex flex-col items-center justify-center">
+        <Spinner />
       </div>
     );
-  if (isError) return <div>Error!</div>;
+
+  if (isError)
+    return (
+      <div className="h-[484px] p-5 flex flex-col items-center justify-center">
+        <WraningIcon />
+        <p className="pt-3 text-xl text-gray-900 font-bold">에러가 발생했어요!</p>
+        <p className="pt-4 text-xs text-gray-600">다시 한번 시도해주세요</p>
+      </div>
+    );
 
   return (
     <div className="p-5 flex flex-col items-center">
       <h4 className="mb-6 font-semibold text-xl text-gray-900 text-center">모임 프로필 변경</h4>
       <div>
         <div className="m-auto w-24 h-24 relative">
-          <div className="w-full h-full rounded-xl overflow-hidden">
-            <Image
-              src={groupProfileImgUrl ? groupProfileImgUrl : ''}
-              alt={'그룹 프로필'}
-              width={100}
-              height={100}
-              className="w-full h-full"
-            />
+          <div className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center">
+            {groupProfileImgUrl.length ? (
+              <Image src={groupProfileImgUrl} alt={'그룹 프로필'} width={100} height={100} className="w-full h-full" />
+            ) : (
+              <div className="w-full h-full bg-gray-400"></div>
+            )}
           </div>
           <label htmlFor="profilePhoto" className="block absolute bottom-[-8px] right-[-14px]">
             <Modification />

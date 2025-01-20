@@ -5,7 +5,6 @@ import { fetchGroupCardInfos } from '@queries/home/fetchGroupInfo';
 import useUser from '@hooks/useUser';
 
 const useFetchGroupList = () => {
-  //유저 아이디 사용
   const { user, isError: userError } = useUser();
   const userId = user ? user.id : null;
 
