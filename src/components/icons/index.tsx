@@ -595,6 +595,29 @@ export const CalendarIcon = ({ className }: IconProps) => (
   </svg>
 );
 
+export const CalendarIconSmall = () => {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M12.1494 3.33331H3.85315C3.19859 3.33331 2.66797 3.86394 2.66797 4.5185V12.8148C2.66797 13.4694 3.19859 14 3.85315 14H12.1494C12.804 14 13.3346 13.4694 13.3346 12.8148V4.5185C13.3346 3.86394 12.804 3.33331 12.1494 3.33331Z"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path d="M10.668 2V4.66667" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M5.33203 2V4.66667" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path
+        d="M2.66797 6.66669H13.3346"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
 export const ProfileAlter = ({ className }: IconProps) => {
   return (
     <svg
