@@ -11,7 +11,6 @@ export interface IsAlreadyJoinParams {
   groupId: GroupsType['id'];
 }
 const useIsAlreadyJoin = ({ groupId }: IsAlreadyJoinParams) => {
-  //유저 아이디 사용
   const { user, isError: userError } = useUser();
   const userId = user ? user.id : '';
 

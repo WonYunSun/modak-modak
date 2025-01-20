@@ -9,7 +9,6 @@ interface UseFetchCurMembersParams {
   groupId: GroupsType['id'];
 }
 const useFetchCurMembers = ({ groupId }: UseFetchCurMembersParams) => {
-  //유저 아이디 사용
   const { user, isError: userError } = useUser();
   const userId = user ? user.id : null;
 

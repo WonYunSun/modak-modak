@@ -9,7 +9,6 @@ interface UseFetchWaitingMembersParams {
   groupId: GroupsType['id'];
 }
 const useFetchWaitingMembers = ({ groupId }: UseFetchWaitingMembersParams) => {
-  //유저 아이디 사용
   const { user, isError: userError } = useUser();
   const userId = user ? user.id : null;
 
