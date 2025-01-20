@@ -7,7 +7,7 @@ import ProfileInputs from '@app/groups/[id]/management/_components/modal/changeG
 import ProfileConfirmBtns from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileConfirmBtns';
 import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
 import useUpdateGroupProfile from '@hooks/management/useUpdateGroupProfile';
-import { Modification, WraningIcon } from '@components/icons';
+import { Modification, WarningIcon  } from '@components/icons';
 import Spinner from '@components/common/Spinner';
 
 const ChangeGroupProfileModal = () => {
@@ -53,7 +53,7 @@ const ChangeGroupProfileModal = () => {
   if (isError)
     return (
       <div className="h-[484px] p-5 flex flex-col items-center justify-center">
-        <WraningIcon />
+        <WarningIcon />
         <p className="pt-3 text-xl text-gray-900 font-bold">에러가 발생했어요!</p>
         <p className="pt-4 text-xs text-gray-600">다시 한번 시도해주세요</p>
       </div>

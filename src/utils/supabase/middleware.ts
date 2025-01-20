@@ -1,5 +1,4 @@
 import { createServerClient } from '@supabase/ssr';
-import { User } from '@supabase/supabase-js';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function updateSession(request: NextRequest) {
@@ -35,13 +34,13 @@ export async function updateSession(request: NextRequest) {
     }
 
     // 인증이 필요한 페이지인데 로그인하지 않은 경우 로그인 페이지로 이동
-    if (!isAuthenticated(user) && needsAuthentication(pathname)) {
+    if (!user && needsAuthentication(pathname)) {
       const url = request.nextUrl.clone();
       url.pathname = '/login';
       return NextResponse.redirect(url);
     }
     // 로그인 한 상태인데 로그인 페이지에 접근하려는 경우 home으로 이동
-    if (isAuthenticated(user) && pathname.startsWith('/login')) {
+    if (user && pathname.startsWith('/login')) {
       return NextResponse.redirect(request.nextUrl.origin);
     }
     // 유저 추가 정보 입력이 필요하지 않은데 회원가입 페이지에 접근하려는 경우 home으로 이동
@@ -88,10 +87,6 @@ export async function updateSession(request: NextRequest) {
 
   return supabaseResponse;
 }
-
-const isAuthenticated = (user: User | null) => {
-  return user && user.user_metadata.nickname;
-};
 
 const isPublicRoute = (pathname: string) => {
   const paths: string[] = ['/api/auth/', '/signup/success', '/join'];

@@ -1,10 +1,10 @@
 'use client';
 
-import Button from '@components/common/Button';
+import { useSearchParams } from 'next/navigation';
 import { Provider } from '@supabase/supabase-js';
+import Button from '@components/common/Button';
 import { GoogleLogo, KakaoLogo } from '@components/icons';
 import { createClient } from '@utils/supabase/client';
-import { useSearchParams } from 'next/navigation';
 
 const SocialLogins = () => {
   const params = useSearchParams();

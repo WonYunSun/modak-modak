@@ -22,7 +22,7 @@ const MyPageComponent = () => {
 
   return (
     <>
-      <Header label="마이 페이지" home={false} />
+      <Header label="마이 페이지" home={false} isScrolled={true} />
       <ProfileSection setModalStatus={setModalStatus} />
       <MySchedule />
       <UserManagement setModalStatus={setModalStatus} />

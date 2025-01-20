@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { createClient } from '@utils/supabase/server';
 import { queryJoinGroup } from '@queries/join/queryJoinGroup';
-import { SupabaseClient } from '@supabase/supabase-js';
 
 export const GET = async (request: Request) => {
   const supabase = await createClient();

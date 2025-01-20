@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
-import Onboarding from './_components/Onboarding';
-import SocialLogins from './_components/SocialLogins';
+import Onboarding from '@app/login/_components/Onboarding';
+import SocialLogins from '@app/login/_components/SocialLogins';
 
 const LoginPage = () => {
   /**
