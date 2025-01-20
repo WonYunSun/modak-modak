@@ -16,11 +16,7 @@ const ScheduleCardList = () => {
   const router = useRouter();
   // const [scheduleData, setScheduleData] = useState<ScheduleType[]>([]);
 
-  const {
-    data: scheduleData = [],
-    isPending,
-    isError,
-  } = useQuery({
+  const { data: scheduleData = [], isPending } = useQuery({
     queryKey: ['GroupSchedules', groupId], // queryKey로 groupId 지정
     queryFn: async () => (await fetchSchedulesBygroupId(groupId)) || [], // fetch 함수 호출
     enabled: !!groupId, // groupId가 있을 때만 fetch
