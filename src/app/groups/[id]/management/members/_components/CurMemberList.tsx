@@ -40,7 +40,7 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
           <span className="text-primary">{curMemberList ? curMemberList.others.length + 1 : '...'}</span>
         </div>
       </div>
-      <div>
+      <div className='divide-y divide-gray-200'>
         {curMemberList && (
           <>
             {isLeaderUser ? (

@@ -5,22 +5,23 @@ import ManageMembersBtn from '@app/groups/[id]/management/members/_components/Ma
 import usePermitNewMember from '@hooks/management/usePermitNewMember';
 import useRefuseNewMember from '@hooks/management/useRefuseNewMember';
 import { UsersType } from '@ts/supabaseTableRowTypes';
+import useUserToManageStore from '@stores/useUserToManage';
 
 interface MemberCardBtnsProps {
   memberId: UsersType['id'];
-  toastOpener: (() => void) | null;
   isLeader: boolean;
   mode: 'curMembers' | 'waiting';
 }
-const MemberCardLeaderBtns = ({ memberId, isLeader, mode, toastOpener }: MemberCardBtnsProps) => {
+const MemberCardLeaderBtns = ({ memberId, isLeader, mode }: MemberCardBtnsProps) => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
+  const { setUserPermitted } = useUserToManageStore();
   const permitNewMember = usePermitNewMember({ groupId, waitingUserId: memberId });
   const refuseNewMember = useRefuseNewMember({ groupId, waitingUserId: memberId });
 
   const onPermit = async () => {
     permitNewMember();
-    if (toastOpener) toastOpener();
+    setUserPermitted(true);
   };
 
   const onRefuse = async () => {
@@ -30,7 +31,13 @@ const MemberCardLeaderBtns = ({ memberId, isLeader, mode, toastOpener }: MemberC
   return (
     <>
       {mode === 'curMembers' &&
-        (isLeader ? <span className="text-primary">대표</span> : <ManageMembersBtn memberId={memberId} />)}
+        (isLeader ? (
+          <div className="w-[40px] h-[40px] flex justify-center items-center">
+            <span className="text-primary">대표</span>
+          </div>
+        ) : (
+          <ManageMembersBtn memberId={memberId} />
+        ))}
       {mode === 'waiting' && (
         <div>
           <button type="button" onClick={onRefuse}>
