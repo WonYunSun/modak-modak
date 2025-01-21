@@ -8,7 +8,7 @@ import Button from '@components/common/Button';
 import { Plus } from '@components/icons';
 
 import { useFetchGetPost } from '@hooks/post/useFetchGetPost';
-import useUser from '@hooks/useUser';
+//import useUser from '@hooks/useUser';
 import PostSelectScheduleCard from '@app/groups/[id]/posts/new/select/_components/PostSelectScheduleCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -28,7 +28,7 @@ export const PostEditForm = () => {
   const editPostId = Array.isArray(postId) ? postId[0] : postId;
 
   const { data, isPending, isError } = useFetchGetPost(editPostId);
-  const { user } = useUser();
+  // const { user } = useUser();
   const { mutate: editPostMutation } = useFetchEditPost(groupId, editPostId);
 
   // 일정 선택 후에도 입력한 데이터 변화 없도록 세팅
