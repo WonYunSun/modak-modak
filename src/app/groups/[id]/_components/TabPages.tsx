@@ -19,7 +19,7 @@ const TabPages = forwardRef<HTMLDivElement, TabPagesProps>(({ isScrolled }, ref)
       <div ref={ref} />
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} isScrolled={isScrolled} />
       <div className="">
-        {activeTab === 'posts' && <PostList setActiveTab={setActiveTab} />}
+        {activeTab === 'posts' && <PostList />}
         {activeTab === 'photos' && <PhotoList />}
         {activeTab === 'schedules' && <ScheduleCardList />}
       </div>

@@ -16,7 +16,7 @@ const PostTextArea = () => {
       <textarea
         value={content}
         onChange={handleChange}
-        className="w-full h-60 p-3 border border-gray-300 rounded-xl text-sm"
+        className="w-full h-60 p-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-black"
         placeholder={`공유하고 싶은 추억을 자유롭게 작성해주세요.\n(최대 2000자)`}
       />
     </div>

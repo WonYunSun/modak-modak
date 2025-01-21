@@ -60,7 +60,7 @@ const ChangeGroupProfileModal = () => {
     );
 
   return (
-    <div className="p-5 flex flex-col items-center">
+    <div className="py-5 w-full flex flex-col items-center">
       <h4 className="mb-6 font-semibold text-xl text-gray-900 text-center">모임 프로필 변경</h4>
       <div>
         <div className="m-auto w-24 h-24 relative">

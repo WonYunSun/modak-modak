@@ -17,11 +17,7 @@ import { useNewPostStore } from '@stores/useNewPostStore';
 import NoPost from '@app/groups/[id]/_components/NoPost';
 import NoSearch from '@app/groups/[id]/_components/NoSearch';
 
-export interface TabsProps {
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const PostList = ({ setActiveTab }: TabsProps) => {
+const PostList = () => {
   const router = useRouter();
 
   const { reset } = useNewPostStore();
@@ -51,7 +47,7 @@ const PostList = ({ setActiveTab }: TabsProps) => {
 
       {/* data 없는 경우 NoPost 랜더링 또는 Post 랜더링, 검색 결과 없는 경우 NoSearch*/}
       {!data || data.length === 0 ? (
-        <NoPost setActiveTab={setActiveTab} /> // 데이터 자체가 없을 때
+        <NoPost /> // 데이터 자체가 없을 때
       ) : !filteredPosts || filteredPosts.length === 0 ? (
         <NoSearch /> // 검색 결과가 없을 때
       ) : (

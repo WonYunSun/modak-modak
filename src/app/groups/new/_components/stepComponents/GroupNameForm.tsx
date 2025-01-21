@@ -52,8 +52,10 @@ const GroupNameForm = ({ onNext, onPrev, prevData }: GroupNameFormProps) => {
 
   return (
     <Layout isDisabled={isDisabled} onNext={handleNext} onPrev={onPrev}>
-      <LabeledTextInput {...nameData} value={values.groupName} onChange={handleChange} />
-      <LabeledTextInput {...descriptionData} value={values.groupDescription} onChange={handleChange} />
+      <div className="space-y-6">
+        <LabeledTextInput {...nameData} value={values.groupName} onChange={handleChange} />
+        <LabeledTextInput {...descriptionData} value={values.groupDescription} onChange={handleChange} />
+      </div>
     </Layout>
   );
 };

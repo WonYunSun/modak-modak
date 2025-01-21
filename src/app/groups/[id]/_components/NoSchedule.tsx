@@ -12,7 +12,7 @@ const NoSchedule = () => {
 
   return (
     <>
-      <div className="mx-auto mt-[3.375rem] text-center justify-center">
+      <div className="mx-auto mt-[7.5rem] text-center justify-center">
         <h4 className="pb-5 text-2xl font-bold">아직 만들어진 일정이 없어요!</h4>
         <p className="text-gray-700 text-lg">지난 일정을 등록하고</p>
         <p className="text-gray-700 text-lg">우리만의 추억을 공유해보세요</p>
