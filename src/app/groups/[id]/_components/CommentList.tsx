@@ -29,10 +29,17 @@ const CommentList = ({ isOpen, onClose, postId }: CommentListProps) => {
       setKeyboardHeight(newKeyboardHeight);
     };
 
-    window.visualViewport?.addEventListener('resize', handleVisualViewportResize);
+    // iOS 환경인지 확인
+    const isIOS = /iPhone|iPad/.test(window.navigator.userAgent);
+
+    if (isIOS) {
+      window.visualViewport?.addEventListener('resize', handleVisualViewportResize);
+    }
 
     return () => {
-      window.visualViewport?.removeEventListener('resize', handleVisualViewportResize);
+      if (isIOS) {
+        window.visualViewport?.removeEventListener('resize', handleVisualViewportResize);
+      }
     };
   }, []);
 
