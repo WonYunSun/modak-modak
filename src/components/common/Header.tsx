@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import { Notification, PrevArrow, Setting } from '@components/icons';
 
@@ -18,9 +18,16 @@ interface HeaderProps {
 const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) => {
   const router = useRouter();
 
-  const handleNavigation = () => router.back();
+  const { id } = useParams();
+  const groupId = Array.isArray(id) ? id[0] : id;
 
   const { groupName } = useHeaderStore();
+
+  const handleNavigation = () => router.back();
+
+  const handleGroupManagement = (groupId: string) => {
+    router.push(`/groups/${groupId}/management`);
+  };
 
   return (
     <header
@@ -30,7 +37,7 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
         {home ? (
           <Image src="/icons/modakLogo.webp" width={80} height={34} alt="Modak Modak Logo" className="w-20 h-10" />
         ) : (
-          <div className="w-20 p-2 flex items-center justify-start">
+          <div className={`${!hasSetting ? 'w-10' : 'w-20'} flex items-center justify-start`}>
             <PrevArrow onClick={handleNavigation} className="w-6 h-6" />
           </div>
         )}
@@ -47,7 +54,7 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
             <Notification className="cursor-pointer" />
           </div>
           {hasSetting && (
-            <div className="w-10 p-2">
+            <div className="w-10 p-2" onClick={() => handleGroupManagement(groupId)}>
               <Setting className="cursor-pointer" />
             </div>
           )}

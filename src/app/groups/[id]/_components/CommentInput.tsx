@@ -27,6 +27,12 @@ const CommentInput = ({ postId }: CommentInputProps) => {
 
   const queryClient = useQueryClient();
 
+  const handleFocus = () => {
+    if (textAreaRef.current) {
+      textAreaRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  };
+
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setCommentValue(value);
@@ -71,23 +77,26 @@ const CommentInput = ({ postId }: CommentInputProps) => {
   };
 
   return (
-    <div className="w-[92%] bg-white absolute bottom-[5%] left-1/2 transform translate-x-[-50%] px-3 py-2 border rounded-lg h-auto flex items-center gap-2">
-      <textarea
-        rows={1}
-        ref={textAreaRef}
-        value={commentValue}
-        onChange={handleInput}
-        placeholder="댓글 추가..."
-        className="overflow-hidden resize-none border-none outline-none max-h-[100px] w-[90%] min-h-6 h-6 text-sm"
-      />
-      <Button
-        type="button"
-        label="등록"
-        onClick={handleSubmit}
-        className={`w-[10%] text-sm font-semibold leading-[140%] ${
-          commentValue ? '!bg-inherit text-sm !text-primary' : '!bg-inherit text-sm !text-gray-400'
-        }`}
-      />
+    <div className="min-h-[20%] relative">
+      <div className="w-[92%] bg-white absolute bottom-[25%] left-1/2 transform translate-x-[-50%] px-3 py-2 border rounded-lg h-auto flex items-center gap-2">
+        <textarea
+          rows={1}
+          onFocus={handleFocus}
+          ref={textAreaRef}
+          value={commentValue}
+          onChange={handleInput}
+          placeholder="댓글 추가..."
+          className="overflow-hidden resize-none border-none outline-none max-h-[100px] w-[90%] min-h-6 h-6 text-sm"
+        />
+        <Button
+          type="button"
+          label="등록"
+          onClick={handleSubmit}
+          className={`w-[10%] text-sm font-semibold leading-[140%] ${
+            commentValue ? '!bg-inherit text-sm !text-primary' : '!bg-inherit text-sm !text-gray-400'
+          }`}
+        />
+      </div>
     </div>
   );
 };

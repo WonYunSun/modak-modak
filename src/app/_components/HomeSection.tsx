@@ -7,7 +7,6 @@ import Button from '@components/common/Button';
 import Header from '@components/common/Header';
 import { Plus } from '@components/icons';
 
-
 const HomeSection = () => {
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
