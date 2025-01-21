@@ -6,13 +6,6 @@ import GlobalLoading from '@app/GlobalLoading';
 import GlobalError from '@app/GlobalError';
 import useFetchCurMembers from '@hooks/management/useFetchCurMembers';
 
-const DEFAULTDATA = {
-  group_id: '',
-  is_approved: true,
-  is_leader: false,
-  users: { id: '', nickname: '', profile_image: '' },
-};
-
 interface CurMemberListProps {
   isLeaderUser: boolean;
 }
@@ -21,13 +14,14 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
   const groupId = Array.isArray(id) ? id[0] : id;
 
   const { data: curMemberList, isPending, isError } = useFetchCurMembers({ groupId });
-  if (isPending) return <GlobalLoading/>;
-  if (isError) return <GlobalError/>;
+
+  if (isPending) return <GlobalLoading />;
+  if (isError) return <GlobalError />;
 
   //유저가 대표가 아닐 때 멤버 데이터에서 대표 데이터를 뽑아내기
   const filteredLeaderData =
     isLeaderUser || !curMemberList ? null : curMemberList.others.find((member) => member.is_leader === true);
-  const leaderData = filteredLeaderData ? filteredLeaderData : DEFAULTDATA;
+  const leaderData = filteredLeaderData;
 
   //대표를 제외한 멤버들의 데이터
   const filteredData = !curMemberList ? null : curMemberList.others.filter((member) => member.is_leader !== true);
@@ -40,7 +34,7 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
           <span className="text-primary">{curMemberList ? curMemberList.others.length + 1 : '...'}</span>
         </div>
       </div>
-      <div className='divide-y divide-gray-200'>
+      <div className="divide-y divide-gray-200">
         {curMemberList && (
           <>
             {isLeaderUser ? (
@@ -56,7 +50,9 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
             ) : (
               <>
                 <MemberCard memberData={curMemberList.me} isLeaderUser={isLeaderUser} mode={'curMembers'} isMe={true} />
-                <MemberCard memberData={leaderData} isLeaderUser={isLeaderUser} mode={'curMembers'} isLeader={true} />
+                {leaderData && (
+                  <MemberCard memberData={leaderData} isLeaderUser={isLeaderUser} mode={'curMembers'} isLeader={true} />
+                )}
               </>
             )}
             {filteredData?.map((member) => (
