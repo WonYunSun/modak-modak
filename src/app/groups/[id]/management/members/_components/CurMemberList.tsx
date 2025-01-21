@@ -24,12 +24,12 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
   if (isPending) return <GlobalLoading/>;
   if (isError) return <GlobalError/>;
 
-  //유저가 리더가 아닐 때 멤버 데이터에서 리더 데이터를 뽑아내기
+  //유저가 대표가 아닐 때 멤버 데이터에서 대표 데이터를 뽑아내기
   const filteredLeaderData =
     isLeaderUser || !curMemberList ? null : curMemberList.others.find((member) => member.is_leader === true);
   const leaderData = filteredLeaderData ? filteredLeaderData : DEFAULTDATA;
 
-  //리더를 제외한 멤버들의 데이터
+  //대표를 제외한 멤버들의 데이터
   const filteredData = !curMemberList ? null : curMemberList.others.filter((member) => member.is_leader !== true);
 
   return (

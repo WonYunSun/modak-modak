@@ -32,7 +32,7 @@ const UserQueryJoinStepTwo = () => {
         </div>
       </div>
       <div className="px-5 w-full absolute bottom-11">
-        <Button type="button" className="full-btn" onClick={onClickHome} label="홈페이지로 가기" />
+        <Button type="button" className="full-btn" onClick={onClickHome} label="홈으로 가기" />
       </div>
     </div>
   );

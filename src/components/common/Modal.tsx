@@ -14,7 +14,7 @@ const Modal = ({ children, onClickOutSide }: ModalProps) => {
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
       if (onClickOutSide) onClickOutSide();
-        closeModal();
+      closeModal();
     }
   };
 
@@ -27,7 +27,7 @@ const Modal = ({ children, onClickOutSide }: ModalProps) => {
     >
       <div
         ref={modalRef}
-        className="bg-[#FFF] rounded-[12px] w-[80%] max-w-md px-5 py-7 flex flex-col items-center justify-center"
+        className="bg-[#FFF] rounded-[12px] min-w-[19.438rem] px-5 py-7 flex flex-col items-center justify-center"
       >
         {children} {/* 내부 요소 렌더링 */}
       </div>
