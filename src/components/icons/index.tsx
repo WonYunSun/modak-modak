@@ -601,18 +601,18 @@ export const CalendarIconSmall = () => {
       <path
         d="M12.1494 3.33331H3.85315C3.19859 3.33331 2.66797 3.86394 2.66797 4.5185V12.8148C2.66797 13.4694 3.19859 14 3.85315 14H12.1494C12.804 14 13.3346 13.4694 13.3346 12.8148V4.5185C13.3346 3.86394 12.804 3.33331 12.1494 3.33331Z"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <path d="M10.668 2V4.66667" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M5.33203 2V4.66667" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M10.668 2V4.66667" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5.33203 2V4.66667" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       <path
         d="M2.66797 6.66669H13.3346"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -705,14 +705,14 @@ export const AddMember = ({ className }: IconProps) => {
         d="M9.5 10.5C9.95963 10.5 10.4148 10.4095 10.8394 10.2336C11.264 10.0577 11.6499 9.79988 11.9749 9.47487C12.2999 9.14987 12.5577 8.76403 12.7336 8.33939C12.9095 7.91475 13 7.45963 13 7C13 6.54037 12.9095 6.08525 12.7336 5.66061C12.5577 5.23597 12.2999 4.85013 11.9749 4.52513C11.6499 4.20012 11.264 3.94231 10.8394 3.76642C10.4148 3.59053 9.95963 3.5 9.5 3.5C8.57174 3.5 7.6815 3.86875 7.02513 4.52513C6.36875 5.1815 6 6.07174 6 7C6 7.92826 6.36875 8.8185 7.02513 9.47487C7.6815 10.1313 8.57174 10.5 9.5 10.5Z"
         stroke="white"
         strokeWidth="1.5"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M18 15V21M15 18H21M13.5 14.5H9.4C7.16 14.5 6.04 14.5 5.184 14.936C4.43139 15.3195 3.81949 15.9314 3.436 16.684C3 17.54 3 18.66 3 20.9V21.5H13.5"
         stroke="white"
         strokeWidth="1.5"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -837,7 +837,7 @@ export const Cancel = ({ className, onClick }: IconProps) => {
         d="M12.657 12.657L1.34326 1.34326M12.657 1.34326L1.34326 12.657"
         stroke="#A1A1AA"
         strokeWidth="2"
-        stroke-linecap="round"
+        strokeLinecap="round"
       />
     </svg>
   );
