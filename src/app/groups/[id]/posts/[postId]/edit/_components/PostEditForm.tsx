@@ -70,13 +70,13 @@ export const PostEditForm = () => {
   };
 
   const handleSubmit = () => {
-    const payload = {
+    const editPostData = {
       postId: editPostId,
       content: text,
       scheduleId: selectedScheduleId,
     };
 
-    editPostMutation(payload);
+    editPostMutation(editPostData);
     router.push(`/groups/${groupId}`);
 
     reset();
