@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { Viewport } from 'next';
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -20,12 +21,13 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: '모닥모닥',
   description: '사람들이 함께 모여 이야기를 나누고, 추억을 쌓는 공간',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
