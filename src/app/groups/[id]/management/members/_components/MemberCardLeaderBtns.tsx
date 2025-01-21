@@ -33,15 +33,15 @@ const MemberCardLeaderBtns = ({ memberId, isLeader, mode, toastOpener }: MemberC
         (isLeader ? <span className="text-primary">대표</span> : <ManageMembersBtn memberId={memberId} />)}
       {mode === 'waiting' && (
         <div>
-          <button type="button" onClick={onPermit}>
-            수락
+          <button type="button" onClick={onRefuse}>
+            거절
           </button>
           <button
             type="button"
-            onClick={onRefuse}
             className="ml-4 px-2.5 py-[0.438rem] bg-[#3B82F6] rounded-lg text-white font-semibold"
+            onClick={onPermit}
           >
-            거절
+            수락
           </button>
         </div>
       )}

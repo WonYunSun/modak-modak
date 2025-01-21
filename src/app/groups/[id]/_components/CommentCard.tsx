@@ -130,8 +130,8 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
           <span className="text-xs font-normal leading-[140%] text-gray-500">{formatTimeAgo(comment.created_at)}</span>
         </div>
         {user && user.id === comment.user_id && <Menu className="w-6 h-6 cursor-pointer" onClick={handleSheetOpen} />}
-        <BottomSheet isOpen={openSheet} onClose={handleSheetClose} snapPoint={[0.25]}>
-          <div className="w-full h-full bg-white rounded-xl divide-y flex flex-col justify-start overflow-hidden">
+        <BottomSheet isOpen={openSheet} onClose={handleSheetClose} snapPoint={[0.2]}>
+          <div className="w-full h-28 bg-white rounded-xl divide-y flex flex-col justify-start overflow-hidden">
             <Button
               type="button"
               label="수정하기"
@@ -151,7 +151,8 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
           </div>
         </BottomSheet>
       </div>
-      <div className="mt-2">
+      {/* // 여기 클래스 수정함 */}
+      <div>
         <p className="text-sm font-normal leading-[140%] text-gray-900 pl-11 whitespace-pre-wrap break-words">
           {comment.content}
         </p>
