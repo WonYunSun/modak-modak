@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { Viewport } from 'next';
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -22,6 +23,13 @@ export const metadata: Metadata = {
   description: '사람들이 함께 모여 이야기를 나누고, 추억을 쌓는 공간',
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,9 +37,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
-      </head>
       <body className={`${pretendard.className} antialiased`}>
         <Providers>
           {children}
