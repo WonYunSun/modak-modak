@@ -34,9 +34,9 @@ export const PostEditForm = () => {
   // 일정 선택 후에도 입력한 데이터 변화 없도록 세팅
   useEffect(() => {
     // 게시글 수정 페이지에 url로 접근한 경우, 글 작성자 외 접근 차단
-    if (data?.user_id !== user?.id) {
-      return router.push(`/groups/${groupId}`);
-    }
+    // if (data?.user_id !== user?.id) {
+    //   return router.push(`/groups/${groupId}`);
+    // }
 
     // 랜더링 시 일정 id 전역으로 세팅
     if (data?.schedule_id && !selectedScheduleId) {
