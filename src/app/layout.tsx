@@ -20,6 +20,12 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: '모닥모닥',
   description: '사람들이 함께 모여 이야기를 나누고, 추억을 쌓는 공간',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({
@@ -29,9 +35,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
-      </head>
       <body className={`${pretendard.className} antialiased`}>
         <Providers>
           {children}

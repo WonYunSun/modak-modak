@@ -75,6 +75,10 @@
   }
 }
 
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 .react-modal-sheet-container.comment-list {
   height: 548px !important;
 }
