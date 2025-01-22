@@ -8,7 +8,7 @@ type Props = {
 };
 
 const page = ({ params }: Props) => {
-  return <ScheduleDetail scheduleId={params.scheduleid} />;
+  return <ScheduleDetail scheduleId={params.scheduleid} groupId={params.id} />;
 };
 
 export default page;

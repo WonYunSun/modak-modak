@@ -9,7 +9,7 @@ import { ScheduleInfo } from '@app/groups/[id]/schedules/_components/detailCompo
 import GlobalError from '@app/GlobalError';
 import Spinner from '@components/common/Spinner';
 
-export const ScheduleDetail = ({ scheduleId }: { scheduleId: string }) => {
+export const ScheduleDetail = ({ scheduleId, groupId }: { scheduleId: string; groupId: string }) => {
   const [isEdit, setIsEdit] = useState(false);
   const { data, isPending, isError, refetch } = useQuery({
     queryKey: ['scheduleId', scheduleId],
@@ -24,9 +24,9 @@ export const ScheduleDetail = ({ scheduleId }: { scheduleId: string }) => {
     <div className="inner">
       <FunnelHeader label={isEdit ? '일정 수정' : '일정 상세'} />
       {isEdit ? (
-        <ScheduleEdit schedule={data} setIsEdit={setIsEdit} refetch={refetch} />
+        <ScheduleEdit schedule={data} groupId={groupId} setIsEdit={setIsEdit} refetch={refetch} />
       ) : (
-        <ScheduleInfo schedule={data} setIsEdit={setIsEdit} />
+        <ScheduleInfo schedule={data} groupId={groupId} setIsEdit={setIsEdit} />
       )}
     </div>
   );
