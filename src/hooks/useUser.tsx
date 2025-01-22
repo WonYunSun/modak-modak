@@ -13,7 +13,7 @@ const fetchUser = async () => {
 
 const useUser = () => {
   const {
-    data: user,
+    data: user = null,
     isPending,
     isError,
   } = useQuery({

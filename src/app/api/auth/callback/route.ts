@@ -1,7 +1,8 @@
+'use server';
+
 import { NextResponse } from 'next/server';
-import { SupabaseClient } from '@supabase/supabase-js';
 import { createClient } from '@utils/supabase/server';
-import { queryJoinGroup } from '@queries/join/queryJoinGroup';
+import { joinGroup } from '@lib/join/joinGroup';
 
 export const GET = async (request: Request) => {
   const supabase = await createClient();
@@ -16,33 +17,13 @@ export const GET = async (request: Request) => {
   }
   await supabase.auth.exchangeCodeForSession(code);
 
-  if (referrer === 'join') {
-    const result = await joinGroup({ supabase, data });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (referrer === 'join' && user?.user_metadata.nickname) {
+    const result = await joinGroup({ groupId: data, user });
     return NextResponse.redirect(`${origin}/join/${data}?is_successful=${result}`);
   }
-  return NextResponse.redirect(`${origin}/signup`);
-};
-
-interface joinGroupParams {
-  supabase: SupabaseClient;
-  data: string | null;
-}
-
-const joinGroup = async ({ supabase, data }: joinGroupParams) => {
-  try {
-    if (!data) throw new Error();
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser();
-    if (authError) throw new Error();
-    if (user && data) {
-      await queryJoinGroup({ groupId: data, userId: user.id });
-    } else {
-      throw new Error();
-    }
-    return true;
-  } catch {
-    return false;
-  }
+  return NextResponse.redirect(`${origin}/signup?referrer=${referrer}&data=${data}`);
 };
