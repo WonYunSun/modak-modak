@@ -12,8 +12,8 @@ export const useFetchEditPost = (groupId: string, editPostId: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (payload: EditPostProps) => {
-      await editPost(payload);
+    mutationFn: async (editPostData: EditPostProps) => {
+      await editPost(editPostData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [editPostId] });
