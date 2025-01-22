@@ -275,7 +275,7 @@ export const Setting = ({ className }: IconProps) => {
   );
 };
 
-export const Home = ({ className, active }: IconProps) => {
+export const Home = ({ className, active = false }: IconProps) => {
   return (
     <svg
       className={className}

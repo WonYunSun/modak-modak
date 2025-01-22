@@ -3,14 +3,15 @@ import { Sheet } from 'react-modal-sheet';
 interface BottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
-  snapPoint: number[];
+  snapPoint?: number[];
+  className?: string;
   children: React.ReactNode;
 }
 
-const BottomSheet = ({ children, isOpen, onClose, snapPoint }: BottomSheetProps) => {
+const BottomSheet = ({ children, isOpen, onClose, snapPoint, className }: BottomSheetProps) => {
   return (
     <Sheet isOpen={isOpen} onClose={onClose} snapPoints={snapPoint}>
-      <Sheet.Container className="bottom-sheet">
+      <Sheet.Container className={className ? className : 'bottom-sheet'}>
         <Sheet.Header className="mb-[21px]">
           <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mt-3" />
         </Sheet.Header>

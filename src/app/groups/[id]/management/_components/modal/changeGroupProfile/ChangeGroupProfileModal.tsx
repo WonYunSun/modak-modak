@@ -66,7 +66,13 @@ const ChangeGroupProfileModal = () => {
         <div className="m-auto w-24 h-24 relative">
           <div className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center">
             {groupProfileImgUrl.length ? (
-              <Image src={groupProfileImgUrl} alt={'그룹 프로필'} width={100} height={100} className="w-full h-full" />
+              <Image
+                src={groupProfileImgUrl}
+                alt={'그룹 프로필'}
+                width={100}
+                height={100}
+                className="w-full h-full object-cover"
+              />
             ) : (
               <div className="w-full h-full bg-gray-400"></div>
             )}
@@ -93,10 +99,7 @@ const ChangeGroupProfileModal = () => {
         />
       </div>
       <div className="w-full mt-6 flex gap-2 justify-center">
-        <ProfileConfirmBtns
-          onConfirm={onConfirmUpdate}
-          disabled={!!(groupName === '' || description === '')}
-        />
+        <ProfileConfirmBtns onConfirm={onConfirmUpdate} disabled={!!(groupName === '' || description === '')} />
       </div>
     </div>
   );

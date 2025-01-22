@@ -87,6 +87,10 @@ body {
   height: 187px !important;
 }
 
+.react-modal-sheet-container.management {
+  height: 130px !important;
+}
+
 .bottom-open {
   top: 0 !important;
   bottom: 100px !important;

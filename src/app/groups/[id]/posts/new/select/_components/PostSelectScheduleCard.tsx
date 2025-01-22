@@ -27,7 +27,7 @@ const PostSelectScheduleCard = () => {
   }, [selectedScheduleId]);
 
   return (
-    <div className="px-5">
+    <div className="px-5 min-h-40">
       {schedule && (
         <ScheduleCard
           name={schedule.name}

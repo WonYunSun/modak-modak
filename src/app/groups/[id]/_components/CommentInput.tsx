@@ -75,7 +75,6 @@ const CommentInput = ({ postId }: CommentInputProps) => {
       <div className="w-[92%] bg-white absolute bottom-[25%] left-1/2 transform translate-x-[-50%] px-3 py-2 border rounded-lg h-auto flex items-center gap-2">
         <textarea
           rows={1}
-          autoFocus
           ref={textAreaRef}
           value={commentValue}
           onChange={handleInput}

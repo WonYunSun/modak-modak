@@ -1,12 +1,14 @@
 'use client';
 
+import useGroupStore from '@stores/useGroupStore';
+
 interface TabsProps {
-  activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
   isScrolled?: boolean;
 }
 
-const Tabs = ({ activeTab, setActiveTab, isScrolled }: TabsProps) => {
+const Tabs = ({ isScrolled }: TabsProps) => {
+  const { activeTab, setActiveTab } = useGroupStore();
+
   return (
     <div className={`sticky top-12 left-0 flex cursor-pointer transition-all ${isScrolled ? 'bg-white z-20' : ''}`}>
       {/* 게시글 탭 */}
