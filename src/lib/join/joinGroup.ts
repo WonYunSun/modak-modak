@@ -1,5 +1,5 @@
-import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 import { User } from '@supabase/supabase-js';
+import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 
 interface joinGroupParams {
   groupId: string | null;

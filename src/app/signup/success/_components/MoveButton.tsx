@@ -6,7 +6,7 @@ import Button from '@components/common/Button';
 const MoveButton = () => {
   const router = useRouter();
 
-  const handleButtonClick = async () => {
+  const handleButtonClick = () => {
     router.push('/');
   };
 
