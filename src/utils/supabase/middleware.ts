@@ -90,11 +90,11 @@ export async function updateSession(request: NextRequest) {
 
 const isPublicRoute = (pathname: string) => {
   const paths: string[] = ['/api/auth/', '/signup/success', '/join'];
-  if (pathname === '/') return true;
   return paths.find((path) => pathname.startsWith(path)) !== undefined;
 };
 
 const needsAuthentication = (pathname: string): boolean => {
   const paths: string[] = ['/mypage', '/groups'];
+  if (pathname === '/') return true;
   return paths.find((path) => pathname.startsWith(path)) !== undefined;
 };
