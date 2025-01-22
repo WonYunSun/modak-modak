@@ -9,9 +9,9 @@ interface OnboardingSlideProps {
 
 const OnboardingContent = ({ title, description, imageUrl }: OnboardingSlideProps) => {
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center">
-      <Image src={imageUrl} width={120} height={130} alt="bonfire" className="mb-6" />
-      <p className="text-2xl font-bold leading-[140%]">{title}</p>
+    <div className="flex flex-col items-center">
+      <Image src={imageUrl} width={145} height={145} alt="bonfire" className="mb-6" />
+      <p className="text-2xl font-bold mb-2 leading-[140%]">{title}</p>
       <p className="text-gray-700 text-xl font-normal">{description}</p>
     </div>
   );

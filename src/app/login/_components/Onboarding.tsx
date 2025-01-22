@@ -10,7 +10,7 @@ const Onboarding = () => {
 
   return (
     <div className="flex flex-col items-center justify-center mb-[114px]">
-      <div className="w-[211px] h-[239px] mb-[47px]">
+      <div className="flex flex-col justify-center w-full mb-[47px]">
         <Swiper
           slidesPerView={1}
           onSlideChange={(swiper: SwiperClass) => move(swiper.activeIndex)}
@@ -18,7 +18,9 @@ const Onboarding = () => {
         >
           {contents.map((content) => (
             <SwiperSlide key={content.title}>
-              <OnboardingContent {...content} />
+              <div className="flex justify-center items-center h-[239px]">
+                <OnboardingContent {...content} />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -31,7 +33,7 @@ const Onboarding = () => {
 const contents = [
   { title: '모닥모닥', description: '우리만의 추억 공유 플랫폼', imageUrl: '/icons/onboarding-fire.webp' },
   { title: '추억을 공유해요', description: '친구들을 초대할 수 있어요!', imageUrl: '/icons/onboarding-heart.webp' },
-  { title: '일정을 관리해요', description: '우리 일정을 관리해보세요!', imageUrl: '/icons/onboarding-calendar.webp' }
+  { title: '일정을 관리해요', description: '우리 일정을 관리해보세요!', imageUrl: '/icons/onboarding-calendar.webp' },
 ];
 
 export default Onboarding;
