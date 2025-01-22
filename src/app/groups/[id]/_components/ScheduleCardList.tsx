@@ -16,23 +16,28 @@ const ScheduleCardList = () => {
   const router = useRouter();
   // const [scheduleData, setScheduleData] = useState<ScheduleType[]>([]);
 
-  const { data: scheduleData = [], isPending } = useQuery({
+  const { data: scheduleData, isPending } = useQuery({
     queryKey: ['GroupSchedules', groupId], // queryKey로 groupId 지정
-    queryFn: async () => (await fetchSchedulesBygroupId(groupId)) || [], // fetch 함수 호출
+    queryFn: () => fetchSchedulesBygroupId(groupId),
     enabled: !!groupId, // groupId가 있을 때만 fetch
   });
 
   const goToScheduleDetail = (scheduleId: string) => {
     router.push(`/groups/${groupId}/schedules/${scheduleId}`);
   };
+
   if (isPending) {
     <Spinner />;
   }
+
   return (
     <div>
-      <CountBar value={scheduleData.length} />
+      <CountBar value={scheduleData ? scheduleData.length : 0} />
       <div className="mt-4 mb-28">
-        {scheduleData.length > 0 ? (
+        {!isPending && scheduleData && scheduleData.length === 0 && <NoSchedule />}
+
+        {scheduleData &&
+          scheduleData.length > 0 &&
           scheduleData.map((schedule, index) => (
             <div className="mb-5" key={index} onClick={() => goToScheduleDetail(schedule.id)}>
               <ScheduleCard
@@ -43,10 +48,8 @@ const ScheduleCardList = () => {
                 start_time={schedule.start_time}
               />
             </div>
-          ))
-        ) : (
-          <NoSchedule />
-        )}
+          ))}
+
         <Button
           label="일정 만들기"
           className="floating-btn"

@@ -5,12 +5,12 @@ import { createClient } from '@utils/supabase/server';
 import { EditPostProps } from '@hooks/post/useFetchEditPost';
 
 // 게시글 수정/저장하기
-export const editPost = async (payload: EditPostProps) => {
+export const editPost = async (editpostData: EditPostProps) => {
   const supabase = await createClient();
 
-  const postId = payload.postId;
-  const content = payload.content;
-  const scheduleId = payload.scheduleId;
+  const postId = editpostData.postId;
+  const content = editpostData.content;
+  const scheduleId = editpostData.scheduleId;
 
   const { data, error } = await supabase
     .from('posts')
