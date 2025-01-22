@@ -67,6 +67,7 @@ const NewSchedulesForm = () => {
   const goToGroup = () => {
     router.replace(`/groups/${groupId}`);
   };
+  console.log(scheduleData);
 
   return (
     <>
