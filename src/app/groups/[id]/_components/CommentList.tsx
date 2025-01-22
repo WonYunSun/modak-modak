@@ -19,23 +19,35 @@ const CommentList = ({ isOpen, onClose, postId }: CommentListProps) => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
 
   useEffect(() => {
-    const handleResize = () => {
-      const visualViewportHeight = window.visualViewport?.height || window.innerHeight;
-      const windowHeight = window.innerHeight;
-      const newKeyboardHeight = windowHeight - visualViewportHeight;
+    const handleVisualViewportResize = () => {
+      if (!window.visualViewport) return;
+
+      const layoutViewportHeight = window.innerHeight;
+      const visualViewportHeight = window.visualViewport.height;
+      const newKeyboardHeight = Math.max(0, layoutViewportHeight - visualViewportHeight);
+
       setKeyboardHeight(newKeyboardHeight);
     };
 
-    window.visualViewport?.addEventListener('resize', handleResize);
+    // iOS 환경인지 확인
+    const isIOS = /iPhone|iPad/.test(window.navigator.userAgent);
+
+    if (isIOS) {
+      window.visualViewport?.addEventListener('resize', handleVisualViewportResize);
+    }
+
     return () => {
-      window.visualViewport?.removeEventListener('resize', handleResize);
+      if (isIOS) {
+        window.visualViewport?.removeEventListener('resize', handleVisualViewportResize);
+      }
     };
   }, []);
 
   return (
     <Sheet isOpen={isOpen} onClose={onClose} className={`${isActionModalOpen ? 'bottom-open transition-all' : ''}`}>
       <Sheet.Container
-        className={`comment-list transition-all ${keyboardHeight > 0 ? `!bottom-[${keyboardHeight}]` : '0'}`}
+        className="comment-list transition-all"
+        style={{ bottom: keyboardHeight > 0 ? keyboardHeight : 0 }}
       >
         <Sheet.Header>
           <div className="w-[5.625rem] h-[0.375rem] rounded-xl mx-auto mt-[0.563rem] bg-[#e4e4e7]" />
