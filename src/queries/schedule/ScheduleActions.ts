@@ -27,7 +27,7 @@ export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleT
   }
 };
 
-export const fetchSchedulesBygroupId = async (groupId: string): Promise<ScheduleType[] | null> => {
+export const fetchSchedulesBygroupId = async (groupId: string): Promise<ScheduleType[]> => {
   try {
     const supabase = await createClient();
     const { data } = await supabase
@@ -36,7 +36,7 @@ export const fetchSchedulesBygroupId = async (groupId: string): Promise<Schedule
       .eq('group_id', groupId)
       .order('start_date', { ascending: false });
 
-    return data;
+    return data || [];
   } catch (error) {
     throw new Error(`${error}`);
   }

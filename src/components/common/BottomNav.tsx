@@ -1,9 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-import useNavStore from 'stores/useNavStore';
 
 import { Home, Chat, User } from '@components/icons';
 
@@ -11,34 +10,38 @@ const buttons = [
   {
     id: 'home',
     label: '홈',
-    iconOff: <Home className="w-6 h-6" active={false} />,
+    iconOff: <Home className="w-6 h-6" />,
     iconOn: <Home className="w-6 h-6" active={true} />,
     href: '/',
   },
   {
     id: 'chat',
     label: '채팅',
-    iconOff: <Chat className="w-6 h-6" active={false} />,
+    iconOff: <Chat className="w-6 h-6" />,
     iconOn: <Chat className="w-6 h-6" active={true} />,
     href: '/',
   },
   {
     id: 'mypage',
     label: '마이페이지',
-    iconOff: <User className="w-6 h-6" active={false} />,
+    iconOff: <User className="w-6 h-6" />,
     iconOn: <User className="w-6 h-6" active={true} />,
     href: '/mypage',
   },
 ];
 
 const BottomNav = () => {
-  const { activeButton, setActiveButton } = useNavStore();
+  const [activeButton, setActiveButton] = useState('');
   const pathname = usePathname();
 
-  // 특정 경로에서 BottomNav를 숨김
+  // URL 경로에 따라 활성 버튼 설정
+  useEffect(() => {
+    const active = pathname.includes('/chat') ? 'chat' : pathname.includes('/mypage') ? 'mypage' : 'home';
+    setActiveButton(active);
+  }, [pathname]);
 
+  // 특정 경로에서 BottomNav 숨김
   const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule', '/join'];
-
   const isHideNav = hiddenPaths.some((path) => pathname.includes(path));
 
   if (isHideNav) {
