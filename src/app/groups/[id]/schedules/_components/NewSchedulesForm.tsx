@@ -10,6 +10,7 @@ import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
 import { addSchedule } from '@queries/schedule/ScheduleActions';
 import useFunnel from '@hooks/useFunnel';
+import { useGroupSchedules } from '@hooks/schedule/useGroupSchedules';
 import { ScheduleType } from '@ts/scheduleType';
 
 //단계 name 정의
@@ -23,6 +24,8 @@ const NewSchedulesForm = () => {
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
+
+  const { invalidateGroupSchedules } = useGroupSchedules(groupId);
 
   const [scheduleData, setScheduleData] = useState<ScheduleType>({
     created_at: '',
@@ -38,7 +41,6 @@ const NewSchedulesForm = () => {
   const handleNext = async (data: Partial<ScheduleType>, nextStep: string) => {
     const updatedScheduleData = { ...scheduleData, ...data };
     setScheduleData(updatedScheduleData);
-
     if (nextStep === 'submitData') {
       const completeScheduleData: ScheduleType = {
         ...updatedScheduleData,
@@ -47,8 +49,9 @@ const NewSchedulesForm = () => {
       };
 
       try {
-        await addSchedule(completeScheduleData); // addSchedule이 완료될 때까지 기다림
-        openModal(); // addSchedule이 완료된 후 모달 열기
+        openModal();
+        await addSchedule(completeScheduleData);
+        invalidateGroupSchedules();
       } catch (error) {
         console.error('Failed to add schedule:', error);
       }
@@ -70,7 +73,7 @@ const NewSchedulesForm = () => {
       <Funnel headerLabel="일정 만들기">
         <Step name={steps[0]}>
           <ScheduleNameForm
-            onPrev={() => {}}
+            onPrev={goToGroup}
             onNext={(data) => handleNext(data, steps[1])}
             prevData={scheduleData.name}
           />
