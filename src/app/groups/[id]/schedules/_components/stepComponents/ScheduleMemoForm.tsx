@@ -35,7 +35,7 @@ const ScheduleMemoForm = ({ onNext, onPrev, prevData }: ScheduleMemoFormProps) =
     // label 관련
     label: '메모',
     required: true,
-    description: '최대 20자까지 입력',
+    description: '일정에 대한 내용을 간단히 메모로 남겨보세요',
     htmlFor: 'scheduleMemo',
   };
 

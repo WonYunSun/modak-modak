@@ -133,6 +133,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
           </div>
         )}
       </div>
+      <p className="text-sm text-gray-400 mt-4">날짜는 원하는 범위로 선택할 수 있어요</p>
     </div>
   );
 };

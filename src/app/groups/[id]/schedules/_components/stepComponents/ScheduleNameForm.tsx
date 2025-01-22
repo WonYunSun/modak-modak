@@ -36,12 +36,18 @@ const ScheduleNameForm = ({ onNext, onPrev, prevData }: ScheduleNameFormProps) =
     label: '일정명',
     required: true,
     description: '일정의 이름을 적어주세요',
-    htmlFor: 'scheduleName'
+    htmlFor: 'scheduleName',
   };
 
   return (
     <Layout isDisabled={isDisabled} onNext={handleNext} onPrev={onPrev}>
-      <LabeledTextInput {...data} />
+      <div>
+        <LabeledTextInput {...data} />
+        <div className="flex w-vw -mx-[20px] mt-10 p-[1rem_1.25rem] flex-col gap-1 bg-gray-100">
+          <p className="text-sm font-semibold">만남 일정 외에 생일 등과 같은 이벤트도 등록해보세요!</p>
+          <p className="text-xs">가볍게 일정을 만들고 게시글을 공유하며 소통하는 것은 어떨까요?</p>
+        </div>
+      </div>
     </Layout>
   );
 };

@@ -55,7 +55,7 @@ const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) =
   const labelData: LabelProps = {
     label: '모임 일시',
     required: true,
-    description: '만나는 날짜와 시간을 적어주세요',
+    description: '일정 또는 이벤트의 날짜와 시간을 적어주세요',
     htmlFor: 'scheduleName',
   };
 
