@@ -1,15 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import useUserToManageStore from '@stores/useUserToManage';
 import CurMemberList from '@app/groups/[id]/management/members/_components/CurMemberList';
 import WaitingMemberList from '@app/groups/[id]/management/members/_components/WaitingMemberList';
 import MembersBottomSheet from '@app/groups/[id]/management/members/_components/MembersBottomSheet';
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
 import GlobalLoading from '@app/GlobalLoading';
 import GlobalError from '@app/GlobalError';
+import { AddMember } from '@components/icons';
 import useIsLeader from '@hooks/management/useIsLeader';
-
+import useSmallAlert from '@hooks/useSmallAlert';
 
 type TabType = 'currentMembers' | 'awaitingMembers';
 
@@ -18,6 +20,8 @@ const MembersPageContents = () => {
   const groupId = Array.isArray(id) ? id[0] : id;
 
   const [selectedTab, setSelectedTab] = useState<TabType>('currentMembers');
+  const { userPermitted, setUserPermitted } = useUserToManageStore();
+  const { SmallAlert: MemberAddedAlert, openAlert } = useSmallAlert();
 
   const handleCurMemTabClick = () => {
     setSelectedTab('currentMembers');
@@ -28,8 +32,16 @@ const MembersPageContents = () => {
   };
 
   const { data: isLeaderUser, isPending, isError } = useIsLeader({ groupId });
-  if (isPending) return <GlobalLoading/>;
-  if (isError) return <GlobalError/>;
+
+  useEffect(() => {
+    if (userPermitted) {
+      setUserPermitted(false);
+      openAlert();
+    }
+  }, [userPermitted]);
+
+  if (isPending) return <GlobalLoading />;
+  if (isError) return <GlobalError />;
 
   return (
     <>
@@ -57,6 +69,12 @@ const MembersPageContents = () => {
       )}
       <ManagementModal isLeader={isLeaderUser ? isLeaderUser : false} modalMode={'leaderTransition'} />
       <MembersBottomSheet />
+      <MemberAddedAlert>
+        <div className="flex gap-2.5">
+          <AddMember />
+          <span>{'멤버가 추가 되었어요!'}</span>
+        </div>
+      </MemberAddedAlert>
     </>
   );
 };

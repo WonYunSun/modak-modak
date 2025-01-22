@@ -19,7 +19,9 @@ const ManageMembersBtn = ({ memberId }: ManageMembersBtnProps) => {
 
   return (
     <button onClick={onOpenBottomSheet}>
-      <Menu />
+      <div className='w-[40px] h-[40px] flex justify-center items-center'>
+        <Menu />
+      </div>
     </button>
   );
 };
