@@ -8,5 +8,6 @@ export const useFetchGetGroup = (groupId: string) => {
     queryKey: ['useFetchGetGroup', groupId],
     queryFn: () => getGroupInfo(groupId),
   });
+
   return { data, isPending, isError };
 };

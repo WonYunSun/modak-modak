@@ -13,6 +13,7 @@ import useFunnel from '@hooks/useFunnel';
 import useUser from '@hooks/useUser';
 import { addGroup } from '@queries/group/postGroup';
 import useSmallAlert from '@hooks/useSmallAlert';
+import useFetchGroupList from '@hooks/home/useFetchGroupList';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 //단계 name 정의
@@ -42,6 +43,7 @@ const NewGroupForm = () => {
     setGruopData(updatedGroupData);
     next(nextStep);
   };
+  const { invalidateGroupListQuery } = useFetchGroupList();
 
   const handleSubmit = async () => {
     const completeGroupData: GroupsType = {
@@ -53,6 +55,7 @@ const NewGroupForm = () => {
     const newGroupId = await addGroup(completeGroupData, user?.id);
 
     setNewGroupId(newGroupId);
+    invalidateGroupListQuery();
     openModal();
   };
 
