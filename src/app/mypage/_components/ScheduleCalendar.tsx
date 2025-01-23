@@ -47,11 +47,11 @@ const ScheduleCalendar = () => {
                         ${isSelected ? 'border-primary-2-300' : 'border-transparent'}`}
                     >
                       <span
-                        className={`w-4 h-10 text-xs font-normal mt-1 mx-4
+                        className={`w-4 h-5 text-xs font-normal mt-1 mx-4 leading-none relative flex flex-col justify-center
                           ${isSunday ? 'text-base-red' : ''}`}
                       >
-                        {hasSchedule && <RedDot className="ml-auto" />}
-                        {dayOfWeek}
+                        {hasSchedule && <RedDot className="ml-auto absolute top-[-1px] right-[-1px]" />}
+                        <span className='my-auto'>{dayOfWeek}</span>
                       </span>
                       <span className="w-4 h-5 text-sm font-semibold mb-1">{date}</span>
                     </div>

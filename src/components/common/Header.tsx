@@ -1,10 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-
 import { useParams, useRouter } from 'next/navigation';
 
-import { Notification, PrevArrow, Setting } from '@components/icons';
+import { Logo, Notification, PrevArrow, Setting } from '@components/icons';
 
 import useHeaderStore from '@stores/useHeaderStore';
 
@@ -35,7 +33,7 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
     >
       <div className="px-5 h-12 flex items-center justify-between">
         {home ? (
-          <Image src="/icons/modakLogo.webp" width={80} height={34} alt="Modak Modak Logo" className="w-20 h-10" />
+          <Logo className="w-20 h-10" />
         ) : (
           <div className={`${!hasSetting ? 'w-10' : 'w-20'} flex items-center justify-start`}>
             <PrevArrow onClick={handleNavigation} className="w-6 h-6" />
