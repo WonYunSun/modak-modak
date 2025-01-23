@@ -8,10 +8,10 @@ import ScheduleDateForm from '@app/groups/[id]/schedules/_components/stepCompone
 import ScheduleMemoForm from '@app/groups/[id]/schedules/_components/stepComponents/ScheduleMemoForm';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
-import { addSchedule } from '@queries/schedule/ScheduleActions';
 import useFunnel from '@hooks/useFunnel';
-import { useGroupSchedules } from '@hooks/schedule/useGroupSchedules';
+
 import { ScheduleType } from '@ts/scheduleType';
+import useAddSchedule from '@hooks/schedule/useAddSchedule';
 
 //단계 name 정의
 const steps = ['일정명', '모임일시', '메모'];
@@ -24,8 +24,7 @@ const NewSchedulesForm = () => {
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
-
-  const { invalidateGroupSchedules } = useGroupSchedules(groupId);
+  const { mutate: addScheduleMutate } = useAddSchedule(groupId);
 
   const [scheduleData, setScheduleData] = useState<ScheduleType>({
     created_at: '',
@@ -48,13 +47,8 @@ const NewSchedulesForm = () => {
         id: '',
       };
 
-      try {
-        openModal();
-        await addSchedule(completeScheduleData);
-        invalidateGroupSchedules();
-      } catch (error) {
-        console.error('Failed to add schedule:', error);
-      }
+      openModal();
+      addScheduleMutate(completeScheduleData);
     } else {
       next(nextStep);
     }
