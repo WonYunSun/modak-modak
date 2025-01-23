@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import TimePicker from '@app/groups/[id]/schedules/_components/TimePicker';
-
-const buttonClass = 'p-2.5 flex-1 rounded-xl bg-primary';
+import Button from '@components/common/Button';
 
 interface SelecTimeProps {
   onTimeSelect: (time: string) => void;
@@ -53,12 +52,7 @@ const SelectTime = ({ onTimeSelect, onClose }: SelecTimeProps) => {
             <TimePicker time={minutes} handleTimeScroll={handleMinuteScroll} selectedTime={selectedMinute} />
           </div>
           <div className="flex justify-center items-center gap-2 text-white mt-4">
-            {/* <button onClick={onClose} className={buttonClass}>
-              취소
-            </button> */}
-            <button onClick={handleConfirm} className={buttonClass}>
-              확인
-            </button>
+            <Button onClick={handleConfirm} label="확인" type="button" className="modal-full-btn"></Button>
           </div>
         </section>
       </div>

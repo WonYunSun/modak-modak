@@ -9,7 +9,7 @@ import { ScheduleInfo } from '@app/groups/[id]/schedules/_components/detailCompo
 import GlobalError from '@app/GlobalError';
 import Spinner from '@components/common/Spinner';
 
-export const ScheduleDetail = ({ scheduleId, groupId }: { scheduleId: string; groupId: string }) => {
+const ScheduleDetail = ({ scheduleId, groupId }: { scheduleId: string; groupId: string }) => {
   const [isEdit, setIsEdit] = useState(false);
   const { data, isPending, isError, refetch } = useQuery({
     queryKey: ['scheduleId', scheduleId],
@@ -31,3 +31,4 @@ export const ScheduleDetail = ({ scheduleId, groupId }: { scheduleId: string; gr
     </div>
   );
 };
+export default ScheduleDetail;

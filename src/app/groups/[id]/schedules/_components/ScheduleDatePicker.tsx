@@ -4,9 +4,9 @@ import { DayPicker } from 'react-day-picker';
 import { ko } from 'react-day-picker/locale';
 import type { DateRange } from 'react-day-picker';
 import { CalendarIcon, ClockIcon } from '@components/icons';
-import 'react-day-picker/style.css';
-import { formatTime } from '@utils/dateUtils';
 import SelectTime from '@app/groups/[id]/schedules/_components/SelectTime';
+import { formatTime } from '@utils/dateUtils';
+import 'react-day-picker/style.css';
 
 type ScheduleDatePickerProps = {
   onDateChange: (dateRange: { from: string; to: string }) => void;

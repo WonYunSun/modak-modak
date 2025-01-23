@@ -1,4 +1,4 @@
-import { ScheduleDetail } from '../_components/ScheduleDetail';
+import ScheduleDetail from '@app/groups/[id]/schedules/_components/ScheduleDetail';
 
 type Props = {
   params: {
