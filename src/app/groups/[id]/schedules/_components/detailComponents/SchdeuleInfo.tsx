@@ -1,4 +1,4 @@
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { CalendarIcon, ClockIcon } from '@components/icons';
 import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
@@ -7,22 +7,26 @@ import Modal from '@components/common/Modal';
 import { formatDate, formatTime } from '@utils/dateUtils';
 import { deleteScheduleById } from '@queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
+import { useGroupSchedules } from '@hooks/schedule/useGroupSchedules';
 
 interface ScheduleInfoType {
   schedule: ScheduleType;
+  groupId: string;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ScheduleInfo = ({ schedule, setIsEdit }: ScheduleInfoType) => {
+export const ScheduleInfo = ({ schedule, groupId, setIsEdit }: ScheduleInfoType) => {
   const { openModal, closeModal } = useModalStore();
+
   const router = useRouter();
-  const { id } = useParams();
-  const groupId = Array.isArray(id) ? id[0] : id;
+
+  const { invalidateGroupSchedules } = useGroupSchedules(groupId);
 
   const isSingleDay = schedule.end_date === schedule.start_date;
 
   const deleteSchedule = async (scheduleId: string) => {
     await deleteScheduleById(scheduleId);
+    invalidateGroupSchedules();
     router.replace(`/groups/${groupId}`);
   };
 

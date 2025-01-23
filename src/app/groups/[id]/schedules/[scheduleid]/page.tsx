@@ -1,4 +1,4 @@
-import { ScheduleDetail } from '../_components/ScheduleDetail';
+import ScheduleDetail from '@app/groups/[id]/schedules/_components/ScheduleDetail';
 
 type Props = {
   params: {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const page = ({ params }: Props) => {
-  return <ScheduleDetail scheduleId={params.scheduleid} />;
+  return <ScheduleDetail scheduleId={params.scheduleid} groupId={params.id} />;
 };
 
 export default page;
