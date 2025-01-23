@@ -24,7 +24,7 @@ export const queryJoinGroup = async ({ groupId, userId }: QueryJoinGroupParams) 
 
     await supabase
       .from('group_members')
-      .insert([{ group_id: groupId, is_approved: false, is_leader: false, user_id: userId }]);
+      .insert([{ group_id: groupId, is_approved: true, is_leader: false, user_id: userId }]);
   } catch (error) {
     throw new Error(`${error}`);
   }
