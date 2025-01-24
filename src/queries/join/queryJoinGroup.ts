@@ -21,7 +21,7 @@ export const isAlreadyMember = async ({ groupId, userId }: QueryJoinGroupParams)
 export const queryJoinGroup = async ({ groupId, userId }: QueryJoinGroupParams) => {
   try {
     const supabase = await createClient();
-
+    if (await isAlreadyMember({ groupId, userId })) return;
     await supabase
       .from('group_members')
       .insert([{ group_id: groupId, is_approved: true, is_leader: false, user_id: userId }]);
