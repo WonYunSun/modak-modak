@@ -81,7 +81,7 @@ const ProfileUpdateModalContent = () => {
         </div>
       </div>
       <div className="w-full mt-6 flex gap-2 justify-center">
-        <ProfileConfirmBtns onConfirm={onConfirmChange} />
+        <ProfileConfirmBtns disabled={!values.nickname} onConfirm={onConfirmChange} />
       </div>
     </div>
   );
