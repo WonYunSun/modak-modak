@@ -101,7 +101,6 @@ export const ScheduleInfo = ({ schedule, groupId, setIsEdit }: ScheduleInfoType)
               disabled={false}
               onClick={() => {
                 deleteSchedule(schedule.id);
-                closeModal();
               }}
             />
           </div>
