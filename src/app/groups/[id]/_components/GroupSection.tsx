@@ -46,7 +46,7 @@ const GroupSection = () => {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-[600px]">
       {/* 헤더 영역 */}
       <div className="w-full fixed top-0 left-0 z-30">
         <Header home={false} hasSetting={true} isScrolled={isScrolled} />

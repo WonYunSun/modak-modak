@@ -42,15 +42,16 @@ const ScheduleCardList = () => {
               />
             </div>
           ))}
-
-        <Button
-          label="일정 만들기"
-          className="floating-btn"
-          type="button"
-          onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
-        >
-          <CalendarIconSmall />
-        </Button>
+        <div className="ml-[calc(100%-124px)]">
+          <Button
+            label="일정 만들기"
+            className="floating-btn"
+            type="button"
+            onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
+          >
+            <CalendarIconSmall />
+          </Button>
+        </div>
       </div>
     </div>
   );

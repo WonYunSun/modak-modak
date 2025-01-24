@@ -29,7 +29,7 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
 
   return (
     <header
-      className={`m-auto max-w-[600px] w-full sticky top-0 left-0 right-0 z-10 transition-colors ${isScrolled ? 'bg-white' : 'bg-primary-10'} `}
+      className={`m-auto w-full max-w-[600px] h-12 sticky top-0 left-0 right-0 z-10 transition-colors ${isScrolled ? 'bg-white' : 'bg-primary-10'} ${hasSetting && 'border-x boreder-gray-200'} `}
     >
       <div className="px-5 h-12 flex items-center justify-between">
         {home ? (

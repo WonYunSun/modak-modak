@@ -33,6 +33,7 @@ export const PostEditForm = () => {
 
   // 일정 선택 후에도 입력한 데이터 변화 없도록 세팅
   useEffect(() => {
+    //TODO: 로그인 사용자와 글쓴사람 일치하지 않는 경우 처리 필요
     // 게시글 수정 페이지에 url로 접근한 경우, 글 작성자 외 접근 차단
     // if (data?.user_id !== user?.id) {
     //   return router.push(`/groups/${groupId}`);
@@ -81,7 +82,6 @@ export const PostEditForm = () => {
 
     reset();
   };
-  //TODO: 로그인 사용자와 글쓴사람 일치하지 않는 경우 처리 필요
 
   return (
     <form
@@ -127,7 +127,7 @@ export const PostEditForm = () => {
 
       <PostSelectScheduleCard />
 
-      <div className="fixed w-full px-5 bottom-0">
+      <div className="fixed w-full max-w-[600px] m-auto px-5 bottom-0">
         <Button label="수정 완료" className="full-btn" type="submit" />
       </div>
     </form>

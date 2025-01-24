@@ -17,14 +17,16 @@ const NoPhoto = () => {
         <p className="text-gray-700 text-lg">사진과 함께 글을 작성하고</p>
         <p className="text-gray-700 text-lg">우리만의 추억을 공유해보세요</p>
       </div>
-      <Button
-        label="게시글 쓰기"
-        className="floating-btn"
-        type="button"
-        onClick={() => router.push(`/groups/${groupId}/posts/new`)}
-      >
-        <ModificationLine />
-      </Button>
+      <div className="ml-[calc(100%-124px)]">
+        <Button
+          label="게시글 쓰기"
+          className="floating-btn"
+          type="button"
+          onClick={() => router.push(`/groups/${groupId}/posts/new`)}
+        >
+          <ModificationLine />
+        </Button>
+      </div>
     </>
   );
 };
