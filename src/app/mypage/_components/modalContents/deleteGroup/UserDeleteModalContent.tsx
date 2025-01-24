@@ -1,8 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import useModalStore from '@stores/useModalStore';
 import UserDeletionAssure from '@app/mypage/_components/modalContents/deleteGroup/UserDeletionAssure';
 import UserDeletionConfirm from '@app/mypage/_components/modalContents/deleteGroup/UserDeletionConfirm';
 import UserDeletionSuccess from '@app/mypage/_components/modalContents/deleteGroup/UserDeletionSuccess';
@@ -10,9 +8,7 @@ import useDeleteUser from '@hooks/user/useDeleteUser';
 
 const UserDeleteModalContent = () => {
   const [deletionStep, setDeletionStep] = useState(1);
-  const { closeModal } = useModalStore();
   const { mutate } = useDeleteUser();
-  const router = useRouter();
 
   const onNextStep = () => {
     setDeletionStep((prev) => prev + 1);
@@ -20,8 +16,6 @@ const UserDeleteModalContent = () => {
 
   const onConfirmDelete = async () => {
     mutate();
-    closeModal();
-    router.push('/');
   };
 
   return (

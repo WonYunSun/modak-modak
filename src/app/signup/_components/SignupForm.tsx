@@ -36,7 +36,7 @@ export interface UserFormState {
 const SignupForm = () => {
   const [values, setValues] = useState<UserFormState>({ profile: null, nickname: '' });
   const { referrer, data } = Object.fromEntries(useSearchParams().entries());
-  const { mutate } = useAddUser();
+  const { mutate, isPending } = useAddUser();
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -69,7 +69,12 @@ const SignupForm = () => {
         />
       </section>
       <LabeledTextInput {...inputProps} value={values.nickname} onChange={handleChange} />
-      <Button className="full-btn mt-auto mb-[19px]" disabled={!values.nickname} type="submit" label="가입하기" />
+      <Button
+        className="full-btn mt-auto mb-[19px]"
+        disabled={!values.nickname || isPending}
+        type="submit"
+        label="가입하기"
+      />
     </form>
   );
 };
