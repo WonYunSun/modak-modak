@@ -4,10 +4,9 @@ import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
 import Label from '@components/common/Label';
 import Modal from '@components/common/Modal';
+import useDeleteSchedule from '@hooks/schedule/useDeleteSchedules';
 import { formatDate, formatTime } from '@utils/dateUtils';
-import { deleteScheduleById } from '@queries/schedule/ScheduleActions';
 import { ScheduleType } from '@ts/scheduleType';
-import { useGroupSchedules } from '@hooks/schedule/useGroupSchedules';
 
 interface ScheduleInfoType {
   schedule: ScheduleType;
@@ -20,13 +19,12 @@ export const ScheduleInfo = ({ schedule, groupId, setIsEdit }: ScheduleInfoType)
 
   const router = useRouter();
 
-  const { invalidateGroupSchedules } = useGroupSchedules(groupId);
+  const { mutate: deleteScheduleMutate } = useDeleteSchedule(groupId);
 
   const isSingleDay = schedule.end_date === schedule.start_date;
 
   const deleteSchedule = async (scheduleId: string) => {
-    await deleteScheduleById(scheduleId);
-    invalidateGroupSchedules();
+    deleteScheduleMutate(scheduleId);
     router.replace(`/groups/${groupId}`);
   };
 
