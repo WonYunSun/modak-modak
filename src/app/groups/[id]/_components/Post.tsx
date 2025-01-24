@@ -13,6 +13,7 @@ import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBo
 import useUser from '@hooks/useUser';
 
 import { CommentCountType, GroupType, PostImageType, PostType, ScheduleType, UserType } from 'queries/post/getPosts';
+import useCommentValueStore from '@stores/useCommentValueStore';
 
 export type PostCommonType = {
   id: PostType['id'];
@@ -35,6 +36,9 @@ const Post = ({ post }: PostProps) => {
   const [bottomSheetPostId, setBottomSheetPostId] = useState<string | null>(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+
+  const { setCommentValue } = useCommentValueStore();
+
   const { user } = useUser();
   // 글 내용 3줄로 줄이기 (최대 80자)
   const truncateText = (text: string | null, postId: string) => {
@@ -48,6 +52,12 @@ const Post = ({ post }: PostProps) => {
       ...prev,
       [postId]: !prev[postId],
     }));
+  };
+
+  // 댓글창 열고 닫기
+  const closeCommentList = () => {
+    setIsCommentOpen(false);
+    setCommentValue('');
   };
 
   return (
@@ -111,7 +121,7 @@ const Post = ({ post }: PostProps) => {
       </article>
 
       {/* 댓글 바텀시트 */}
-      <CommentList postId={post.id} isOpen={isCommentOpen} onClose={() => setIsCommentOpen(false)} />
+      <CommentList postId={post.id} isOpen={isCommentOpen} onClose={closeCommentList} />
 
       {/* 메뉴 수정 바텀시트 */}
       {bottomSheetPostId && (
