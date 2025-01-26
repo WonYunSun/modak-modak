@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Comments, Menu } from '@components/icons';
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';

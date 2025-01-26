@@ -25,7 +25,7 @@ export type PostListType = {
 };
 
 // 게시글 리스트 불러오기
-export const getPosts = async (groupId: string): Promise<PostListType[]> => {
+export const getPosts = async (groupId: string, offset: number, limit: number): Promise<PostListType[]> => {
   const supabase = await createClient();
 
   const { data, error } = await supabase
@@ -42,7 +42,8 @@ export const getPosts = async (groupId: string): Promise<PostListType[]> => {
   `
     )
     .eq('group_id', groupId)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
 
   if (error) throw new Error(`getPosts 게시글 리스트 데이터 불러오는 중 에러 발생: ${error.message}`);
 
