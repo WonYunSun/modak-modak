@@ -20,7 +20,7 @@ const steps = ['일정명', '모임일시', '메모'];
 
 const NewSchedulesForm = () => {
   const { Funnel, Step, next, prev } = useFunnel(steps[0], 3);
-  const { openModal, closeModal } = useModalStore();
+  const { openModal } = useModalStore();
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -58,8 +58,9 @@ const NewSchedulesForm = () => {
     prev(prevStep);
   };
 
-  const goToGroup = () => {
-    router.replace(`/groups/${groupId}`);
+  const goToGroup = async () => {
+    await router.replace(`/groups/${groupId}`);
+    // closeModal();
   };
 
   return (
@@ -104,7 +105,6 @@ const NewSchedulesForm = () => {
               className="modal-full-btn"
               onClick={() => {
                 goToGroup();
-                closeModal();
               }}
             ></Button>
           </Modal>

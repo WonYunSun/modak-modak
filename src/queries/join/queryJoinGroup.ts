@@ -10,7 +10,12 @@ export interface QueryJoinGroupParams {
 export const isAlreadyMember = async ({ groupId, userId }: QueryJoinGroupParams): Promise<GroupMembersType | null> => {
   try {
     const supabase = await createClient();
-    const { data } = await supabase.from('group_members').select().eq('group_id', groupId).eq('user_id', userId).single();
+    const { data } = await supabase
+      .from('group_members')
+      .select()
+      .eq('group_id', groupId)
+      .eq('user_id', userId)
+      .single();
 
     return data as GroupMembersType | null;
   } catch (error) {
@@ -24,7 +29,7 @@ export const queryJoinGroup = async ({ groupId, userId }: QueryJoinGroupParams) 
     if (await isAlreadyMember({ groupId, userId })) return;
     await supabase
       .from('group_members')
-      .insert([{ group_id: groupId, is_approved: true, is_leader: false, user_id: userId }]);
+      .insert([{ group_id: groupId, is_approved: false, is_leader: false, user_id: userId }]);
   } catch (error) {
     throw new Error(`${error}`);
   }
