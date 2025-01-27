@@ -1,6 +1,6 @@
 'use client';
 
-import GlobalLoading from '@app/GlobalLoading';
+import GlobalLoading from '@components/common/GlobalLoading';
 import NonUserQueryJoin from '@app/join/[id]/_components/NonUserQueryJoin';
 import UserQueryJoin from '@app/join/[id]/_components/UserQueryJoin';
 import useUser from '@hooks/useUser';

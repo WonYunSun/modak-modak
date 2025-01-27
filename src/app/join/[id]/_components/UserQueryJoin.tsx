@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import UserQueryJoinStepOne from '@app/join/[id]/_components/UserQueryJoinStepOne';
 import UserQueryJoinStepTwo from '@app/join/[id]/_components/UserQueryJoinStepTwo';
-import GlobalLoading from '@app/GlobalLoading';
+import GlobalLoading from '@components/common/GlobalLoading';
 import GlobalError from '@app/GlobalError';
 import useIsAlreadyJoin from '@hooks/join/useIsAlreadyJoin';
 import { queryJoinGroup } from '@queries/join/queryJoinGroup';

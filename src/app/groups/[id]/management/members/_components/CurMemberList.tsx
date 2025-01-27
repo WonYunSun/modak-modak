@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import MemberCard from '@app/groups/[id]/management/members/_components/MemberCard';
-import GlobalLoading from '@app/GlobalLoading';
+import GlobalLoading from '@components/common/GlobalLoading';
 import GlobalError from '@app/GlobalError';
 import useFetchCurMembers from '@hooks/management/useFetchCurMembers';
 

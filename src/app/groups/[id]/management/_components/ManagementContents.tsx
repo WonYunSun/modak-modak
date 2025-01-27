@@ -7,12 +7,11 @@ import ManagementCard from '@app/groups/[id]/management/_components/ManagementCa
 import ToggleBox from '@app/groups/[id]/management/_components/ToggleBox';
 import ManagementBtns from '@app/groups/[id]/management/_components/ManagementBtns';
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
-import GlobalLoading from '@app/GlobalLoading';
+import GlobalLoading from '@components/common/GlobalLoading';
 import GlobalError from '@app/GlobalError';
 import { CircleOk, Copy, NextArrow } from '@components/icons';
 import useSmallAlert from '@hooks/useSmallAlert';
 import useIsLeader from '@hooks/management/useIsLeader';
-
 
 export type ModalModeType = 'changeProfile' | 'deleteGroup' | 'leaveGroup' | 'leaderTransition';
 interface ManagementContentsProps {
@@ -37,7 +36,7 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
   const { data: isLeader, isPending, isError } = useIsLeader({ groupId });
 
   if (isPending) return <GlobalLoading />;
-  if (isError) return <GlobalError/>;
+  if (isError) return <GlobalError />;
 
   return (
     <>

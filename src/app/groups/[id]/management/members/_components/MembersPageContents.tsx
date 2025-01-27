@@ -7,7 +7,7 @@ import CurMemberList from '@app/groups/[id]/management/members/_components/CurMe
 import WaitingMemberList from '@app/groups/[id]/management/members/_components/WaitingMemberList';
 import MembersBottomSheet from '@app/groups/[id]/management/members/_components/MembersBottomSheet';
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
-import GlobalLoading from '@app/GlobalLoading';
+import GlobalLoading from '@components/common/GlobalLoading';
 import GlobalError from '@app/GlobalError';
 import { AddMember } from '@components/icons';
 import useIsLeader from '@hooks/management/useIsLeader';
