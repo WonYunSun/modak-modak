@@ -34,13 +34,13 @@ const ScheduleCalendar = () => {
 
   return (
     <div className="py-2 px-5">
-      <div className="h-14 mb-2">
+      <div className="h-14 mb-2 relative">
         <Swiper slidesPerView={1} spaceBetween={10} className="w-full h-14">
           {calendar.map((week, idx) => (
             <SwiperSlide key={idx}>
-              <div className="flex justify-center">
+              <div className="flex justify-center pl-4">
                 {week.map(({ id, dayOfWeek, date, isToday, isSelected, isSunday, hasSchedule }) => (
-                  <div className="flex justify-center flex-1" key={id} onClick={() => handleDayClick(id)}>
+                  <div className="flex justify-center flex-1 mr-[2px]" key={id} onClick={() => handleDayClick(id)}>
                     <div
                       className={`flex flex-col items-center rounded-full text-center border w-12 h-12 text-gray-500
                         ${isToday && 'bg-[#FFD3B8]'}
@@ -51,7 +51,7 @@ const ScheduleCalendar = () => {
                           ${isSunday ? 'text-base-red' : ''}`}
                       >
                         {hasSchedule && <RedDot className="ml-auto absolute top-[-1px] right-[-1px]" />}
-                        <span className='my-auto'>{dayOfWeek}</span>
+                        <span className="my-auto">{dayOfWeek}</span>
                       </span>
                       <span className="w-4 h-5 text-sm font-semibold mb-1">{date}</span>
                     </div>
@@ -61,6 +61,10 @@ const ScheduleCalendar = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+        <div
+          className="absolute top-0 right-0 w-[12%] h-12 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"
+          aria-hidden="true"
+        ></div>
       </div>
       <ScheduleCardList schedules={getSchedules()} />
     </div>
