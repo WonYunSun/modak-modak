@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import ScheduleCardList from '@app/mypage/_components/ScheduleCardList';
-import { RedDot } from '@components/icons';
+import ScheduleDay from '@app/mypage/_components/ScheduleDay';
 import useMySchedule from '@hooks/schedule/useMySchedule';
 import { createCalendar, DayInfo, firstWeekSchedules, getSelectedDay, select } from '@lib/scheduleCalendar';
 import { MyScheduleData } from '@queries/schedule/ScheduleActions';
@@ -39,23 +39,8 @@ const ScheduleCalendar = () => {
           {calendar.map((week, idx) => (
             <SwiperSlide key={idx}>
               <div className="flex justify-center pl-4">
-                {week.map(({ id, dayOfWeek, date, isToday, isSelected, isSunday, hasSchedule }) => (
-                  <div className="flex justify-center flex-1 mr-[2px]" key={id} onClick={() => handleDayClick(id)}>
-                    <div
-                      className={`flex flex-col items-center rounded-full text-center border w-12 h-12 text-gray-500
-                        ${isToday && 'bg-[#FFD3B8]'}
-                        ${isSelected ? 'border-primary-2-300' : 'border-transparent'}`}
-                    >
-                      <span
-                        className={`w-4 h-5 text-xs font-normal mt-1 mx-4 leading-none relative flex flex-col justify-center
-                          ${isSunday ? 'text-base-red' : ''}`}
-                      >
-                        {hasSchedule && <RedDot className="ml-auto absolute top-[-1px] right-[-1px]" />}
-                        <span className="my-auto">{dayOfWeek}</span>
-                      </span>
-                      <span className="w-4 h-5 text-sm font-semibold mb-1">{date}</span>
-                    </div>
-                  </div>
+                {week.map((day) => (
+                  <ScheduleDay key={day.id} {...day} onClick={handleDayClick} />
                 ))}
               </div>
             </SwiperSlide>
