@@ -7,7 +7,6 @@ import CountBar from '@app/groups/[id]/_components/CountBar';
 import Post from '@app/groups/[id]/_components/Post';
 import Button from '@components/common/Button';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
-import Loading from '@components/common/Spinner';
 
 import { ModificationLine } from '@components/icons';
 
@@ -15,7 +14,7 @@ import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
 import { useNewPostStore } from '@stores/useNewPostStore';
 
 import NoPost from '@app/groups/[id]/_components/NoPost';
-import NoSearch from '@app/groups/[id]/_components/NoSearch';
+// import NoSearch from '@app/groups/[id]/_components/NoSearch';
 import Spinner from '@components/common/Spinner';
 
 const PostList = () => {
@@ -29,23 +28,24 @@ const PostList = () => {
   const [search, setSearch] = useState<string | null>(null);
   const loadPostRef = useRef<HTMLDivElement>(null);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending, isError } = useFetchGetPosts(groupId);
+  const { data, fetchNextPage, hasNextPage, isPending, isError } = useFetchGetPosts(groupId);
 
   const posts = data?.pages.flat() || [];
 
+  console.log('data', data);
   useEffect(() => {
     if (!loadPostRef.current || !hasNextPage) return;
     const observer = new IntersectionObserver(
       ([entries]) => {
         if (entries.isIntersecting && hasNextPage) {
-          fetchNextPage(); // 스크롤로 데이터를 가져옴
+          fetchNextPage();
         }
       },
-      { rootMargin: '100px', threshold: 0.1 }
+      { threshold: 0.1 }
     );
 
-    if (loadPostRef.current) observer.observe(loadPostRef.current);
-    return () => observer.disconnect();
+    if (loadPostRef.current) observer.observe(loadPostRef.current); // 관찰 시작
+    return () => observer.disconnect(); // 관찰 종료
   }, [fetchNextPage, hasNextPage]);
 
   // 검색어에 따라 게시글 필터링
@@ -69,11 +69,6 @@ const PostList = () => {
       {/* 게시글 수 */}
       <CountBar value={!posts || posts.length === 0 ? 0 : (posts?.length ?? 0)} />
 
-      {/* {isFetchingNextPage && (
-        <div className="w-full flex justify-center items-center">
-          <Spinner />
-        </div>
-      )} */}
       {!posts || posts.length === 0 ? (
         <NoPost /> // 데이터 자체가 없을 때
       ) : (

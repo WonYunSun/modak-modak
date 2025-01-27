@@ -11,8 +11,7 @@ import { PhotoSlider } from '@app/groups/[id]/_components/PhotoSlider';
 import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBottomSheet';
 
 import useUser from '@hooks/useUser';
-
-import { CommentCountType, GroupType, PostImageType, PostType, ScheduleType, UserType } from 'queries/post/getPosts';
+import { GroupType, PostType, UserType, ScheduleType, CommentCountType, PostImageType } from '@ts/postType';
 
 export type PostCommonType = {
   id: PostType['id'];

@@ -4,14 +4,15 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 const PAGE_SIZE = 1;
 
 export const useFetchGetPosts = (groupId: string) => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending, isError } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isPending, isError } = useInfiniteQuery({
     queryKey: [groupId, 'posts'],
-    queryFn: ({ pageParam = 0 }) => getPosts(groupId, pageParam, PAGE_SIZE),
+    queryFn: ({ pageParam = 0 }) => getPosts(groupId, Number(pageParam), PAGE_SIZE),
+    initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length < PAGE_SIZE) return undefined; // 더 이상 가져올 데이터가 없으면 종료
-      return allPages.length * PAGE_SIZE; // 다음 offset 계산
+      // 데이터가 비어 있으면 페이지네이션 종료
+      return lastPage.length > 0 ? allPages.length + 1 : undefined;
     },
   });
 
-  return { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending, isError };
+  return { data, fetchNextPage, hasNextPage, isPending, isError };
 };
