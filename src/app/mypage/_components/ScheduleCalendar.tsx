@@ -35,7 +35,7 @@ const ScheduleCalendar = () => {
   return (
     <div className="py-2 px-5">
       <div className="h-14 mb-2 relative">
-        <Swiper slidesPerView={1} spaceBetween={10} className="w-full h-14">
+        <Swiper slidesPerView={1} spaceBetween={15} className="w-full h-14">
           {calendar.map((week, idx) => (
             <SwiperSlide key={idx}>
               <div className="flex justify-center pl-4">
