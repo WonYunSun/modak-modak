@@ -63,7 +63,7 @@ const Post = ({ post }: PostProps) => {
                 alt="프로필"
                 width={32}
                 height={32}
-                className="rounded-full object-cover"
+                className="w-8 h-8 rounded-full object-cover"
               />
             </div>
             {/* 닉네임 */}
