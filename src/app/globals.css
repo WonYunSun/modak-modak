@@ -20,7 +20,7 @@
   }
 
   .reactive {
-    @apply max-w-[600px] mx-auto border-x border-gray-200 min-h-screen;
+    @apply max-w-[600px] mx-auto border-x border-gray-200;
   }
 
   input[type='time']::-webkit-calendar-picker-indicator {
