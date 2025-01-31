@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation';
 
 import BottomSheet from '@components/common/BottomSheet';
 import Button from '@components/common/Button';
-import { Delete, Menu, ModificationLine } from '@components/icons';
+import { Delete, Menu, ModificationNoCircle } from '@components/icons';
 
 import useCommentHandler from '@hooks/comment/useCommentHandler';
 
@@ -138,7 +138,7 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
               onClick={handleUpdateComment}
               className="cursor-pointer flex-1 px-3 py-4 flex items-center justify-start text-base font-normal gap-4 leading-[140%] bg-[#F4F4F5]"
             >
-              <ModificationLine className="w-6 h-6 fill-black" />
+              <ModificationNoCircle className="w-6 h-6" />
             </Button>
             <Button
               type="button"

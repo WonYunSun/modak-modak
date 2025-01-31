@@ -98,6 +98,20 @@ body {
   right: 0 !important;
 }
 
+@media (min-width: 600px) {
+  /*모달 배경색 가운데 정렬*/
+  .modal-back-drop {
+    width: 600px !important;
+    margin: auto;
+  }
+  /*라이브러리 모달 배경색 가운데 정렬할 때는 이것도 필요*/
+  .modal-sheet-back-drop {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
 /* button 클래스 */
 @layer utilities {
   .full-btn {
