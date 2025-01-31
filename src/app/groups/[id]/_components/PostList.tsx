@@ -15,7 +15,7 @@ import { useNewPostStore } from '@stores/useNewPostStore';
 
 import NoPost from '@app/groups/[id]/_components/NoPost';
 // import NoSearch from '@app/groups/[id]/_components/NoSearch';
-import Spinner from '@components/common/Spinner';
+import SpinnerContainer from '@components/common/SpinnerContainer';
 
 const PostList = () => {
   const router = useRouter();
@@ -54,12 +54,7 @@ const PostList = () => {
   //   : data;
 
   if (isError) return <div>Error loading data</div>;
-  if (isPending)
-    return (
-      <div className="w-full flex h-[calc(100vh-352px)] justify-center items-center">
-        <Spinner />
-      </div>
-    );
+  if (isPending) return <SpinnerContainer />;
 
   return (
     <section className="w-full flex flex-col mb-28">

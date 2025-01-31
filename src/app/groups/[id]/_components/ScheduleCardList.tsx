@@ -4,7 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import CountBar from '@app/groups/[id]/_components/CountBar';
 import NoSchedule from '@app/groups/[id]/_components/NoSchedule';
 import Button from '@components/common/Button';
-import Spinner from '@components/common/Spinner';
+import SpinnerContainer from '@components/common/SpinnerContainer';
 import { CalendarIconSmall } from '@components/icons';
 import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
 import { useGroupSchedules } from '@hooks/schedule/useGroupSchedules';
@@ -19,9 +19,7 @@ const ScheduleCardList = () => {
     router.push(`/groups/${groupId}/schedules/${scheduleId}`);
   };
 
-  if (isPending) {
-    <Spinner />;
-  }
+  if (isPending) return <SpinnerContainer />;
 
   return (
     <div>
