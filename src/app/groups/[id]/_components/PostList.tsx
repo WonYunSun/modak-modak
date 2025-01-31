@@ -56,17 +56,19 @@ const PostList = () => {
       )}
 
       {/* 플로팅 버튼 */}
-      <Button
-        label="게시글 쓰기"
-        className="floating-btn"
-        type="button"
-        onClick={() => {
-          router.push(`/groups/${groupId}/posts/new`);
-          reset();
-        }}
-      >
-        <ModificationLine />
-      </Button>
+      <div className="ml-[calc(100%-124px)]">
+        <Button
+          label="게시글 쓰기"
+          className="floating-btn"
+          type="button"
+          onClick={() => {
+            router.push(`/groups/${groupId}/posts/new`);
+            reset();
+          }}
+        >
+          <ModificationLine />
+        </Button>
+      </div>
     </section>
   );
 };

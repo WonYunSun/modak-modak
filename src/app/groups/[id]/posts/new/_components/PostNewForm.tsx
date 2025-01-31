@@ -74,7 +74,7 @@ export const PostNewForm = () => {
 
       <PostSelectScheduleCard />
 
-      <div className="fixed w-full px-5 bottom-0">
+      <div className="fixed w-full max-w-[600px] m-auto px-5 bottom-0">
         <Button
           label="작성 완료"
           className="full-btn"

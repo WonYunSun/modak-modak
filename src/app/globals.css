@@ -8,6 +8,7 @@
     color: #000;
     background: #fff;
   }
+
   /* datepicker 커스텀 */
   .rdp-root {
     --rdp-accent-color: #b94600 !important;
@@ -19,7 +20,8 @@
   }
 
   input[type='time']::-webkit-calendar-picker-indicator {
-    display: none; /* 아이콘 숨기기 */
+    display: none;
+    /* 아이콘 숨기기 */
   }
 
   input[type='time']::-webkit-calendar-picker-indicator {
@@ -47,6 +49,7 @@
     width: 51px;
     height: 31px;
   }
+
   .toggle-btn .slider {
     position: absolute;
     cursor: pointer;
@@ -55,6 +58,7 @@
     transition: all 0.2s ease 0s;
     border-radius: 34px;
   }
+
   .toggle-btn .slider::before {
     position: absolute;
     content: '';
@@ -67,11 +71,29 @@
     border-radius: 50%;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 4px 0px;
   }
-  .toggle-btn input:checked + .slider {
+
+  .toggle-btn input:checked+.slider {
     background-color: #34c759;
   }
-  .toggle-btn input:checked + .slider::before {
+
+  .toggle-btn input:checked+.slider::before {
     transform: translateX(22px);
+  }
+
+  @media (min-width: 600px) {
+
+    /*모달 배경색 가운데 정렬*/
+    .modal-back-drop {
+      width: 600px !important;
+      margin: auto;
+    }
+
+    /*라이브러리 모달 배경색 가운데 정렬할 때는 이것도 필요*/
+    .modal-sheet-back-drop {
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+    }
   }
 }
 
@@ -131,7 +153,9 @@ body {
   }
 
   .floating-btn {
-    @apply w-[124px] h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0px_4px_4px_0px_#00000033] fixed bottom-[6.125rem] right-5;
+    @apply w-[124px] h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0px_4px_4px_0px_#00000033] fixed bottom-[5.5rem]
+    /*right-5*/
+    ;
   }
 
   .no-floating-btn {
