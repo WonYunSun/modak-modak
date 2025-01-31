@@ -60,7 +60,7 @@ const ProfileUpdateModalContent = () => {
           name="profile"
           setValue={handleFileChange}
           className="w-[84px] h-[84px]"
-          innerClass="bottom-[-10px] right-[-10px]"
+          innerClass="bottom-[-11px] right-[-11px]"
           imageUrl={imageUrl}
         />
       </div>
