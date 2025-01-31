@@ -3,10 +3,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 const PAGE_SIZE = 1;
 
-export const useFetchGetPosts = (groupId: string) => {
+export const useFetchGetPosts = (groupId: string, searchTerm?: string) => {
   const { data, fetchNextPage, hasNextPage, isPending, isError } = useInfiniteQuery({
-    queryKey: [groupId, 'posts'],
-    queryFn: ({ pageParam = 0 }) => getPosts(groupId, Number(pageParam), PAGE_SIZE),
+    queryKey: ['posts', groupId, searchTerm || ''],
+    queryFn: ({ pageParam = 0 }) => getPosts(groupId, Number(pageParam), PAGE_SIZE, searchTerm),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       // 데이터가 비어 있으면 페이지네이션 종료

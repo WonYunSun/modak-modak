@@ -11,10 +11,11 @@ import SearchBar from '@app/groups/[id]/_components/SearchBar';
 import { ModificationLine } from '@components/icons';
 
 import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
+import { useFetchPostCount } from '@hooks/post/useFetchPostCount';
 import { useNewPostStore } from '@stores/useNewPostStore';
 
 import NoPost from '@app/groups/[id]/_components/NoPost';
-// import NoSearch from '@app/groups/[id]/_components/NoSearch';
+import NoSearch from '@app/groups/[id]/_components/NoSearch';
 import SpinnerContainer from '@components/common/SpinnerContainer';
 
 const PostList = () => {
@@ -25,14 +26,15 @@ const PostList = () => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
 
-  const [search, setSearch] = useState<string | null>(null);
   const loadPostRef = useRef<HTMLDivElement>(null);
+  const [searchTerm, setSearchTerm] = useState<string | null>(null);
+  const searchQuery = searchTerm ? searchTerm : undefined;
 
-  const { data, fetchNextPage, hasNextPage, isPending, isError } = useFetchGetPosts(groupId);
+  const { data, fetchNextPage, hasNextPage, isPending, isError } = useFetchGetPosts(groupId, searchQuery);
+  const { data: totalCount, isPending: isCountLoading } = useFetchPostCount(groupId, searchQuery);
 
   const posts = data?.pages.flat() || [];
 
-  console.log('data', data);
   useEffect(() => {
     if (!loadPostRef.current || !hasNextPage) return;
     const observer = new IntersectionObserver(
@@ -48,30 +50,22 @@ const PostList = () => {
     return () => observer.disconnect(); // 관찰 종료
   }, [fetchNextPage, hasNextPage]);
 
-  // 검색어에 따라 게시글 필터링
-  // const filteredPosts = search
-  //   ? data?.filter((post) => post.schedules?.name?.toLowerCase().includes(search.toLowerCase()))
-  //   : data;
-
   if (isError) return <div>Error loading data</div>;
   if (isPending) return <SpinnerContainer />;
 
   return (
     <section className="w-full flex flex-col mb-28">
       {/* 검색바 */}
-      {/* 검색 기능 고도화 및 작동 방식 논의 필요 */}
-      <SearchBar search={search} setSearch={setSearch} />
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {/* 게시글 수 */}
-      <CountBar value={!posts || posts.length === 0 ? 0 : (posts?.length ?? 0)} />
+      <CountBar value={isCountLoading ? 0 : (totalCount ?? 0)} />
 
-      {!posts || posts.length === 0 ? (
-        <NoPost /> // 데이터 자체가 없을 때
+      {posts && posts.length > 0 ? (
+        posts.map((post) => <Post key={post.id} post={post} />) // 데이터가 있으면 Post 리스트 렌더링
+      ) : searchTerm ? (
+        <NoSearch /> // 검색어가 있는데 데이터가 없으면 검색 결과 없음 표시
       ) : (
-        //  : !posts || posts.length === 0 ? (
-        //   <NoSearch /> // 검색 결과가 없을 때
-        // )
-        // Post 컴포넌트 랜더링
-        posts.map((post) => <Post key={post.id} post={post} />)
+        <NoPost /> // 검색어가 없고 데이터도 없으면 기본 NoPost 표시
       )}
       <div ref={loadPostRef}></div>
 

@@ -15,10 +15,10 @@ const FunnelHeader = ({ label = '' }: FunnelHeaderProps) => {
 
   return (
     <header>
-      <div className="relative w-full max-w-[600px] mx-auto h-12 flex items-center justify-center bg-white border-x border-gray-200">
+      <div className="relative w-full max-w-[600px] mx-auto h-12 flex items-center justify-center bg-white">
         <PrevArrow
           onClick={handleNaivation}
-          className="absolute w-6 h-6 top-[50%] transform translate-y-[-50%] left-5 cursor-pointer"
+          className="absolute w-6 h-6 top-[50%] transform translate-y-[-50%] left-7 cursor-pointer"
         />
         <h3 className="text-center text-xl font-semibold leading-[140%]">{label}</h3>
       </div>
