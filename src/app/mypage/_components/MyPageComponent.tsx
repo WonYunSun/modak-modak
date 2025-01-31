@@ -21,13 +21,13 @@ const MyPageComponent = () => {
   };
 
   return (
-    <>
+    <div className="reactive">
       <Header label="마이 페이지" home={false} isScrolled={true} />
       <ProfileSection setModalStatus={setModalStatus} />
       <MySchedule />
       <UserManagement setModalStatus={setModalStatus} />
       <Modal>{modalContents[modalStatus]}</Modal>
-    </>
+    </div>
   );
 };
 
