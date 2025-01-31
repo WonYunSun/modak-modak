@@ -1,6 +1,17 @@
+'use client';
+
+import { useEffect } from 'react';
+import useLoadingStore from '@stores/useLoadingStore';
 import { LoadingIcon1, LoadingIcon2 } from '@components/icons';
 
 const Loading = () => {
+  const setLoading = useLoadingStore((state) => state.setLoading);
+
+  useEffect(() => {
+    setLoading(true);
+    return () => setLoading(false); // 언마운트될 때 로딩 상태 해제
+  }, [setLoading]);
+
   return (
     <div className="h-screen w-full max-w-[600px] m-auto z-50 bg-white flex justify-center items-center border-x border-gray-200">
       <div className="w-full flex flex-col items-center">
