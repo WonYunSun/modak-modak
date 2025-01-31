@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import MemberCard from '@app/groups/[id]/management/members/_components/MemberCard';
 import GlobalLoading from '@components/common/GlobalLoading';
-import GlobalError from '@app/GlobalError';
+import GlobalError from '@components/common/GlobalError';
 import useFetchWaitingMembers from '@hooks/management/useFetchWaitingMembers';
 
 interface WaitingMemberListProps {

@@ -5,7 +5,7 @@ import { useParams, useSearchParams } from 'next/navigation';
 import UserQueryJoinStepOne from '@app/join/[id]/_components/UserQueryJoinStepOne';
 import UserQueryJoinStepTwo from '@app/join/[id]/_components/UserQueryJoinStepTwo';
 import GlobalLoading from '@components/common/GlobalLoading';
-import GlobalError from '@app/GlobalError';
+import GlobalError from '@components/common/GlobalError';
 import useIsAlreadyJoin from '@hooks/join/useIsAlreadyJoin';
 import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 import { UsersType } from '@ts/supabaseTableRowTypes';

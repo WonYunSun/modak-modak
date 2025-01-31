@@ -8,7 +8,7 @@ import ToggleBox from '@app/groups/[id]/management/_components/ToggleBox';
 import ManagementBtns from '@app/groups/[id]/management/_components/ManagementBtns';
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
 import GlobalLoading from '@components/common/GlobalLoading';
-import GlobalError from '@app/GlobalError';
+import GlobalError from '@components/common/GlobalError';
 import { CircleOk, Copy, NextArrow } from '@components/icons';
 import useSmallAlert from '@hooks/useSmallAlert';
 import useIsLeader from '@hooks/management/useIsLeader';

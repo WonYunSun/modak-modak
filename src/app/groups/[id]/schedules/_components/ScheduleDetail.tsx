@@ -6,7 +6,7 @@ import { fetchScheduleById } from 'queries/schedule/ScheduleActions';
 import FunnelHeader from '@components/common/FunnelHeader';
 import { ScheduleEdit } from '@app/groups/[id]/schedules/_components/detailComponents/ScheduleEdit';
 import { ScheduleInfo } from '@app/groups/[id]/schedules/_components/detailComponents/SchdeuleInfo';
-import GlobalError from '@app/GlobalError';
+import GlobalError from '@components/common/GlobalError';
 import Spinner from '@components/common/Spinner';
 
 const ScheduleDetail = ({ scheduleId, groupId }: { scheduleId: string; groupId: string }) => {
