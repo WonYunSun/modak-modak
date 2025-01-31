@@ -10,6 +10,7 @@ import { GroupCardSection } from '@app/groups/[id]/_components/GroupCardSection'
 import TabPages from '@app/groups/[id]/_components/TabPages';
 
 import useHeaderStore from '@stores/useHeaderStore';
+import useModalStore from '@stores/useModalStore';
 
 const GroupSection = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -20,7 +21,11 @@ const GroupSection = () => {
 
   const { reset } = useHeaderStore();
 
+  const { closeModal } = useModalStore();
+
   useEffect(() => {
+    closeModal(); //이전에 열린 모달 닫기 처리용
+
     const targetInstanceRef = targetRef.current;
 
     const options = {

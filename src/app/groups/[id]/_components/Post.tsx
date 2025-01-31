@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 
 import { Comments, Menu } from '@components/icons';
+
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import CommentList from '@app/groups/[id]/_components/CommentList';
 import { DeleteModal } from '@app/groups/[id]/_components/DeleteModal';
@@ -11,6 +12,8 @@ import { PhotoSlider } from '@app/groups/[id]/_components/PhotoSlider';
 import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBottomSheet';
 
 import useUser from '@hooks/useUser';
+import useCommentValueStore from '@stores/useCommentValueStore';
+
 import { GroupType, PostType, UserType, ScheduleType, CommentCountType, PostImageType } from '@ts/postType';
 
 export type PostCommonType = {
@@ -34,6 +37,9 @@ const Post = ({ post }: PostProps) => {
   const [bottomSheetPostId, setBottomSheetPostId] = useState<string | null>(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+
+  const { setCommentValue } = useCommentValueStore();
+
   const { user } = useUser();
   // 글 내용 3줄로 줄이기 (최대 80자)
   const truncateText = (text: string | null, postId: string) => {
@@ -47,6 +53,12 @@ const Post = ({ post }: PostProps) => {
       ...prev,
       [postId]: !prev[postId],
     }));
+  };
+
+  // 댓글창 열고 닫기
+  const closeCommentList = () => {
+    setIsCommentOpen(false);
+    setCommentValue('');
   };
 
   return (
@@ -110,7 +122,7 @@ const Post = ({ post }: PostProps) => {
       </article>
 
       {/* 댓글 바텀시트 */}
-      <CommentList postId={post.id} isOpen={isCommentOpen} onClose={() => setIsCommentOpen(false)} />
+      <CommentList postId={post.id} isOpen={isCommentOpen} onClose={closeCommentList} />
 
       {/* 메뉴 수정 바텀시트 */}
       {bottomSheetPostId && (
