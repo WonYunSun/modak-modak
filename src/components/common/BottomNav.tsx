@@ -19,7 +19,7 @@ const buttons = [
     label: '채팅',
     iconOff: <Chat className="w-6 h-6" />,
     iconOn: <Chat className="w-6 h-6" active={true} />,
-    href: '/',
+    href: '/chat',
   },
   {
     id: 'mypage',
@@ -41,7 +41,7 @@ const BottomNav = () => {
   }, [pathname]);
 
   // 특정 경로에서 BottomNav 숨김
-  const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule', '/join'];
+  const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule', '/join', '/chat/'];
   const isHideNav = hiddenPaths.some((path) => pathname.includes(path));
 
   if (isHideNav) {
@@ -56,11 +56,7 @@ const BottomNav = () => {
             href={button.href}
             key={button.id}
             className="flex-1 flex justify-center items-center"
-            onClick={
-              button.id !== 'chat'
-                ? () => setActiveButton(button.id)
-                : () => alert('아직 서비스 준비 중입니다!😊 조금만 기다려 주세요.')
-            }
+            onClick={() => setActiveButton(button.id)}
           >
             <div className="flex flex-col justify-end items-center">
               <div
