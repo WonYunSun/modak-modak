@@ -9,10 +9,9 @@ const TABLEBYTYPE = {
   schedules_new: 'schedules',
 };
 
-//Promise<GroupMembersType[] | null>
-
 export type NotificationCardDataType = {
   id: string;
+  
   isRead: boolean;
   iconStyle: IconStyleType;
   config: {
@@ -20,6 +19,7 @@ export type NotificationCardDataType = {
     linkTo: string;
     title: string;
     body: string;
+    createdAt: string;
   };
 };
 
@@ -33,10 +33,11 @@ type NotificationType = 'group_members_new' | 'schedules_new';
 
 interface FetchNotificationsDataParams {
   type: NotificationType;
+  createdAt: string;
   fetchDataConfig: FetchDataConfigType;
 }
 
-export const fetchNotificationsData = async ({ type, fetchDataConfig }: FetchNotificationsDataParams) => {
+export const fetchNotificationsData = async ({ type, createdAt, fetchDataConfig }: FetchNotificationsDataParams) => {
   const { groupId, triggeredRowId, isRead } = fetchDataConfig;
   try {
     const supabase = await createClient();
@@ -56,6 +57,7 @@ export const fetchNotificationsData = async ({ type, fetchDataConfig }: FetchNot
           linkTo: `/groups/${groupId}/management/members`,
           title: '새로운 멤버가 들어왔어요',
           body: `${groupData?.name}에 '${newMemberData?.nickname}'님이 멤버가 되었어요`,
+          createdAt,
         },
       };
 
@@ -64,6 +66,7 @@ export const fetchNotificationsData = async ({ type, fetchDataConfig }: FetchNot
 
     if (type === 'schedules_new') {
       const notificationCardData = {
+        id: triggeredRow?.id,
         isRead,
         iconStyle: 'groupImg',
         config: {
@@ -71,6 +74,7 @@ export const fetchNotificationsData = async ({ type, fetchDataConfig }: FetchNot
           linkTo: `/groups/${groupId}/schedules/${triggeredRow?.id}`,
           title: '일정이 등록되었어요',
           body: `${groupData?.name}에 '${triggeredRow?.name}'일정이 생겼어요`,
+          createdAt,
         },
       };
 
@@ -99,17 +103,19 @@ export const fetchNotifications = async ({ userId }: FetchUserGroupListParams) =
     const alreadyReadNotifications = notifications.filter(({ is_read }) => is_read === true);
 
     const unReadData = await Promise.all(
-      unReadNotifications.map(async ({ group_id, triggered_row_id, is_read, type }) => {
+      unReadNotifications.map(async (data) => {
+        const { group_id, triggered_row_id, is_read, type, created_at } = data;
         const fetchDataConfig = { groupId: group_id, triggeredRowId: triggered_row_id, isRead: is_read };
 
-        return await fetchNotificationsData({ type, fetchDataConfig });
+        return await fetchNotificationsData({ type, createdAt: created_at, fetchDataConfig });
       })
     );
     const alreadyReadData = await Promise.all(
-      alreadyReadNotifications.map(async ({ group_id, triggered_row_id, is_read, type }) => {
+      alreadyReadNotifications.map(async (data) => {
+        const { group_id, triggered_row_id, is_read, type, created_at } = data;
         const fetchDataConfig = { groupId: group_id, triggeredRowId: triggered_row_id, isRead: is_read };
 
-        return await fetchNotificationsData({ type, fetchDataConfig });
+        return await fetchNotificationsData({ type, createdAt: created_at, fetchDataConfig });
       })
     );
 
