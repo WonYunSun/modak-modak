@@ -61,7 +61,6 @@ const MembersPageContents = () => {
           </div>
         </div>
       </div>
-
       {selectedTab === 'currentMembers' ? (
         <CurMemberList isLeaderUser={isLeaderUser ? isLeaderUser : false} />
       ) : (

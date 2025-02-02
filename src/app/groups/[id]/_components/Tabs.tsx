@@ -14,7 +14,7 @@ const Tabs = ({ isScrolled }: TabsProps) => {
       {/* 게시글 탭 */}
       <div
         onClick={() => setActiveTab('posts')}
-        className={`flex-1 text-center text-base py-2 ${
+        className={`flex-1 text-center text-base py-3 ${
           activeTab === 'posts' ? 'border-b-2 border-gray-900 font-semibold' : 'text-gray-700 border-b-0'
         }`}
       >
@@ -24,7 +24,7 @@ const Tabs = ({ isScrolled }: TabsProps) => {
       {/* 사진첩 탭 */}
       <div
         onClick={() => setActiveTab('photos')}
-        className={`flex-1 text-center text-base py-2 ${
+        className={`flex-1 text-center text-base py-3 ${
           activeTab === 'photos' ? 'border-b-2 border-gray-900 font-semibold' : 'text-gray-700 border-b-0'
         }`}
       >
@@ -34,7 +34,7 @@ const Tabs = ({ isScrolled }: TabsProps) => {
       {/* 모임일정 탭 */}
       <div
         onClick={() => setActiveTab('schedules')}
-        className={`flex-1 text-center text-base py-2 ${
+        className={`flex-1 text-center text-base py-3 ${
           activeTab === 'schedules' ? 'border-b-2 border-gray-900 font-semibold' : 'text-gray-700 border-b-0'
         }`}
       >

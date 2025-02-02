@@ -54,7 +54,7 @@ const PhotoList = () => {
 
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
+          className="fixed inset-y-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-80 flex justify-center items-center z-50 w-full max-w-[600px]"
           onClick={handleClose}
         >
           <div className="relative w-[80%] h-auto">
@@ -64,14 +64,16 @@ const PhotoList = () => {
       )}
 
       {/* 플로팅 버튼 */}
-      <Button
-        label="게시글 쓰기"
-        className="floating-btn"
-        type="button"
-        onClick={() => router.push(`/groups/${groupId}/posts/new`)}
-      >
-        <ModificationLine />
-      </Button>
+      <div className="ml-[calc(100%-124px)]">
+        <Button
+          label="게시글 쓰기"
+          className="floating-btn"
+          type="button"
+          onClick={() => router.push(`/groups/${groupId}/posts/new`)}
+        >
+          <ModificationLine />
+        </Button>
+      </div>
     </section>
   );
 };

@@ -4,7 +4,7 @@ import PostNewForm from '@app/groups/[id]/posts/new/_components/PostNewForm';
 
 const PostNewPage = () => {
   return (
-    <div className="w-full pb-2">
+    <div className="w-full h-screen max-w-[600px] mx-auto pb-2 border border-gray-200">
       {/* 헤더 영역 */}
       <div className="w-full fixed top-0 left-0 z-30 px-5">
         <FunnelHeader label="게시글 쓰기" />

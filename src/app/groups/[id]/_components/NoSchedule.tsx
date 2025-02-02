@@ -17,14 +17,16 @@ const NoSchedule = () => {
         <p className="text-gray-700 text-lg">지난 일정을 등록하고</p>
         <p className="text-gray-700 text-lg">우리만의 추억을 공유해보세요</p>
       </div>
-      <Button
-        label="일정 만들기"
-        className="floating-btn"
-        type="button"
-        onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
-      >
-        <CalendarIconSmall />
-      </Button>
+      <div className="ml-[calc(100%-124px)]">
+        <Button
+          label="일정 만들기"
+          className="floating-btn"
+          type="button"
+          onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
+        >
+          <CalendarIconSmall />
+        </Button>
+      </div>
     </>
   );
 };
