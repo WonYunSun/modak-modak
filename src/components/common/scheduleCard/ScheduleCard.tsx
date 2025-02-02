@@ -57,10 +57,12 @@ const ScheduleCard = ({
             </>
           )}
         </div>
-        <div className={detailClass}>
-          <span className={labelClass}>시간</span>
-          <span>{formatTime(start_time)}</span>
-        </div>
+        {start_time !== null && (
+          <div className={detailClass}>
+            <span className={labelClass}>시간</span>
+            <span>{formatTime(start_time)}</span>
+          </div>
+        )}
       </div>
 
       {hasArrow ? <NextArrow className="min-w-6" /> : null}

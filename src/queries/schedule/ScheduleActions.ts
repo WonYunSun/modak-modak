@@ -15,7 +15,7 @@ export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleT
         start_date: scheduleData.start_date,
         end_date: scheduleData.end_date,
         group_id: scheduleData.group_id,
-        start_time: scheduleData.start_time,
+        start_time: scheduleData.start_time || null,
         memo: scheduleData.memo,
         created_at: scheduleData.created_at,
       },
