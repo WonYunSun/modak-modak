@@ -27,9 +27,7 @@ const GroupCardContent = ({ groupInfo, hasLink = true }: GroupCardContentProps) 
         <div className="overflow-hidden w-full h-full flex flex-col justify-center py-1 gap-1">
           <div className="min-w-0 flex-auto">
             <h4 className={`${hasLink ? 'truncate' : ''} text-lg font-semibold leading-[140%]`}>{name}</h4>
-            <span className={`${hasLink ? 'truncate' : ''} block text-gray-600 text-[0.875rem] leading-[140%]`}>
-              {description}
-            </span>
+            <span className={`block text-gray-600 text-[0.875rem] leading-[140%]`}>{description}</span>
           </div>
           <div className="h-[2rem] flex items-center justify-between">
             <div className="flex items-center gap-0.5">
