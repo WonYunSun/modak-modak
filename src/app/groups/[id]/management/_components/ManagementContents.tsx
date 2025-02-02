@@ -7,7 +7,7 @@ import ManagementCard from '@app/groups/[id]/management/_components/ManagementCa
 import ToggleBox from '@app/groups/[id]/management/_components/ToggleBox';
 import ManagementBtns from '@app/groups/[id]/management/_components/ManagementBtns';
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
-import GlobalLoading from '@components/common/GlobalLoading';
+import SpinnerContainer from '@components/common/SpinnerContainer';
 import GlobalError from '@components/common/GlobalError';
 import { CircleOk, Copy, NextArrow } from '@components/icons';
 import useSmallAlert from '@hooks/useSmallAlert';
@@ -35,7 +35,7 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
 
   const { data: isLeader, isPending, isError } = useIsLeader({ groupId });
 
-  if (isPending) return <GlobalLoading />;
+  if (isPending) return <SpinnerContainer height={112} />;
   if (isError) return <GlobalError />;
 
   return (

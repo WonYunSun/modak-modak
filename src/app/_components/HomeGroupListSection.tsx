@@ -2,7 +2,7 @@
 
 import GroupList from '@app/_components/GroupList';
 import NoGroup from '@app/_components/NoGroup';
-import GlobalLoading from '@components/common/GlobalLoading';
+import SpinnerContainer from '@components/common/SpinnerContainer';
 import useFetchGroupList from '@hooks/home/useFetchGroupList';
 import useFetchWaitingGroupList from '@hooks/home/useFetchWaitingGroupList';
 
@@ -10,7 +10,7 @@ const HomeGroupListSection = () => {
   const { data: groupDataList } = useFetchGroupList();
   const { data: waitingGroupDataList } = useFetchWaitingGroupList();
 
-  if (groupDataList === undefined && waitingGroupDataList === undefined) return <GlobalLoading />;
+  if (groupDataList === undefined && waitingGroupDataList === undefined) return <SpinnerContainer height={249} />;
 
   return (
     <>
