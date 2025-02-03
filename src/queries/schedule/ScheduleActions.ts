@@ -15,7 +15,7 @@ export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleT
         start_date: scheduleData.start_date,
         end_date: scheduleData.end_date,
         group_id: scheduleData.group_id,
-        start_time: scheduleData.start_time,
+        start_time: scheduleData.start_time || null,
         memo: scheduleData.memo,
         created_at: scheduleData.created_at,
       },
@@ -42,12 +42,23 @@ export const fetchSchedulesBygroupId = async (groupId: string): Promise<Schedule
   }
 };
 
-export const fetchScheduleById = async (scheduleId: string): Promise<ScheduleType | null> => {
+export const fetchScheduleById = async (
+  scheduleId: string
+): Promise<(ScheduleType & { hasRelatedPosts: boolean }) | null> => {
   try {
     const supabase = await createClient();
-    const { data } = await supabase.from('schedules').select('*').eq('id', scheduleId).single();
 
-    return data;
+    const { data: schedule } = await supabase.from('schedules').select('*').eq('id', scheduleId).single();
+
+    if (!schedule) return null;
+
+    // 연관된 게시글이 있는지 확인
+    const { count } = await supabase
+      .from('posts')
+      .select('id', { count: 'exact', head: true })
+      .eq('schedule_id', scheduleId);
+
+    return { ...schedule, hasRelatedPosts: !!count };
   } catch (error) {
     throw new Error(`${error}`);
   }

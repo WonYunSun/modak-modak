@@ -13,13 +13,17 @@ const DeletionConfirm = ({ onNextStep }: DeletionConfirmProps) => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
   const { closeModal } = useModalStore();
-  const deleteGroup = useDeleteGroup({ groupId });
+  const { mutate: deleteGroup } = useDeleteGroup({ groupId });
 
   const [confirmationInput, setConfirmationInput] = useState('');
 
   const onDeleteGroup = async () => {
-    deleteGroup();
-    onNextStep();
+    try {
+      await deleteGroup(); // 삭제 완료 대기
+      onNextStep();
+    } catch (error) {
+      console.error('그룹 삭제 중 에러 발생:', error);
+    }
   };
 
   return (

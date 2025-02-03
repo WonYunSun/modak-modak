@@ -120,7 +120,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
           }}
           className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[3.12rem] h-[50px] "
         >
-          {selectedTime ? formatTime(selectedTime) : <p className="text-[#a0a0a0]">만나는 시간</p>}
+          {selectedTime ? formatTime(selectedTime) : <p className="text-[#a0a0a0]">만나는 시간(필수는 아니에요)</p>}
         </div>
         {isTimepickerOpen && (
           <div ref={timepickerRef} className="absolute z-50 top-[100%] left-0 w-full bg-white drop-shadow-md">

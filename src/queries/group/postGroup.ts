@@ -54,6 +54,7 @@ export const addGroup = async (groupData: GroupsType, userId?: string): Promise<
       throw new Error('그룹 멤버 추가에 실패했습니다.');
     }
 
+
     // 채팅방 멤버 추가
     const { error: chatRoomMemberInsertError } = await supabase.from('chat_room_members').insert({
       chat_room_id: chatRoomResultData.id,
