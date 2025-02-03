@@ -4,7 +4,7 @@ import SignupForm from './_components/SignupForm';
 
 const SignupPage = () => {
   return (
-    <div className="flex flex-col px-5 h-screen">
+    <div className="flex flex-col h-screen max-w-[600px] mx-auto">
       <FunnelHeader label="회원가입" />
       <Suspense>
         <SignupForm />

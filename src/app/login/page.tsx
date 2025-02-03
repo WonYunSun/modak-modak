@@ -11,7 +11,7 @@ const LoginPage = () => {
    */
 
   return (
-    <div className="flex flex-col h-screen pb-[112px] pt-[119px] inner justify-center">
+    <div className="flex flex-col h-screen pb-[112px] pt-[119px] inner justify-center reactive">
       <Onboarding />
       <Suspense>
         <SocialLogins />
