@@ -15,7 +15,7 @@ interface ChatInputProps {
 }
 
 const ChatInput = ({ user, chatRoomId }: ChatInputProps) => {
-  const { message, setMessage, sendMessage } = useChatMessage(chatRoomId as string, user?.id as string);
+  const { message, setMessage, sendMessage, SmallAlert } = useChatMessage(chatRoomId as string, user?.id as string);
 
   const keyboardHeight = useIOSKeyboardHeight();
 
@@ -74,6 +74,7 @@ const ChatInput = ({ user, chatRoomId }: ChatInputProps) => {
           onClick={() => sendMessage(resetTextAreaHeight)}
         />
       </div>
+      <SmallAlert>메세지를 입력해주세요.</SmallAlert>
     </div>
   );
 };

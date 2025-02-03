@@ -72,8 +72,6 @@ const getChatList = async (userId: string): Promise<getChatListType[] | []> => {
       };
     });
 
-    console.log('combinedList', combinedList);
-
     return combinedList || [];
   } catch (error) {
     console.error(error);

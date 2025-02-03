@@ -41,7 +41,6 @@ const useChatRoomList = (user_id: string) => {
               const updatedChatList = currentChatList.map((chat) => {
                 if (chat.chat_room_id === payload.new.chat_room_id) {
                   const isUnread = !payload.new.read_by?.includes(user_id);
-                  console.log('isUnread', isUnread);
                   return {
                     ...chat,
                     messages: [...chat.messages, payload.new],
@@ -80,8 +79,6 @@ const useChatRoomList = (user_id: string) => {
       .subscribe((status, err) => {
         if (err) {
           console.error('Subscription error:', err);
-        } else {
-          console.log('Subscription status:', status);
         }
       });
 

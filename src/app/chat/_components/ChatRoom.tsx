@@ -1,19 +1,17 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { User } from '@supabase/supabase-js';
 
-// import DateSeparator from '@app/chat/_components/DateSeparator';
-// import UserMessage from '@app/chat/_components/UserMessage';
-// import OtherUserMessage from '@app/chat/_components/OtherUserMessage';
+import ChatEmptyMessage from '@app/chat/_components/ChatEmptyMessage';
+import ChatMessageList from '@app/chat/_components/ChatMessageList';
 
 import useMessageList from '@hooks/chat/useMessgeList';
 import useCheckMessageRead from '@hooks/chat/useCheckMessageRead';
 
 import { MessageType } from '@queries/chat/getChatList';
-import ChatEmptyMessage from '@app/chat/_components/ChatEmptyMessage';
-import ChatMessageList from '@app/chat/_components/ChatMessageList';
+import useSmallAlert from '@hooks/useSmallAlert';
 
 interface ChatRoomProps {
   user: User | null;
@@ -22,9 +20,14 @@ interface ChatRoomProps {
 
 const ChatRoom = ({ user, chatRoomId }: ChatRoomProps) => {
   const { messages, isPending, isError } = useMessageList(chatRoomId as string, user?.id as string);
+
   const currentUserId = user?.id;
+
   const chatRoomRef = useRef<HTMLDivElement | null>(null);
+
   const [summary, setSummary] = useState<string | null>(null);
+
+  const { SmallAlert, openAlert } = useSmallAlert();
 
   useCheckMessageRead(chatRoomId as string, currentUserId as string);
 
@@ -46,7 +49,7 @@ const ChatRoom = ({ user, chatRoomId }: ChatRoomProps) => {
     const todayMessages = filterTodayMessages(messages || []);
 
     if (todayMessages.length === 0) {
-      alert('오늘의 대화가 없습니다.');
+      openAlert();
       return;
     }
 
@@ -121,6 +124,7 @@ const ChatRoom = ({ user, chatRoomId }: ChatRoomProps) => {
     >
       {messages?.length === 0 && <ChatEmptyMessage />}
       <ChatMessageList messages={messages} currentUserId={currentUserId as string} />
+      <SmallAlert>오늘의 대화가 없습니다.</SmallAlert>
       <div>
         <button
           onClick={handleSummarize}

@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Sheet } from 'react-modal-sheet';
 
 import CommentContent from '@app/groups/[id]/_components/CommentContent';
@@ -17,6 +16,7 @@ interface CommentListProps {
 
 const CommentList = ({ isOpen, onClose, postId }: CommentListProps) => {
   const { isActionModalOpen } = useBottomSheetStore();
+
   const keyboardHeight = useIOSKeyboardHeight();
 
   return (

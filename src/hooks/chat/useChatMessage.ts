@@ -3,14 +3,18 @@ import { useState } from 'react';
 import useChatRoomPresence from '@hooks/chat/useChatRoomPresence';
 
 import { insertMessage } from '@queries/chat/chatInputQuery';
+import useSmallAlert from '@hooks/useSmallAlert';
 
 const useChatMessage = (chatRoomId: string, userId: string) => {
   const [message, setMessage] = useState<string>('');
+
   const onlineUsers = useChatRoomPresence(chatRoomId, userId);
+
+  const { SmallAlert, openAlert } = useSmallAlert();
 
   const sendMessage = async (resetTextAreaHeight: () => void) => {
     if (!message.trim()) {
-      alert('메시지를 입력해주세요.');
+      openAlert();
       return;
     }
 
@@ -24,7 +28,7 @@ const useChatMessage = (chatRoomId: string, userId: string) => {
     }
   };
 
-  return { message, setMessage, sendMessage };
+  return { message, setMessage, sendMessage, SmallAlert };
 };
 
 export default useChatMessage;
