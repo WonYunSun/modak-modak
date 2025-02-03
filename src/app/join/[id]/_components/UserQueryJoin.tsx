@@ -11,9 +11,9 @@ import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 import { UsersType } from '@ts/supabaseTableRowTypes';
 
 const JOINSTATE = {
-  member: '이미 가입한 모임이에요',
-  waiting: '이미 가입 신청했어요',
-  joinable: '모임 가입하기',
+  member: '이미 가입한 모임이에요!',
+  waiting: '이미 가입 신청한 모임이에요!',
+  joinable: '모임 가입 신청하기',
 };
 
 interface UserQueryJoinProps {
@@ -47,6 +47,7 @@ const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
           <UserQueryJoinStepOne
             onQueryJoin={onQueryJoin}
             buttonLabel={JOINSTATE[joinStateData]}
+            joinState={joinStateData}
             isJoinable={!!(joinStateData === 'joinable')}
           />
         </>

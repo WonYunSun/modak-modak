@@ -52,11 +52,14 @@ const NewGroupForm = () => {
       id: '',
     };
 
-    const newGroupId = await addGroup(completeGroupData, user?.id);
-
-    setNewGroupId(newGroupId);
-    invalidateGroupListQuery();
-    openModal();
+    try {
+      const newGroupId = await addGroup(completeGroupData, user?.id);
+      setNewGroupId(newGroupId);
+      invalidateGroupListQuery();
+      openModal();
+    } catch (error) {
+      console.error('addGroup 에러 발생:', error); // 오류 확인
+    }
   };
 
   const handlePrev = (prevStep: string) => {

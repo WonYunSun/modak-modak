@@ -8,8 +8,12 @@ import useDeleteSchedule from '@hooks/schedule/useDeleteSchedules';
 import { formatDate, formatTime } from '@utils/dateUtils';
 import { ScheduleType } from '@ts/scheduleType';
 
+interface ScheduleWithPosts extends ScheduleType {
+  hasRelatedPosts: boolean;
+}
+
 interface ScheduleInfoType {
-  schedule: ScheduleType;
+  schedule: ScheduleWithPosts;
   groupId: string;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -49,7 +53,7 @@ export const ScheduleInfo = ({ schedule, groupId, setIsEdit }: ScheduleInfoType)
           </div>
           <div className="flex bg-gray-100 px-4 py-3 rounded-lg font-medium">
             <ClockIcon className=" cursor-pointer mr-2" />
-            {formatTime(schedule.start_time)}
+            {schedule.start_time !== null ? formatTime(schedule.start_time) : ''}
           </div>
         </div>
 
@@ -79,32 +83,50 @@ export const ScheduleInfo = ({ schedule, groupId, setIsEdit }: ScheduleInfoType)
         />
       </div>
       <Modal>
-        <div className="w-full">
-          <div className="px-[1rem] py-[1.25rem] w-full mb-[1.25rem]">
-            <p className="text-gray-900 font-semibold text-lg mb-[0.25rem]">정말 삭제하시겠어요?</p>
-            <p className="text-gray-500 ">삭제하시면 되돌릴 수 없어요</p>
+        {schedule.hasRelatedPosts ? (
+          <div className="w-full">
+            <div className="px-[1rem] py-[1.25rem] w-full mb-[1.25rem]">
+              <p className="font-semibold text-lg mb-[1.25rem]">게시글이 있어서 삭제할 수 없어요</p>
+
+              <p className="mb-[0.75rem]">일정에 관련된 게시글이 남아있어요</p>
+              <p className="font-medium">
+                일정 삭제를 원하시면
+                <br />
+                일정에 관련된 게시글을 삭제해주세요
+              </p>
+            </div>
+            <div className="flex gap-2 px-[1rem]">
+              <Button label="확인" className="full-btn" type="button" disabled={false} onClick={closeModal} />
+            </div>
           </div>
-          <div className="flex gap-2 px-[1rem]">
-            <Button
-              label="취소"
-              className="flex-[2_2_0%] full-white-btn"
-              type="button"
-              disabled={false}
-              onClick={() => {
-                closeModal();
-              }}
-            />
-            <Button
-              label="확인"
-              className="flex-[5_5_0%] full-btn"
-              type="button"
-              disabled={false}
-              onClick={() => {
-                deleteSchedule(schedule.id);
-              }}
-            />
+        ) : (
+          <div className="w-full">
+            <div className="px-[1rem] py-[1.25rem] w-full mb-[1.25rem]">
+              <p className="text-gray-900 font-semibold text-lg mb-[0.25rem]">정말 삭제하시겠어요?</p>
+              <p className="text-gray-500 ">삭제하시면 되돌릴 수 없어요</p>
+            </div>
+            <div className="flex gap-2 px-[1rem]">
+              <Button
+                label="취소"
+                className="flex-[2_2_0%] full-white-btn"
+                type="button"
+                disabled={false}
+                onClick={() => {
+                  closeModal();
+                }}
+              />
+              <Button
+                label="확인"
+                className="flex-[5_5_0%] full-btn"
+                type="button"
+                disabled={false}
+                onClick={() => {
+                  deleteSchedule(schedule.id);
+                }}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </Modal>
     </div>
   );

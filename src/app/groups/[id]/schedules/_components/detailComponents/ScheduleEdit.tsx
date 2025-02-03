@@ -8,8 +8,12 @@ import { updateScheduleById } from 'queries/schedule/ScheduleActions';
 import { useGroupSchedules } from '@hooks/schedule/useGroupSchedules';
 import { ScheduleType } from '@ts/scheduleType';
 
+interface ScheduleWithPosts extends ScheduleType {
+  hasRelatedPosts: boolean;
+}
+
 interface ScheduleEditType {
-  schedule: ScheduleType;
+  schedule: ScheduleWithPosts;
   groupId: string;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   refetch: () => Promise<QueryObserverResult<ScheduleType | null, Error>>;

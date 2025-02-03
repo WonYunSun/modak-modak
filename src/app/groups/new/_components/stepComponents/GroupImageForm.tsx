@@ -38,7 +38,7 @@ const GroupImageForm = ({ onNext, onPrev, prevData }: GroupImageFormProps) => {
   return (
     <Layout isDisabled={false} onNext={handleNext} onPrev={onPrev}>
       <div>
-        <Label htmlFor="" label="대표 사진" required={true} description="모임을 대표할 사진을 등록해주세요" />
+        <Label htmlFor="" label="대표 사진" required={false} description="모임을 대표할 사진을 등록해주세요" />
         <div>
           <div className="p-5 flex flex-col items-center">
             <div>
