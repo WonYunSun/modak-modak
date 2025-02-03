@@ -19,6 +19,10 @@
     @apply px-[20px];
   }
 
+  .reactive {
+    @apply max-w-[600px] mx-auto border-x border-gray-200;
+  }
+
   input[type='time']::-webkit-calendar-picker-indicator {
     display: none;
     /* 아이콘 숨기기 */
@@ -121,11 +125,13 @@ body {
 }
 
 @media (min-width: 600px) {
+
   /*모달 배경색 가운데 정렬*/
   .modal-back-drop {
     width: 600px !important;
     margin: auto;
   }
+
   /*라이브러리 모달 배경색 가운데 정렬할 때는 이것도 필요*/
   .modal-sheet-back-drop {
     top: 50% !important;
