@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import 'swiper/css';
 
-import { PostImageType } from 'queries/post/getPosts';
 import Image from 'next/image';
+import { PostImageType } from '@ts/postType';
 
 interface photoProps {
   photoList: PostImageType[];

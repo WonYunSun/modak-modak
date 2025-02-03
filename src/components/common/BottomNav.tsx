@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { Home, Chat, User } from '@components/icons';
+import useLoadingStore from '@stores/useLoadingStore';
 
 const buttons = [
   {
@@ -34,6 +35,8 @@ const BottomNav = () => {
   const [activeButton, setActiveButton] = useState('');
   const pathname = usePathname();
 
+  const isLoading = useLoadingStore((state) => state.isLoading);
+
   // URL 경로에 따라 활성 버튼 설정
   useEffect(() => {
     const active = pathname.includes('/chat') ? 'chat' : pathname.includes('/mypage') ? 'mypage' : 'home';
@@ -44,9 +47,9 @@ const BottomNav = () => {
   const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule', '/join'];
   const isHideNav = hiddenPaths.some((path) => pathname.includes(path));
 
-  if (isHideNav) {
-    return null; // 조건 만족 시 BottomNav를 렌더링하지 않음
-  }
+  if (isHideNav) return null; // 조건 만족 시 BottomNav를 렌더링하지 않음
+
+  if (isLoading) return null; // 로딩 중이면 네비게이션 숨김
 
   return (
     <div className="m-auto w-full max-w-[600px] flex">

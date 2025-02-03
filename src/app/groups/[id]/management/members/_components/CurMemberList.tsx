@@ -2,8 +2,8 @@
 
 import { useParams } from 'next/navigation';
 import MemberCard from '@app/groups/[id]/management/members/_components/MemberCard';
-import GlobalLoading from '@app/GlobalLoading';
-import GlobalError from '@app/GlobalError';
+import SpinnerContainer from '@components/common/SpinnerContainer';
+import GlobalError from '@components/common/GlobalError';
 import useFetchCurMembers from '@hooks/management/useFetchCurMembers';
 
 interface CurMemberListProps {
@@ -15,7 +15,7 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
 
   const { data: curMemberList, isPending, isError } = useFetchCurMembers({ groupId });
 
-  if (isPending) return <GlobalLoading />;
+  if (isPending) return <SpinnerContainer height={136} />;
   if (isError) return <GlobalError />;
 
   //유저가 대표가 아닐 때 멤버 데이터에서 대표 데이터를 뽑아내기
