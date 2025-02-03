@@ -10,6 +10,7 @@ const ToggleBox = ({ isChecked }: ToggleBoxProps) => {
   const [istoggled, setIsToggled] = useState(isChecked);
 
   const handleToggle = () => {
+    //mutation
     setIsToggled(prev=>!prev);
   };
 
