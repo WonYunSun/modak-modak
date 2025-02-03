@@ -1,8 +1,8 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import useUser from '@hooks/useUser';
 import { fetchNotifications } from '@queries/notifications/fetchNotifications';
-import { useQuery } from '@tanstack/react-query';
 
 const useFetchNotifications = () => {
   const { user, isError: userError } = useUser();
