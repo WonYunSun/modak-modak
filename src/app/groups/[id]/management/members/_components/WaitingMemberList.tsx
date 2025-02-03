@@ -2,8 +2,8 @@
 
 import { useParams } from 'next/navigation';
 import MemberCard from '@app/groups/[id]/management/members/_components/MemberCard';
-import GlobalLoading from '@app/GlobalLoading';
-import GlobalError from '@app/GlobalError';
+import SpinnerContainer from '@components/common/SpinnerContainer';
+import GlobalError from '@components/common/GlobalError';
 import useFetchWaitingMembers from '@hooks/management/useFetchWaitingMembers';
 
 interface WaitingMemberListProps {
@@ -15,7 +15,7 @@ const WaitingMemberList = ({ isLeaderUser }: WaitingMemberListProps) => {
 
   const { data, isPending, isError } = useFetchWaitingMembers({ groupId });
 
-  if (isPending) return <GlobalLoading />;
+  if (isPending) return <SpinnerContainer height={136} />;
   if (isError) return <GlobalError />;
 
   return (

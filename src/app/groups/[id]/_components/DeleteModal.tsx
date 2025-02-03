@@ -35,7 +35,7 @@ export const DeleteModal = ({ postId, setDeleteModal }: modalProps) => {
         // <SmallAlert>게시글이 삭제되었습니다.</SmallAlert>
         // TODO: smallAlert 세팅 문의
         // 앨범 querykey 삭제 추가
-        queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
+        queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
         setDeleteModal(false);
       }
     } catch (error) {

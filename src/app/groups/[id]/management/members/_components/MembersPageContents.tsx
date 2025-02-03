@@ -7,8 +7,8 @@ import CurMemberList from '@app/groups/[id]/management/members/_components/CurMe
 import WaitingMemberList from '@app/groups/[id]/management/members/_components/WaitingMemberList';
 import MembersBottomSheet from '@app/groups/[id]/management/members/_components/MembersBottomSheet';
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
-import GlobalLoading from '@app/GlobalLoading';
-import GlobalError from '@app/GlobalError';
+import SpinnerContainer from '@components/common/SpinnerContainer';
+import GlobalError from '@components/common/GlobalError';
 import { AddMember } from '@components/icons';
 import useIsLeader from '@hooks/management/useIsLeader';
 import useSmallAlert from '@hooks/useSmallAlert';
@@ -40,7 +40,7 @@ const MembersPageContents = () => {
     }
   }, [userPermitted]);
 
-  if (isPending) return <GlobalLoading />;
+  if (isPending) return <SpinnerContainer height={136} />;
   if (isError) return <GlobalError />;
 
   return (
