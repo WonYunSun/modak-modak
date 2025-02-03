@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import NoChatList from '@app/chat/_components/NoChatList';
 import ChatListItem from '@app/chat/_components/ChatListItem';
@@ -9,18 +9,24 @@ import FunnelHeader from '@components/common/FunnelHeader';
 
 import useChatRoomList from '@hooks/chat/useChatRoomList';
 import useUser from '@hooks/useUser';
+import { useQueryClient } from '@tanstack/react-query';
 
 const ChatRoomList = () => {
   const { user } = useUser();
   const { chatList, isPending, isError } = useChatRoomList(user?.id as string);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ['chatList', user?.id] });
+  }, []);
 
   if (isPending) return <div>로딩 중..</div>;
   if (isError) return <div>에러발생..</div>;
 
   return (
-    <div className="min-h-screen mx-5">
+    <div className="min-h-screen max-w-[600px] mx-auto border-x border-gray-200">
       <FunnelHeader label="채팅" />
-      <main className="w-full h-full">
+      <main className="w-full h-full mt-2">
         {chatList?.length === 0 ? (
           <NoChatList />
         ) : (

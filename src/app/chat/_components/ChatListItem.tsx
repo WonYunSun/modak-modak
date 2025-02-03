@@ -16,7 +16,7 @@ dayjs.locale('ko');
 
 const ChatListItem = ({ chat }: ChatListItemProps) => {
   return (
-    <Link href={`chat/${chat.chat_room_id}`} key={chat.group_id} className="py-2">
+    <Link href={`chat/${chat.chat_room_id}`} key={chat.group_id} className="px-5 py-2 block">
       <div className="w-full flex gap-2 items-center">
         <Image
           src={chat.group_image_url}
@@ -37,10 +37,14 @@ const ChatListItem = ({ chat }: ChatListItemProps) => {
             </h4>
           </div>
           <div className="mt-1 w-full flex items-center justify-between">
-            <p className="max-w-[209px] text-xs font-normal leading-[140%] text-gray-500">
+            <p className="max-w-[209px] text-xs font-normal leading-[140%] text-gray-500 overflow-hidden overflow-ellipsis line-clamp-2">
               {chat.messages.length > 0 ? chat.messages[chat.messages.length - 1].message : '채팅을 시작해보세요.'}
             </p>
-            {chat.unread_count > 0 ? <p>{chat.unread_count}</p> : null}
+            {chat.unread_count > 0 ? (
+              <p className="w-5 h-5 rounded-[50%] bg-primary text-white flex items-center justify-center font-normal leading-[140%] text-xs">
+                {chat.unread_count}
+              </p>
+            ) : null}
           </div>
         </div>
       </div>

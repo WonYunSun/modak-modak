@@ -3,7 +3,7 @@ import { createClient } from '@utils/supabase/client';
 
 const supabase = createClient();
 
-type MessageType = Database['public']['Tables']['messages']['Row'];
+export type MessageType = Database['public']['Tables']['messages']['Row'];
 
 export interface getChatListType {
   group_name: string;
@@ -25,7 +25,7 @@ const getChatList = async (userId: string): Promise<getChatListType[] | []> => {
       .eq('is_approved', true);
 
     if (groupError) {
-      throw new Error('유저 채팅 목록을 가져오는데 실패했습니다.');
+      throw new Error('유저 그룹 목록을 가져오는데 실패했습니다.');
     }
 
     // 채팅방 데이터 가져오기
@@ -53,7 +53,13 @@ const getChatList = async (userId: string): Promise<getChatListType[] | []> => {
     const combinedList = groups.map((group) => {
       // 해당 그룹에 대응하는 채팅방 찾기
       const matchingChatGroup = chatGroups.find((chatGroup) => chatGroup.group_id === group.group_id);
-      const messagesGroup = messages.filter((message) => message.chat_room_id === matchingChatGroup.chat_room_id);
+      const messagesGroup = messages
+        .filter((message) => message.chat_room_id === matchingChatGroup.chat_room_id)
+        .sort((a, b) => {
+          const dateA = new Date(a.created_at).getTime(); // Date를 number로 변환
+          const dateB = new Date(b.created_at).getTime(); // Date를 number로 변환
+          return dateA - dateB;
+        });
 
       const unreadCount = messagesGroup.filter(
         (message) => !message.read_by?.includes(userId) // 현재 사용자가 읽지 않은 메시지
@@ -69,6 +75,8 @@ const getChatList = async (userId: string): Promise<getChatListType[] | []> => {
         unread_count: unreadCount,
       };
     });
+
+    console.log('combinedList', combinedList);
 
     return combinedList || [];
   } catch (error) {
