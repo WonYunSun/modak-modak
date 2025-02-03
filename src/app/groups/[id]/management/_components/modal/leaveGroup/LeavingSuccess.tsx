@@ -1,15 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import useModalStore from '@stores/useModalStore';
 import Button from '@components/common/Button';
 
 const LeavingSuccess = () => {
   const router = useRouter();
-  const { closeModal } = useModalStore();
 
   const onLeavingSuccess = () => {
-    closeModal();
     router.push('/');
   };
 

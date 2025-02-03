@@ -2,14 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import Button from '@components/common/Button';
-import useModalStore from '@stores/useModalStore';
 
 const DeletionSuccess = () => {
   const router = useRouter();
-  const { closeModal } = useModalStore();
 
   const onDeleteGroupSuccess = () => {
-    closeModal();
     router.push('/');
   };
   return (
