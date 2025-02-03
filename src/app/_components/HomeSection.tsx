@@ -6,11 +6,12 @@ import HomeContents from '@app/_components/HomeContents';
 import Button from '@components/common/Button';
 import Header from '@components/common/Header';
 import { Plus } from '@components/icons';
+import useModalStore from '@stores/useModalStore';
 
 const HomeSection = () => {
   const router = useRouter();
+  const { closeModal } = useModalStore();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
-
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const onCreateGroup = () => {
@@ -18,6 +19,7 @@ const HomeSection = () => {
   };
 
   useEffect(() => {
+    closeModal();
     const targetInstanceRef = targetRef.current;
 
     const options = {
@@ -41,7 +43,7 @@ const HomeSection = () => {
   }, []);
 
   return (
-    <div className="border-x border-gray-200">
+    <div>
       <Header hasSetting={false} home={true} isScrolled={isScrolled} />
       <HomeContents ref={targetRef} />
       <div className="ml-[calc(100%-144px)]">

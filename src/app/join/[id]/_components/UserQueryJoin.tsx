@@ -4,16 +4,16 @@ import { useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import UserQueryJoinStepOne from '@app/join/[id]/_components/UserQueryJoinStepOne';
 import UserQueryJoinStepTwo from '@app/join/[id]/_components/UserQueryJoinStepTwo';
-import GlobalLoading from '@app/GlobalLoading';
-import GlobalError from '@app/GlobalError';
+import SpinnerContainer from '@components/common/SpinnerContainer';
+import GlobalError from '@components/common/GlobalError';
 import useIsAlreadyJoin from '@hooks/join/useIsAlreadyJoin';
 import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 import { UsersType } from '@ts/supabaseTableRowTypes';
 
 const JOINSTATE = {
-  member: '이미 가입한 모임이에요',
-  waiting: '이미 가입 신청했어요',
-  joinable: '모임 가입하기',
+  member: '이미 가입한 모임이에요!',
+  waiting: '이미 가입 신청한 모임이에요!',
+  joinable: '모임 가입 신청하기',
 };
 
 interface UserQueryJoinProps {
@@ -37,7 +37,7 @@ const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
     setJoinStep(2);
   };
 
-  if (isPending) return <GlobalLoading />;
+  if (isPending) return <SpinnerContainer height={0} />;
   if (isError) return <GlobalError />;
 
   return (
@@ -47,6 +47,7 @@ const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
           <UserQueryJoinStepOne
             onQueryJoin={onQueryJoin}
             buttonLabel={JOINSTATE[joinStateData]}
+            joinState={joinStateData}
             isJoinable={!!(joinStateData === 'joinable')}
           />
         </>

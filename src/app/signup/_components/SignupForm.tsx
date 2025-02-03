@@ -57,7 +57,7 @@ const SignupForm = () => {
   };
 
   return (
-    <form className="flex flex-col flex-grow" onSubmit={handleSubmit}>
+    <form className="flex flex-col flex-grow px-5 border-x border-gray-200" onSubmit={handleSubmit}>
       <section className="mt-11 mb-14">
         <Label className="mb-10" {...profileLabelProps} />
         <ProfilePreview

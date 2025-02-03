@@ -60,7 +60,7 @@ const CommentInput = ({ postId }: CommentInputProps) => {
     } else {
       createMutation.mutate(commentValue, {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
+          queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
           setCommentValue('');
           if (textAreaRef.current) {
             textAreaRef.current.style.height = 'auto';

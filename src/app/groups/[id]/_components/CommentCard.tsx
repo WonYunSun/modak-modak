@@ -123,7 +123,7 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
             src={comment.users?.profile_image ? comment.users.profile_image : '/icons/profile-image.webp'}
             width={36}
             height={36}
-            className="w-9 h-9 rounded-[50%] bg-red-300"
+            className="w-9 h-9 rounded-[50%]"
             alt="comment user profile"
           />
           <h4 className="text-base font-semibold leading-[140%]">{comment.users?.nickname}</h4>
