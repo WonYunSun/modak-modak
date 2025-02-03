@@ -35,6 +35,7 @@ export const addGroup = async (groupData: GroupsType, userId?: string): Promise<
     if (memberInsertError) {
       throw new Error('그룹 멤버 추가에 실패했습니다.');
     }
+
     return groupId;
   } catch (error) {
     console.error(error);

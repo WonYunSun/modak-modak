@@ -10,15 +10,13 @@ interface UseDeleteGroupParams {
 const useDeleteGroup = ({ groupId }: UseDeleteGroupParams) => {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  return useMutation({
     mutationFn: () => deleteGroup({ groupId }),
     onSuccess: () => {
-      queryClient.removeQueries({ queryKey: [groupId] });
       queryClient.invalidateQueries({ queryKey: ['fetchGroupList'] });
+      queryClient.removeQueries({ queryKey: [groupId] });
     },
   });
-
-  return mutate;
 };
 
 export default useDeleteGroup;
