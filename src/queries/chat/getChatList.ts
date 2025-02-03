@@ -45,10 +45,6 @@ const getChatList = async (userId: string): Promise<getChatListType[] | []> => {
       throw new Error('채팅 대화를 가져오는데 실패했습니다.');
     }
 
-    console.log('groups', groups);
-    console.log('chatGroups', chatGroups);
-    console.log('messages', messages);
-
     // groups와 chatGroups 데이터를 합쳐 하나의 객체로 만들기
     const combinedList = groups.map((group) => {
       // 해당 그룹에 대응하는 채팅방 찾기

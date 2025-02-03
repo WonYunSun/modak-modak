@@ -17,32 +17,31 @@ const useChatRoomList = (user_id: string) => {
   } = useQuery({
     queryKey: ['chatList', user_id],
     queryFn: () => getChatList(user_id),
+    enabled: !!user_id,
+    staleTime: 1000 * 60 * 60,
   });
 
   useEffect(() => {
-    // 메시지 테이블에 대한 실시간 구독 설정
     const subscription = supabase
       .channel('messages-channel')
       .on(
         'postgres_changes',
         {
-          event: '*', // INSERT, UPDATE, DELETE 모든 이벤트 감지
+          event: '*',
           schema: 'public',
           table: 'messages',
         },
         async (payload) => {
           // 새 메시지가 생성되었을 때
           if (payload.eventType === 'INSERT') {
-            console.log('payload 실행', payload);
-            // 현재 캐시된 채팅 목록 가져오기
             const currentChatList = queryClient.getQueryData(['chatList', user_id]) as getChatListType[];
 
-            console.log('currentChatList', currentChatList);
             if (currentChatList) {
               // 새 메시지가 속한 채팅방 찾기
               const updatedChatList = currentChatList.map((chat) => {
                 if (chat.chat_room_id === payload.new.chat_room_id) {
                   const isUnread = !payload.new.read_by?.includes(user_id);
+                  console.log('isUnread', isUnread);
                   return {
                     ...chat,
                     messages: [...chat.messages, payload.new],
@@ -58,9 +57,7 @@ const useChatRoomList = (user_id: string) => {
           }
 
           if (payload.eventType === 'UPDATE') {
-            console.log('업데이트 실행');
             const currentChatList = queryClient.getQueryData(['chatList', user_id]) as getChatListType[];
-            console.log('업데이트 리스트', currentChatList);
 
             if (currentChatList) {
               const updatedChatList = currentChatList.map((chat) => {
@@ -69,7 +66,7 @@ const useChatRoomList = (user_id: string) => {
                   return {
                     ...chat,
                     messages: chat.messages.map((msg) => (msg.id === payload.new.id ? payload.new : msg)),
-                    unread_count: isUnread ? chat.unread_count : chat.unread_count - 1, // 읽지 않은 메시지 수 업데이트
+                    unread_count: isUnread ? chat.unread_count : Math.max(chat.unread_count - 1, 0), // 읽지 않은 메시지 수 업데이트
                   };
                 }
                 return chat;
