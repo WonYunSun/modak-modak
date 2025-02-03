@@ -3,11 +3,11 @@ import FunnelHeader from '@components/common/FunnelHeader';
 
 const Notification = () => {
   return (
-    <div className="mx-auto max-w-[600px] h-screen overflow-y-scroll scrollbar-hide">
-      <div className="sticky w-[600px] left-0 top-0 bg-white">
+    <div className="mx-auto max-w-[600px] h-screen overflow-y-scroll scrollbar-hide border-x border-gray-200">
+      <div className="sticky w-[600px] left-0 top-0 bg-white px-5">
         <FunnelHeader label="알림" />
       </div>
-      <NotificationsContents/>
+      <NotificationsContents />
     </div>
   );
 };
