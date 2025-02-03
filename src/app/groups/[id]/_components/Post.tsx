@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { Comments, Menu } from '@components/icons';
+
 import PostScheduleCard from '@components/common/scheduleCard/PostScheduleCard';
 import CommentList from '@app/groups/[id]/_components/CommentList';
 import { DeleteModal } from '@app/groups/[id]/_components/DeleteModal';
@@ -11,9 +12,9 @@ import { PhotoSlider } from '@app/groups/[id]/_components/PhotoSlider';
 import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBottomSheet';
 
 import useUser from '@hooks/useUser';
-
-import { CommentCountType, GroupType, PostImageType, PostType, ScheduleType, UserType } from 'queries/post/getPosts';
 import useCommentValueStore from '@stores/useCommentValueStore';
+
+import { GroupType, PostType, UserType, ScheduleType, CommentCountType, PostImageType } from '@ts/postType';
 
 export type PostCommonType = {
   id: PostType['id'];

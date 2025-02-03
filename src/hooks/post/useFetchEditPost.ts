@@ -17,7 +17,7 @@ export const useFetchEditPost = (groupId: string, editPostId: string) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [editPostId] });
-      queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
+      queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
     },
   });
 };

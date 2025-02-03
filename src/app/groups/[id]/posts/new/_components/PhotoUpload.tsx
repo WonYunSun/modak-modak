@@ -40,7 +40,7 @@ const PhotoUpload = () => {
   };
 
   return (
-    <div className="w-full flex mt-[4.5rem] px-5">
+    <div className="w-full flex mt-0 px-5">
       {/* 파일 선택 버튼 */}
       <div
         {...getRootProps()}

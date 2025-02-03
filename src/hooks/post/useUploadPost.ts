@@ -23,7 +23,7 @@ const useUploadPost = () => {
     },
     onSuccess: (data) => {
       const { groupId } = data;
-      queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
+      queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
       console.log('업로드 성공');
     },
     onError: (error: Error) => {

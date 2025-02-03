@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { Home, Chat, User } from '@components/icons';
+import useLoadingStore from '@stores/useLoadingStore';
 
 const buttons = [
   {
@@ -19,7 +20,7 @@ const buttons = [
     label: '채팅',
     iconOff: <Chat className="w-6 h-6" />,
     iconOn: <Chat className="w-6 h-6" active={true} />,
-    href: '/',
+    href: '/chat',
   },
   {
     id: 'mypage',
@@ -34,6 +35,8 @@ const BottomNav = () => {
   const [activeButton, setActiveButton] = useState('');
   const pathname = usePathname();
 
+  const isLoading = useLoadingStore((state) => state.isLoading);
+
   // URL 경로에 따라 활성 버튼 설정
   useEffect(() => {
     const active = pathname.includes('/chat') ? 'chat' : pathname.includes('/mypage') ? 'mypage' : 'home';
@@ -41,12 +44,12 @@ const BottomNav = () => {
   }, [pathname]);
 
   // 특정 경로에서 BottomNav 숨김
-  const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule', '/join'];
+  const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule', '/join', '/chat/'];
   const isHideNav = hiddenPaths.some((path) => pathname.includes(path));
 
-  if (isHideNav) {
-    return null; // 조건 만족 시 BottomNav를 렌더링하지 않음
-  }
+  if (isHideNav) return null; // 조건 만족 시 BottomNav를 렌더링하지 않음
+
+  if (isLoading) return null; // 로딩 중이면 네비게이션 숨김
 
   return (
     <div className="m-auto w-full max-w-[600px] flex">
@@ -56,11 +59,7 @@ const BottomNav = () => {
             href={button.href}
             key={button.id}
             className="flex-1 flex justify-center items-center"
-            onClick={
-              button.id !== 'chat'
-                ? () => setActiveButton(button.id)
-                : () => alert('아직 서비스 준비 중입니다!😊 조금만 기다려 주세요.')
-            }
+            onClick={() => setActiveButton(button.id)}
           >
             <div className="flex flex-col justify-end items-center">
               <div
