@@ -38,7 +38,7 @@ const GroupImageForm = ({ onNext, onPrev, prevData }: GroupImageFormProps) => {
   return (
     <Layout isDisabled={false} onNext={handleNext} onPrev={onPrev}>
       <div>
-        <Label htmlFor="" label="대표 사진" required={true} description="모임을 대표할 사진을 등록해주세요" />
+        <Label htmlFor="" label="대표 사진" required={false} description="모임을 대표할 사진을 등록해주세요" />
         <div>
           <div className="p-5 flex flex-col items-center">
             <div>
@@ -49,7 +49,7 @@ const GroupImageForm = ({ onNext, onPrev, prevData }: GroupImageFormProps) => {
                     alt={'그룹 프로필'}
                     width={100}
                     height={100}
-                    className="w-full h-full rounded-xl"
+                    className="w-full h-full rounded-xl object-cover"
                   />
                 </div>
                 <label htmlFor="profilePhoto" className="block absolute bottom-[-8px] right-[-14px]">

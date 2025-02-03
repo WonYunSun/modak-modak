@@ -49,8 +49,8 @@ const BottomNav = () => {
   }
 
   return (
-    <div className="m-auto w-full flex max-w-[600px]">
-      <div className="w-full max-w-[600px] h-16 fixed bottom-0 bg-white flex shadow-[0px_-4px_4px_0px_rgba(0,0,0,0.1)] z-[30]">
+    <div className="m-auto w-full max-w-[600px] flex">
+      <div className="w-full max-w-[600px] h-16 fixed bottom-0 bg-white flex shadow-[0px_-4px_4px_0px_rgba(0,0,0,0.1)] z-[30] border-x border-gray-200">
         {buttons.map((button) => (
           <Link
             href={button.href}

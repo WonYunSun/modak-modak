@@ -25,9 +25,9 @@ const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) =
 
   useEffect(() => {
     const { from, to } = values.scheduleDate;
-    const time = values.scheduleTime;
+
     // 날짜와 시간이 모두 입력되었는지 확인
-    if (from && to && time) {
+    if (from && to) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -55,7 +55,7 @@ const ScheduleDateForm = ({ onNext, onPrev, prevData }: ScheduleDateFormProps) =
   const labelData: LabelProps = {
     label: '모임 일시',
     required: true,
-    description: '만나는 날짜와 시간을 적어주세요',
+    description: '일정 또는 이벤트의 날짜와 시간을 적어주세요',
     htmlFor: 'scheduleName',
   };
 

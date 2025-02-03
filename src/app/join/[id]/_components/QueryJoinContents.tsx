@@ -1,12 +1,13 @@
-import Image from "next/image";
-import GroupCard, { GroupCardInfosType } from "@components/common/groupCard/GroupCard";
+import Image from 'next/image';
+import GroupCard, { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
 
 interface QueryJoinContentsProps {
   groupInfo: GroupCardInfosType;
   children: React.ReactNode;
+  isWaiting?: boolean;
 }
 
-const QueryJoinContents = ({ groupInfo, children }: QueryJoinContentsProps) => {
+const QueryJoinContents = ({ groupInfo, children, isWaiting = false }: QueryJoinContentsProps) => {
   return (
     <div className="pt-[48px] w-full h-full bg-primary-10 flex flex-col justify-end gap-9">
       <div className="text-center">
@@ -27,7 +28,8 @@ const QueryJoinContents = ({ groupInfo, children }: QueryJoinContentsProps) => {
       <div className="w-full h-[45vh] rounded-t-[1.25rem] bg-white">
         {groupInfo && (
           <div className="px-5 pt-5">
-            <h6 className="text-gray-500 mb-3">초대된 모임</h6> <GroupCard groupInfo={groupInfo} hasLink={false} />
+            <h6 className="text-gray-500 mb-3">초대된 모임</h6>
+            <GroupCard groupInfo={groupInfo} hasLink={false} disabled={isWaiting} />
           </div>
         )}
         <div className="px-5 w-full absolute bottom-0">{children}</div>
@@ -36,4 +38,4 @@ const QueryJoinContents = ({ groupInfo, children }: QueryJoinContentsProps) => {
   );
 };
 
-export default QueryJoinContents
+export default QueryJoinContents;

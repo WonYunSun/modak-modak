@@ -8,9 +8,10 @@ import ScheduleDateForm from '@app/groups/[id]/schedules/_components/stepCompone
 import ScheduleMemoForm from '@app/groups/[id]/schedules/_components/stepComponents/ScheduleMemoForm';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
-import { addSchedule } from '@queries/schedule/ScheduleActions';
 import useFunnel from '@hooks/useFunnel';
+
 import { ScheduleType } from '@ts/scheduleType';
+import useAddSchedule from '@hooks/schedule/useAddSchedule';
 
 //단계 name 정의
 const steps = ['일정명', '모임일시', '메모'];
@@ -19,10 +20,11 @@ const steps = ['일정명', '모임일시', '메모'];
 
 const NewSchedulesForm = () => {
   const { Funnel, Step, next, prev } = useFunnel(steps[0], 3);
-  const { openModal, closeModal } = useModalStore();
+  const { openModal } = useModalStore();
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
+  const { mutate: addScheduleMutate } = useAddSchedule(groupId);
 
   const [scheduleData, setScheduleData] = useState<ScheduleType>({
     created_at: '',
@@ -38,7 +40,6 @@ const NewSchedulesForm = () => {
   const handleNext = async (data: Partial<ScheduleType>, nextStep: string) => {
     const updatedScheduleData = { ...scheduleData, ...data };
     setScheduleData(updatedScheduleData);
-
     if (nextStep === 'submitData') {
       const completeScheduleData: ScheduleType = {
         ...updatedScheduleData,
@@ -46,12 +47,8 @@ const NewSchedulesForm = () => {
         id: '',
       };
 
-      try {
-        await addSchedule(completeScheduleData); // addSchedule이 완료될 때까지 기다림
-        openModal(); // addSchedule이 완료된 후 모달 열기
-      } catch (error) {
-        console.error('Failed to add schedule:', error);
-      }
+      openModal();
+      addScheduleMutate(completeScheduleData);
     } else {
       next(nextStep);
     }
@@ -61,8 +58,9 @@ const NewSchedulesForm = () => {
     prev(prevStep);
   };
 
-  const goToGroup = () => {
-    router.replace(`/groups/${groupId}`);
+  const goToGroup = async () => {
+    await router.replace(`/groups/${groupId}`);
+    // closeModal();
   };
 
   return (
@@ -70,7 +68,7 @@ const NewSchedulesForm = () => {
       <Funnel headerLabel="일정 만들기">
         <Step name={steps[0]}>
           <ScheduleNameForm
-            onPrev={() => {}}
+            onPrev={goToGroup}
             onNext={(data) => handleNext(data, steps[1])}
             prevData={scheduleData.name}
           />
@@ -107,7 +105,6 @@ const NewSchedulesForm = () => {
               className="modal-full-btn"
               onClick={() => {
                 goToGroup();
-                closeModal();
               }}
             ></Button>
           </Modal>

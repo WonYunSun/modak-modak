@@ -3,6 +3,84 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      chat_room_members: {
+        Row: {
+          chat_room_id: string;
+          group_id: string;
+          id: string;
+          is_joined: boolean;
+          user_id: string;
+        };
+        Insert: {
+          chat_room_id: string;
+          group_id: string;
+          id?: string;
+          is_joined?: boolean;
+          user_id: string;
+        };
+        Update: {
+          chat_room_id?: string;
+          group_id?: string;
+          id?: string;
+          is_joined?: boolean;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'chat_room_members_chat_room_id_fkey';
+            columns: ['chat_room_id'];
+            isOneToOne: false;
+            referencedRelation: 'chat_rooms';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'chat_room_members_group_id_fkey';
+            columns: ['group_id'];
+            isOneToOne: false;
+            referencedRelation: 'groups';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'chat_room_members_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      chat_rooms: {
+        Row: {
+          created_at: string;
+          group_id: string;
+          id: string;
+          image_url: string;
+          name: string;
+        };
+        Insert: {
+          created_at?: string;
+          group_id: string;
+          id?: string;
+          image_url?: string;
+          name?: string;
+        };
+        Update: {
+          created_at?: string;
+          group_id?: string;
+          id?: string;
+          image_url?: string;
+          name?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'chat_rooms_group_id_fkey';
+            columns: ['group_id'];
+            isOneToOne: false;
+            referencedRelation: 'groups';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       comments: {
         Row: {
           content: string;
@@ -42,7 +120,7 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'users';
             referencedColumns: ['id'];
-          }
+          },
         ];
       };
       group_members: {
@@ -52,6 +130,7 @@ export type Database = {
           id: string;
           is_approved: boolean;
           is_leader: boolean;
+          receive_notifications: boolean;
           user_id: string;
         };
         Insert: {
@@ -60,6 +139,7 @@ export type Database = {
           id?: string;
           is_approved?: boolean;
           is_leader?: boolean;
+          receive_notifications?: boolean;
           user_id: string;
         };
         Update: {
@@ -68,6 +148,7 @@ export type Database = {
           id?: string;
           is_approved?: boolean;
           is_leader?: boolean;
+          receive_notifications?: boolean;
           user_id?: string;
         };
         Relationships: [
@@ -84,7 +165,7 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'users';
             referencedColumns: ['id'];
-          }
+          },
         ];
       };
       groups: {
@@ -110,6 +191,51 @@ export type Database = {
           name?: string;
         };
         Relationships: [];
+      };
+      messages: {
+        Row: {
+          chat_room_id: string;
+          created_at: string;
+          id: string;
+          message: string;
+          read_by: string[] | null;
+          unread_count: number;
+          user_id: string;
+        };
+        Insert: {
+          chat_room_id?: string;
+          created_at?: string;
+          id?: string;
+          message?: string;
+          read_by?: string[] | null;
+          unread_count?: number;
+          user_id?: string;
+        };
+        Update: {
+          chat_room_id?: string;
+          created_at?: string;
+          id?: string;
+          message?: string;
+          read_by?: string[] | null;
+          unread_count?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'messages_chat_room_id_fkey';
+            columns: ['chat_room_id'];
+            isOneToOne: false;
+            referencedRelation: 'chat_rooms';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'messages_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
       };
       post_images: {
         Row: {
@@ -137,7 +263,7 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'posts';
             referencedColumns: ['id'];
-          }
+          },
         ];
       };
       posts: {
@@ -186,7 +312,49 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'groups';
             referencedColumns: ['id'];
-          }
+          },
+        ];
+      };
+      push_notifications: {
+        Row: {
+          created_at: string;
+          group_id: string;
+          id: string;
+          is_read: boolean;
+          target_user_id: string;
+          type: string;
+        };
+        Insert: {
+          created_at?: string;
+          group_id?: string;
+          id?: string;
+          is_read?: boolean;
+          target_user_id: string;
+          type: string;
+        };
+        Update: {
+          created_at?: string;
+          group_id?: string;
+          id?: string;
+          is_read?: boolean;
+          target_user_id?: string;
+          type?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'push_notifications_group_id_fkey';
+            columns: ['group_id'];
+            isOneToOne: false;
+            referencedRelation: 'groups';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'push_notifications_target_user_id_fkey';
+            columns: ['target_user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
         ];
       };
       schedules: {
@@ -227,7 +395,7 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'groups';
             referencedColumns: ['id'];
-          }
+          },
         ];
       };
       users: {
@@ -236,18 +404,21 @@ export type Database = {
           id: string;
           nickname: string;
           profile_image: string;
+          push_token: string | null;
         };
         Insert: {
           created_at?: string;
           id: string;
           nickname: string;
           profile_image: string;
+          push_token?: string | null;
         };
         Update: {
           created_at?: string;
           id?: string;
           nickname?: string;
           profile_image?: string;
+          push_token?: string | null;
         };
         Relationships: [];
       };
@@ -274,7 +445,7 @@ export type Tables<
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
         Database[PublicTableNameOrOptions['schema']]['Views'])
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions['schema']]['Tables'] &
       Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
@@ -294,7 +465,7 @@ export type TablesInsert<
   PublicTableNameOrOptions extends keyof PublicSchema['Tables'] | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Insert: infer I;
@@ -313,7 +484,7 @@ export type TablesUpdate<
   PublicTableNameOrOptions extends keyof PublicSchema['Tables'] | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Update: infer U;
@@ -332,7 +503,7 @@ export type Enums<
   PublicEnumNameOrOptions extends keyof PublicSchema['Enums'] | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
-    : never = never
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
@@ -345,7 +516,7 @@ export type CompositeTypes<
     schema: keyof Database;
   }
     ? keyof Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
-    : never = never
+    : never = never,
 > = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
   ? Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof PublicSchema['CompositeTypes']

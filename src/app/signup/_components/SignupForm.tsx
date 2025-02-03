@@ -36,7 +36,7 @@ export interface UserFormState {
 const SignupForm = () => {
   const [values, setValues] = useState<UserFormState>({ profile: null, nickname: '' });
   const { referrer, data } = Object.fromEntries(useSearchParams().entries());
-  const { mutate } = useAddUser();
+  const { mutate, isPending } = useAddUser();
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
@@ -57,7 +57,7 @@ const SignupForm = () => {
   };
 
   return (
-    <form className="flex flex-col flex-grow" onSubmit={handleSubmit}>
+    <form className="flex flex-col flex-grow px-5 border-x border-gray-200" onSubmit={handleSubmit}>
       <section className="mt-11 mb-14">
         <Label className="mb-10" {...profileLabelProps} />
         <ProfilePreview
@@ -69,7 +69,12 @@ const SignupForm = () => {
         />
       </section>
       <LabeledTextInput {...inputProps} value={values.nickname} onChange={handleChange} />
-      <Button className="full-btn mt-auto mb-[19px]" disabled={!values.nickname} type="submit" label="가입하기" />
+      <Button
+        className="full-btn mt-auto mb-[19px]"
+        disabled={!values.nickname || isPending}
+        type="submit"
+        label="가입하기"
+      />
     </form>
   );
 };

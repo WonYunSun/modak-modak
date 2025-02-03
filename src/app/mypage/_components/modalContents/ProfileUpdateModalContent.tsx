@@ -60,7 +60,7 @@ const ProfileUpdateModalContent = () => {
           name="profile"
           setValue={handleFileChange}
           className="w-[84px] h-[84px]"
-          innerClass="bottom-[-10px] right-[-10px]"
+          innerClass="bottom-[-11px] right-[-11px]"
           imageUrl={imageUrl}
         />
       </div>
@@ -81,7 +81,7 @@ const ProfileUpdateModalContent = () => {
         </div>
       </div>
       <div className="w-full mt-6 flex gap-2 justify-center">
-        <ProfileConfirmBtns onConfirm={onConfirmChange} />
+        <ProfileConfirmBtns disabled={!values.nickname} onConfirm={onConfirmChange} />
       </div>
     </div>
   );

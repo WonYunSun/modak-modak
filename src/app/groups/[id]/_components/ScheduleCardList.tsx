@@ -1,27 +1,20 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
 import CountBar from '@app/groups/[id]/_components/CountBar';
 import NoSchedule from '@app/groups/[id]/_components/NoSchedule';
 import Button from '@components/common/Button';
 import Spinner from '@components/common/Spinner';
 import { CalendarIconSmall } from '@components/icons';
 import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
-import { fetchSchedulesBygroupId } from 'queries/schedule/ScheduleActions';
+import { useGroupSchedules } from '@hooks/schedule/useGroupSchedules';
 
 const ScheduleCardList = () => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
   const router = useRouter();
-  // const [scheduleData, setScheduleData] = useState<ScheduleType[]>([]);
 
-  const { data: scheduleData, isPending } = useQuery({
-    queryKey: ['GroupSchedules', groupId], // queryKey로 groupId 지정
-    queryFn: () => fetchSchedulesBygroupId(groupId),
-    enabled: !!groupId, // groupId가 있을 때만 fetch
-  });
-
+  const { scheduleData, isPending } = useGroupSchedules(groupId);
   const goToScheduleDetail = (scheduleId: string) => {
     router.push(`/groups/${groupId}/schedules/${scheduleId}`);
   };
@@ -49,15 +42,16 @@ const ScheduleCardList = () => {
               />
             </div>
           ))}
-
-        <Button
-          label="일정 만들기"
-          className="floating-btn"
-          type="button"
-          onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
-        >
-          <CalendarIconSmall />
-        </Button>
+        <div className="ml-[calc(100%-124px)]">
+          <Button
+            label="일정 만들기"
+            className="floating-btn"
+            type="button"
+            onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
+          >
+            <CalendarIconSmall />
+          </Button>
+        </div>
       </div>
     </div>
   );

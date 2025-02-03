@@ -4,6 +4,8 @@ import { DayPicker } from 'react-day-picker';
 import { ko } from 'react-day-picker/locale';
 import type { DateRange } from 'react-day-picker';
 import { CalendarIcon, ClockIcon } from '@components/icons';
+import SelectTime from '@app/groups/[id]/schedules/_components/SelectTime';
+import { formatTime } from '@utils/dateUtils';
 import 'react-day-picker/style.css';
 
 type ScheduleDatePickerProps = {
@@ -16,7 +18,9 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
   const [selectedRange, setSelectedRange] = useState<DateRange | undefined>();
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [isDatepickerOpen, setIsDatepickerOpen] = useState<boolean>(false);
+  const [isTimepickerOpen, setIsTimepickerOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const timepickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (prevData?.scheduleDate) {
@@ -32,6 +36,9 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
     // 클릭된 요소가 dropdownRef 내부에 있지 않다면 닫기
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setIsDatepickerOpen(false);
+    }
+    if (timepickerRef.current && !timepickerRef.current.contains(event.target as Node)) {
+      setIsTimepickerOpen(false);
     }
   };
 
@@ -65,8 +72,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
     }
   };
 
-  const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const time = e.target.value;
+  const handleTimeChange = (time: string) => {
     setSelectedTime(time);
     onTimeChange(time);
   };
@@ -108,15 +114,26 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
       </div>
       <div className="relative flex items-center">
         <ClockIcon className="absolute left-4 cursor-pointer" />
-
-        <input
-          value={selectedTime}
-          onChange={handleTimeChange}
-          onClick={() => setIsDatepickerOpen(false)}
-          type="time"
-          className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[3.12rem] "
-        />
+        <div
+          onClick={() => {
+            setIsTimepickerOpen(!isTimepickerOpen);
+          }}
+          className="border border-solid border-gray-300 px-4 py-3 text-base rounded-lg focus:outline-gray-700 w-full pl-[3.12rem] h-[50px] "
+        >
+          {selectedTime ? formatTime(selectedTime) : <p className="text-[#a0a0a0]">만나는 시간(필수는 아니에요)</p>}
+        </div>
+        {isTimepickerOpen && (
+          <div ref={timepickerRef} className="absolute z-50 top-[100%] left-0 w-full bg-white drop-shadow-md">
+            <SelectTime
+              onTimeSelect={handleTimeChange}
+              onClose={() => {
+                setIsTimepickerOpen(false);
+              }}
+            />
+          </div>
+        )}
       </div>
+      <p className="text-sm text-gray-400 mt-4">날짜는 원하는 범위로 선택할 수 있어요</p>
     </div>
   );
 };
