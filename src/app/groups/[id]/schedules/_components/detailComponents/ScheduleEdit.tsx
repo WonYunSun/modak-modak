@@ -36,7 +36,11 @@ export const ScheduleEdit = ({ schedule, groupId, setIsEdit, refetch }: Schedule
   };
 
   const handleSave = async () => {
-    const success = await updateScheduleById(values.id, values);
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const { hasRelatedPosts: _, ...dataToUpdate } = values;
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+
+    const success = await updateScheduleById(values.id, dataToUpdate);
     if (success) {
       await refetch(); // 데이터 리페치
       invalidateGroupSchedules();
