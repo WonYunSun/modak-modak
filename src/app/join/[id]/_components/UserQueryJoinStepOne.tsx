@@ -2,8 +2,8 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import Button from '@components/common/Button';
-import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
 import QueryJoinContents from '@app/join/[id]/_components/QueryJoinContents';
+import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
 
 interface UserQueryJoinStepOneProps {
   onQueryJoin: () => void;

@@ -874,6 +874,30 @@ export const SlimDownArrow = ({ className }: IconProps) => {
   );
 };
 
+export const SlimUpArrow = ({ className }: IconProps) => {
+  return (
+    <svg
+      className={className}
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M13.8047 11.138C13.5444 11.3983 13.1223 11.3983 12.8619 11.138L8 6.27606L3.13807 11.138C2.87772 11.3983 2.45561 11.3983 2.19526 11.138C1.93491 10.8776 1.93491 10.4555 2.19526 10.1952L7.05719 5.33325C7.57789 4.81255 8.42211 4.81255 8.94281 5.33325L13.8047 10.1952C14.0651 10.4555 14.0651 10.8776 13.8047 11.138Z"
+        fill="#18181B"
+        stroke="white"
+        strokeWidth="0.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
 export const RedDot = ({ className }: IconProps) => {
   return (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">

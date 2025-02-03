@@ -53,7 +53,7 @@ export const ScheduleInfo = ({ schedule, groupId, setIsEdit }: ScheduleInfoType)
           </div>
           <div className="flex bg-gray-100 px-4 py-3 rounded-lg font-medium">
             <ClockIcon className=" cursor-pointer mr-2" />
-            {schedule.start_time !== null ? formatTime(schedule.start_time) : ''}
+            {schedule.start_time !== null ? formatTime(schedule.start_time) : '--:--'}
           </div>
         </div>
 
