@@ -116,7 +116,7 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
                   }}
                   label="적용"
                   type="button"
-                  className="modal-full-btn"
+                  className="modal-full-btn mt-4"
                 ></Button>
               }
             />
