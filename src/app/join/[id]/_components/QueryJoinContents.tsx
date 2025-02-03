@@ -4,10 +4,10 @@ import GroupCard, { GroupCardInfosType } from '@components/common/groupCard/Grou
 interface QueryJoinContentsProps {
   groupInfo: GroupCardInfosType;
   children: React.ReactNode;
-  isWaiting: boolean;
+  isWaiting?: boolean;
 }
 
-const QueryJoinContents = ({ groupInfo, children, isWaiting }: QueryJoinContentsProps) => {
+const QueryJoinContents = ({ groupInfo, children, isWaiting = false }: QueryJoinContentsProps) => {
   return (
     <div className="pt-[48px] w-full h-full bg-primary-10 flex flex-col justify-end gap-9">
       <div className="text-center">
