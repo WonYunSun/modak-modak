@@ -1,5 +1,7 @@
+import ChatRoomList from '@app/chat/_components/ChatRoomList';
+
 const ChatPage = () => {
-  return <div>page</div>;
+  return <ChatRoomList />;
 };
 
 export default ChatPage;
