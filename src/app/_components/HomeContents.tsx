@@ -10,8 +10,7 @@ const HomeContents = forwardRef<HTMLDivElement>((_, ref) => {
         <HomeTitle />
       </div>
       <div ref={ref} />
-      <div className="h-auto pb-[5.25rem] bg-white rounded-t-[1.25rem]">
-        
+      <div className="h-auto pb-[5.25rem] bg-white rounded-t-[1.25rem] min-h-[calc(100vh-11.7rem)]">
         <HomeGroupListSection />
       </div>
     </>
