@@ -16,6 +16,25 @@ export const permitNewMember = async ({ groupId, waitingUserId }: ManageWatingUs
       .update({ is_approved: true })
       .eq('group_id', groupId)
       .eq('user_id', waitingUserId);
+
+    // 승인 후 채팅방 멤버에도 추가하기
+    const { data: chatRoomData, error: chatRoomError } = await supabase
+      .from('chat_rooms')
+      .select('id')
+      .eq('group_id', groupId)
+      .single();
+
+    if (chatRoomError) {
+      throw new Error('채팅방 정보를 가져오는 중 에러가 발생했습니다.');
+    }
+
+    const { error: chatMemberError } = await supabase
+      .from('chat_room_members')
+      .insert({ chat_room_id: chatRoomData?.id, user_id: waitingUserId, group_id: groupId });
+
+    if (chatMemberError) {
+      throw new Error('모임 채팅방 가입 중 에러가 발생했습니다.');
+    }
   } catch (error) {
     throw new Error(`${error}`);
   }
