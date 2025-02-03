@@ -15,7 +15,7 @@ const FunnelHeader = ({ label = '' }: FunnelHeaderProps) => {
 
   return (
     <header>
-      <div className="relative w-full max-w-[600px] mx-auto h-12 flex items-center justify-center bg-white border-x border-gray-200">
+      <div className="relative w-full max-w-[600px] mx-auto h-12 flex items-center justify-center bg-white">
         <div
           className="absolute top-[50%] transform translate-y-[-50%] left-5 cursor-pointer w-10 h-10 flex items-center justify-center"
           onClick={handleNaivation}
