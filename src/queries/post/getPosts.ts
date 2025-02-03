@@ -1,34 +1,18 @@
 'use server';
 
+import PostListType from '@ts/postType';
 import { createClient } from '@utils/supabase/server';
 
-import { Database } from '@ts/supabase';
-
-export type PostType = Pick<Database['public']['Tables']['posts']['Row'], 'id' | 'content'>;
-export type GroupType = Pick<Database['public']['Tables']['groups']['Row'], 'name' | 'description'>;
-export type UserType = Pick<Database['public']['Tables']['users']['Row'], 'id' | 'nickname' | 'profile_image'>;
-export type ScheduleType = Pick<
-  Database['public']['Tables']['schedules']['Row'],
-  'name' | 'memo' | 'start_date' | 'end_date' | 'start_time'
->;
-export type CommentCountType = { count: number };
-export type PostImageType = { image_url: string };
-
-export type PostListType = {
-  id: PostType['id'];
-  content: PostType['content'];
-  groups: GroupType;
-  users: UserType;
-  schedules: ScheduleType;
-  comments: CommentCountType;
-  post_images: PostImageType[];
-};
-
 // 게시글 리스트 불러오기
-export const getPosts = async (groupId: string): Promise<PostListType[]> => {
+export const getPosts = async (
+  groupId: string,
+  offset: number,
+  limit: number,
+  searchTerm?: string
+): Promise<PostListType[]> => {
   const supabase = await createClient();
 
-  const { data, error } = await supabase
+  let query = supabase
     .from('posts')
     .select(
       `
@@ -42,7 +26,14 @@ export const getPosts = async (groupId: string): Promise<PostListType[]> => {
   `
     )
     .eq('group_id', groupId)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (searchTerm) {
+    query = query.ilike('schedules.name', `%${searchTerm}%`);
+  }
+
+  const { data, error } = await query;
 
   if (error) throw new Error(`getPosts 게시글 리스트 데이터 불러오는 중 에러 발생: ${error.message}`);
 

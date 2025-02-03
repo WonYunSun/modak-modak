@@ -45,7 +45,7 @@ const useCommentHandler = (commentId: string, postId: string, groupId: string) =
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
-      queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
+      queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
     },
   });
 

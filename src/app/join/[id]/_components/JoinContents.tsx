@@ -1,6 +1,6 @@
 'use client';
 
-import GlobalLoading from '@app/GlobalLoading';
+import SpinnerContainer from '@components/common/SpinnerContainer';
 import NonUserQueryJoin from '@app/join/[id]/_components/NonUserQueryJoin';
 import UserQueryJoin from '@app/join/[id]/_components/UserQueryJoin';
 import useUser from '@hooks/useUser';
@@ -8,7 +8,7 @@ import useUser from '@hooks/useUser';
 const JoinContents = () => {
   const { user, isPending } = useUser();
 
-  if (isPending) return <GlobalLoading />;
+  if (isPending) return <SpinnerContainer height={0} />;
 
   return (
     <div className="w-full h-full relative top-0 border-x border-gray-200">

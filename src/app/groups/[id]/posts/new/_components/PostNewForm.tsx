@@ -23,7 +23,7 @@ export const PostNewForm = () => {
 
   // 로그인 유저 확인
   const { user } = useUser();
-  // if (isPending) return <Spinner />;
+  // if (isPending) return <SpinnerContainer />;
 
   // 게시글 업로드 로직
   const { mutate: uploadPostMutation } = useUploadPost();

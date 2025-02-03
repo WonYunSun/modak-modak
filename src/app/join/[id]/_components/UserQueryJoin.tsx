@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import UserQueryJoinStepOne from '@app/join/[id]/_components/UserQueryJoinStepOne';
 import UserQueryJoinStepTwo from '@app/join/[id]/_components/UserQueryJoinStepTwo';
-import GlobalLoading from '@app/GlobalLoading';
-import GlobalError from '@app/GlobalError';
+import SpinnerContainer from '@components/common/SpinnerContainer';
+import GlobalError from '@components/common/GlobalError';
 import useIsAlreadyJoin from '@hooks/join/useIsAlreadyJoin';
 import { queryJoinGroup } from '@queries/join/queryJoinGroup';
 import { UsersType } from '@ts/supabaseTableRowTypes';
@@ -37,7 +37,7 @@ const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
     setJoinStep(2);
   };
 
-  if (isPending) return <GlobalLoading />;
+  if (isPending) return <SpinnerContainer height={0} />;
   if (isError) return <GlobalError />;
 
   return (

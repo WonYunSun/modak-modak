@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import Button from '@components/common/Button';
-import Spinner from '@components/common/Spinner';
+import SpinnerContainer from '@components/common/SpinnerContainer';
 import NoPhoto from '@app/groups/[id]/_components/NoPhoto';
 import { ModificationLine } from '@components/icons';
 
@@ -28,7 +28,7 @@ const PhotoList = () => {
     setSelectedImage(null);
   };
 
-  if (isPending) return <Spinner />;
+  if (isPending) return <SpinnerContainer />;
 
   if (isError) return <p>에러 발생!</p>;
 
