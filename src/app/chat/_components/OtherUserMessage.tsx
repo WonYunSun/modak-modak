@@ -13,15 +13,7 @@ interface OtherUserMessageProps {
 }
 
 const OtherUserMessage = ({ message, marginTop, isPreviousSameUser }: OtherUserMessageProps) => {
-  const { otherUser, isPending, isError } = useChatOtherUser(message.user_id);
-
-  if (isPending) {
-    return <div>로딩 중..</div>;
-  }
-
-  if (isError) {
-    return <div>로딩 중..</div>;
-  }
+  const { otherUser } = useChatOtherUser(message.user_id);
 
   return (
     <div className={`flex justify-start px-3 ${marginTop}`}>
