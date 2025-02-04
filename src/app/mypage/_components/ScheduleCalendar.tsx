@@ -40,7 +40,7 @@ const ScheduleCalendar = () => {
         <Swiper slidesPerView={1} spaceBetween={15} className="w-full h-14">
           {calendar.map((week, idx) => (
             <SwiperSlide key={idx}>
-              <div className="flex justify-center pl-4">
+              <div className="flex justify-center pl-4 cursor-pointer">
                 {week.map((day) => (
                   <ScheduleDay key={day.id} {...day} onClick={handleDayClick} />
                 ))}
