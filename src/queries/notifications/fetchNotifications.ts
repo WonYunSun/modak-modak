@@ -11,7 +11,6 @@ const TABLE_BY_TYPE = {
 
 export type NotificationCardDataType = {
   id: string;
-  
   isRead: boolean;
   iconStyle: IconStyleType;
   config: {
@@ -32,12 +31,13 @@ type FetchDataConfigType = {
 type NotificationType = 'group_members_new' | 'schedules_new';
 
 interface FetchNotificationsDataParams {
+  id: string;
   type: NotificationType;
   createdAt: string;
   fetchDataConfig: FetchDataConfigType;
 }
 
-export const fetchNotificationsData = async ({ type, createdAt, fetchDataConfig }: FetchNotificationsDataParams) => {
+export const fetchNotificationsData = async ({ id, type, createdAt, fetchDataConfig }: FetchNotificationsDataParams) => {
   const { groupId, triggeredRowId, isRead } = fetchDataConfig;
   try {
     const supabase = await createClient();
@@ -49,7 +49,7 @@ export const fetchNotificationsData = async ({ type, createdAt, fetchDataConfig 
       const { data: newMemberData } = await supabase.from('users').select().eq('id', triggeredRow?.user_id).single();
 
       const notificationCardData = {
-        id: triggeredRow?.id,
+        id,
         isRead,
         iconStyle: 'memberImg',
         config: {
@@ -66,7 +66,7 @@ export const fetchNotificationsData = async ({ type, createdAt, fetchDataConfig 
 
     if (type === 'schedules_new') {
       const notificationCardData = {
-        id: triggeredRow?.id,
+        id,
         isRead,
         iconStyle: 'groupImg',
         config: {
@@ -97,28 +97,28 @@ export const fetchNotifications = async ({ userId }: FetchUserGroupListParams) =
       .eq('target_user_id', userId)
       .order('created_at', { ascending: false });
 
-    if (!notifications) return;
+    if (!notifications) return null;
 
     const unReadNotifications = notifications.filter(({ is_read }) => is_read === false);
     const alreadyReadNotifications = notifications.filter(({ is_read }) => is_read === true);
 
     const unReadData = await Promise.all(
       unReadNotifications.map(async (data) => {
-        const { group_id, triggered_row_id, is_read, type, created_at } = data;
+        const { id, group_id, triggered_row_id, is_read, type, created_at } = data;
         const fetchDataConfig = { groupId: group_id, triggeredRowId: triggered_row_id, isRead: is_read };
 
-        return await fetchNotificationsData({ type, createdAt: created_at, fetchDataConfig });
+        return await fetchNotificationsData({ id, type, createdAt: created_at, fetchDataConfig });
       })
     );
     const alreadyReadData = await Promise.all(
       alreadyReadNotifications.map(async (data) => {
-        const { group_id, triggered_row_id, is_read, type, created_at } = data;
+        const { id, group_id, triggered_row_id, is_read, type, created_at } = data;
         const fetchDataConfig = { groupId: group_id, triggeredRowId: triggered_row_id, isRead: is_read };
 
-        return await fetchNotificationsData({ type, createdAt: created_at, fetchDataConfig });
+        return await fetchNotificationsData({ id, type, createdAt: created_at, fetchDataConfig });
       })
     );
-
+    
     return { unRead: unReadData, alreadyRead: alreadyReadData };
   } catch (error) {
     throw new Error(`${error}`);
