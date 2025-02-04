@@ -64,7 +64,10 @@ const ChangeGroupProfileModal = () => {
       <h4 className="mb-6 font-semibold text-xl text-gray-900 text-center">모임 프로필 변경</h4>
       <div>
         <div className="m-auto w-24 h-24 relative">
-          <div className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center">
+          <label
+            htmlFor="profilePhoto"
+            className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center cursor-pointer"
+          >
             {groupProfileImgUrl.length ? (
               <Image
                 src={groupProfileImgUrl}
@@ -76,7 +79,7 @@ const ChangeGroupProfileModal = () => {
             ) : (
               <div className="w-full h-full bg-gray-400"></div>
             )}
-          </div>
+          </label>
           <label htmlFor="profilePhoto" className="block absolute bottom-[-8px] right-[-14px]">
             <Modification />
           </label>
