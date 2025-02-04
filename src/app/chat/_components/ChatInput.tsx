@@ -59,6 +59,7 @@ const ChatInput = ({ user, chatRoomId }: ChatInputProps) => {
           value={message}
           onChange={handleInput}
           onKeyDown={handleKeyDown}
+          onTouchStart={() => textAreaRef.current?.focus()}
           placeholder="메세지 입력하기.."
           className="resize-none border-none outline-none min-h-6 h-6 text-sm w-full"
         />
