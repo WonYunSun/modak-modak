@@ -122,7 +122,7 @@ const ChatRoom = ({ user, chatRoomId }: ChatRoomProps) => {
   return (
     <div
       ref={chatRoomRef}
-      className="flex w-full flex-col overflow-y-auto h-[calc(100vh-48px)] pb-[58px] scroll-smooth scrollbar-hide"
+      className="flex w-full flex-col overflow-y-auto h-[calc(100dvh-48px)] pb-[58px] scroll-smooth scrollbar-hide"
     >
       {messages?.length === 0 && <ChatEmptyMessage />}
       <ChatMessageList messages={messages} currentUserId={currentUserId as string} />
