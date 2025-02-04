@@ -25,10 +25,15 @@ export interface Schedule {
 
 interface ScheduleSelectProps {
   setIsScheduleModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedSchedule: Schedule | null;
   setSelectedSchedule: React.Dispatch<React.SetStateAction<Schedule | null>>;
 }
 
-const ScheduleSelectSection = ({ setIsScheduleModalOpen, setSelectedSchedule }: ScheduleSelectProps) => {
+const ScheduleSelectSection = ({
+  setIsScheduleModalOpen,
+  selectedSchedule,
+  setSelectedSchedule,
+}: ScheduleSelectProps) => {
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
   const searchQuery = searchTerm ? searchTerm : undefined;
 
@@ -73,6 +78,7 @@ const ScheduleSelectSection = ({ setIsScheduleModalOpen, setSelectedSchedule }: 
                   start_date={schedule.start_date}
                   end_date={schedule.end_date}
                   start_time={schedule.start_time}
+                  isSelected={selectedSchedule?.id === schedule.id}
                 />
               </div>
             ))

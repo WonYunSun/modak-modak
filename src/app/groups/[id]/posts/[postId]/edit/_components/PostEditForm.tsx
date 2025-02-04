@@ -92,6 +92,7 @@ export const PostEditForm = () => {
         {isScheduleModalOpen && (
           <ScheduleSelectSection
             setIsScheduleModalOpen={setIsScheduleModalOpen}
+            selectedSchedule={selectedSchedule}
             setSelectedSchedule={setSelectedSchedule}
           />
         )}
