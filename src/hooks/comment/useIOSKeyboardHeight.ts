@@ -11,7 +11,6 @@ const useIOSKeyboardHeight = () => {
       const visualViewportHeight = window.visualViewport.height;
       const newKeyboardHeight = Math.max(0, layoutViewportHeight - visualViewportHeight);
 
-      alert(`키보드 높이는 ${newKeyboardHeight} 입니다`);
       setKeyboardHeight(newKeyboardHeight);
     };
 
