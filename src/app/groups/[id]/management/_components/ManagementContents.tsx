@@ -8,7 +8,6 @@ import ToggleBox from '@app/groups/[id]/management/_components/ToggleBox';
 import ManagementBtns from '@app/groups/[id]/management/_components/ManagementBtns';
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
 import SpinnerContainer from '@components/common/SpinnerContainer';
-import GlobalError from '@components/common/GlobalError';
 import { CircleOk, Copy, NextArrow } from '@components/icons';
 import useSmallAlert from '@hooks/useSmallAlert';
 import useIsLeader from '@hooks/management/useIsLeader';
@@ -33,14 +32,13 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
     openModal();
   };
 
-  const { data: isLeader, isPending, isError } = useIsLeader({ groupId });
+  const { data: isLeader, isPending } = useIsLeader({ groupId });
 
   if (isPending) return <SpinnerContainer height={112} />;
-  if (isError) return <GlobalError />;
 
   return (
     <>
-      <div className="pt-6 mb-36">
+      <div className="pt-6 pb-36">
         <div className="mb-6 w-full flex flex-col border-b divide-y-8 divide-gray-200">
           {isLeader && (
             <ManagementSection title={'모임 관리'}>

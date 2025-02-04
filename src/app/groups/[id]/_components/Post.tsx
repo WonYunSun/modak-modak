@@ -116,7 +116,7 @@ const Post = ({ post, openDeleteAlert }: PostProps) => {
         {/* 댓글 */}
         <div className="w-24 flex items-center h-6 text-xs mt-3 cursor-pointer" onClick={() => setIsCommentOpen(true)}>
           <Comments />
-          <span className="ml-1 font-semibold">
+          <span className="ml-1 font-semibold cursor-pointer">
             {post.comments.count > 0 ? `${post.comments.count}개 모두 보기` : '댓글 남기기'}
           </span>
         </div>

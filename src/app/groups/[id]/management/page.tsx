@@ -10,7 +10,7 @@ const ManagementPage = ({ params }: ManagementPageProps) => {
   const { id } = params;
 
   return (
-    <div className="mx-auto max-w-[600px] h-screen overflow-y-scroll scrollbar-hide">
+    <div className="mx-auto max-w-[600px] h-[100dvh] overflow-y-scroll scrollbar-hide">
       <div className="h-full border-x border-gray-200">
         <Header home={false} label={'관리 페이지'} isScrolled={true} />
         <ManagementContents groupId={id} />

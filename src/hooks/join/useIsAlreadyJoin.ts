@@ -12,18 +12,19 @@ export interface IsAlreadyJoinParams {
 }
 const useIsAlreadyJoin = ({ groupId }: IsAlreadyJoinParams) => {
   const { user, isError: userError } = useUser();
-  const userId = user ? user.id : '';
+  const userId = user ? user.id : null;
 
   if (userError) throw new Error(`user error : ${userError}`);
 
   const { data, isPending, isError } = useQuery({
     queryKey: ['isAlreadyJoin', groupId, userId],
     queryFn: async (): Promise<JoinStateType> => {
-      const data = await isAlreadyMember({ groupId, userId });
+      const data = await isAlreadyMember({ groupId, userId : userId! });
       if (data) return data['is_approved'] ? 'member' : 'waiting';
 
       return 'joinable';
     },
+    enabled: !!userId,
   });
   return { data, isPending, isError };
 };

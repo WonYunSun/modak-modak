@@ -10,13 +10,14 @@ interface ToggleNotificationParams {
 }
 const useFetchReceiveNotification = ({ groupId }: ToggleNotificationParams) => {
   const { user, isError: userError } = useUser();
-  const userId = user ? user.id : '';
+  const userId = user ? user.id : null;
 
   if (userError) throw new Error(`user error : ${userError}`);
 
   const { data, isPending, isError } = useQuery({
     queryKey: ['fetchReceiveNotification', userId],
-    queryFn: () => FetchReceiveNotifications({ userId, groupId }),
+    queryFn: () => FetchReceiveNotifications({ userId: userId!, groupId }),
+    enabled: !!userId,
   });
 
   return { data, isPending, isError };

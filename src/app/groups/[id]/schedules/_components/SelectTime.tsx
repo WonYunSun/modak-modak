@@ -38,11 +38,8 @@ const SelectTime = ({ onTimeSelect, onClose }: SelecTimeProps) => {
   };
 
   return (
-    <div onClick={onClose} className="flex items-center justify-center w-full h-full  z-50">
-      <div
-        className="w-full m-4 bg-white rounded-2xl flex items-center justify-center"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div onClick={onClose} className="flex items-center justify-center w-full h-full z-50">
+      <div className="w-full m-4  flex items-center justify-center " onClick={(e) => e.stopPropagation()}>
         <section className="w-full">
           <div className="flex justify-center items-center">
             {/* 시간 선택 */}
