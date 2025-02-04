@@ -40,7 +40,7 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
 
   return (
     <>
-      <div className="pt-6 mb-36">
+      <div className="pt-6 pb-36">
         <div className="mb-6 w-full flex flex-col border-b divide-y-8 divide-gray-200">
           {isLeader && (
             <ManagementSection title={'모임 관리'}>
