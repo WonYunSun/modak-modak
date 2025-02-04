@@ -11,8 +11,6 @@ const useCheckMessageRead = (chatRoomId: string, userId: string) => {
     try {
       const unreadMessages = await getMessageRead(chatRoomId, userId);
 
-      console.log('unreadMessages', unreadMessages);
-
       if (unreadMessages && unreadMessages.length > 0) {
         for (const message of unreadMessages) {
           // 이미 읽은 메시지는 업데이트하지 않음

@@ -22,10 +22,10 @@ const ChatRoomDetail = () => {
 
   return (
     <div
-      className="relative max-w-[600px] mx-auto border-x border-gray-200 w-full h-dvh transition-all"
+      className="max-w-[600px] mx-auto border-x border-gray-200 w-full h-dvh transition-all"
       // style={{ bottom: keyboardHeight > 0 ? keyboardHeight : 0 }}
       style={{
-        position: keyboardHeight > 0 ? 'fixed' : 'relative',
+        position: keyboardHeight > 0 ? 'absolute' : 'relative',
         bottom: keyboardHeight > 0 ? keyboardHeight : 0,
       }}
     >
