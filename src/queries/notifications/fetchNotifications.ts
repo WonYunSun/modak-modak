@@ -4,7 +4,7 @@ import { createClient } from '@utils/supabase/server';
 import { UsersType } from '@ts/supabaseTableRowTypes';
 import { IconStyleType } from '@app/notifications/_components/NotificationCard';
 
-const TABLEBY_TYPE = {
+const TABLE_BY_TYPE = {
   group_members_new: 'group_members',
   schedules_new: 'schedules',
 };
@@ -43,7 +43,7 @@ export const fetchNotificationsData = async ({ type, createdAt, fetchDataConfig 
     const supabase = await createClient();
 
     const { data: groupData } = await supabase.from('groups').select().eq('id', groupId).single();
-    const { data: triggeredRow } = await supabase.from(TABLEBY_TYPE[type]).select().eq('id', triggeredRowId).single();
+    const { data: triggeredRow } = await supabase.from(TABLE_BY_TYPE[type]).select().eq('id', triggeredRowId).single();
 
     if (type === 'group_members_new') {
       const { data: newMemberData } = await supabase.from('users').select().eq('id', triggeredRow?.user_id).single();
