@@ -12,6 +12,7 @@ import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
 import CountBar from '@app/groups/[id]/_components/CountBar';
 import NoSchedule from '@app/groups/[id]/_components/NoSchedule';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
+import NoSearchSchedule from '@app/groups/[id]/_components/NoSearchSchedule';
 
 export interface Schedule {
   id: string;
@@ -36,8 +37,6 @@ const ScheduleSelectSection = ({ setIsScheduleModalOpen, setSelectedSchedule }: 
 
   const { scheduleData, isPending } = useGroupSchedules(groupId, searchQuery);
 
-  if (isPending) return <SpinnerContainer />;
-
   const handleSelectSchedule = (schedule: Schedule) => {
     setSelectedSchedule(schedule);
     setIsScheduleModalOpen(false); // 선택 후 모달 닫기
@@ -58,21 +57,16 @@ const ScheduleSelectSection = ({ setIsScheduleModalOpen, setSelectedSchedule }: 
           </div>
         </header>
 
-        <section className="px-5 flex-1 overflow-y-auto">
+        <section className="px-5 flex-1 overflow-y-scroll scrollbar-hide">
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <div className="mt-6 mb-5">
             <CountBar value={scheduleData ? scheduleData.length : 0} />
           </div>
-          {!isPending && scheduleData && scheduleData.length === 0 && <NoSchedule />}
-
-          {scheduleData &&
-            scheduleData.length > 0 &&
+          {isPending ? (
+            <SpinnerContainer />
+          ) : scheduleData && scheduleData.length > 0 ? (
             scheduleData.map((schedule, index) => (
-              <div
-                className="mb-5 rounded-xl cursor-pointer"
-                key={index}
-                onClick={() => handleSelectSchedule(schedule)}
-              >
+              <div className="mb-5" key={index} onClick={() => handleSelectSchedule(schedule)}>
                 <ScheduleCard
                   name={schedule.name}
                   memo={schedule.memo}
@@ -81,7 +75,12 @@ const ScheduleSelectSection = ({ setIsScheduleModalOpen, setSelectedSchedule }: 
                   start_time={schedule.start_time}
                 />
               </div>
-            ))}
+            ))
+          ) : searchTerm ? (
+            <NoSearchSchedule />
+          ) : (
+            <NoSchedule />
+          )}
         </section>
       </div>
     </div>
