@@ -34,7 +34,7 @@ export const fetchSchedulesBygroupId = async (groupId: string): Promise<Schedule
       .from('schedules')
       .select('*')
       .eq('group_id', groupId)
-      .order('start_date', { ascending: false });
+      .order('end_date', { ascending: false });
 
     return data || [];
   } catch (error) {

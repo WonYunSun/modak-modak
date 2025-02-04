@@ -17,13 +17,13 @@ const SearchBar = ({ searchTerm, setSearchTerm }: searchProps) => {
   };
 
   return (
-    <div className="w-full relative mt-6">
+    <div className="w-full relative mt-5">
       <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
 
       <input
         type="text"
         value={inputValue}
-        placeholder="일정명으로 검색하세요..."
+        placeholder="일정명으로 검색하세요"
         className="w-full border border-solid border-gray-300 py-2 pl-14 pr-[3.5rem] text-base rounded-lg focus:outline-gray-700"
         onChange={(e) => setInputValue(e.target.value)} // 입력값만 변경
         onKeyDown={handleKeyDown} // 엔터 입력 시 검색 실행

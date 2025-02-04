@@ -9,7 +9,7 @@ type ScheduleCardProps = {
   memo: ScheduleType['memo'];
   start_date: ScheduleType['start_date'];
   end_date: ScheduleType['end_date'];
-  start_time: ScheduleType['start_time'];
+  start_time: ScheduleType['start_time'] | null;
   groupName?: string;
   hasArrow?: boolean;
 };

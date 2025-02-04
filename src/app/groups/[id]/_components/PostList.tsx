@@ -12,7 +12,6 @@ import { ModificationLine } from '@components/icons';
 
 import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
 import { useFetchPostCount } from '@hooks/post/useFetchPostCount';
-import { useNewPostStore } from '@stores/useNewPostStore';
 
 import NoPost from '@app/groups/[id]/_components/NoPost';
 import NoSearch from '@app/groups/[id]/_components/NoSearch';
@@ -20,8 +19,6 @@ import SpinnerContainer from '@components/common/SpinnerContainer';
 
 const PostList = () => {
   const router = useRouter();
-
-  const { reset } = useNewPostStore();
 
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -54,7 +51,7 @@ const PostList = () => {
   if (isPending) return <SpinnerContainer />;
 
   return (
-    <section className="w-full flex flex-col mb-28">
+    <section className="w-full flex flex-col mb-28 pt-1">
       {/* 검색바 */}
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {/* 게시글 수 */}
@@ -77,7 +74,6 @@ const PostList = () => {
           type="button"
           onClick={() => {
             router.push(`/groups/${groupId}/posts/new`);
-            reset();
           }}
         >
           <ModificationLine />

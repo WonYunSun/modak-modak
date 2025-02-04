@@ -18,7 +18,7 @@ export const useGroupSchedules = (groupId: string | undefined) => {
   // 쿼리 무효화 함수
   const invalidateGroupSchedules = () => {
     queryClient.invalidateQueries({ queryKey: ['GroupSchedules', groupId] });
-    queryClient.invalidateQueries({ queryKey: [groupId, 'posts'] });
+    queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
   };
 
   return { scheduleData, isPending, isError, refetch, invalidateGroupSchedules };
