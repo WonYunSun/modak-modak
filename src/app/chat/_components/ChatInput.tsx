@@ -51,7 +51,7 @@ const ChatInput = ({ user, chatRoomId }: ChatInputProps) => {
   };
 
   return (
-    <div className="px-5 py-2 absolute bottom-0 left-0 right-0 z-10">
+    <div className="px-5 py-2 absolute bottom-0 left-0 right-0 z-10 bg-white">
       <div className="w-full border bg-white px-3 py-2 rounded-lg flex items-center gap-1">
         <textarea
           rows={1}
@@ -59,7 +59,6 @@ const ChatInput = ({ user, chatRoomId }: ChatInputProps) => {
           value={message}
           onChange={handleInput}
           onKeyDown={handleKeyDown}
-          onTouchStart={() => textAreaRef.current?.focus()}
           placeholder="메세지 입력하기.."
           className="resize-none border-none outline-none min-h-6 h-6 text-sm w-full"
         />
