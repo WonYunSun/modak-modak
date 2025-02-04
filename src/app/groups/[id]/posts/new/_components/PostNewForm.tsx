@@ -4,15 +4,16 @@ import { useParams, useRouter } from 'next/navigation';
 
 import { PlusGray } from '@components/icons';
 import Button from '@components/common/Button';
+import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
+
+import PhotoUpload from '@app/groups/[id]/posts/new/_components/PhotoUpload';
+import PostTextArea from '@app/groups/[id]/posts/new/_components/PostTextArea';
+import ScheduleSelectSection, { Schedule } from '@app/groups/[id]/_components/ScheduleSelectSection';
 
 import useUploadPost from '@hooks/post/useUploadPost';
 import useUser from '@hooks/useUser';
 
-import PhotoUpload from '@app/groups/[id]/posts/new/_components/PhotoUpload';
-import PostTextArea from '@app/groups/[id]/posts/new/_components/PostTextArea';
 import { useState } from 'react';
-import ScheduleSelectSection, { Schedule } from '@app/groups/[id]/_components/ScheduleSelectSection';
-import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
 
 export const PostNewForm = () => {
   const [content, setContent] = useState<string>('');
@@ -27,7 +28,6 @@ export const PostNewForm = () => {
 
   // 로그인 유저 확인
   const { user } = useUser();
-  // if (isPending) return <SpinnerContainer />;
 
   // 게시글 업로드 로직
   const { mutate: uploadPostMutation } = useUploadPost();

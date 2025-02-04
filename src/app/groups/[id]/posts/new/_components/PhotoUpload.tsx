@@ -6,6 +6,7 @@ import 'swiper/css';
 
 import Button from '@components/common/Button';
 import { DeletePhoto, PlusGray } from '@components/icons';
+
 import { useState } from 'react';
 
 const MAX_FILES = 10; // 최대 파일 수

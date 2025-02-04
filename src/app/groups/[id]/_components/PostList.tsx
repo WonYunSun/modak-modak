@@ -3,19 +3,19 @@
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
+import Button from '@components/common/Button';
+import SpinnerContainer from '@components/common/SpinnerContainer';
+
 import CountBar from '@app/groups/[id]/_components/CountBar';
 import Post from '@app/groups/[id]/_components/Post';
-import Button from '@components/common/Button';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
+import NoPost from '@app/groups/[id]/_components/NoPost';
+import NoSearchPost from '@app/groups/[id]/_components/NoSearchPost';
 
 import { ModificationLine } from '@components/icons';
 
 import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
 import { useFetchPostCount } from '@hooks/post/useFetchPostCount';
-
-import NoPost from '@app/groups/[id]/_components/NoPost';
-import NoSearchPost from '@app/groups/[id]/_components/NoSearchPost';
-import SpinnerContainer from '@components/common/SpinnerContainer';
 
 const PostList = () => {
   const router = useRouter();

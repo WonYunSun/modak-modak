@@ -5,17 +5,17 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
 import Button from '@components/common/Button';
+import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
+import SpinnerContainer from '@components/common/SpinnerContainer';
+import PostTextArea from '@app/groups/[id]/posts/new/_components/PostTextArea';
+import ScheduleSelectSection, { Schedule } from '@app/groups/[id]/_components/ScheduleSelectSection';
 
-import { useFetchGetPost } from '@hooks/post/useFetchGetPost';
-import useUser from '@hooks/useUser';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
+import { useFetchGetPost } from '@hooks/post/useFetchGetPost';
 import { useFetchEditPost } from '@hooks/post/useFetchEditPost';
-import SpinnerContainer from '@components/common/SpinnerContainer';
-import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
-import PostTextArea from '@app/groups/[id]/posts/new/_components/PostTextArea';
-import ScheduleSelectSection, { Schedule } from '@app/groups/[id]/_components/ScheduleSelectSection';
+import useUser from '@hooks/useUser';
 
 export const PostEditForm = () => {
   const [content, setContent] = useState<string>('');
