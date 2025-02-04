@@ -22,7 +22,8 @@ const ChatRoomDetail = () => {
 
   return (
     <div
-      className={`relative max-w-[600px] mx-auto border-x border-gray-200 w-full h-screen ${keyboardHeight > 0 ? `bottom-[${keyboardHeight}]px` : ''} transition-all`}
+      className="relative max-w-[600px] mx-auto border-x border-gray-200 w-full h-screen transition-all"
+      style={{ bottom: keyboardHeight > 0 ? `${keyboardHeight}px` : 0 }}
     >
       <FunnelHeader label={chatGroupName?.name as string} />
       <ChatRoom user={user} chatRoomId={chatRoomId as string} />
