@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from 'next/navigation';
 
-import { PlusGray } from '@components/icons';
+import { AlertSign, PlusGray } from '@components/icons';
 import Button from '@components/common/Button';
 import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
 
@@ -12,6 +12,7 @@ import ScheduleSelectSection, { Schedule } from '@app/groups/[id]/_components/Sc
 
 import useUploadPost from '@hooks/post/useUploadPost';
 import useUser from '@hooks/useUser';
+import useSmallAlert from '@hooks/useSmallAlert';
 
 import { useState } from 'react';
 
@@ -20,6 +21,7 @@ export const PostNewForm = () => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
+  const [isUploading, setIsUploading] = useState(false); // 업로드 중 상태
 
   const router = useRouter();
 
@@ -29,10 +31,14 @@ export const PostNewForm = () => {
   // 로그인 유저 확인
   const { user } = useUser();
 
+  const { SmallAlert: SubmitAlert, openAlert: OpenSubmitAlert } = useSmallAlert();
+
   // 게시글 업로드 로직
   const { mutate: uploadPostMutation } = useUploadPost();
 
   const handleUploadPost = () => {
+    if (isUploading) return; // 버튼 중복 클릭 방지
+    setIsUploading(true); // 업로드 시작
     // FormData 사용
     const formData = new FormData();
     formData.append('userId', user!.id);
@@ -44,76 +50,90 @@ export const PostNewForm = () => {
     selectedFiles.forEach((file) => {
       formData.append('files', file);
     });
-    uploadPostMutation(formData);
-    router.push(`/groups/${groupId}`);
+    uploadPostMutation(formData, {
+      onSuccess: () => {
+        setIsUploading(false);
+        router.push(`/groups/${groupId}`);
+      },
+      onError: () => {
+        setIsUploading(false);
+      },
+    });
   };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleUploadPost();
-      }}
-    >
-      {/* 일정 선택하기 타이틀 */}
-      <div className="w-full flex flex-col px-5 mt-[0.625rem]">
-        <div className="flex">
-          <label className="font-semibold text-xl">일정 선택하기</label>
-          <p className="text-[#FF3B30] ml-1">*</p>
-        </div>
-        <span className="text-base text-gray-500 mb-4">어떤 날의 추억을 공유해 볼까요?</span>
+    <>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleUploadPost();
+        }}
+      >
+        {/* 일정 선택하기 타이틀 */}
+        <div className="w-full flex flex-col px-5 my-5">
+          <div className="flex mb-[7px]">
+            <label className="font-semibold text-base">일정 선택하기</label>
+            <p className="text-[#FF3B30] ml-1">*</p>
+          </div>
+          <span className="text-sm text-gray-500 mb-4">추억을 공유하고 싶은 일정을 선택해주세요</span>
 
-        <div onClick={() => setIsScheduleModalOpen(true)} className="cursor-pointer">
-          {selectedSchedule ? (
-            <ScheduleCard
-              name={selectedSchedule.name}
-              memo={selectedSchedule.memo}
-              start_date={selectedSchedule.start_date}
-              end_date={selectedSchedule.end_date}
-              start_time={selectedSchedule.start_time}
+          <div onClick={() => setIsScheduleModalOpen(true)} className="cursor-pointer">
+            {selectedSchedule ? (
+              <ScheduleCard
+                name={selectedSchedule.name}
+                memo={selectedSchedule.memo}
+                start_date={selectedSchedule.start_date}
+                end_date={selectedSchedule.end_date}
+                start_time={selectedSchedule.start_time}
+              />
+            ) : (
+              <div className="w-full h-[95px] flex flex-col items-center  justify-center border border-gray-300 rounded-xl cursor-pointer">
+                <PlusGray />
+              </div>
+            )}
+          </div>
+
+          {/* 일정 선택하기 화면 */}
+          {isScheduleModalOpen && (
+            <ScheduleSelectSection
+              setIsScheduleModalOpen={setIsScheduleModalOpen}
+              setSelectedSchedule={setSelectedSchedule}
             />
-          ) : (
-            <div className="w-full h-[4.875rem] flex flex-col items-center  justify-center border border-gray-300 rounded-xl cursor-pointer">
-              <PlusGray />
-            </div>
           )}
         </div>
 
-        {/* 일정 선택하기 화면 */}
-        {isScheduleModalOpen && (
-          <ScheduleSelectSection
-            setIsScheduleModalOpen={setIsScheduleModalOpen}
-            setSelectedSchedule={setSelectedSchedule}
+        {/* 사진 업로드 컴포넌트 */}
+        <PhotoUpload selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles} />
+
+        {/* 글 입력 컴포넌트 */}
+        <PostTextArea content={content} setContent={setContent} />
+
+        <div className="fixed w-full max-w-[600px] m-auto px-5 bottom-0">
+          <Button
+            label="작성 완료"
+            className="full-btn"
+            disabled={selectedFiles.length === 0 || selectedSchedule === null}
+            type="submit"
           />
-        )}
-      </div>
 
-      <div className="w-full h-2 bg-[#F1F1F1] mt-[15px]"></div>
-
-      {/* 게시글 타이틀 */}
-      <div className="w-full flex flex-col px-5 mt-6 mb-5">
-        <div className="flex">
-          <label className="font-semibold text-xl">게시글</label>
-          <p className="text-[#FF3B30] ml-1">*</p>
+          {/* 버튼이 disabled 상태일 때만 동작 */}
+          {selectedFiles.length === 0 || selectedSchedule === null ? (
+            <div
+              className="absolute inset-0 flex items-center justify-center bg-transparent"
+              onClick={() => OpenSubmitAlert()}
+            />
+          ) : null}
         </div>
-        <span className="text-base text-gray-500">우리의 추억을 이미지로 남겨주세요</span>
-      </div>
-
-      {/* 사진 업로드 컴포넌트 */}
-      <PhotoUpload selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles} />
-
-      {/* 글 입력 컴포넌트 */}
-      <PostTextArea content={content} setContent={setContent} />
-
-      <div className="fixed w-full max-w-[600px] m-auto px-5 bottom-0">
-        <Button
-          label="작성 완료"
-          className="full-btn"
-          disabled={selectedFiles.length === 0 || selectedSchedule === null}
-          type="submit"
-        />
-      </div>
-    </form>
+      </form>
+      <SubmitAlert>
+        <AlertSign className="mr-1" />
+        {selectedFiles.length === 0 && selectedSchedule === null
+          ? `일정 선택과 사진 첨부는 필수예요!`
+          : selectedFiles.length === 0
+            ? `사진을 첨부해주세요!`
+            : `일정을 선택해주세요!`}
+      </SubmitAlert>
+    </>
   );
 };
 

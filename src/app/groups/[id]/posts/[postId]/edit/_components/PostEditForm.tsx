@@ -69,11 +69,11 @@ export const PostEditForm = () => {
     >
       {/* 일정 수정하기 타이틀 */}
       <div className="w-full flex flex-col px-5 mt-[0.625rem]">
-        <div className="flex">
-          <label className="font-semibold text-xl">일정 수정하기</label>
+        <div className="flex mb-[7px]">
+          <label className="font-semibold text-base">일정 수정하기</label>
           <p className="text-[#FF3B30] ml-1">*</p>
         </div>
-        <span className="text-base text-gray-500 mb-4">어떤 날의 추억을 공유해 볼까요?</span>
+        <span className="text-sm text-gray-500 mb-4">추억을 공유하고 싶은 일정을 선택해주세요</span>
 
         <div onClick={() => setIsScheduleModalOpen(true)}>
           {selectedSchedule && (
@@ -97,10 +97,8 @@ export const PostEditForm = () => {
         )}
       </div>
 
-      <div className="w-full h-2 bg-[#F1F1F1] mt-[3.75rem]"></div>
-
       {/* 사진 미리보기 */}
-      <div className="w-full mt-6 px-5">
+      <div className="w-full mt-5 px-5">
         <Swiper spaceBetween={1} slidesPerView={'auto'} className="flex w-full justify-start">
           {data!.post_images.map((url, index) => (
             <SwiperSlide key={index} style={{ flex: '0 0 auto', width: '8.625rem' }}>

@@ -11,9 +11,10 @@ import { deletePost } from 'queries/post/deletePost';
 interface modalProps {
   postId: string;
   setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  openDeleteAlert: () => void;
 }
 
-export const DeleteModal = ({ postId, setDeleteModal }: modalProps) => {
+export const DeleteModal = ({ postId, setDeleteModal, openDeleteAlert }: modalProps) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const queryClient = useQueryClient();
   const { id } = useParams();
@@ -31,6 +32,7 @@ export const DeleteModal = ({ postId, setDeleteModal }: modalProps) => {
         queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
         queryClient.invalidateQueries({ queryKey: ['photos', groupId] });
         setDeleteModal(false);
+        openDeleteAlert();
       }
     } catch (error) {
       console.error('게시글 삭제 오류:', error);
