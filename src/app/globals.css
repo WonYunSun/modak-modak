@@ -76,16 +76,15 @@
     box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 4px 0px;
   }
 
-  .toggle-btn input:checked+.slider {
+  .toggle-btn input:checked + .slider {
     background-color: #34c759;
   }
 
-  .toggle-btn input:checked+.slider::before {
+  .toggle-btn input:checked + .slider::before {
     transform: translateX(22px);
   }
 
   @media (min-width: 600px) {
-
     /*모달 배경색 가운데 정렬*/
     .modal-back-drop {
       width: 600px !important;
@@ -103,6 +102,15 @@
 
 body {
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* IOS */
+input,
+textarea {
+  -moz-user-select: auto;
+  -webkit-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
 }
 
 .react-modal-sheet-container.comment-list {
@@ -125,7 +133,6 @@ body {
 }
 
 @media (min-width: 600px) {
-
   /*모달 배경색 가운데 정렬*/
   .modal-back-drop {
     width: 600px !important;
@@ -160,8 +167,7 @@ body {
 
   .floating-btn {
     @apply w-[124px] h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0px_4px_4px_0px_#00000033] fixed bottom-[5.5rem]
-    /*right-5*/
-    ;
+    /*right-5*/;
   }
 
   .no-floating-btn {
