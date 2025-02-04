@@ -66,7 +66,8 @@ const ChatRoom = ({ user, chatRoomId }: ChatRoomProps) => {
         type: 'response.create',
         response: {
           modalities: ['text'],
-          instructions: 'Please summarize the conversation.',
+          instructions:
+            'Please summarize the conversation. If you cannot understand the conversation or summarization is not possible, respond with: "The conversation cannot be summarized. Please check the conversation content."',
         },
       };
 
