@@ -21,13 +21,15 @@ const ScheduleDetail = ({ scheduleId, groupId }: { scheduleId: string; groupId: 
   if (!data) return <GlobalError />;
 
   return (
-    <div className="inner">
+    <div className="reactive">
       <FunnelHeader label={isEdit ? '일정 수정' : '일정 상세'} />
-      {isEdit ? (
-        <ScheduleEdit schedule={data} groupId={groupId} setIsEdit={setIsEdit} refetch={refetch} />
-      ) : (
-        <ScheduleInfo schedule={data} groupId={groupId} setIsEdit={setIsEdit} />
-      )}
+      <div className="inner">
+        {isEdit ? (
+          <ScheduleEdit schedule={data} groupId={groupId} setIsEdit={setIsEdit} refetch={refetch} />
+        ) : (
+          <ScheduleInfo schedule={data} groupId={groupId} setIsEdit={setIsEdit} />
+        )}
+      </div>
     </div>
   );
 };
