@@ -14,7 +14,7 @@ import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
 import { useFetchPostCount } from '@hooks/post/useFetchPostCount';
 
 import NoPost from '@app/groups/[id]/_components/NoPost';
-import NoSearch from '@app/groups/[id]/_components/NoSearch';
+import NoSearchPost from '@app/groups/[id]/_components/NoSearchPost';
 import SpinnerContainer from '@components/common/SpinnerContainer';
 
 const PostList = () => {
@@ -60,7 +60,7 @@ const PostList = () => {
       {posts && posts.length > 0 ? (
         posts.map((post) => <Post key={post.id} post={post} />) // 데이터가 있으면 Post 리스트 렌더링
       ) : searchTerm ? (
-        <NoSearch /> // 검색어가 있는데 데이터가 없으면 검색 결과 없음 표시
+        <NoSearchPost /> // 검색어가 있는데 데이터가 없으면 검색 결과 없음 표시
       ) : (
         <NoPost /> // 검색어가 없고 데이터도 없으면 기본 NoPost 표시
       )}

@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchSchedulesBygroupId } from 'queries/schedule/ScheduleActions';
 
-export const useGroupSchedules = (groupId: string | undefined) => {
+export const useGroupSchedules = (groupId: string | undefined, searchTerm?: string) => {
   const queryClient = useQueryClient();
 
   const {
@@ -10,14 +10,14 @@ export const useGroupSchedules = (groupId: string | undefined) => {
     isError,
     refetch,
   } = useQuery({
-    queryKey: ['GroupSchedules', groupId],
-    queryFn: () => fetchSchedulesBygroupId(groupId!),
+    queryKey: ['GroupSchedules', groupId, searchTerm || ''],
+    queryFn: () => fetchSchedulesBygroupId(groupId!, searchTerm),
     enabled: !!groupId, // groupId가 있을 때만 fetch 실행
   });
 
   // 쿼리 무효화 함수
   const invalidateGroupSchedules = () => {
-    queryClient.invalidateQueries({ queryKey: ['GroupSchedules', groupId] });
+    queryClient.invalidateQueries({ queryKey: ['GroupSchedules', groupId, ''] });
     queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
   };
 

@@ -63,7 +63,7 @@ export const PostNewForm = () => {
         </div>
         <span className="text-base text-gray-500 mb-4">어떤 날의 추억을 공유해 볼까요?</span>
 
-        <div onClick={() => setIsScheduleModalOpen(true)}>
+        <div onClick={() => setIsScheduleModalOpen(true)} className="cursor-pointer">
           {selectedSchedule ? (
             <ScheduleCard
               name={selectedSchedule.name}
@@ -73,7 +73,7 @@ export const PostNewForm = () => {
               start_time={selectedSchedule.start_time}
             />
           ) : (
-            <div className="w-full h-[4.875rem] flex flex-col items-center  justify-center border border-gray-300 rounded-xl">
+            <div className="w-full h-[4.875rem] flex flex-col items-center  justify-center border border-gray-300 rounded-xl cursor-pointer">
               <PlusGray />
             </div>
           )}

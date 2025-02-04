@@ -28,11 +28,13 @@ interface ScheduleSelectProps {
 }
 
 const ScheduleSelectSection = ({ setIsScheduleModalOpen, setSelectedSchedule }: ScheduleSelectProps) => {
+  const [searchTerm, setSearchTerm] = useState<string | null>(null);
+  const searchQuery = searchTerm ? searchTerm : undefined;
+
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
 
-  const { scheduleData, isPending } = useGroupSchedules(groupId);
-  const [searchTerm, setSearchTerm] = useState<string | null>(null);
+  const { scheduleData, isPending } = useGroupSchedules(groupId, searchQuery);
 
   if (isPending) return <SpinnerContainer />;
 

@@ -27,14 +27,18 @@ export const addSchedule = async (scheduleData: ScheduleType): Promise<ScheduleT
   }
 };
 
-export const fetchSchedulesBygroupId = async (groupId: string): Promise<ScheduleType[]> => {
+export const fetchSchedulesBygroupId = async (groupId: string, searchTerm?: string): Promise<ScheduleType[]> => {
   try {
     const supabase = await createClient();
-    const { data } = await supabase
-      .from('schedules')
-      .select('*')
-      .eq('group_id', groupId)
-      .order('end_date', { ascending: false });
+    let query = supabase.from('schedules').select('*').eq('group_id', groupId);
+
+    if (searchTerm) {
+      query = query.ilike('name', `%${searchTerm}%`);
+    }
+    query = query.order('end_date', { ascending: false });
+
+    const { data, error } = await query;
+    if (error) throw new Error(error.message);
 
     return data || [];
   } catch (error) {
