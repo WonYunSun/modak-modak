@@ -1,46 +1,44 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { User } from '@supabase/supabase-js';
 
-import DateSeparator from '@app/chat/_components/DateSeparator';
-import UserMessage from '@app/chat/_components/UserMessage';
-import OtherUserMessage from '@app/chat/_components/OtherUserMessage';
+import ChatEmptyMessage from '@app/chat/_components/ChatEmptyMessage';
+import ChatMessageList from '@app/chat/_components/ChatMessageList';
 
 import useMessageList from '@hooks/chat/useMessgeList';
 import useCheckMessageRead from '@hooks/chat/useCheckMessageRead';
 
 import { MessageType } from '@queries/chat/getChatList';
+import useSmallAlert from '@hooks/useSmallAlert';
 
 interface ChatRoomProps {
   user: User | null;
+  chatRoomId: string;
 }
 
-const ChatRoom = ({ user }: ChatRoomProps) => {
-  const { id: chatRoomId } = useParams();
+const ChatRoom = ({ user, chatRoomId }: ChatRoomProps) => {
   const { messages, isPending, isError } = useMessageList(chatRoomId as string, user?.id as string);
+
   const currentUserId = user?.id;
+
   const chatRoomRef = useRef<HTMLDivElement | null>(null);
+
   const [summary, setSummary] = useState<string | null>(null);
+
+  const { SmallAlert, openAlert } = useSmallAlert();
 
   useCheckMessageRead(chatRoomId as string, currentUserId as string);
 
   useEffect(() => {
-    if (chatRoomRef.current) {
-      chatRoomRef.current.scrollTop = chatRoomRef.current.scrollHeight;
-    }
+    if (!messages?.length) return;
+
+    chatRoomRef.current?.scrollTo({
+      top: chatRoomRef.current.scrollHeight,
+      behavior: 'smooth',
+    });
   }, [messages]);
-
-  const isNewDate = (current: string, previous: string | null) => {
-    if (!previous) return true;
-
-    const currentDate = new Date(current).toLocaleDateString();
-    const previousDate = new Date(previous).toLocaleDateString();
-    return currentDate !== previousDate;
-  };
 
   const filterTodayMessages = (messages: MessageType[]) => {
     const today = new Date().toLocaleDateString();
@@ -51,7 +49,7 @@ const ChatRoom = ({ user }: ChatRoomProps) => {
     const todayMessages = filterTodayMessages(messages || []);
 
     if (todayMessages.length === 0) {
-      alert('오늘의 대화가 없습니다.');
+      openAlert();
       return;
     }
 
@@ -68,7 +66,8 @@ const ChatRoom = ({ user }: ChatRoomProps) => {
         type: 'response.create',
         response: {
           modalities: ['text'],
-          instructions: 'Please summarize the conversation.',
+          instructions:
+            'Please summarize the conversation. If you cannot understand the conversation or summarization is not possible, respond with: "The conversation cannot be summarized. Please check the conversation content."',
         },
       };
 
@@ -120,33 +119,13 @@ const ChatRoom = ({ user }: ChatRoomProps) => {
   if (isError) return <div>에러 발생</div>;
 
   return (
-    <div ref={chatRoomRef} className="flex w-full flex-col overflow-y-auto h-[calc(100vh-48px-58px)] scroll-smooth">
-      <div className="bg-gray-100 px-5 py-4">
-        <p className="text-xs font-bold leading-[140%] text-gray-900">소중한 사람들과 이야기 나눠보세요</p>
-        <p className="text-xs font-semibold leading-[140%] text-gray-900">
-          미뤄왔던 만남에 대한 이야기 나눠 보시는 건 어떨까요?
-        </p>
-      </div>
-      <div className="flex-1">
-        {messages?.map((message, index) => {
-          const isCurrentUser = message.user_id === currentUserId;
-          const isPreviousSameUser = index > 0 && messages[index - 1].user_id === message.user_id;
-          const marginTop = isPreviousSameUser ? 'mt-1' : 'mt-4';
-
-          const showDateSeparator = isNewDate(message.created_at, index > 0 ? messages[index - 1].created_at : null);
-
-          return (
-            <React.Fragment key={message.id}>
-              {showDateSeparator && <DateSeparator key={message.created_at} date={message.created_at} />}
-              {isCurrentUser ? (
-                <UserMessage message={message} marginTop={marginTop} />
-              ) : (
-                <OtherUserMessage message={message} marginTop={marginTop} isPreviousSameUser={isPreviousSameUser} />
-              )}
-            </React.Fragment>
-          );
-        })}
-      </div>
+    <div
+      ref={chatRoomRef}
+      className="flex w-full flex-col overflow-y-auto h-[calc(100vh-48px-58px)] scroll-smooth scrollbar-hide"
+    >
+      {messages?.length === 0 && <ChatEmptyMessage />}
+      <ChatMessageList messages={messages} currentUserId={currentUserId as string} />
+      <SmallAlert>오늘의 대화가 없습니다.</SmallAlert>
       <div>
         <button
           onClick={handleSummarize}

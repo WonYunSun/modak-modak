@@ -1,22 +1,32 @@
 'use client';
 
+import { useParams } from 'next/navigation';
+
 import ChatInput from '@app/chat/_components/ChatInput';
 import ChatRoom from '@app/chat/_components/ChatRoom';
 
 import FunnelHeader from '@components/common/FunnelHeader';
 
+import useIOSKeyboardHeight from '@hooks/comment/useIOSKeyboardHeight';
+import useGroupName from '@hooks/chat/useGroupName';
 import useUser from '@hooks/useUser';
 
 const ChatRoomDetail = () => {
   const { user } = useUser();
 
+  const { id: chatRoomId } = useParams();
+
+  const { chatGroupName } = useGroupName(chatRoomId as string);
+
+  const keyboardHeight = useIOSKeyboardHeight();
+
   return (
-    <div className="relative w-full h-screen">
-      <div className="px-5">
-        <FunnelHeader label="채팅방" />
-      </div>
-      <ChatRoom user={user} />
-      <ChatInput user={user} />
+    <div
+      className={`relative max-w-[600px] mx-auto border-x border-gray-200 w-full h-screen ${keyboardHeight > 0 ? `bottom-[${keyboardHeight}]px` : ''} transition-all`}
+    >
+      <FunnelHeader label={chatGroupName?.name as string} />
+      <ChatRoom user={user} chatRoomId={chatRoomId as string} />
+      <ChatInput user={user} chatRoomId={chatRoomId as string} />
     </div>
   );
 };

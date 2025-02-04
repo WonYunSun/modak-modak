@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { createClient } from '@utils/supabase/client';
 import { useQueryClient } from '@tanstack/react-query';
+
+import { createClient } from '@utils/supabase/client';
 
 const useChatRoomPresence = (chatRoomId: string, userId: string) => {
   const supabase = createClient();
+
   const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
 
   const queryClient = useQueryClient();

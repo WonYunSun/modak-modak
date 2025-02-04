@@ -11,6 +11,7 @@ import { MyScheduleData } from '@queries/schedule/ScheduleActions';
 
 const ScheduleCalendar = () => {
   const [calendar, setCalendar] = useState<DayInfo[][]>([]);
+  const [isExpanded, setIsExpanded] = useState(false);
   const { schedules, isPending, isError } = useMySchedule();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const ScheduleCalendar = () => {
   if (isError) throw new Error();
 
   const handleDayClick = (id: string) => {
+    setIsExpanded(false);
     setCalendar(select(calendar, id));
   };
 
@@ -51,7 +53,7 @@ const ScheduleCalendar = () => {
           aria-hidden="true"
         ></div>
       </div>
-      <ScheduleCardList schedules={getSchedules()} />
+      <ScheduleCardList schedules={getSchedules()} isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
     </div>
   );
 };

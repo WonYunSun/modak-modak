@@ -57,7 +57,7 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
 
           <ManagementSection title={'알림 관리'}>
             <ManagementCard label={'모임방 전체 알림'}>
-              <ToggleBox isChecked={false} />
+              <ToggleBox />
             </ManagementCard>
           </ManagementSection>
 

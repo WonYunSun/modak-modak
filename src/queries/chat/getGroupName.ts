@@ -1,0 +1,25 @@
+import { createClient } from '@utils/supabase/client';
+
+import { Database } from '@ts/supabase';
+
+type GroupNameType = Database['public']['Tables']['chat_rooms']['Row'];
+
+type GroupName = Pick<GroupNameType, 'name'>;
+
+const getGroupName = async (chatRoomId: string): Promise<GroupName> => {
+  const supabase = createClient();
+
+  const { data, error: groupNameError } = await supabase
+    .from('chat_rooms')
+    .select('name')
+    .eq('id', chatRoomId)
+    .single();
+
+  if (groupNameError) {
+    throw new Error('그룹 이름을 가져오는 중 에러가 발생했습니다.');
+  }
+
+  return data;
+};
+
+export default getGroupName;

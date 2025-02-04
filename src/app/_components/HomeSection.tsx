@@ -43,7 +43,7 @@ const HomeSection = () => {
   }, []);
 
   return (
-    <div className="border-x border-gray-200">
+    <div>
       <Header hasSetting={false} home={true} isScrolled={isScrolled} />
       <HomeContents ref={targetRef} />
       <div className="ml-[calc(100%-144px)]">

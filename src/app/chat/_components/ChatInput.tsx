@@ -1,7 +1,5 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-
 import { useRef } from 'react';
 
 import { User } from '@supabase/supabase-js';
@@ -12,12 +10,11 @@ import useChatMessage from '@hooks/chat/useChatMessage';
 
 interface ChatInputProps {
   user: User | null;
+  chatRoomId: string;
 }
 
-const ChatInput = ({ user }: ChatInputProps) => {
-  const { id: chatRoomId } = useParams();
-
-  const { message, setMessage, sendMessage } = useChatMessage(chatRoomId as string, user?.id as string);
+const ChatInput = ({ user, chatRoomId }: ChatInputProps) => {
+  const { message, setMessage, sendMessage, SmallAlert } = useChatMessage(chatRoomId as string, user?.id as string);
 
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -54,7 +51,7 @@ const ChatInput = ({ user }: ChatInputProps) => {
   };
 
   return (
-    <div className="px-5 py-2 absolute bottom-0 left-0 right-0 ">
+    <div className="px-5 py-2 absolute bottom-0 left-0 right-0 z-10">
       <div className="w-full border bg-white px-3 py-2 rounded-lg flex items-center gap-1">
         <textarea
           rows={1}
@@ -72,6 +69,7 @@ const ChatInput = ({ user }: ChatInputProps) => {
           onClick={() => sendMessage(resetTextAreaHeight)}
         />
       </div>
+      <SmallAlert>메세지를 입력해주세요.</SmallAlert>
     </div>
   );
 };

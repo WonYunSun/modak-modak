@@ -52,7 +52,7 @@ const SelectTime = ({ onTimeSelect, onClose }: SelecTimeProps) => {
             <TimePicker time={minutes} handleTimeScroll={handleMinuteScroll} selectedTime={selectedMinute} />
           </div>
           <div className="flex justify-center items-center gap-2 text-white mt-4">
-            <Button onClick={handleConfirm} label="확인" type="button" className="modal-full-btn"></Button>
+            <Button onClick={handleConfirm} label="적용" type="button" className="modal-full-btn"></Button>
           </div>
         </section>
       </div>
