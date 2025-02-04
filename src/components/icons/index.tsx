@@ -954,3 +954,22 @@ export const AlertSign = ({ className }: IconProps) => {
     </svg>
   );
 };
+
+export const OrangeArrow = ({ className }: IconProps) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="21"
+      viewBox="0 0 20 21"
+      fill="none"
+    >
+      <path
+        d="M8.33325 15.5L12.744 11.0893C13.0694 10.7638 13.0694 10.2362 12.744 9.91074L8.33325 5.5"
+        stroke="#B94600"
+        stroke-linecap="round"
+      />
+    </svg>
+  );
+};
