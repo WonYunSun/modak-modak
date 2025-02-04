@@ -10,7 +10,6 @@ interface ToggleNotificationParams {
 }
 
 const useToggleNotification = ({ groupId }: ToggleNotificationParams) => {
-  //디바운스 처리
   const { user, isError: userError } = useUser();
   const userId = user ? user.id : '';
 
@@ -20,8 +19,20 @@ const useToggleNotification = ({ groupId }: ToggleNotificationParams) => {
 
   const { mutate } = useMutation({
     mutationFn: (toggleTo: boolean) => toggleNotification({ userId, groupId, toggleTo }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [] });
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ['fetchReceiveNotification', userId] });
+
+      const receiveNotificationPrev = queryClient.getQueryData(['fetchReceiveNotification', userId]);
+
+      queryClient.setQueryData(['fetchReceiveNotification', userId], !receiveNotificationPrev);
+
+      return { receiveNotificationPrev };
+    },
+    onError: async (_err, _variables, context) => {
+      queryClient.setQueryData(['fetchReceiveNotification', userId], context?.receiveNotificationPrev);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['fetchReceiveNotification', userId] });
     },
   });
 
