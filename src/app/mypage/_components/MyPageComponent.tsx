@@ -21,7 +21,7 @@ const MyPageComponent = () => {
   };
 
   return (
-    <div className="reactive h-screen">
+    <div className="reactive">
       <Header label="마이 페이지" home={false} isScrolled={true} />
       <ProfileSection setModalStatus={setModalStatus} />
       <MySchedule />

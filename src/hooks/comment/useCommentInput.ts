@@ -1,47 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { createClient } from '@utils/supabase/client';
+import useUser from '@hooks/useUser';
 
-import { CommentsType } from '@hooks/comment/useComments';
+import { CommentsType } from '@queries/group/comments/fetchComments';
+import createComment from '@queries/group/comments/createComment';
 
 const useCommentInput = (postId: string) => {
   const queryClient = useQueryClient();
-  const supabase = createClient();
 
-  const getUser = async () => {
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
-    if (userError) throw userError;
-
-    return user;
-  };
-
-  const createComment = async (content: string) => {
-    try {
-      const user = await getUser();
-
-      const { data, error } = await supabase.from('comments').insert([
-        {
-          content,
-          post_id: postId,
-          user_id: user?.id,
-          created_at: new Date().toISOString(),
-        },
-      ]);
-      if (error) throw error;
-      return data;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+  const { user } = useUser();
 
   const mutation = useMutation({
-    mutationFn: (content: string) => createComment(content),
+    mutationFn: (content: string) => createComment(content, postId, user?.id as string),
     onMutate: async (newContent) => {
-      const user = await getUser();
       await queryClient.cancelQueries({ queryKey: ['comments', postId] });
 
       const previousComments = queryClient.getQueryData(['comments', postId]);

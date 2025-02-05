@@ -15,14 +15,18 @@ const useIOSKeyboardHeight = () => {
     };
 
     // iOS 환경인지 확인
-    const isIOS = /iPhone|iPad/.test(window.navigator.userAgent);
+    const userAgent = window.navigator.userAgent;
+    const isIOS = /iPhone|iPad/.test(userAgent);
 
-    if (isIOS) {
+    // ios에서도 safari만 제외
+    const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+
+    if (isIOS && isSafari) {
       window.visualViewport?.addEventListener('resize', handleVisualViewportResize);
     }
 
     return () => {
-      if (isIOS) {
+      if (isIOS && isSafari) {
         window.visualViewport?.removeEventListener('resize', handleVisualViewportResize);
       }
     };

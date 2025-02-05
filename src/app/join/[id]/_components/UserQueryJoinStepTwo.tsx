@@ -13,7 +13,7 @@ const UserQueryJoinStepTwo = () => {
 
   return (
     <div className="pt-[48px] w-full h-full flex flex-col gap-8">
-      <div className="w-full h-[calc(100vh-110px)] text-center flex items-center justify-center">
+      <div className="w-full flex-grow text-center flex items-center justify-center">
         <div className="text-lg text-gray-700">
           <Image
             width={226}
@@ -31,7 +31,7 @@ const UserQueryJoinStepTwo = () => {
           </span>
         </div>
       </div>
-      <div className="px-5 w-full absolute bottom-11">
+      <div className="px-5 w-full pb-[12px]">
         <Button type="button" className="full-btn" onClick={onClickHome} label="홈으로 가기" />
       </div>
     </div>

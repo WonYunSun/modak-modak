@@ -2,22 +2,20 @@
 
 import Image from 'next/image';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'next/navigation';
 
 import BottomSheet from '@components/common/BottomSheet';
 import Button from '@components/common/Button';
 import { Delete, Menu, ModificationNoCircle } from '@components/icons';
 
+import useUser from '@hooks/useUser';
 import useCommentHandler from '@hooks/comment/useCommentHandler';
 
 import useCommentValueStore from '@stores/useCommentValueStore';
 import useBottomSheetStore from '@stores/useBottomSheetStore';
 
-import { createClient } from '@utils/supabase/client';
-
 import { Database } from '@ts/supabase';
-import type { User as SupabaseUser } from '@supabase/supabase-js';
 
 export type Comment = Database['public']['Tables']['comments']['Row'];
 export type User = Database['public']['Tables']['users']['Row'];
@@ -62,7 +60,6 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
   const groupId = Array.isArray(id) ? id[0] : id;
 
   const [openSheet, setOpenSheet] = useState<boolean>(false);
-  const [user, setUser] = useState<SupabaseUser | null>(null);
 
   const { setActionModalOpen } = useBottomSheetStore();
 
@@ -70,28 +67,7 @@ const CommentCard = ({ comment, postId }: CommentCardProps) => {
 
   const { deleteCommentMutation } = useCommentHandler(comment.id, postId, groupId);
 
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const supabase = createClient();
-        const {
-          data: { user },
-          error,
-        } = await supabase.auth.getUser();
-
-        if (error) {
-          console.log(error);
-          return;
-        }
-
-        setUser(user);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getUser();
-  }, []);
+  const { user } = useUser();
 
   const handleSheetOpen = () => {
     setOpenSheet(true);

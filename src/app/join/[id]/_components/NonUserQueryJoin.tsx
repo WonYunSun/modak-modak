@@ -15,13 +15,13 @@ const NonUserQueryJoin = () => {
   };
 
   return (
-    <>
+    <div className="flex-grow">
       {groupInfo && (
         <QueryJoinContents groupInfo={groupInfo}>
           <Button type="button" className="full-btn" onClick={onQueryJoin} label="로그인하고 모임 가입하기" />
         </QueryJoinContents>
       )}
-    </>
+    </div>
   );
 };
 

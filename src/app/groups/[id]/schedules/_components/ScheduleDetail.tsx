@@ -21,9 +21,9 @@ const ScheduleDetail = ({ scheduleId, groupId }: { scheduleId: string; groupId: 
   if (!data) return <GlobalError />;
 
   return (
-    <div className="reactive">
+    <div className="reactive h-dvh flex flex-col">
       <FunnelHeader label={isEdit ? '일정 수정' : '일정 상세'} />
-      <div className="inner">
+      <div className="inner flex-grow mt-[2.18rem]">
         {isEdit ? (
           <ScheduleEdit schedule={data} groupId={groupId} setIsEdit={setIsEdit} refetch={refetch} />
         ) : (
