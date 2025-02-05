@@ -10,9 +10,9 @@ type LayoutProps = {
 };
 const Layout = ({ children, isDisabled = false, onNext, onPrev, NextBtnlabel = '다음' }: LayoutProps) => {
   return (
-    <div className="flex flex-col h-full">
-      {children}
-      <div className="flex gap-2 w-full mt-auto pb-[12px]">
+    <div className="flex flex-col h-full ">
+      <div className="flex-grow">{children}</div>
+      <div className="flex gap-2 w-full pb-[12px]">
         <Button label="이전" className="flex-[2_2_0%] full-white-btn" type="button" disabled={false} onClick={onPrev} />
         <Button
           label={NextBtnlabel}

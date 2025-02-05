@@ -99,7 +99,7 @@ export const ScheduleEdit = ({ schedule, groupId, setIsEdit, refetch }: Schedule
           <LabeledTextInput {...memoData} />
         </div>
       </div>
-      <div className="mt-auto pb-[12px]">
+      <div className="pb-[12px]">
         <Button label="저장하기" className="full-btn" type="button" disabled={false} onClick={handleSave} />
       </div>
     </div>

@@ -62,7 +62,7 @@ export const ScheduleInfo = ({ schedule, groupId, setIsEdit }: ScheduleInfoType)
           <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{schedule.memo}</p>
         </div>
       </div>
-      <div className="flex gap-2 mt-auto pb-[12px]">
+      <div className="flex gap-2 pb-[12px]">
         <Button
           label="삭제"
           className="flex-[2_2_0%] full-white-btn"
