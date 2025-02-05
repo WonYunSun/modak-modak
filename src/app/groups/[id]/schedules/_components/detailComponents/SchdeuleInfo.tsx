@@ -33,8 +33,8 @@ export const ScheduleInfo = ({ schedule, groupId, setIsEdit }: ScheduleInfoType)
   };
 
   return (
-    <div className="h-[calc(100vh-7rem)] flex flex-col justify-between mt-[2.18rem]">
-      <div className="flex flex-col gap-8">
+    <div className="h-full flex flex-col">
+      <div className="flex flex-col gap-8 flex-grow">
         <div className="space-y-4">
           <Label label="일정명" htmlFor="" />
           <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{schedule.name}</p>
@@ -62,7 +62,7 @@ export const ScheduleInfo = ({ schedule, groupId, setIsEdit }: ScheduleInfoType)
           <p className="bg-gray-100 px-4 py-3 rounded-lg font-medium">{schedule.memo}</p>
         </div>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 mt-auto pb-[12px]">
         <Button
           label="삭제"
           className="flex-[2_2_0%] full-white-btn"
