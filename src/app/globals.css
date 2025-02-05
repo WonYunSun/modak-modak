@@ -148,6 +148,10 @@ textarea {
   }
 }
 
+.ai-dark path {
+  fill: #000 !important;
+}
+
 /* button 클래스 */
 @layer utilities {
   .full-btn {

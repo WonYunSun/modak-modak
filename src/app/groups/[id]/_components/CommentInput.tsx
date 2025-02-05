@@ -1,6 +1,10 @@
-import { useRef } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
+'use client';
+
 import { useParams } from 'next/navigation';
+
+import { useRef } from 'react';
+
+import { useQueryClient } from '@tanstack/react-query';
 
 import Button from '@components/common/Button';
 

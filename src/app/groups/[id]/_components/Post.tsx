@@ -28,11 +28,12 @@ export type PostCommonType = {
 
 interface PostProps {
   post: PostCommonType;
+  openDeleteAlert: () => void;
 }
 
 const MAX_LENGTH = 80;
 
-const Post = ({ post }: PostProps) => {
+const Post = ({ post, openDeleteAlert }: PostProps) => {
   const [isExpanded, setIsExpanded] = useState<{ [key: string]: boolean }>({});
   const [bottomSheetPostId, setBottomSheetPostId] = useState<string | null>(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -133,7 +134,9 @@ const Post = ({ post }: PostProps) => {
         />
       )}
 
-      {deleteModal && <DeleteModal postId={post.id} setDeleteModal={setDeleteModal} />}
+      {deleteModal && (
+        <DeleteModal postId={post.id} setDeleteModal={setDeleteModal} openDeleteAlert={openDeleteAlert} />
+      )}
     </>
   );
 };

@@ -12,6 +12,7 @@ type ScheduleCardProps = {
   start_time: ScheduleType['start_time'] | null;
   groupName?: string;
   hasArrow?: boolean;
+  isSelected?: boolean;
 };
 
 const ScheduleCard = ({
@@ -22,6 +23,7 @@ const ScheduleCard = ({
   start_time,
   groupName,
   hasArrow = true,
+  isSelected = false,
 }: ScheduleCardProps) => {
   const labelClass = 'text-gray-500 whitespace-nowrap'; // 라벨 스타일
   const detailClass = 'flex items-center gap-3 text-xs';
@@ -36,8 +38,8 @@ const ScheduleCard = ({
   return (
     <div
       className={`w-full box-border border border-gray-300 rounded-xl flex justify-between items-center pl-5 pr-2 py-2 gap-[0.5rem] cursor-pointer ${
-        isExpired ? 'bg-gray-100' : ''
-      }`}
+        isExpired && 'bg-gray-100'
+      } ${isSelected && 'border-primary'}`}
     >
       <div className="flex flex-col w-11/12">
         <div className="pb-1 text-xs text-gray-600">{groupName}</div>

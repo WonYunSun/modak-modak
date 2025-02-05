@@ -7,6 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import NoChatList from '@app/chat/_components/NoChatList';
 import ChatListItem from '@app/chat/_components/ChatListItem';
 
+import SpinnerContainer from '@components/common/SpinnerContainer';
 import FunnelHeader from '@components/common/FunnelHeader';
 
 import useChatRoomList from '@hooks/chat/useChatRoomList';
@@ -23,11 +24,11 @@ const ChatRoomList = () => {
     queryClient.invalidateQueries({ queryKey: ['chatList', user?.id] });
   }, [user?.id]);
 
-  if (isPending) return <div>로딩 중..</div>;
+  if (isPending) return <SpinnerContainer />;
   if (isError) return <div>에러발생..</div>;
 
   return (
-    <div className="min-h-screen max-w-[600px] mx-auto border-x border-gray-200">
+    <div className="h-dvh max-w-[600px] mx-auto border-x border-gray-200">
       <FunnelHeader label="채팅" />
       <main className="w-full h-full mt-2">
         {chatList?.length === 0 ? (

@@ -2,6 +2,8 @@
 
 import CommentCard from '@app/groups/[id]/_components/CommentCard';
 
+import SpinnerContainer from '@components/common/SpinnerContainer';
+
 import useComments from '@hooks/comment/useComments';
 
 interface CommentContentProps {
@@ -11,7 +13,7 @@ interface CommentContentProps {
 const CommentContent = ({ postId }: CommentContentProps) => {
   const { comments, isPending, isError } = useComments(postId);
 
-  if (isPending) return <div>로딩중..</div>;
+  if (isPending) return <SpinnerContainer />;
   if (isError) return <div>에러발생</div>;
 
   return (

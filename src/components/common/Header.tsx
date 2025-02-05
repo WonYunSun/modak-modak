@@ -41,7 +41,7 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
         {home ? (
           <Logo className="w-20 h-10" />
         ) : (
-          <div className={`${!hasSetting ? 'w-10' : 'w-20'} flex items-center justify-start`}>
+          <div className={`${!hasSetting ? 'w-10' : 'w-20'} flex items-center justify-start cursor-pointer`}>
             <PrevArrow onClick={handleNavigation} className="w-6 h-6" />
           </div>
         )}
