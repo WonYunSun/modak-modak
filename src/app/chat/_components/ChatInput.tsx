@@ -65,7 +65,7 @@ const ChatInput = ({ user, chatRoomId }: ChatInputProps) => {
         <Button
           type="button"
           label="보내기"
-          className="w-12 text-sm font-semibold leading-[140%]"
+          className={`w-12 text-sm font-semibold leading-[140%] ${message ? 'text-primary' : 'text-gray-400'}`}
           onClick={() => sendMessage(resetTextAreaHeight)}
         />
       </div>
