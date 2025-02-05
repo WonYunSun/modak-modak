@@ -47,9 +47,7 @@ const BottomNav = () => {
   const hiddenPaths = ['/login', '/signup', '/new', '/edit', '/schedule', '/join', '/chat/'];
   const isHideNav = hiddenPaths.some((path) => pathname.includes(path));
 
-  if (isHideNav) return null; // 조건 만족 시 BottomNav를 렌더링하지 않음
-
-  if (isLoading) return null; // 로딩 중이면 네비게이션 숨김
+  if (isHideNav || isLoading) return null;
 
   return (
     <div className="m-auto w-full max-w-[600px] flex">

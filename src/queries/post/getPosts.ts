@@ -10,12 +10,13 @@ export const getPosts = async (
   limit: number,
   searchTerm?: string
 ): Promise<PostListType[]> => {
-  const supabase = await createClient();
+  try {
+    const supabase = await createClient();
 
-  let query = supabase
-    .from('posts')
-    .select(
-      `
+    let query = supabase
+      .from('posts')
+      .select(
+        `
       id, 
       content,
       groups!inner(name, description),
@@ -24,20 +25,23 @@ export const getPosts = async (
       comments(count),
       post_images(image_url)
   `
-    )
-    .eq('group_id', groupId)
-    .order('created_at', { ascending: false })
-    .range(offset, offset + limit - 1);
+      )
+      .eq('group_id', groupId)
+      .order('created_at', { ascending: false })
+      .range(offset, offset + limit - 1);
 
-  if (searchTerm) {
-    query = query.ilike('schedules.name', `%${searchTerm}%`);
-  }
+    if (searchTerm) {
+      query = query.ilike('schedules.name', `%${searchTerm}%`);
+    }
 
-  const { data, error } = await query;
+    const { data, error } = await query;
 
-  if (error) throw new Error(`getPosts 게시글 리스트 데이터 불러오는 중 에러 발생: ${error.message}`);
+    if (error) {
+      console.error(`getPosts: 게시글 리스트 데이터 불러오는 중 에러 발생`, error);
+      throw new Error(`getPosts 게시글 리스트 데이터 불러오는 중 에러 발생: ${error.message}`);
+    }
 
-  /*groups!inner, users!inner 등을 사용할 때 Supabase는 관계형 데이터를 배열 형태로 반환한다.
+    /*groups!inner, users!inner 등을 사용할 때 Supabase는 관계형 데이터를 배열 형태로 반환한다.
   배열 요소를 제거해서 data를 반환해 준다.
     {
       id: "123",
@@ -48,18 +52,22 @@ export const getPosts = async (
       comments: [{ count: 3 }]
     } */
 
-  const formattedData: PostListType[] =
-    data?.length > 0
-      ? data.map((post) => ({
-          id: post.id,
-          content: post.content,
-          groups: Array.isArray(post.groups) ? post.groups[0] : post.groups,
-          users: Array.isArray(post.users) ? post.users[0] : post.users,
-          schedules: Array.isArray(post.schedules) ? post.schedules[0] : post.schedules,
-          comments: Array.isArray(post.comments) ? post.comments[0] : post.comments,
-          post_images: post.post_images,
-        }))
-      : [];
+    const formattedData: PostListType[] =
+      data?.length > 0
+        ? data.map((post) => ({
+            id: post.id,
+            content: post.content,
+            groups: Array.isArray(post.groups) ? post.groups[0] : post.groups,
+            users: Array.isArray(post.users) ? post.users[0] : post.users,
+            schedules: Array.isArray(post.schedules) ? post.schedules[0] : post.schedules,
+            comments: Array.isArray(post.comments) ? post.comments[0] : post.comments,
+            post_images: post.post_images,
+          }))
+        : [];
 
-  return formattedData;
+    return formattedData;
+  } catch (err) {
+    console.error(`getPosts: 서버에서 예기치 못한 에러 발생`, err);
+    throw new Error(`getPosts: 서버 에러가 발생했습니다.`);
+  }
 };

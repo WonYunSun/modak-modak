@@ -13,6 +13,7 @@ import CountBar from '@app/groups/[id]/_components/CountBar';
 import NoSchedule from '@app/groups/[id]/_components/NoSchedule';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
 import NoSearchSchedule from '@app/groups/[id]/_components/NoSearchSchedule';
+import ScheduleBottomBanner from '@app/groups/[id]/_components/ScheduleBottomBanner';
 
 export interface Schedule {
   id: string;
@@ -25,10 +26,15 @@ export interface Schedule {
 
 interface ScheduleSelectProps {
   setIsScheduleModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedSchedule: Schedule | null;
   setSelectedSchedule: React.Dispatch<React.SetStateAction<Schedule | null>>;
 }
 
-const ScheduleSelectSection = ({ setIsScheduleModalOpen, setSelectedSchedule }: ScheduleSelectProps) => {
+const ScheduleSelectSection = ({
+  setIsScheduleModalOpen,
+  selectedSchedule,
+  setSelectedSchedule,
+}: ScheduleSelectProps) => {
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
   const searchQuery = searchTerm ? searchTerm : undefined;
 
@@ -43,47 +49,51 @@ const ScheduleSelectSection = ({ setIsScheduleModalOpen, setSelectedSchedule }: 
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-30">
-      <div className="w-full max-w-[600px] h-full bg-white border-gray-200 flex flex-col">
-        <header className="flex-none">
-          <div className="relative w-full max-w-[600px] mx-auto h-12 flex items-center justify-center bg-white">
-            <div
-              className="absolute top-[50%] transform translate-y-[-50%] left-5 cursor-pointer w-10 h-10 flex items-center justify-center"
-              onClick={() => setIsScheduleModalOpen(false)}
-            >
-              <PrevArrow className="w-6 h-6" />
-            </div>
-            <h3 className="text-center text-xl font-semibold leading-[140%]">일정 선택하기</h3>
-          </div>
-        </header>
-
-        <section className="px-5 flex-1 overflow-y-scroll scrollbar-hide">
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-          <div className="mt-6 mb-5">
-            <CountBar value={scheduleData ? scheduleData.length : 0} />
-          </div>
-          {isPending ? (
-            <SpinnerContainer />
-          ) : scheduleData && scheduleData.length > 0 ? (
-            scheduleData.map((schedule, index) => (
-              <div className="mb-5" key={index} onClick={() => handleSelectSchedule(schedule)}>
-                <ScheduleCard
-                  name={schedule.name}
-                  memo={schedule.memo}
-                  start_date={schedule.start_date}
-                  end_date={schedule.end_date}
-                  start_time={schedule.start_time}
-                />
+    <>
+      <div className="fixed inset-0 flex items-center justify-center z-30">
+        <div className="w-full max-w-[600px] h-full bg-white border border-gray-200 flex flex-col">
+          <header className="flex-none">
+            <div className="relative w-full max-w-[600px] mx-auto h-12 flex items-center justify-center bg-white">
+              <div
+                className="absolute top-[50%] transform translate-y-[-50%] left-5 cursor-pointer w-10 h-10 flex items-center justify-center"
+                onClick={() => setIsScheduleModalOpen(false)}
+              >
+                <PrevArrow className="w-6 h-6" />
               </div>
-            ))
-          ) : searchTerm ? (
-            <NoSearchSchedule />
-          ) : (
-            <NoSchedule />
-          )}
-        </section>
+              <h3 className="text-center text-xl font-semibold leading-[140%]">일정 선택하기</h3>
+            </div>
+          </header>
+
+          <section className="px-5 flex-1 overflow-y-scroll scrollbar-hide">
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <div className="mt-6 mb-5">
+              <CountBar value={scheduleData ? scheduleData.length : 0} />
+            </div>
+            {isPending ? (
+              <SpinnerContainer />
+            ) : scheduleData && scheduleData.length > 0 ? (
+              scheduleData.map((schedule, index) => (
+                <div className="mb-5" key={index} onClick={() => handleSelectSchedule(schedule)}>
+                  <ScheduleCard
+                    name={schedule.name}
+                    memo={schedule.memo}
+                    start_date={schedule.start_date}
+                    end_date={schedule.end_date}
+                    start_time={schedule.start_time}
+                    isSelected={selectedSchedule?.id === schedule.id}
+                  />
+                </div>
+              ))
+            ) : searchTerm ? (
+              <NoSearchSchedule />
+            ) : (
+              <NoSchedule />
+            )}
+          </section>
+        </div>
+        <ScheduleBottomBanner />
       </div>
-    </div>
+    </>
   );
 };
 export default ScheduleSelectSection;
