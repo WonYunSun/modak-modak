@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useChatRoomPresence from '@hooks/chat/useChatRoomPresence';
 
 import { insertMessage } from '@queries/chat/chatInputQuery';
-import useSmallAlert from '@hooks/useSmallAlert';
+import useSmallAlert from '@hooks/common/useSmallAlert';
 
 const useChatMessage = (chatRoomId: string, userId: string) => {
   const [message, setMessage] = useState<string>('');

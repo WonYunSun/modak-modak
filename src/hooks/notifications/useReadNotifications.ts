@@ -1,8 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 import { checkNotificationsRead } from '@queries/notifications/checkNotificationsRead';
 import { NotificationCardDataType } from '@queries/notifications/fetchNotifications';
-
 
 const useReadNotifications = () => {
   const { user, isError: userError } = useUser();

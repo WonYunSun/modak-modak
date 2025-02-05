@@ -10,7 +10,7 @@ import ScheduleCardList from '@app/groups/[id]/_components/ScheduleCardList';
 import { CircleOk } from '@components/icons';
 
 import useGroupStore from '@stores/useGroupStore';
-import useSmallAlert from '@hooks/useSmallAlert';
+import useSmallAlert from '@hooks/common/useSmallAlert';
 
 interface TabPagesProps {
   isScrolled: boolean;

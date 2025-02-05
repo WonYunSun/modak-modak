@@ -11,7 +11,7 @@ import SpinnerContainer from '@components/common/SpinnerContainer';
 import GlobalError from '@components/common/GlobalError';
 import { AddMember } from '@components/icons';
 import useIsLeader from '@hooks/management/useIsLeader';
-import useSmallAlert from '@hooks/useSmallAlert';
+import useSmallAlert from '@hooks/common/useSmallAlert';
 
 type TabType = 'currentMembers' | 'awaitingMembers';
 

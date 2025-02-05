@@ -9,10 +9,10 @@ import GroupNameForm from '@app/groups/new/_components/stepComponents/GroupNameF
 import GroupImageForm from '@app/groups/new/_components/stepComponents/GroupImageForm';
 import GroupPreview from '@app/groups/new/_components/stepComponents/GroupPreview';
 import useModalStore from '@stores/useModalStore';
-import useFunnel from '@hooks/useFunnel';
-import useUser from '@hooks/useUser';
+import useFunnel from '@hooks/common/useFunnel';
+import useUser from '@hooks/common/useUser';
 import { addGroup } from '@queries/group/postGroup';
-import useSmallAlert from '@hooks/useSmallAlert';
+import useSmallAlert from '@hooks/common/useSmallAlert';
 import useFetchGroupList from '@hooks/home/useFetchGroupList';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
 

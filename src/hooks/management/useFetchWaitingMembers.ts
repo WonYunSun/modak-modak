@@ -1,6 +1,6 @@
 'use client';
 
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 import { fetchWaitingMembers } from '@queries/management/fetchMembers';
 import { useQuery } from '@tanstack/react-query';
 import { GroupsType } from '@ts/supabaseTableRowTypes';

@@ -1,7 +1,7 @@
 'use client';
 import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import FunnelHeader from '@components/common/FunnelHeader';
-import useDotIndicator from '@hooks/useDotIndicator';
+import useDotIndicator from '@hooks/common/useDotIndicator';
 
 type StepProps = {
   name: string;

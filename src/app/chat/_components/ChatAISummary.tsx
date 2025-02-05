@@ -7,7 +7,7 @@ import Summary from '@app/chat/_components/Summary';
 import { Ai, AiNextArrow } from '@components/icons';
 import Button from '@components/common/Button';
 
-import useSmallAlert from '@hooks/useSmallAlert';
+import useSmallAlert from '@hooks/common/useSmallAlert';
 
 import { MessageType } from '@queries/chat/getChatList';
 

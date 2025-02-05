@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchLeaderInfo } from '@queries/management/fetchMembers';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 interface UseIsLeaderParams {
   groupId: GroupsType['id'];

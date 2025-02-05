@@ -3,7 +3,7 @@ import ProfileConfirmBtns from '@app/groups/[id]/management/_components/modal/ch
 import ProfilePreview from '@app/signup/_components/ProfilePreview';
 import { UserFormState } from '@app/signup/_components/SignupForm';
 import TextInput from '@components/common/TextInput';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 import { updateUser } from '@queries/users/users';
 import { uploadFile } from '@utils/uploadFile';
 import { createClient } from '@utils/supabase/client';

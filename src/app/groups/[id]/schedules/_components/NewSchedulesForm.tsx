@@ -8,7 +8,7 @@ import ScheduleDateForm from '@app/groups/[id]/schedules/_components/stepCompone
 import ScheduleMemoForm from '@app/groups/[id]/schedules/_components/stepComponents/ScheduleMemoForm';
 import Modal from '@components/common/Modal';
 import Button from '@components/common/Button';
-import useFunnel from '@hooks/useFunnel';
+import useFunnel from '@hooks/common/useFunnel';
 
 import { ScheduleType } from '@ts/scheduleType';
 import useAddSchedule from '@hooks/schedule/useAddSchedule';

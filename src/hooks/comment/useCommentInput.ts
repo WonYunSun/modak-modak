@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 import { CommentsType } from '@queries/group/comments/fetchComments';
 import createComment from '@queries/group/comments/createComment';

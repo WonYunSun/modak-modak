@@ -11,7 +11,7 @@ import SpinnerContainer from '@components/common/SpinnerContainer';
 import FunnelHeader from '@components/common/FunnelHeader';
 
 import useChatRoomList from '@hooks/chat/useChatRoomList';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 const ChatRoomList = () => {
   const { user } = useUser();

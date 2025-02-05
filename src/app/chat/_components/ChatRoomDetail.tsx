@@ -9,7 +9,7 @@ import FunnelHeader from '@components/common/FunnelHeader';
 
 import useIOSKeyboardHeight from '@hooks/comment/useIOSKeyboardHeight';
 import useGroupName from '@hooks/chat/useGroupName';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 const ChatRoomDetail = () => {
   const { user } = useUser();

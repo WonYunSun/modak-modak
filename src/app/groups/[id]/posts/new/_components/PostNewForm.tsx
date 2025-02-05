@@ -11,8 +11,8 @@ import PostTextArea from '@app/groups/[id]/posts/new/_components/PostTextArea';
 import ScheduleSelectSection, { Schedule } from '@app/groups/[id]/_components/ScheduleSelectSection';
 
 import useUploadPost from '@hooks/post/useUploadPost';
-import useUser from '@hooks/useUser';
-import useSmallAlert from '@hooks/useSmallAlert';
+import useUser from '@hooks/common/useUser';
+import useSmallAlert from '@hooks/common/useSmallAlert';
 
 import { useState } from 'react';
 

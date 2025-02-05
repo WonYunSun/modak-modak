@@ -15,7 +15,7 @@ import 'swiper/css';
 
 import { useFetchGetPost } from '@hooks/post/useFetchGetPost';
 import { useFetchEditPost } from '@hooks/post/useFetchEditPost';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 export const PostEditForm = () => {
   const [content, setContent] = useState<string>('');

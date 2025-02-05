@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import GroupCard, { GroupCardInfosType } from '@components/common/groupCard/GroupCard';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 interface QueryJoinContentsProps {
   groupInfo: GroupCardInfosType;
