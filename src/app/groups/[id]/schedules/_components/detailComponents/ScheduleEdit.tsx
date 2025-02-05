@@ -84,8 +84,8 @@ export const ScheduleEdit = ({ schedule, groupId, setIsEdit, refetch }: Schedule
   };
 
   return (
-    <div className="h-[calc(100vh-7rem)] flex flex-col justify-between mt-[2.18rem]">
-      <div className="flex flex-col gap-8">
+    <div className="h-full flex flex-col justify-between">
+      <div className="flex flex-col gap-8 flex-grow">
         <div className="space-y-4">
           <LabeledTextInput {...nameData} />
         </div>
@@ -99,7 +99,7 @@ export const ScheduleEdit = ({ schedule, groupId, setIsEdit, refetch }: Schedule
           <LabeledTextInput {...memoData} />
         </div>
       </div>
-      <div className="">
+      <div className="pb-[12px]">
         <Button label="저장하기" className="full-btn" type="button" disabled={false} onClick={handleSave} />
       </div>
     </div>

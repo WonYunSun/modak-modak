@@ -46,13 +46,13 @@ const useFunnel = (defaultStep: string, length: number) => {
     const targetStep = children.find((childStep) => childStep.props.name === step);
 
     return (
-      <div className="reactive">
+      <div className="reactive h-dvh flex flex-col">
         <FunnelHeader label={headerLabel} />
-        <div className="inner">
-          <div className="flex gap-2 pt-[2.25rem] pb-[2.5rem] ">
+        <div className="inner flex flex-col flex-grow">
+          <div className="flex gap-2 pt-[2.25rem] pb-[2.5rem]">
             <DotIndicator />
           </div>
-          {targetStep}
+          <div className="flex-grow">{targetStep}</div>
         </div>
       </div>
     );

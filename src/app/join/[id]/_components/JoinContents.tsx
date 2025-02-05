@@ -11,7 +11,7 @@ const JoinContents = () => {
   if (isPending) return <SpinnerContainer height={0} />;
 
   return (
-    <div className="w-full h-full relative top-0 border-x border-gray-200">
+    <div className="w-full h-full top-0 border-x border-gray-200 flex flex-col">
       {user ? <UserQueryJoin userId={user.id} /> : <NonUserQueryJoin />}
     </div>
   );

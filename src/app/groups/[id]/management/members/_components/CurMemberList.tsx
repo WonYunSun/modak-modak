@@ -73,6 +73,7 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
           )}
         </div>
       </div>
+      <div className="w-1 h-[66px]"></div>
     </div>
   );
 };
