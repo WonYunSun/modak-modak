@@ -28,7 +28,7 @@ const DeletionConfirm = ({ onNextStep }: DeletionConfirmProps) => {
 
   return (
     <>
-      <div className="w-60 py-6 w-full text-left">
+      <div className="w-60 py-6 text-left">
         <div className="w-full mb-5 text-lg font-semibold">
           모임을 삭제하시려면
           <br />
