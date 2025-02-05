@@ -45,14 +45,14 @@ const QueryJoinContents = ({ groupInfo, children, isWaiting = false }: QueryJoin
           </span>
         </div>
       )}
-      <div className="w-full h-[45vh] rounded-t-[1.25rem] bg-white">
+      <div className="w-full h-[45vh] rounded-t-[1.25rem] bg-white flex flex-col">
         {groupInfo && (
-          <div className="px-5 pt-5">
+          <div className="px-5 pt-5 flex-grow">
             <h6 className="text-gray-500 mb-3">초대된 모임</h6>
             <GroupCard groupInfo={groupInfo} hasLink={false} disabled={isWaiting} />
           </div>
         )}
-        <div className="px-5 w-full absolute bottom-0">{children}</div>
+        <div className="px-5 w-full pb-[12px]">{children}</div>
       </div>
     </div>
   );

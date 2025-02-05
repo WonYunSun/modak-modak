@@ -22,7 +22,7 @@ const UserQueryJoinStepOne = ({ onQueryJoin, buttonLabel, isJoinable, joinState 
   };
 
   return (
-    <>
+    <div className="flex-grow">
       {groupInfo && (
         <QueryJoinContents groupInfo={groupInfo} isWaiting={joinState === 'waiting'}>
           {isJoinable ? (
@@ -35,7 +35,7 @@ const UserQueryJoinStepOne = ({ onQueryJoin, buttonLabel, isJoinable, joinState 
           )}
         </QueryJoinContents>
       )}
-    </>
+    </div>
   );
 };
 
