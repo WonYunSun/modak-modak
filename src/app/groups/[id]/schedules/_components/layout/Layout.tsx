@@ -10,25 +10,17 @@ type LayoutProps = {
 };
 const Layout = ({ children, isDisabled = false, onNext, onPrev, NextBtnlabel = '다음' }: LayoutProps) => {
   return (
-    <div>
-      <div className="h-[calc(100vh-10.25rem)] flex flex-col justify-between">
-        {children}
-        <div className="flex gap-2">
-          <Button
-            label="이전"
-            className="flex-[2_2_0%] full-white-btn"
-            type="button"
-            disabled={false}
-            onClick={onPrev}
-          />
-          <Button
-            label={NextBtnlabel}
-            className="flex-[5_5_0%] full-btn"
-            type="button"
-            disabled={isDisabled}
-            onClick={onNext}
-          />
-        </div>
+    <div className="flex flex-col h-full">
+      {children}
+      <div className="flex gap-2 w-full mt-auto pb-[12px]">
+        <Button label="이전" className="flex-[2_2_0%] full-white-btn" type="button" disabled={false} onClick={onPrev} />
+        <Button
+          label={NextBtnlabel}
+          className="flex-[5_5_0%] full-btn"
+          type="button"
+          disabled={isDisabled}
+          onClick={onNext}
+        />
       </div>
     </div>
   );
