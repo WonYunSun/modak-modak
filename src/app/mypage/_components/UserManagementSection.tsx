@@ -23,7 +23,7 @@ const UserManagement = ({ setModalStatus }: UserManagementProps) => {
   };
 
   return (
-    <div className="mb-28">
+    <div className="pb-28">
       <ManagementSection title={'계정 관리'} isLast={true}>
         <ManagementCard label={'로그아웃'} handleClick={handleLogoutClick} className="cursor-pointer" />
         <ManagementCard label={'회원 탈퇴'} handleClick={handleDeleteClick} className="cursor-pointer" />
