@@ -78,7 +78,6 @@ const ChatAISummary = ({ messages }: ChatAISummaryProps) => {
           setSummary((prev) => (prev || '') + message.delta);
           break;
         case 'response.text.done':
-          console.log('전체 답변:', message.text);
           break;
         case 'response.done':
           ws.close();
@@ -91,7 +90,7 @@ const ChatAISummary = ({ messages }: ChatAISummaryProps) => {
     });
 
     ws.addEventListener('close', () => {
-      console.log('GPT API 리얼타임 연결 종료');
+      console.log('AI 요약을 마쳤습니다.');
     });
   };
 
