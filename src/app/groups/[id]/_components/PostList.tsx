@@ -12,13 +12,16 @@ import SearchBar from '@app/groups/[id]/_components/SearchBar';
 import NoPost from '@app/groups/[id]/_components/NoPost';
 import NoSearchPost from '@app/groups/[id]/_components/NoSearchPost';
 
-import { CircleOk, ModificationLine } from '@components/icons';
+import { ModificationLine } from '@components/icons';
 
 import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
 import { useFetchPostCount } from '@hooks/post/useFetchPostCount';
-import useSmallAlert from '@hooks/useSmallAlert';
 
-const PostList = () => {
+interface PostListProps {
+  openDeleteAlert: () => void;
+}
+
+const PostList = ({ openDeleteAlert }: PostListProps) => {
   const router = useRouter();
 
   const { id } = useParams();
@@ -28,7 +31,6 @@ const PostList = () => {
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
   const searchQuery = searchTerm ? searchTerm : undefined;
 
-  const { SmallAlert, openAlert: openDeleteAlert } = useSmallAlert();
   const { data, fetchNextPage, hasNextPage, isPending, isError } = useFetchGetPosts(groupId, searchQuery);
   const { data: totalCount, isPending: isCountLoading } = useFetchPostCount(groupId, searchQuery);
 
@@ -64,7 +66,7 @@ const PostList = () => {
       ) : searchTerm ? (
         <NoSearchPost /> // 검색어가 있는데 데이터가 없으면 검색 결과 없음 표시
       ) : (
-        <NoPost /> // 검색어가 없고 데이터도 없으면 기본 NoPost 표시
+        <NoPost /> // 검색어가 없고 데이터도 없으면 게시글 없음 표시
       )}
       <div ref={loadPostRef}></div>
 
@@ -81,10 +83,6 @@ const PostList = () => {
           <ModificationLine />
         </Button>
       </div>
-
-      <SmallAlert>
-        <CircleOk /> {'게시글이 삭제되었습니다!'}
-      </SmallAlert>
     </section>
   );
 };

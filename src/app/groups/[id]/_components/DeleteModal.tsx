@@ -33,7 +33,6 @@ export const DeleteModal = ({ postId, setDeleteModal, openDeleteAlert }: modalPr
         queryClient.invalidateQueries({ queryKey: ['photos', groupId] });
         queryClient.invalidateQueries({ queryKey: ['postCount', groupId] });
         setDeleteModal(false);
-        //TODO: alert 두번 뜨는 문제 해결 필요
         openDeleteAlert();
       }
     } catch (error) {

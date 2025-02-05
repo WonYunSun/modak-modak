@@ -7,6 +7,8 @@ export const useFetchGetPost = (postId: string) => {
   const { data, isPending, isError } = useQuery({
     queryKey: [postId],
     queryFn: () => getSinglePost(postId),
+    enabled: !!postId,
+    staleTime: 1000 * 60 * 5,
   });
   return { data, isPending, isError };
 };
