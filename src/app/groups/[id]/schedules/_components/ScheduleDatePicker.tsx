@@ -4,6 +4,7 @@ import { DayPicker } from 'react-day-picker';
 import { ko } from 'react-day-picker/locale';
 import type { DateRange } from 'react-day-picker';
 import { CalendarIcon, ClockIcon } from '@components/icons';
+import Button from '@components/common/Button';
 import SelectTime from '@app/groups/[id]/schedules/_components/SelectTime';
 import { formatTime } from '@utils/dateUtils';
 import 'react-day-picker/style.css';
@@ -108,6 +109,16 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
               timeZone="UTC"
               weekStartsOn={1}
               className="bg-white rounded-lg p-2.5 drop-shadow-md"
+              footer={
+                <Button
+                  onClick={() => {
+                    setIsDatepickerOpen(!isDatepickerOpen);
+                  }}
+                  label="적용"
+                  type="button"
+                  className="modal-full-btn mt-4"
+                ></Button>
+              }
             />
           </div>
         )}
@@ -123,7 +134,10 @@ const ScheduleDatePicker = ({ onDateChange, onTimeChange, prevData }: ScheduleDa
           {selectedTime ? formatTime(selectedTime) : <p className="text-[#a0a0a0]">만나는 시간(필수는 아니에요)</p>}
         </div>
         {isTimepickerOpen && (
-          <div ref={timepickerRef} className="absolute z-50 top-[100%] left-0 w-full bg-white drop-shadow-md">
+          <div
+            ref={timepickerRef}
+            className="absolute z-50 top-[100%] left-0 w-full bg-white drop-shadow-md rounded-lg overflow-hidden"
+          >
             <SelectTime
               onTimeSelect={handleTimeChange}
               onClose={() => {

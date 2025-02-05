@@ -25,6 +25,7 @@ const useFetchCurMembers = ({ groupId }: UseFetchCurMembersParams) => {
       }
       return null;
     },
+    enabled: !!userId,
   });
 
   return { data, isPending, isError };

@@ -4,14 +4,20 @@ import { useDropzone } from 'react-dropzone';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import { useNewPostStore } from '@stores/useNewPostStore';
 import Button from '@components/common/Button';
 import { DeletePhoto, PlusGray } from '@components/icons';
 
+import { useState } from 'react';
+
 const MAX_FILES = 10; // 최대 파일 수
 
-const PhotoUpload = () => {
-  const { selectedFiles, previewUrls, setSelectedFiles, setPreviewUrls } = useNewPostStore();
+interface PhotoUploadProps {
+  selectedFiles: File[];
+  setSelectedFiles: React.Dispatch<React.SetStateAction<File[]>>;
+}
+
+const PhotoUpload = ({ selectedFiles, setSelectedFiles }: PhotoUploadProps) => {
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -44,12 +50,13 @@ const PhotoUpload = () => {
       {/* 파일 선택 버튼 */}
       <div
         {...getRootProps()}
-        className="flex items-center justify-center w-[5.25rem] h-[5.25rem] bg-[#F1F1F1] cursor-pointer flex-shrink-0 mr-[1px]"
+        className="relative flex items-center justify-center w-[8.75rem] h-[8.75rem] bg-[#F1F1F1] cursor-pointer flex-shrink-0 mr-[1px]"
       >
         <input {...getInputProps()} type="file" multiple accept="image/jpeg, image/png, image/gif, image/svg+xml" />
         <div className="flex flex-col items-center">
+          <p className="absolute top-[32px] right-[48px] text-[#FF3B30]">*</p>
           <PlusGray />
-          <div className="text-gray-500 text-[10px] w-6 flex justify-center">
+          <div className="text-gray-500 text-base w-6 flex justify-center">
             {previewUrls.length}/{MAX_FILES}
           </div>
         </div>
@@ -59,8 +66,8 @@ const PhotoUpload = () => {
       {previewUrls.length > 0 && (
         <Swiper spaceBetween={1} slidesPerView={'auto'} className="w-full justify-start">
           {previewUrls.map((url, index) => (
-            <SwiperSlide key={index} style={{ flex: '0 0 auto', width: '5.25rem' }}>
-              <img src={url} alt={`미리보기-${index}`} className="w-[5.25rem] aspect-square object-cover" />
+            <SwiperSlide key={index} style={{ flex: '0 0 auto', width: '8.625rem' }}>
+              <img src={url} alt={`미리보기-${index}`} className="w-[8.75rem] aspect-square object-cover" />
               <Button
                 label=""
                 type="button"
@@ -72,7 +79,7 @@ const PhotoUpload = () => {
             </SwiperSlide>
           ))}
           {/* 미리보기 우측 그라디언트 효과 */}
-          <div className="absolute top-0 right-0 w-[28px] h-[5.25rem] pointer-events-none bg-gradient-to-r from-transparent to-white z-10"></div>
+          <div className="absolute top-0 right-0 w-[28px] h-[8.75rem] pointer-events-none bg-gradient-to-r from-transparent to-white z-10"></div>
         </Swiper>
       )}
     </div>

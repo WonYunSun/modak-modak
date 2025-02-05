@@ -2,7 +2,6 @@
 
 import { NextResponse } from 'next/server';
 import { createClient } from '@utils/supabase/server';
-import { joinGroup } from '@lib/join/joinGroup';
 
 export const GET = async (request: Request) => {
   const supabase = await createClient();
@@ -22,8 +21,7 @@ export const GET = async (request: Request) => {
   } = await supabase.auth.getUser();
 
   if (referrer === 'join' && user?.user_metadata.nickname) {
-    const result = await joinGroup({ groupId: data, user });
-    return NextResponse.redirect(`${origin}/join/${data}?is_successful=${result}`);
+    return NextResponse.redirect(`${origin}/join/${data}`);
   }
   return NextResponse.redirect(`${origin}/signup?referrer=${referrer}&data=${data}`);
 };

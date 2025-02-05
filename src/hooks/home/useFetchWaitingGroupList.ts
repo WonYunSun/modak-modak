@@ -13,9 +13,10 @@ const useFetchWaitingGroupList = () => {
   const { data, isPending, isError } = useQuery({
     queryKey: ['fetchWaitingGroupList', userId],
     queryFn: async () => {
-      const data = userId ? await fetchGroupCardInfos({ userId, isApproved:false }) : null;
+      const data = await fetchGroupCardInfos({ userId: userId!, isApproved: false });
       if (data) return data.length ? data : null;
     },
+    enabled: !!userId,
   });
 
   return { data, isPending, isError };

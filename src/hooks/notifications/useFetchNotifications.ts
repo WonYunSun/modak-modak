@@ -12,9 +12,8 @@ const useFetchNotifications = () => {
 
   const { data, isPending, isError } = useQuery({
     queryKey: ['fetchNotifications', userId],
-    queryFn: async () => {
-      if (userId) return fetchNotifications({ userId });
-    },
+    queryFn: async () => fetchNotifications({ userId: userId! }),
+    enabled: !!userId,
   });
 
   return { data, isPending, isError };

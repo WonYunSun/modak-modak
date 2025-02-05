@@ -11,6 +11,7 @@ import { MyScheduleData } from '@queries/schedule/ScheduleActions';
 
 const ScheduleCalendar = () => {
   const [calendar, setCalendar] = useState<DayInfo[][]>([]);
+  const [isExpanded, setIsExpanded] = useState(false);
   const { schedules, isPending, isError } = useMySchedule();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const ScheduleCalendar = () => {
   if (isError) throw new Error();
 
   const handleDayClick = (id: string) => {
+    setIsExpanded(false);
     setCalendar(select(calendar, id));
   };
 
@@ -38,7 +40,7 @@ const ScheduleCalendar = () => {
         <Swiper slidesPerView={1} spaceBetween={15} className="w-full h-14">
           {calendar.map((week, idx) => (
             <SwiperSlide key={idx}>
-              <div className="flex justify-center pl-4">
+              <div className="flex justify-center pl-4 cursor-pointer">
                 {week.map((day) => (
                   <ScheduleDay key={day.id} {...day} onClick={handleDayClick} />
                 ))}
@@ -51,7 +53,7 @@ const ScheduleCalendar = () => {
           aria-hidden="true"
         ></div>
       </div>
-      <ScheduleCardList schedules={getSchedules()} />
+      <ScheduleCardList schedules={getSchedules()} isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
     </div>
   );
 };

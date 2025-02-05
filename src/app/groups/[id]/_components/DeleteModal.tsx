@@ -8,19 +8,17 @@ import Button from '@components/common/Button';
 
 import { deletePost } from 'queries/post/deletePost';
 
-//import useSmallAlert from '@hooks/useSmallAlert';
-
 interface modalProps {
   postId: string;
   setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  openDeleteAlert: () => void;
 }
 
-export const DeleteModal = ({ postId, setDeleteModal }: modalProps) => {
+export const DeleteModal = ({ postId, setDeleteModal, openDeleteAlert }: modalProps) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const queryClient = useQueryClient();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
-  // const { SmallAlert, openAlert } = useSmallAlert();
 
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
@@ -31,16 +29,14 @@ export const DeleteModal = ({ postId, setDeleteModal }: modalProps) => {
     try {
       const response = await deletePost(postId);
       if (response.success) {
-        // openAlert();
-        // <SmallAlert>게시글이 삭제되었습니다.</SmallAlert>
-        // TODO: smallAlert 세팅 문의
-        // 앨범 querykey 삭제 추가
         queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
+        queryClient.invalidateQueries({ queryKey: ['photos', groupId] });
         setDeleteModal(false);
+        openDeleteAlert();
       }
     } catch (error) {
       console.error('게시글 삭제 오류:', error);
-      alert(`게시글 삭제 실패: ${(error as Error).message}`);
+      // alert(`게시글 삭제 실패: ${(error as Error).message}`);
       setDeleteModal(false);
     }
   };

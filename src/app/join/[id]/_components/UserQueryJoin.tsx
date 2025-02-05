@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import UserQueryJoinStepOne from '@app/join/[id]/_components/UserQueryJoinStepOne';
 import UserQueryJoinStepTwo from '@app/join/[id]/_components/UserQueryJoinStepTwo';
 import SpinnerContainer from '@components/common/SpinnerContainer';
@@ -20,13 +20,7 @@ interface UserQueryJoinProps {
   userId: UsersType['id'];
 }
 const UserQueryJoin = ({ userId }: UserQueryJoinProps) => {
-  const searchParams = useSearchParams();
-
-  //회원가입과 멤버 신청을 마친 비로그인 유저 판별
-  const isJoinSuccessful = searchParams.get('is_successful');
-  const initialStep = isJoinSuccessful ? 2 : 1;
-
-  const [joinStep, setJoinStep] = useState(initialStep);
+  const [joinStep, setJoinStep] = useState(1);
 
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;

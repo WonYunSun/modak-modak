@@ -3,7 +3,7 @@ import { getPhotos } from 'queries/photo/getPhotos';
 
 export const useFetchPhotos = (groupId: string) => {
   const { data, isPending, isError } = useQuery({
-    queryKey: [groupId, 'photos'],
+    queryKey: ['photos', groupId],
     queryFn: () => getPhotos(groupId),
   });
   return { data, isPending, isError };

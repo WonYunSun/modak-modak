@@ -28,11 +28,12 @@ export type PostCommonType = {
 
 interface PostProps {
   post: PostCommonType;
+  openDeleteAlert: () => void;
 }
 
 const MAX_LENGTH = 80;
 
-const Post = ({ post }: PostProps) => {
+const Post = ({ post, openDeleteAlert }: PostProps) => {
   const [isExpanded, setIsExpanded] = useState<{ [key: string]: boolean }>({});
   const [bottomSheetPostId, setBottomSheetPostId] = useState<string | null>(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -82,7 +83,7 @@ const Post = ({ post }: PostProps) => {
           </div>
           {/* 메뉴 아이콘(작성자id와 접속id 일치하는 경우만 보인다) */}
           {user?.id === post.users.id && (
-            <div onClick={() => setBottomSheetPostId(post.id)} className="flex h-10 w-10">
+            <div onClick={() => setBottomSheetPostId(post.id)} className="flex h-10 w-10 cursor-pointer">
               <Menu className="m-auto" />
             </div>
           )}
@@ -113,9 +114,9 @@ const Post = ({ post }: PostProps) => {
         />
 
         {/* 댓글 */}
-        <div className="w-28 flex items-center h-6 text-xs mt-3" onClick={() => setIsCommentOpen(true)}>
+        <div className="w-24 flex items-center h-6 text-xs mt-3 cursor-pointer" onClick={() => setIsCommentOpen(true)}>
           <Comments />
-          <span className="ml-1 font-semibold">
+          <span className="ml-1 font-semibold cursor-pointer">
             {post.comments.count > 0 ? `${post.comments.count}개 모두 보기` : '댓글 남기기'}
           </span>
         </div>
@@ -133,7 +134,9 @@ const Post = ({ post }: PostProps) => {
         />
       )}
 
-      {deleteModal && <DeleteModal postId={post.id} setDeleteModal={setDeleteModal} />}
+      {deleteModal && (
+        <DeleteModal postId={post.id} setDeleteModal={setDeleteModal} openDeleteAlert={openDeleteAlert} />
+      )}
     </>
   );
 };

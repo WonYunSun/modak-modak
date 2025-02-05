@@ -38,11 +38,8 @@ const SelectTime = ({ onTimeSelect, onClose }: SelecTimeProps) => {
   };
 
   return (
-    <div onClick={onClose} className="flex items-center justify-center w-full h-full  z-50">
-      <div
-        className="w-full m-4 bg-white rounded-2xl flex items-center justify-center"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div onClick={onClose} className="flex items-center justify-center w-full h-full z-50">
+      <div className="w-full m-4  flex items-center justify-center " onClick={(e) => e.stopPropagation()}>
         <section className="w-full">
           <div className="flex justify-center items-center">
             {/* 시간 선택 */}
@@ -52,7 +49,7 @@ const SelectTime = ({ onTimeSelect, onClose }: SelecTimeProps) => {
             <TimePicker time={minutes} handleTimeScroll={handleMinuteScroll} selectedTime={selectedMinute} />
           </div>
           <div className="flex justify-center items-center gap-2 text-white mt-4">
-            <Button onClick={handleConfirm} label="확인" type="button" className="modal-full-btn"></Button>
+            <Button onClick={handleConfirm} label="적용" type="button" className="modal-full-btn"></Button>
           </div>
         </section>
       </div>

@@ -24,7 +24,7 @@ const PostScheduleCard = ({ name, memo, start_date, end_date, start_time }: Post
   return (
     <div
       onClick={toggleDetails}
-      className="box-border border border-gray-300 rounded-xl pl-[1.25rem] pr-[0.5rem] py-[0.5rem] gap-[0.5rem]"
+      className="box-border border border-gray-300 rounded-xl pl-[1.25rem] pr-[0.5rem] py-[0.5rem] gap-[0.5rem] cursor-pointer"
     >
       <div className="flex justify-between items-center">
         <p className="text-sm font-semibold leading-[140%]">{name}</p>

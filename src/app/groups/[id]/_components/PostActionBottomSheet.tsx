@@ -40,13 +40,13 @@ export const PostActionBottomSheet = ({ setBottomSheetPostId, postId, setDeleteM
         <div className="w-full max-w-[600px] m-auto fixed bottom-0 h-[11.75rem] z-[60] bg-white rounded-tl-xl rounded-tr-xl flex flex-col justify-center items-center px-5 border-x border-gray-200">
           <div className="absolute top-2 w-[5.625rem] rounded-full bg-gray-200 h-[0.375rem]"></div>
           <div
-            className="w-full flex items-center px-3 py-4 bg-gray-100 rounded-tl-xl rounded-tr-xl border-b border-gray-200 mt-8"
+            className="w-full flex items-center px-3 py-4 bg-gray-100 rounded-tl-xl rounded-tr-xl border-b border-gray-200 mt-8 cursor-pointer"
             onClick={handleEditPost}
           >
             <ModificationNoCircle /> <span className="ml-4 text-gray-900 text-base font-normal">수정하기</span>
           </div>
           <div
-            className="w-full flex items-center px-3 py-4 bg-gray-100 text-gray-900 text-base font-normal rounded-bl-xl rounded-br-xl"
+            className="w-full flex items-center px-3 py-4 bg-gray-100 text-gray-900 text-base font-normal rounded-bl-xl rounded-br-xl cursor-pointer"
             onClick={handleDeletePost}
           >
             <TrashCan /> <span className="ml-4 text-[#FF3B30] text-base font-normal ">삭제하기</span>
