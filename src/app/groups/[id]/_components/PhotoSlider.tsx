@@ -16,7 +16,7 @@ export const PhotoSlider = ({ photoList }: photoProps) => {
   const [currentIndex, setCurrentIndex] = useState(1);
 
   return (
-    <div className="w-full aspect-square mb-3 relative z-0">
+    <div className="w-full max-w-[558px] aspect-square mb-3 relative z-0">
       {/* 슬라이드 */}
       <Swiper
         onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex + 1)} // 현재 슬라이드 번호 업데이트
@@ -28,7 +28,7 @@ export const PhotoSlider = ({ photoList }: photoProps) => {
               src={image.image_url}
               alt={`Photo ${index + 1}`}
               fill
-              sizes="100vw"
+              sizes="(max-width: 600px) 100vw, 558px"
               className="object-cover"
               priority={index === 0} // 첫번째 이미지만 즉시 로드
             />

@@ -34,7 +34,6 @@ const PostList = () => {
 
   const posts = data?.pages.flat() || [];
 
-  console.log('posts', posts);
   useEffect(() => {
     if (!loadPostRef.current || !hasNextPage) return;
     const observer = new IntersectionObserver(

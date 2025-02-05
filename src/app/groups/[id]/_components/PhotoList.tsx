@@ -46,7 +46,13 @@ const PhotoList = () => {
               className="relative w-[calc(25%-0.75px)] aspect-square bg-white cursor-pointer"
               onClick={() => handleImageClick(image.image_url)}
             >
-              <Image src={image.image_url} alt={`이미지-${index}`} layout="fill" objectFit="cover" />
+              <Image
+                src={image.image_url}
+                alt={`이미지-${index}`}
+                fill
+                sizes="(max-width: 600px) 25vw, 139px"
+                className="object-cover"
+              />
             </div>
           ))
         )}
