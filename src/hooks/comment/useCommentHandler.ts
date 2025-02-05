@@ -1,31 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { createClient } from '@utils/supabase/client';
+import deleteComment from '@queries/group/comments/deleteComment';
+import updateComment from '@queries/group/comments/updateComment';
 
-import { CommentsType } from '@hooks/comment/useComments';
+import { CommentsType } from '@queries/group/comments/fetchComments';
 
 const useCommentHandler = (commentId: string, postId: string, groupId: string) => {
   const queryClient = useQueryClient();
-  const supabase = createClient();
-
-  const deleteComment = async (commentId: string) => {
-    const { error } = await supabase.from('comments').delete().eq('id', commentId);
-
-    if (error) throw error;
-  };
-
-  const updateComment = async (newContent: string) => {
-    const { data, error } = await supabase
-      .from('comments')
-      // .update({ content: newContent, created_at: new Date().toISOString() })
-      .update({ content: newContent })
-      .eq('id', commentId)
-      .select();
-
-    if (error) throw error;
-
-    return data;
-  };
 
   const deleteCommentMutation = useMutation({
     mutationFn: (commentId: string) => deleteComment(commentId),
@@ -50,7 +31,7 @@ const useCommentHandler = (commentId: string, postId: string, groupId: string) =
   });
 
   const updateCommentMutation = useMutation({
-    mutationFn: (newContent: string) => updateComment(newContent),
+    mutationFn: (newContent: string) => updateComment(newContent, commentId),
     onMutate: async (newContent) => {
       await queryClient.cancelQueries({ queryKey: ['comments', postId] });
 

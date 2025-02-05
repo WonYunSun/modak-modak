@@ -1,31 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { Comment, CommentUser } from '@app/groups/[id]/_components/CommentCard';
-
-import { createClient } from '@utils/supabase/client';
-
-export type CommentsType = Comment & { users: CommentUser };
+import fetchComments from '@queries/group/comments/fetchComments';
 
 const useComments = (post_id: string) => {
-  const supabase = createClient();
-
-  const fetchComments = async (post_id: string): Promise<CommentsType[] | []> => {
-    const { data, error } = await supabase
-      .from('comments')
-      .select(
-        `
-      *,
-      users(id, nickname, profile_image)
-    `
-      )
-      .eq('post_id', post_id)
-      .order('created_at', { ascending: false });
-
-    if (error) throw new Error(error.message);
-
-    return data;
-  };
-
   const {
     data: comments,
     isPending,
@@ -33,6 +10,7 @@ const useComments = (post_id: string) => {
   } = useQuery({
     queryKey: ['comments', post_id],
     queryFn: () => fetchComments(post_id),
+    enabled: !!post_id,
   });
 
   return { comments, isPending, isError };
