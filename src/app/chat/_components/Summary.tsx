@@ -26,7 +26,7 @@ const Summary = ({ summary, handleClose }: SummaryProps) => {
           </div>
           <p className="text-xs font-normal leading-[140%] text-gray-500">채팅은 하루 단위로 요약돼요</p>
         </div>
-        <div className="text-sm font-normal leading-[140%] text-gray-900">{summary}</div>
+        <div className="min-h-[140px] text-sm font-normal leading-[140%] text-gray-900">{summary}</div>
       </div>
     </div>
   );
