@@ -19,7 +19,7 @@ const NoPost = () => {
           className="mx-auto flex mt-[1.375rem] border-b-[1px] border-gray-900 w-[7.75rem]"
           onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
         >
-          <span className="text-gray-900 text-sm ">일정 등록 바로가기</span>
+          <span className="text-gray-900 text-sm cursor-pointer">일정 등록 바로가기</span>
           <GreaterThan />
         </div>
       </div>

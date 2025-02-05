@@ -10,31 +10,79 @@ import { DeletePhoto, PlusGray } from '@components/icons';
 import { useState } from 'react';
 
 const MAX_FILES = 10; // 최대 파일 수
+const MAX_WIDTH = 700; // 최대 너비
+const QUALITY = 1; // 이미지 품질 (0 ~ 1)
 
 interface PhotoUploadProps {
   selectedFiles: File[];
   setSelectedFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  OpenImageCountAlert: () => void;
 }
 
-const PhotoUpload = ({ selectedFiles, setSelectedFiles }: PhotoUploadProps) => {
+const PhotoUpload = ({ selectedFiles, setSelectedFiles, OpenImageCountAlert }: PhotoUploadProps) => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+
+  // 이미지 파일 최적화
+  const resizeImage = (file: File): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        img.src = e.target?.result as string;
+      };
+
+      reader.onerror = (e) => reject(e);
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        if (!ctx) return reject('Canvas context not available');
+
+        // 이미지 크기 조정
+        const scale = Math.min(MAX_WIDTH / img.width, 1);
+        const width = img.width * scale;
+        const height = img.height * scale;
+
+        canvas.width = width;
+        canvas.height = height;
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) return reject('Blob conversion failed');
+            const resizedFile = new File([blob], file.name, { type: 'image/jpeg' });
+            resolve(resizedFile);
+          },
+          'image/jpeg',
+          QUALITY
+        );
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'image/jpeg': ['.jpeg', '.jpg'],
       'image/png': ['.png'],
-      'image/gif': ['.gif'],
-      'image/svg+xml': ['.svg'],
     },
-    onDrop: (acceptedFiles) => {
+    onDrop: async (acceptedFiles) => {
       const totalFiles = selectedFiles.length + acceptedFiles.length;
 
       if (totalFiles > MAX_FILES) {
-        alert(`최대 ${MAX_FILES}개의 파일만 업로드할 수 있습니다.`);
+        OpenImageCountAlert();
         return;
       }
-      const newUrls = acceptedFiles.map((file) => URL.createObjectURL(file));
-      setSelectedFiles([...selectedFiles, ...acceptedFiles]);
+
+      // 이미지 리사이즈 처리
+      const resizedFiles = await Promise.all(acceptedFiles.map((file) => resizeImage(file)));
+      const newUrls = resizedFiles.map((file) => URL.createObjectURL(file));
+
+      setSelectedFiles([...selectedFiles, ...resizedFiles]);
       setPreviewUrls([...previewUrls, ...newUrls]);
     },
   });
