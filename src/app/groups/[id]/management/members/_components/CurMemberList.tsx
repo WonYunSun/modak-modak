@@ -34,46 +34,52 @@ const CurMemberList = ({ isLeaderUser }: CurMemberListProps) => {
           <span className="text-primary">{curMemberList ? curMemberList.others.length + 1 : '...'}</span>
         </div>
       </div>
-      <div className={`${curMemberList ? 'border-b border-gray-200' : ''}`}>
-        <div className="divide-y divide-gray-200">
-          {curMemberList && (
-            <>
-              {isLeaderUser ? (
-                <>
-                  <MemberCard
-                    memberData={curMemberList.me}
-                    isLeaderUser={isLeaderUser}
-                    mode={'curMembers'}
-                    isLeader={true}
-                    isMe={true}
-                  />
-                </>
-              ) : (
-                <>
-                  <MemberCard
-                    memberData={curMemberList.me}
-                    isLeaderUser={isLeaderUser}
-                    mode={'curMembers'}
-                    isMe={true}
-                  />
-                  {leaderData && (
+      <div className="pb-[128px]">
+        <div className={`${curMemberList ? 'border-b border-gray-200' : ''}`}>
+          <div className="divide-y divide-gray-200">
+            {curMemberList && (
+              <>
+                {isLeaderUser ? (
+                  <>
                     <MemberCard
-                      memberData={leaderData}
+                      memberData={curMemberList.me}
                       isLeaderUser={isLeaderUser}
                       mode={'curMembers'}
                       isLeader={true}
+                      isMe={true}
                     />
-                  )}
-                </>
-              )}
-              {filteredData?.map((member) => (
-                <MemberCard key={member.users.id} memberData={member} isLeaderUser={isLeaderUser} mode={'curMembers'} />
-              ))}
-            </>
-          )}
+                  </>
+                ) : (
+                  <>
+                    <MemberCard
+                      memberData={curMemberList.me}
+                      isLeaderUser={isLeaderUser}
+                      mode={'curMembers'}
+                      isMe={true}
+                    />
+                    {leaderData && (
+                      <MemberCard
+                        memberData={leaderData}
+                        isLeaderUser={isLeaderUser}
+                        mode={'curMembers'}
+                        isLeader={true}
+                      />
+                    )}
+                  </>
+                )}
+                {filteredData?.map((member) => (
+                  <MemberCard
+                    key={member.users.id}
+                    memberData={member}
+                    isLeaderUser={isLeaderUser}
+                    mode={'curMembers'}
+                  />
+                ))}
+              </>
+            )}
+          </div>
         </div>
       </div>
-      <div className="w-1 h-[66px]"></div>
     </div>
   );
 };
