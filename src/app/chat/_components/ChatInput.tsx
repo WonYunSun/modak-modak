@@ -44,6 +44,10 @@ const ChatInput = ({ user, chatRoomId }: ChatInputProps) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.nativeEvent.isComposing) {
+      return;
+    }
+
     if (e.key === 'Enter') {
       e.preventDefault();
       sendMessage(resetTextAreaHeight);
