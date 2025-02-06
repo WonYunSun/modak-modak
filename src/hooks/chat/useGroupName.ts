@@ -11,7 +11,6 @@ const useGroupName = (chatRoomId: string) => {
     queryKey: ['groupName', chatRoomId],
     queryFn: () => getGroupName(chatRoomId),
     enabled: !!chatRoomId,
-    staleTime: 1000 * 60 * 60 * 24,
   });
 
   return { chatGroupName, isPending, isError };

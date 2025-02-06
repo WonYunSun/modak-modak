@@ -28,6 +28,7 @@ export const updateGroupProfile = async ({ groupId, groupProfileData }: UpdateGr
       await supabase.from('chat_rooms').update({ name: groupName }).eq('group_id', groupId);
     } else {
       await supabase.from('groups').update({ name: groupName, description }).eq('id', groupId);
+
       await supabase.from('chat_rooms').update({ name: groupName }).eq('group_id', groupId);
     }
   } catch (error) {
