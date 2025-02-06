@@ -43,3 +43,9 @@ export const updateUser = async (toUpdate: UserUpdate) => {
   const { error } = await supabase.from('users').update(toUpdate).eq('id', userId);
   if (error) throw new Error('업데이트를 실패했습니다.');
 };
+
+export const loginAsGuest = async () => {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithPassword({ email: 'modak@modak.com', password: 'modak1230' });
+  if (error) throw new Error('게스트 로그인에 실패했습니다.');
+};
