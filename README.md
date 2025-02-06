@@ -147,49 +147,76 @@
 
 # 💣 트러블 슈팅
 
-### 푸시 알림을 보내기 위해 Expo 프로젝트와 APNs, FCM 연결하기
+<details>
+  <summary>📌 푸시 알림을 보내기 위해 Expo 프로젝트와 APNs, FCM 연결하기</summary>
 
 ![Image](https://github.com/user-attachments/assets/3417ef3d-cae1-4bfd-a183-d21dd7a7e2d0)
 
 - **문제 상황**
+
   - Expo에서는 푸시 알림을 보내기 위해 FCM(Firebase Cloud Messaging) 또는 APNs(Apple Push Notification service) 와 연결이 필요함.
   - iOS(APNs) 는 Expo가 자동으로 설정해주지만, Android(FCM) 은 개발자가 직접 설정해야 함.
+
 - **원인 파악**
 
-  - APNs(애플)
+  - **APNs(애플)**
     - 애플 개발자 계정에는 APNs 인증 키(APNS authentication key) 가 존재함.
     - Expo는 개발자 계정이 등록되어 있으면 이를 이용해 자동으로 APNs와 연결 가능.
-  - FCM(구글 & 파이어베이스)
+  - **FCM(구글 & 파이어베이스)**
     - 구글은 FCM의 Sender ID 및 Server Key 를 프로젝트 단위로 발급함.
     - 보안 정책상 이 키들은 외부에서 자동으로 가져올 수 없으며, 직접 설정해야 함.
-  - **해결 방법**
-    - iOS(APNs) : Expo가 자동으로 APNs와 연결해 주므로 별도 설정이 필요 없음.
-    - Android(FCM) :
-      - Firebase Console에서 Sender ID 및 Server Key 를 수동으로 가져와 Expo 프로젝트에 설정해야 함.
-      - Firebase 프로젝트와 Expo를 직접 연결하여 푸시 알림을 정상적으로 사용할 수 있도록 구성.
+
+- **해결 방법**
+  - **iOS(APNs)** : Expo가 자동으로 APNs와 연결해 주므로 별도 설정이 필요 없음.
+  - **Android(FCM)** :
+    - Firebase Console에서 Sender ID 및 Server Key 를 수동으로 가져와 Expo 프로젝트에 설정해야 함.
+    - Firebase 프로젝트와 Expo를 직접 연결하여 푸시 알림을 정상적으로 사용할 수 있도록 구성.
+
+</details>
 
 <br>
 
-### IOS 입력 필드 확대 및 가상 키보드 가림 문제(크로스 브라우징)
+<details>
+  <summary>📌 IOS 입력 필드 확대 및 가상 키보드 가림 문제 (크로스 브라우징)</summary>
 
-- **문제 상황**
+### 문제 상황
 
-  - 입력 필드(focus) 시 화면 확대 문제
+- 입력 필드(focus) 시 화면 확대 문제
+- 가상 키보드가 입력 필드를 가리는 문제
 
-  - 가상 키보드가 입력 필드를 가리는 문제
+### 원인 파악
 
-- **원인 파악**
+- **화면 확대 문제의 원인**
+  - iOS 환경에서 `input`, `textarea` 등의 글꼴 크기가 16px 미만이면 화면이 자동 확대됨.
+  - 프로젝트 디자인 시안은 14px로 설정되어 있어, 화면이 확대되는 문제가 발생함.
+- **키보드 가림 문제의 원인**
+  - **Android**: 키보드가 올라올 때 Viewport의 높이를 자동 조절하여 입력 필드가 보이도록 함.
+  - **iOS**: 키보드가 올라와도 Viewport 크기를 변경하지 않고 document를 밀어 올리는 방식을 사용하여, 키보드 뒤로 가려지는 문제가 발생함.
 
-  - 화면 확대 문제의 원인
+### 해결 방법
 
-    - iOS 환경에서 input, textarea 등의 글꼴 크기가 16px 미만이면 화면이 자동 확대됨. 프로젝트 디자인 시안은 14px로 설정되어 있어, 화면이 확대되는 문제가 발생함.
+| 해결 방법                          | 설명                                                                                                           | 단점                                                                                      |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **① `transform: scale()` 활용**    | 글꼴 크기를 16px로 변경한 후, `transform: scale()`을 사용해 14px처럼 보이도록 조정                             | `border`, `line-height`, `padding` 등의 스타일을 추가로 조정해야 하므로 유지보수가 어려움 |
+| **② `viewport meta 태그` 적용 ✅** | `<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">` 추가 | 모바일 확대 기능이 사라짐 (하지만 모바일 우선 UX에서는 큰 문제 없음)                      |
 
-  - 키보드 가림 문제의 원인
-    - Android: 키보드가 올라올 때 Viewport의 높이를 자동 조절하여 입력 필드가 보이도록 함.
-    - iOS: 키보드가 올라와도 Viewport 크기를 변경하지 않고 document를 밀어 올리는 방식을 사용하여 이로인해 키보드 뒤로 가려지는 문제가 발생함
+- **입력 필드 확대 문제 해결**
 
-- **해결 방법**
-  - 입력 필드 확대 문제 해결
+  - 최종적으로 `viewport meta 태그`를 적용하여 화면 확대 방지
+
+- **가상 키보드 가림 문제 해결**
+
+  - `visualViewport API` 활용하여 키보드 높이 감지 및 조정
+  - `window.visualViewport.height` 값을 활용해 전체 화면 높이와 실제 보이는 영역을 비교하여 키보드 높이를 계산
+  - Safari 브라우저에서는 동작하지 않도록 `userAgent` 체크 추가
+
+  <br>
+
+  <p align="center">
+    <img src="https://github.com/user-attachments/assets/e0f3961f-2694-41ae-bc15-ef18d5565359" width="300" />
+  </p>
+
+</details>
 
 <br>
 
