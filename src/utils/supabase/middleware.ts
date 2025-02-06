@@ -24,7 +24,9 @@ export async function updateSession(request: NextRequest) {
   const authTokens = request.headers.get('Authorization');
   if (authTokens) {
     const [access_token, refresh_token] = authTokens.split(',');
-    await supabase.auth.setSession({ access_token, refresh_token });
+    if (access_token && refresh_token) {
+      await supabase.auth.setSession({ access_token, refresh_token });
+    }
   }
 
   const pathname = request.nextUrl.pathname;
