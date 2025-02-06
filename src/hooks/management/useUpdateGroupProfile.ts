@@ -29,6 +29,7 @@ const useUpdateGroupProfile = ({ groupId }: UpdateGroupProfile) => {
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: ['useFetchGetGroup', groupId] });
       // 프로필 변경후 채팅방 이름도 변경
+      queryClient.invalidateQueries({ queryKey: ['groupName'] });
     },
   });
 
