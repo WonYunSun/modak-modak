@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { permitNewMember } from '@queries/management/manageMembers';
 import { GroupsType, UsersType } from '@ts/supabaseTableRowTypes';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 interface UsePermitNewMemberParams {
   groupId: GroupsType['id'];

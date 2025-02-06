@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchGroupCardInfos } from '@queries/home/fetchGroupInfo';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 const useFetchWaitingGroupList = () => {
   const { user, isError: userError } = useUser();

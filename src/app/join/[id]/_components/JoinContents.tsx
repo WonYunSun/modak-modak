@@ -3,7 +3,7 @@
 import SpinnerContainer from '@components/common/SpinnerContainer';
 import NonUserQueryJoin from '@app/join/[id]/_components/NonUserQueryJoin';
 import UserQueryJoin from '@app/join/[id]/_components/UserQueryJoin';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 const JoinContents = () => {
   const { user, isPending } = useUser();

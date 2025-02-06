@@ -2,7 +2,7 @@
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchGroupCardInfos } from '@queries/home/fetchGroupInfo';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 const useFetchGroupList = () => {
   const queryClient = useQueryClient();

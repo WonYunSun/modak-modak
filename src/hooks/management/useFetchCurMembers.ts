@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { CurMemberType, fetchCurMembers } from '@queries/management/fetchMembers';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 interface UseFetchCurMembersParams {
   groupId: GroupsType['id'];

@@ -31,12 +31,12 @@ export const DeleteModal = ({ postId, setDeleteModal, openDeleteAlert }: modalPr
       if (response.success) {
         queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
         queryClient.invalidateQueries({ queryKey: ['photos', groupId] });
+        queryClient.invalidateQueries({ queryKey: ['postCount', groupId] });
         setDeleteModal(false);
         openDeleteAlert();
       }
     } catch (error) {
       console.error('게시글 삭제 오류:', error);
-      // alert(`게시글 삭제 실패: ${(error as Error).message}`);
       setDeleteModal(false);
     }
   };

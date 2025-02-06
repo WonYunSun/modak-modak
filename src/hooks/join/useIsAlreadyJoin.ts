@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { isAlreadyMember } from '@queries/join/queryJoinGroup';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
 
 type JoinStateType = 'member' | 'waiting' | 'joinable';
@@ -19,7 +19,7 @@ const useIsAlreadyJoin = ({ groupId }: IsAlreadyJoinParams) => {
   const { data, isPending, isError } = useQuery({
     queryKey: ['isAlreadyJoin', groupId, userId],
     queryFn: async (): Promise<JoinStateType> => {
-      const data = await isAlreadyMember({ groupId, userId : userId! });
+      const data = await isAlreadyMember({ groupId, userId: userId! });
       if (data) return data['is_approved'] ? 'member' : 'waiting';
 
       return 'joinable';

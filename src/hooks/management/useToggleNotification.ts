@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
 import { toggleNotification } from '@queries/management/toggleNotification';
 

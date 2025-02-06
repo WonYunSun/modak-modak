@@ -15,7 +15,7 @@ import 'swiper/css';
 
 import { useFetchGetPost } from '@hooks/post/useFetchGetPost';
 import { useFetchEditPost } from '@hooks/post/useFetchEditPost';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 export const PostEditForm = () => {
   const [content, setContent] = useState<string>('');
@@ -114,7 +114,7 @@ export const PostEditForm = () => {
       {/* 글쓰기 */}
       <PostTextArea content={content} setContent={setContent} />
 
-      <div className="fixed w-full max-w-[600px] m-auto px-5 bottom-0">
+      <div className="fixed w-full max-w-[600px] m-auto px-5 bottom-3">
         <Button label="수정 완료" className="full-btn" type="submit" />
       </div>
     </form>

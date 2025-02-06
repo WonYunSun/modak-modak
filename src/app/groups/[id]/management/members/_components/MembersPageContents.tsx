@@ -11,7 +11,7 @@ import SpinnerContainer from '@components/common/SpinnerContainer';
 import GlobalError from '@components/common/GlobalError';
 import { AddMember } from '@components/icons';
 import useIsLeader from '@hooks/management/useIsLeader';
-import useSmallAlert from '@hooks/useSmallAlert';
+import useSmallAlert from '@hooks/common/useSmallAlert';
 
 type TabType = 'currentMembers' | 'awaitingMembers';
 
@@ -49,13 +49,13 @@ const MembersPageContents = () => {
         <div className="px-5 flex items-center">
           <div
             onClick={handleCurMemTabClick}
-            className={`w-[50%] py-3 text-center ${selectedTab === 'currentMembers' ? 'font-semibold border-b-2 border-gray-900' : ''}`}
+            className={`w-[50%] py-3 text-center cursor-pointer ${selectedTab === 'currentMembers' ? 'font-semibold border-b-2 border-gray-900' : ''}`}
           >
             참여 중
           </div>
           <div
             onClick={handleAwaitMemTabClick}
-            className={`w-[50%] py-3 text-center ${selectedTab === 'awaitingMembers' ? 'font-semibold border-b-2 border-gray-900' : ''}`}
+            className={`w-[50%] py-3 text-center cursor-pointer ${selectedTab === 'awaitingMembers' ? 'font-semibold border-b-2 border-gray-900' : ''}`}
           >
             대기 중
           </div>

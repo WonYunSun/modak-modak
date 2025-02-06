@@ -2,7 +2,7 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import Button from '@components/common/Button';
-import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
+import { useFetchGetGroup } from '@hooks/common/useFetchGetGroup';
 import QueryJoinContents from '@app/join/[id]/_components/QueryJoinContents';
 
 const NonUserQueryJoin = () => {

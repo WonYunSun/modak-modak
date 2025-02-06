@@ -26,7 +26,7 @@ export const PostActionBottomSheet = ({ setBottomSheetPostId, postId, setDeleteM
   };
 
   // 게시글 삭제하기
-  const handleDeletePost = async () => {
+  const handleDeletePost = () => {
     setBottomSheetPostId(null);
     setDeleteModal(true);
   };

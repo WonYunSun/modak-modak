@@ -9,7 +9,7 @@ import ManagementBtns from '@app/groups/[id]/management/_components/ManagementBt
 import ManagementModal from '@app/groups/[id]/management/_components/modal/ManagementModal';
 import SpinnerContainer from '@components/common/SpinnerContainer';
 import { CircleOk, Copy, NextArrow } from '@components/icons';
-import useSmallAlert from '@hooks/useSmallAlert';
+import useSmallAlert from '@hooks/common/useSmallAlert';
 import useIsLeader from '@hooks/management/useIsLeader';
 
 export type ModalModeType = 'changeProfile' | 'deleteGroup' | 'leaveGroup' | 'leaderTransition';

@@ -11,7 +11,7 @@ import { DeleteModal } from '@app/groups/[id]/_components/DeleteModal';
 import { PhotoSlider } from '@app/groups/[id]/_components/PhotoSlider';
 import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBottomSheet';
 
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 import useCommentValueStore from '@stores/useCommentValueStore';
 
 import { GroupType, PostType, UserType, ScheduleType, CommentCountType, PostImageType } from '@ts/postType';

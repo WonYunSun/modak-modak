@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import ProfileInputs from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileInputs';
 import ProfileConfirmBtns from '@app/groups/[id]/management/_components/modal/changeGroupProfile/ProfileConfirmBtns';
-import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
+import { useFetchGetGroup } from '@hooks/common/useFetchGetGroup';
 import useUpdateGroupProfile from '@hooks/management/useUpdateGroupProfile';
 import { Modification, WarningIcon } from '@components/icons';
 import Spinner from '@components/common/Spinner';

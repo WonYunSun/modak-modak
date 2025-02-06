@@ -23,8 +23,9 @@ const useUploadPost = () => {
     },
     onSuccess: (data) => {
       const { groupId } = data;
-      queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
       console.log('업로드 성공');
+      queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
+      queryClient.invalidateQueries({ queryKey: ['postCount', groupId, ''] });
     },
     onError: (error: Error) => {
       console.error('useUploadPost: 업로드 실패:', error.message);

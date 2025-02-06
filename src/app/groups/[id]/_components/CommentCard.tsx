@@ -9,7 +9,7 @@ import BottomSheet from '@components/common/BottomSheet';
 import Button from '@components/common/Button';
 import { Delete, Menu, ModificationNoCircle } from '@components/icons';
 
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 import useCommentHandler from '@hooks/comment/useCommentHandler';
 
 import useCommentValueStore from '@stores/useCommentValueStore';

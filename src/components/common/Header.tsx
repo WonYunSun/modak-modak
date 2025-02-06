@@ -23,7 +23,7 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
 
   const { groupName } = useHeaderStore();
 
-  const handleNavigation = () => router.back();
+  const handleNavigation = () => router.push('/');
 
   const handleGroupManagement = (groupId: string) => {
     router.push(`/groups/${groupId}/management`);
@@ -41,8 +41,8 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
         {home ? (
           <Logo className="w-20 h-10" />
         ) : (
-          <div className={`${!hasSetting ? 'w-10' : 'w-20'} flex items-center justify-start cursor-pointer`}>
-            <PrevArrow onClick={handleNavigation} className="w-6 h-6" />
+          <div className={`w-10 h-10 ${hasSetting && 'mr-10'} flex items-center justify-start cursor-pointer pl-2`}>
+            <PrevArrow onClick={handleNavigation} />
           </div>
         )}
 

@@ -3,15 +3,18 @@ import ProfileConfirmBtns from '@app/groups/[id]/management/_components/modal/ch
 import ProfilePreview from '@app/signup/_components/ProfilePreview';
 import { UserFormState } from '@app/signup/_components/SignupForm';
 import TextInput from '@components/common/TextInput';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 import { updateUser } from '@queries/users/users';
 import { uploadFile } from '@utils/uploadFile';
 import { createClient } from '@utils/supabase/client';
+import { useQueryClient } from '@tanstack/react-query';
 
 const ProfileUpdateModalContent = () => {
   const { user, isPending } = useUser();
   const [values, setValues] = useState<UserFormState>({ profile: null, nickname: '' });
   const [imageUrl, setImageUrl] = useState<string>('/icons/profile-image.webp');
+
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (!isPending && user) {
@@ -45,8 +48,9 @@ const ProfileUpdateModalContent = () => {
       await supabase.auth.updateUser({
         data: { nickname: values.nickname, profile_image: imageUrl },
       });
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
     } catch (error) {
-      alert((error as Error).message);
+      console.error((error as Error).message);
     }
   };
 

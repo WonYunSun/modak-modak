@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 import { getMySchedules, MyScheduleData } from '@queries/schedule/ScheduleActions';
 
 interface MySchedule {

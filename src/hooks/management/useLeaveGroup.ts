@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteMember } from '@queries/management/manageMembers';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 interface UseLeaveGroupParams {
   groupId: GroupsType['id'];

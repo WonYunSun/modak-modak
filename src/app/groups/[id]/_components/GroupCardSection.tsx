@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 import GroupCard from '@components/common/groupCard/GroupCard';
 
-import { useFetchGetGroup } from '@hooks/useFetchGetGroup';
+import { useFetchGetGroup } from '@hooks/common/useFetchGetGroup';
 
 import useHeaderStore from '@stores/useHeaderStore';
 

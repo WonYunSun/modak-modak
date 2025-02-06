@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { leaderTransition } from '@queries/management/leaderTransition';
 import { GroupsType, UsersType } from '@ts/supabaseTableRowTypes';
-import useUser from '@hooks/useUser';
+import useUser from '@hooks/common/useUser';
 
 interface UseLeaderTransitionParams {
   groupId: GroupsType['id'];

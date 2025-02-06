@@ -7,10 +7,14 @@ export const useFetchGetPosts = (groupId: string, searchTerm?: string) => {
   const { data, fetchNextPage, hasNextPage, isPending, isError } = useInfiniteQuery({
     queryKey: ['posts', groupId, searchTerm || ''],
     queryFn: ({ pageParam = 0 }) => getPosts(groupId, Number(pageParam), PAGE_SIZE, searchTerm),
+    enabled: !!groupId,
+    staleTime: 1000 * 60 * 60,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
-      // 데이터가 비어 있으면 페이지네이션 종료
-      return lastPage.length > 0 ? allPages.length + 1 : undefined;
+      if (!lastPage || lastPage.length === 0) {
+        return undefined; // 페이지네이션 종료
+      }
+      return allPages.length; // 다음 페이지 번호 반환
     },
   });
 

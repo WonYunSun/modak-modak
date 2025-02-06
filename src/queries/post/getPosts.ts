@@ -53,17 +53,15 @@ export const getPosts = async (
     } */
 
     const formattedData: PostListType[] =
-      data?.length > 0
-        ? data.map((post) => ({
-            id: post.id,
-            content: post.content,
-            groups: Array.isArray(post.groups) ? post.groups[0] : post.groups,
-            users: Array.isArray(post.users) ? post.users[0] : post.users,
-            schedules: Array.isArray(post.schedules) ? post.schedules[0] : post.schedules,
-            comments: Array.isArray(post.comments) ? post.comments[0] : post.comments,
-            post_images: post.post_images,
-          }))
-        : [];
+      data.map((post) => ({
+        id: post.id,
+        content: post.content,
+        groups: Array.isArray(post.groups) ? post.groups[0] : post.groups,
+        users: Array.isArray(post.users) ? post.users[0] : post.users,
+        schedules: Array.isArray(post.schedules) ? post.schedules[0] : post.schedules,
+        comments: Array.isArray(post.comments) ? post.comments[0] : post.comments,
+        post_images: post.post_images,
+      })) || [];
 
     return formattedData;
   } catch (err) {

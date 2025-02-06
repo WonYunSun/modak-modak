@@ -11,8 +11,8 @@ import PostTextArea from '@app/groups/[id]/posts/new/_components/PostTextArea';
 import ScheduleSelectSection, { Schedule } from '@app/groups/[id]/_components/ScheduleSelectSection';
 
 import useUploadPost from '@hooks/post/useUploadPost';
-import useUser from '@hooks/useUser';
-import useSmallAlert from '@hooks/useSmallAlert';
+import useUser from '@hooks/common/useUser';
+import useSmallAlert from '@hooks/common/useSmallAlert';
 
 import { useState } from 'react';
 
@@ -32,6 +32,7 @@ export const PostNewForm = () => {
   const { user } = useUser();
 
   const { SmallAlert: SubmitAlert, openAlert: OpenSubmitAlert } = useSmallAlert();
+  const { SmallAlert: ImageCountAlert, openAlert: OpenImageCountAlert } = useSmallAlert();
 
   // 게시글 업로드 로직
   const { mutate: uploadPostMutation } = useUploadPost();
@@ -104,12 +105,16 @@ export const PostNewForm = () => {
         </div>
 
         {/* 사진 업로드 컴포넌트 */}
-        <PhotoUpload selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles} />
+        <PhotoUpload
+          selectedFiles={selectedFiles}
+          setSelectedFiles={setSelectedFiles}
+          OpenImageCountAlert={OpenImageCountAlert}
+        />
 
         {/* 글 입력 컴포넌트 */}
         <PostTextArea content={content} setContent={setContent} />
 
-        <div className="fixed w-full max-w-[600px] m-auto px-5 bottom-0">
+        <div className="fixed w-full max-w-[600px] m-auto px-5 bottom-3">
           <Button
             label="작성 완료"
             className="full-btn"
@@ -134,6 +139,10 @@ export const PostNewForm = () => {
             ? `사진을 첨부해주세요!`
             : `일정을 선택해주세요!`}
       </SubmitAlert>
+      <ImageCountAlert>
+        <AlertSign className="mr-1" />
+        {'최대 10개의 파일만 업로드할 수 있습니다!'}
+      </ImageCountAlert>
     </>
   );
 };
