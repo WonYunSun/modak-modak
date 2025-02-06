@@ -21,8 +21,13 @@ const useIOSKeyboardHeight = () => {
     // ios에서도 safari만 제외
     const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
 
+    // if (isIOS && isSafari) {
+    //   window.visualViewport?.addEventListener('resize', handleVisualViewportResize);
+    // }
     if (isIOS && isSafari) {
-      window.visualViewport?.addEventListener('resize', handleVisualViewportResize);
+      setTimeout(() => {
+        window.visualViewport?.addEventListener('resize', handleVisualViewportResize);
+      }, 200); // 가상 키보드가 올라올 시간을 고려해 0.2초 지연
     }
 
     return () => {
