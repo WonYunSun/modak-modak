@@ -24,7 +24,7 @@ const ChatRoomList = () => {
     queryClient.invalidateQueries({ queryKey: ['chatList', user?.id] });
   }, [user?.id]);
 
-  if (isPending) return <SpinnerContainer height={110} />;
+  if (isPending) return <SpinnerContainer height={64} />;
   if (isError) return <div>에러발생..</div>;
 
   return (
