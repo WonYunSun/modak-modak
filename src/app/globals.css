@@ -172,7 +172,6 @@ textarea {
 
   .floating-btn {
     @apply w-[124px] h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0px_4px_4px_0px_#00000033] fixed bottom-[5.5rem]
-    /*right-5*/;
   }
 
   .no-floating-btn {
@@ -189,5 +188,9 @@ textarea {
 
   .google-btn {
     @apply border outline-none border-gray-400 w-full h-14 px-5 py-3 rounded-xl flex items-center justify-center gap-3 text-gray-900 text-base font-semibold leading-[140%];
+  }
+
+  .guest-login {
+    @apply bg-[#FFF2EB] outline-none w-full h-14 px-5 py-3 rounded-xl flex items-center justify-center gap-3 text-gray-900 text-base font-semibold leading-[140%];
   }
 }

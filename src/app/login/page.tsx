@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import Onboarding from '@app/login/_components/Onboarding';
 import SocialLogins from '@app/login/_components/SocialLogins';
+import GuestLogin from '@app/login/_components/GuestLogin';
 
 const LoginPage = () => {
   /**
@@ -11,11 +12,12 @@ const LoginPage = () => {
    */
 
   return (
-    <div className="flex flex-col h-screen pb-[112px] pt-[119px] inner justify-center reactive">
+    <div className="flex flex-col h-screen pb-[21px] pt-[116px] inner justify-center reactive">
       <Onboarding />
       <Suspense>
         <SocialLogins />
       </Suspense>
+      <GuestLogin />
     </div>
   );
 };
