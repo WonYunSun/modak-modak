@@ -48,6 +48,9 @@ export const deleteMember = async ({ groupId, memberId }: DeleteMemberParams) =>
     const supabase = await createClient();
 
     await supabase.from('group_members').delete().eq('group_id', groupId).eq('user_id', memberId);
+
+    // 모임 탈퇴시 채팅방 멤버에서도 삭제
+    await supabase.from('chat_room_members').delete().eq('group_id', groupId).eq('user_id', memberId);
   } catch (error) {
     throw new Error(`${error}`);
   }
