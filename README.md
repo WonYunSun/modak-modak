@@ -218,7 +218,7 @@
 
   - `visualViewport API` 활용하여 키보드 높이 감지 및 조정
   - `window.visualViewport.height` 값을 활용해 전체 화면 높이와 실제 보이는 영역을 비교하여 키보드 높이를 계산
-  - Safari 브라우저에서는 동작하지 않도록 `userAgent` 체크 추가
+  - Safari 브라우저에서만 동작하도록 `userAgent` 체크 추가
 
   <br>
 
