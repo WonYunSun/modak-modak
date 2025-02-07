@@ -47,7 +47,6 @@ const ChatAISummary = ({ messages }: ChatAISummaryProps) => {
 
     ws.addEventListener('open', () => {
       console.log('GPT API 리얼타임 연결');
-      console.log('시작 buttonRef.current', buttonRef.current);
 
       const createResponseEvent = {
         type: 'response.create',
@@ -99,7 +98,6 @@ const ChatAISummary = ({ messages }: ChatAISummaryProps) => {
     ws.addEventListener('close', () => {
       buttonRef.current = false;
       console.log('AI 요약을 마쳤습니다.');
-      console.log('종료 buttonRef.current', buttonRef.current);
     });
   };
 
