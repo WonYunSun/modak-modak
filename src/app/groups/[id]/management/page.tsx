@@ -1,4 +1,5 @@
-import Header from '@components/common/Header';
+import FunnelHeader from '@components/common/FunnelHeader';
+
 import ManagementContents from '@app/groups/[id]/management/_components/ManagementContents';
 
 interface ManagementPageProps {
@@ -12,7 +13,7 @@ const ManagementPage = ({ params }: ManagementPageProps) => {
   return (
     <div className="mx-auto max-w-[600px] h-[100dvh] overflow-y-scroll scrollbar-hide">
       <div className="h-full border-x border-gray-200">
-        <Header home={false} label={'관리 페이지'} isScrolled={true} />
+        <FunnelHeader label={'관리 페이지'} />
         <ManagementContents groupId={id} />
       </div>
     </div>
