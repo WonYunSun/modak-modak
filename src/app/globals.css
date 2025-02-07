@@ -114,6 +114,13 @@ textarea {
   user-select: auto;
 }
 
+#make-scrollable {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: calc(100% + 1px);
+}
+
 .react-modal-sheet-container.comment-list {
   height: 548px !important;
 }
@@ -171,7 +178,7 @@ textarea {
   }
 
   .floating-btn {
-    @apply w-[124px] h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0px_4px_4px_0px_#00000033] fixed bottom-[5.5rem]
+    @apply w-[124px] h-11 flex items-center justify-center gap-1 rounded-[20px] text-sm bg-primary font-semibold leading-[140%] text-white shadow-[0px_4px_4px_0px_#00000033] fixed bottom-[5.5rem];
   }
 
   .no-floating-btn {
