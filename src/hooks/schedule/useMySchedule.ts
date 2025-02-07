@@ -15,7 +15,7 @@ const useMySchedule = (): MySchedule => {
     isPending: isSchedulePending,
     isError: isScheduleError,
   } = useQuery({
-    queryKey: ['mySchedule', user!.id],
+    queryKey: ['mySchedule', user?.id],
     queryFn: () => getMySchedules(user!.id),
     enabled: !!user,
   });
