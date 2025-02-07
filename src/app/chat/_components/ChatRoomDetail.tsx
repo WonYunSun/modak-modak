@@ -7,7 +7,7 @@ import ChatRoom from '@app/chat/_components/ChatRoom';
 
 import FunnelHeader from '@components/common/FunnelHeader';
 
-// import useIOSKeyboardHeight from '@hooks/comment/useIOSKeyboardHeight';
+import useIOSKeyboardHeight from '@hooks/comment/useIOSKeyboardHeight';
 import useGroupName from '@hooks/chat/useGroupName';
 import useUser from '@hooks/common/useUser';
 
@@ -18,25 +18,18 @@ const ChatRoomDetail = () => {
 
   const { chatGroupName } = useGroupName(chatRoomId as string);
 
-  // const keyboardHeight = useIOSKeyboardHeight();
+  const keyboardHeight = useIOSKeyboardHeight();
 
   return (
-    // <div
-    //   className="max-w-[600px] mx-auto border-x border-gray-200 w-full h-dvh transition-all"
-    //   style={{
-    //     position: keyboardHeight > 0 ? 'fixed' : 'relative',
-    //     bottom: keyboardHeight > 0 ? keyboardHeight : 0,
-    //   }}
-    // >
-    //   <FunnelHeader label={chatGroupName?.name as string} />
-    //   <ChatRoom user={user} chatRoomId={chatRoomId as string} />
-    //   <ChatInput user={user} chatRoomId={chatRoomId as string} />
-    // </div>
-    <div className="relative max-w-[600px] mx-auto border-x border-gray-200 w-full h-dvh transition-all">
+    <div
+      className="absoulte max-w-[600px] mx-auto border-x border-gray-200 w-full h-dvh transition-all"
+      style={{
+        bottom: keyboardHeight > 0 ? keyboardHeight : 0,
+      }}
+    >
       <FunnelHeader label={chatGroupName?.name as string} />
       <ChatRoom user={user} chatRoomId={chatRoomId as string} />
       <ChatInput user={user} chatRoomId={chatRoomId as string} />
-      <div id="make-scrollable" />
     </div>
   );
 };
