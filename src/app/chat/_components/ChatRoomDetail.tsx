@@ -16,19 +16,18 @@ const ChatRoomDetail = () => {
 
   const { id: chatRoomId } = useParams();
 
-  const { chatGroupName } = useGroupName(chatRoomId as string);
+  const { chatGroupInfo } = useGroupName(chatRoomId as string);
 
   const keyboardHeight = useIOSKeyboardHeight();
 
   return (
     <div
-      className="max-w-[600px] mx-auto border-x border-gray-200 w-full h-dvh transition-all"
+      className="absoulte max-w-[600px] mx-auto border-x border-gray-200 w-full h-dvh transition-all"
       style={{
-        position: keyboardHeight > 0 ? 'fixed' : 'relative',
         bottom: keyboardHeight > 0 ? keyboardHeight : 0,
       }}
     >
-      <FunnelHeader label={chatGroupName?.name as string} />
+      <FunnelHeader label={chatGroupInfo?.data.name as string} users={chatGroupInfo?.chatRoomUsers} />
       <ChatRoom user={user} chatRoomId={chatRoomId as string} />
       <ChatInput user={user} chatRoomId={chatRoomId as string} />
     </div>
