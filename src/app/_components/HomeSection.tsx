@@ -7,6 +7,7 @@ import Button from '@components/common/Button';
 import Header from '@components/common/Header';
 import { Plus } from '@components/icons';
 import useModalStore from '@stores/useModalStore';
+import { sendGAEvent } from '@next/third-parties/google';
 
 const HomeSection = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ const HomeSection = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const onCreateGroup = () => {
+    sendGAEvent('event', 'click_post_create', { count: 1 });
     router.push('/groups/new');
   };
 
