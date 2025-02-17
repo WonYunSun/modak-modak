@@ -17,7 +17,7 @@ import useSmallAlert from '@hooks/common/useSmallAlert';
 
 import { sendGAEvent } from '@next/third-parties/google';
 
-export const PostNewForm = () => {
+const PostNewForm = () => {
   const [content, setContent] = useState<string>('');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
