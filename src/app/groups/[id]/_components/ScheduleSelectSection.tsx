@@ -36,7 +36,7 @@ const ScheduleSelectSection = ({
   setSelectedSchedule,
 }: ScheduleSelectProps) => {
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
-  const searchQuery = searchTerm ? searchTerm : undefined;
+  const searchQuery = searchTerm && searchTerm.trim() !== '' ? searchTerm.trim() : undefined;
 
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
@@ -66,9 +66,7 @@ const ScheduleSelectSection = ({
 
           <section className="px-5 flex-1 overflow-y-scroll scrollbar-hide pb-[90px]">
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <div className="mt-6 mb-5">
-              <CountBar value={scheduleData ? scheduleData.length : 0} />
-            </div>
+            <div className="mt-6 mb-5">{!isPending && <CountBar value={scheduleData ? scheduleData.length : 0} />}</div>
             {isPending ? (
               <SpinnerContainer />
             ) : scheduleData && scheduleData.length > 0 ? (

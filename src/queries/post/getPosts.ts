@@ -1,7 +1,7 @@
 'use server';
 
-import PostListType from '@ts/postType';
 import { createClient } from '@utils/supabase/server';
+import PostListType from '@ts/postType';
 
 // 게시글 리스트 불러오기
 export const getPosts = async (
