@@ -40,7 +40,7 @@ const ScheduleMemoForm = ({ onNext, onPrev, prevData }: ScheduleMemoFormProps) =
   };
 
   return (
-    <Layout isDisabled={isDisabled} onNext={handleNext} onPrev={onPrev} NextBtnlabel="일정 등록하기">
+    <Layout isDisabled={isDisabled} onNext={handleNext} onPrev={onPrev} NextBtnlabel="일정 만들기">
       <LabeledTextInput {...data} />
     </Layout>
   );

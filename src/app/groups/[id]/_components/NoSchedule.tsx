@@ -5,10 +5,18 @@ import { useParams, useRouter } from 'next/navigation';
 import Button from '@components/common/Button';
 import { CalendarIconSmall } from '@components/icons';
 
+import { sendGAEvent } from '@next/third-parties/google';
+
 const NoSchedule = () => {
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
+
+  const handleClickNewSchedule = () => {
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'click_schedule_create', { page_type: 'no_schedule_page' });
+    router.push(`/groups/${groupId}/schedules/new`);
+  };
 
   return (
     <>
@@ -18,12 +26,7 @@ const NoSchedule = () => {
         <p className="text-gray-700 text-lg">우리만의 추억을 공유해보세요</p>
       </div>
       <div className="ml-[calc(100%-124px)]">
-        <Button
-          label="일정 만들기"
-          className="floating-btn"
-          type="button"
-          onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
-        >
+        <Button label="일정 만들기" className="floating-btn" type="button" onClick={handleClickNewSchedule}>
           <CalendarIconSmall />
         </Button>
       </div>

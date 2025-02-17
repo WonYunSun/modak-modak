@@ -5,10 +5,19 @@ import { useParams, useRouter } from 'next/navigation';
 import Button from '@components/common/Button';
 import { ModificationLine } from '@components/icons';
 
+import { sendGAEvent } from '@next/third-parties/google';
+
 const NoPhoto = () => {
   const router = useRouter();
   const { id } = useParams();
+
   const groupId = Array.isArray(id) ? id[0] : id;
+
+  const handleClickNewPost = () => {
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'click_post_create', { page_type: 'no_post_page' });
+    router.push(`/groups/${groupId}/posts/new`);
+  };
 
   return (
     <>
@@ -18,12 +27,7 @@ const NoPhoto = () => {
         <p className="text-gray-700 text-lg">우리만의 추억을 공유해보세요</p>
       </div>
       <div className="ml-[calc(100%-124px)]">
-        <Button
-          label="게시글 쓰기"
-          className="floating-btn"
-          type="button"
-          onClick={() => router.push(`/groups/${groupId}/posts/new`)}
-        >
+        <Button label="게시글 쓰기" className="floating-btn" type="button" onClick={handleClickNewPost}>
           <ModificationLine />
         </Button>
       </div>

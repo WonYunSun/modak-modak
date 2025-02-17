@@ -11,9 +11,9 @@ type GroupPreviewProps = {
 
 const GroupPreview = ({ onNext, onPrev, prevData }: GroupPreviewProps) => {
   return (
-    <Layout isDisabled={false} onNext={onNext} onPrev={onPrev}>
+    <Layout isDisabled={false} onNext={onNext} onPrev={onPrev} NextBtnlabel="모임 만들기">
       <div className="space-y-8">
-        <Label htmlFor="" label="모임 미리보기" description="실제로 보여질 모임 리스트에요" />
+        <Label htmlFor="" label="모임 미리보기" description="실제로 보여질 모임 리스트예요" />
         <GroupCard
           groupInfo={{
             ...prevData,

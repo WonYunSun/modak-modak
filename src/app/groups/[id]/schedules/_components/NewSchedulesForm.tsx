@@ -12,6 +12,7 @@ import useFunnel from '@hooks/common/useFunnel';
 
 import { ScheduleType } from '@ts/scheduleType';
 import useAddSchedule from '@hooks/schedule/useAddSchedule';
+import { sendGAEvent } from '@next/third-parties/google';
 
 //단계 name 정의
 const steps = ['일정명', '모임일시', '메모'];
@@ -41,6 +42,8 @@ const NewSchedulesForm = () => {
     const updatedScheduleData = { ...scheduleData, ...data };
     setScheduleData(updatedScheduleData);
     if (nextStep === 'submitData') {
+      // Google Analytics 이벤트 트래킹
+      sendGAEvent('event', 'end_schedule_create', { count: 1 });
       const completeScheduleData: ScheduleType = {
         ...updatedScheduleData,
         created_at: new Date().toISOString(),

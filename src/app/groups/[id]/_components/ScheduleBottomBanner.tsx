@@ -1,6 +1,7 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
+import { sendGAEvent } from '@next/third-parties/google';
 
 import { OrangeArrow } from '@components/icons';
 
@@ -8,6 +9,12 @@ const ScheduleBottomBanner = () => {
   const router = useRouter();
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
+
+  const handleClickNewSchedule = () => {
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'click_post_banner', { count: 1 });
+    router.push(`/groups/${groupId}/schedules/new`);
+  };
 
   return (
     <div className="fixed bottom-0 w-full max-w-[600px] bg-gray-100 p-5 flex justify-between items-center z-40 border-x border-gray-200">
@@ -17,7 +24,7 @@ const ScheduleBottomBanner = () => {
       </div>
       <div
         className="text-primary text-sm font-semibold flex items-center cursor-pointer"
-        onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
+        onClick={handleClickNewSchedule}
       >
         바로가기
         <OrangeArrow />

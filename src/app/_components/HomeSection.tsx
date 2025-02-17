@@ -16,7 +16,8 @@ const HomeSection = () => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const onCreateGroup = () => {
-    sendGAEvent('event', 'click_post_create', { count: 1 });
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'start_group_create', { count: 1 });
     router.push('/groups/new');
   };
 
