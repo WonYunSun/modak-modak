@@ -1,6 +1,7 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import { AlertSign, PlusGray } from '@components/icons';
 import Button from '@components/common/Button';
@@ -14,7 +15,7 @@ import useUploadPost from '@hooks/post/useUploadPost';
 import useUser from '@hooks/common/useUser';
 import useSmallAlert from '@hooks/common/useSmallAlert';
 
-import { useState } from 'react';
+import { sendGAEvent } from '@next/third-parties/google';
 
 export const PostNewForm = () => {
   const [content, setContent] = useState<string>('');
@@ -38,6 +39,9 @@ export const PostNewForm = () => {
   const { mutate: uploadPostMutation } = useUploadPost();
 
   const handleUploadPost = () => {
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'end_post_create');
+
     if (isUploading) return; // 버튼 중복 클릭 방지
     setIsUploading(true); // 업로드 시작
     // FormData 사용
@@ -59,6 +63,12 @@ export const PostNewForm = () => {
         setIsUploading(false);
       },
     });
+  };
+
+  const handleDisabled = () => {
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'click_post_disabled');
+    OpenSubmitAlert();
   };
 
   return (
@@ -125,7 +135,7 @@ export const PostNewForm = () => {
           {selectedFiles.length === 0 || selectedSchedule === null ? (
             <div
               className="absolute inset-0 flex items-center justify-center bg-transparent"
-              onClick={() => OpenSubmitAlert()}
+              onClick={handleDisabled}
             />
           ) : null}
         </div>
