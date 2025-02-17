@@ -11,6 +11,8 @@ import { ModificationLine } from '@components/icons';
 
 import { useFetchPhotos } from '@hooks/photo/useFetchPhotos';
 
+import { sendGAEvent } from '@next/third-parties/google';
+
 const PhotoList = () => {
   const router = useRouter();
   const { id } = useParams();
@@ -26,6 +28,12 @@ const PhotoList = () => {
 
   const handleClose = () => {
     setSelectedImage(null);
+  };
+
+  const handleClickNewPost = () => {
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'click_post_create', { page_type: 'photo_list_page' });
+    router.push(`/groups/${groupId}/posts/new`);
   };
 
   if (isPending) return <SpinnerContainer />;
@@ -71,12 +79,7 @@ const PhotoList = () => {
 
       {/* 플로팅 버튼 */}
       <div className="ml-[calc(100%-124px)]">
-        <Button
-          label="게시글 쓰기"
-          className="floating-btn"
-          type="button"
-          onClick={() => router.push(`/groups/${groupId}/posts/new`)}
-        >
+        <Button label="게시글 쓰기" className="floating-btn" type="button" onClick={handleClickNewPost}>
           <ModificationLine />
         </Button>
       </div>

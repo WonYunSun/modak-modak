@@ -17,6 +17,8 @@ import { ModificationLine } from '@components/icons';
 import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
 import { useFetchPostCount } from '@hooks/post/useFetchPostCount';
 
+import { sendGAEvent } from '@next/third-parties/google';
+
 interface PostListProps {
   openDeleteAlert: () => void;
 }
@@ -51,6 +53,12 @@ const PostList = ({ openDeleteAlert }: PostListProps) => {
     return () => observer.disconnect(); // 관찰 종료
   }, [fetchNextPage, hasNextPage]);
 
+  const handleClickNewPost = () => {
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'click_post_create', { page_type: 'post_list_page' });
+    router.push(`/groups/${groupId}/posts/new`);
+  };
+
   if (isError) return <div>Error loading data</div>;
   if (isPending) return <SpinnerContainer />;
 
@@ -72,14 +80,7 @@ const PostList = ({ openDeleteAlert }: PostListProps) => {
 
       {/* 플로팅 버튼 */}
       <div className="ml-[calc(100%-124px)]">
-        <Button
-          label="게시글 쓰기"
-          className="floating-btn"
-          type="button"
-          onClick={() => {
-            router.push(`/groups/${groupId}/posts/new`);
-          }}
-        >
+        <Button label="게시글 쓰기" className="floating-btn" type="button" onClick={handleClickNewPost}>
           <ModificationLine />
         </Button>
       </div>

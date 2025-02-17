@@ -66,7 +66,7 @@ const GroupImageForm = ({ onNext, onPrev, prevData }: GroupImageFormProps) => {
               onChange={handleChange}
             />
           </div>
-          <p className="text-gray-400 text-sm">실제로 반영되는 사진 크기에요</p>
+          <p className="text-gray-400 text-sm">실제로 반영되는 사진 크기예요</p>
         </div>
       </div>
     </Layout>

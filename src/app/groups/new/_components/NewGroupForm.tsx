@@ -15,6 +15,7 @@ import { addGroup } from '@queries/group/postGroup';
 import useSmallAlert from '@hooks/common/useSmallAlert';
 import useFetchGroupList from '@hooks/home/useFetchGroupList';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
+import { sendGAEvent } from '@next/third-parties/google';
 
 //단계 name 정의
 const steps = ['모임명', '모임사진', '미리보기'];
@@ -46,6 +47,8 @@ const NewGroupForm = () => {
   const { invalidateGroupListQuery } = useFetchGroupList();
 
   const handleSubmit = async () => {
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'end_group_create', { count: 1 });
     const completeGroupData: GroupsType = {
       ...groupData,
       created_at: new Date().toISOString(),

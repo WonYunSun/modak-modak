@@ -1,16 +1,20 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
+import { useState } from 'react';
+
 import CountBar from '@app/groups/[id]/_components/CountBar';
 import NoSchedule from '@app/groups/[id]/_components/NoSchedule';
 import Button from '@components/common/Button';
 import SpinnerContainer from '@components/common/SpinnerContainer';
 import { CalendarIconSmall } from '@components/icons';
 import ScheduleCard from '@components/common/scheduleCard/ScheduleCard';
-import { useGroupSchedules } from '@hooks/schedule/useGroupSchedules';
 import NoSearchSchedule from '@app/groups/[id]/_components/NoSearchSchedule';
-import { useState } from 'react';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
+
+import { useGroupSchedules } from '@hooks/schedule/useGroupSchedules';
+
+import { sendGAEvent } from '@next/third-parties/google';
 
 const ScheduleCardList = () => {
   const { id } = useParams();
@@ -24,6 +28,12 @@ const ScheduleCardList = () => {
 
   const goToScheduleDetail = (scheduleId: string) => {
     router.push(`/groups/${groupId}/schedules/${scheduleId}`);
+  };
+
+  const handleClickNewSchedule = () => {
+    // Google Analytics 이벤트 트래킹
+    sendGAEvent('event', 'click_schedule_create', { page_type: 'schedule_list_page' });
+    router.push(`/groups/${groupId}/schedules/new`);
   };
 
   if (isPending) return <SpinnerContainer />;
@@ -54,12 +64,7 @@ const ScheduleCardList = () => {
         )}
 
         <div className="ml-[calc(100%-124px)]">
-          <Button
-            label="일정 만들기"
-            className="floating-btn"
-            type="button"
-            onClick={() => router.push(`/groups/${groupId}/schedules/new`)}
-          >
+          <Button label="일정 만들기" className="floating-btn" type="button" onClick={handleClickNewSchedule}>
             <CalendarIconSmall />
           </Button>
         </div>
