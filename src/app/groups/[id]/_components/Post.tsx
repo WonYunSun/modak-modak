@@ -14,12 +14,11 @@ import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBo
 import useUser from '@hooks/common/useUser';
 import useCommentValueStore from '@stores/useCommentValueStore';
 
-import { GroupType, PostType, UserType, ScheduleType, CommentCountType, PostImageType } from '@ts/postType';
+import { PostType, UserType, ScheduleType, CommentCountType, PostImageType } from '@ts/postType';
 
 export type PostCommonType = {
   id: PostType['id'];
   content: PostType['content'];
-  groups: GroupType;
   users: UserType;
   schedules: ScheduleType;
   comments: CommentCountType;
