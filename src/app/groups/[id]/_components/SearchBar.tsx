@@ -30,7 +30,7 @@ const SearchBar = ({ searchTerm, setSearchTerm }: searchProps) => {
       />
       {inputValue && (
         <Cancel
-          className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-500"
+          className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
           onClick={() => {
             setInputValue(''); // 입력 필드 초기화
             setSearchTerm(null); // 검색어 초기화

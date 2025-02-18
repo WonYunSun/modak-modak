@@ -22,7 +22,7 @@ const ScheduleCardList = () => {
   const router = useRouter();
 
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
-  const searchQuery = searchTerm ? searchTerm : undefined;
+  const searchQuery = searchTerm && searchTerm.trim() !== '' ? searchTerm.trim() : undefined;
 
   const { scheduleData, isPending } = useGroupSchedules(groupId, searchQuery);
 
@@ -36,16 +36,17 @@ const ScheduleCardList = () => {
     router.push(`/groups/${groupId}/schedules/new`);
   };
 
-  if (isPending) return <SpinnerContainer />;
-
   return (
     <div>
       {/* 검색바 */}
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {/* 일정 수 */}
-      <CountBar value={scheduleData ? scheduleData.length : 0} />
+      {!isPending && <CountBar value={scheduleData ? scheduleData.length : 0} />}
+
       <div className="mt-4 mb-28">
-        {scheduleData && scheduleData.length > 0 ? (
+        {isPending ? (
+          <SpinnerContainer />
+        ) : scheduleData && scheduleData.length > 0 ? (
           scheduleData.map((schedule, index) => (
             <div className="mb-5" key={index} onClick={() => goToScheduleDetail(schedule.id)}>
               <ScheduleCard

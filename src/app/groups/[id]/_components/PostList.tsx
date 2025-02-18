@@ -31,7 +31,7 @@ const PostList = ({ openDeleteAlert }: PostListProps) => {
 
   const loadPostRef = useRef<HTMLDivElement>(null);
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
-  const searchQuery = searchTerm ? searchTerm : undefined;
+  const searchQuery = searchTerm && searchTerm.trim() !== '' ? searchTerm.trim() : undefined;
 
   const { data, fetchNextPage, hasNextPage, isPending, isError } = useFetchGetPosts(groupId, searchQuery);
   const { data: totalCount, isPending: isCountLoading } = useFetchPostCount(groupId, searchQuery);
@@ -60,16 +60,17 @@ const PostList = ({ openDeleteAlert }: PostListProps) => {
   };
 
   if (isError) return <div>Error loading data</div>;
-  if (isPending) return <SpinnerContainer />;
 
   return (
     <section className="w-full flex flex-col mb-28 pt-1">
       {/* 검색바 */}
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       {/* 게시글 수 */}
-      <CountBar value={isCountLoading ? 0 : (totalCount ?? 0)} />
+      {!isCountLoading && <CountBar value={totalCount ?? 0} />}
 
-      {posts && posts.length > 0 ? (
+      {isPending ? (
+        <SpinnerContainer />
+      ) : posts && posts.length > 0 ? (
         posts.map((post) => <Post key={post.id} post={post} openDeleteAlert={openDeleteAlert} />) // 데이터가 있으면 Post 리스트 렌더링
       ) : searchTerm ? (
         <NoSearchPost /> // 검색어가 있는데 데이터가 없으면 검색 결과 없음 표시

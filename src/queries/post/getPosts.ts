@@ -1,7 +1,7 @@
 'use server';
 
-import PostListType from '@ts/postType';
 import { createClient } from '@utils/supabase/server';
+import PostListType from '@ts/postType';
 
 // 게시글 리스트 불러오기
 export const getPosts = async (
@@ -19,7 +19,6 @@ export const getPosts = async (
         `
       id, 
       content,
-      groups!inner(name, description),
       users!inner(id, nickname, profile_image),
       schedules!inner(name, memo, start_date, end_date, start_time),
       comments(count),
@@ -46,7 +45,6 @@ export const getPosts = async (
     {
       id: "123",
       content: "게시글 내용",
-      groups: [{ name: "그룹1", description: "그룹 설명" }],
       users: [{ nickname: "사용자1", profile_image: "profile.jpg" }],
       schedules: [{ name: "일정1", start_date: "2024-01-01" }],
       comments: [{ count: 3 }]
@@ -56,7 +54,6 @@ export const getPosts = async (
       data.map((post) => ({
         id: post.id,
         content: post.content,
-        groups: Array.isArray(post.groups) ? post.groups[0] : post.groups,
         users: Array.isArray(post.users) ? post.users[0] : post.users,
         schedules: Array.isArray(post.schedules) ? post.schedules[0] : post.schedules,
         comments: Array.isArray(post.comments) ? post.comments[0] : post.comments,
