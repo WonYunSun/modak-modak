@@ -6,11 +6,6 @@ import { HasNotification, Logo, Notification, PrevArrow, Setting } from '@compon
 
 import useHeaderStore from '@stores/useHeaderStore';
 import useFetchNotifications from '@hooks/notifications/useFetchNotifications';
-import { useQueryClient } from '@tanstack/react-query';
-import useUser from '@hooks/common/useUser';
-import { fetchReceiveNotifications } from '@queries/management/fetchReceiveNotifications';
-import { fetchLeaderInfo } from '@queries/management/fetchMembers';
-import { useEffect } from 'react';
 
 interface HeaderProps {
   home: boolean;
@@ -20,13 +15,8 @@ interface HeaderProps {
 }
 
 const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) => {
-  const { user, isError: userError } = useUser();
-  const userId = user ? user.id : null;
-
-  if (userError) throw new Error(`user error : ${userError}`);
 
   const router = useRouter();
-  const queryClient = useQueryClient();
   const { data: notificationsData } = useFetchNotifications();
 
   const { id } = useParams();
@@ -43,28 +33,6 @@ const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) =>
   const handleNotifications = () => {
     router.push(`/notifications`);
   };
-
-  useEffect(() => {
-    if (hasSetting && userId) {
-      queryClient.prefetchQuery({
-        queryKey: ['fetchReceiveNotification', userId],
-        queryFn: () => fetchReceiveNotifications({ userId: userId!, groupId }),
-        staleTime: Infinity,
-      });
-      queryClient.prefetchQuery({
-        queryKey: ['isLeader', groupId, userId],
-        queryFn: async () => {
-          const data = await fetchLeaderInfo({ groupId });
-
-          if (data && data.users.id === userId) {
-            return true;
-          }
-          return false;
-        },
-        staleTime: Infinity,
-      });
-    }
-  }, [userId, groupId]);
 
   return (
     <header
