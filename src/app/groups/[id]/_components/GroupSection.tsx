@@ -19,7 +19,8 @@ const GroupSection = () => {
   useManagementPrefetch({ groupId });
 
   const targetRef = useRef<HTMLDivElement | null>(null);
-  const isScrolled = useObserveScrollHeader({targetRef});
+  const tabScrollRef = useRef<HTMLDivElement | null>(null);
+  const isScrolled = useObserveScrollHeader({ targetRef });
 
   const { closeModal } = useModalStore();
 
@@ -28,17 +29,22 @@ const GroupSection = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-[600px]">
-      {/* 헤더 영역 */}
-      <div className="w-full fixed top-0 left-0 z-30">
-        <Header home={false} hasSetting={true} isScrolled={isScrolled} />
+    <div
+      className="max-w-[600px] h-screen m-auto overflow-y-scroll scrollbar-hide border-x border-gray-200"
+      ref={tabScrollRef}
+    >
+      <div className="w-full max-w-[600px]">
+        {/* 헤더 영역 */}
+        <div className="w-full fixed top-0 left-0 z-30">
+          <Header home={false} hasSetting={true} isScrolled={isScrolled} />
+        </div>
+        <div className="w-full h-[6.5rem] bg-primary-10"></div>
+
+        <GroupCardSection />
+
+        {/* 탭 화면 */}
+        <TabPages ref={targetRef} isScrolled={isScrolled} tabScrollRef={tabScrollRef} />
       </div>
-      <div className="w-full h-[6.5rem] bg-primary-10"></div>
-
-      <GroupCardSection />
-
-      {/* 탭 화면 */}
-      <TabPages ref={targetRef} isScrolled={isScrolled} />
     </div>
   );
 };

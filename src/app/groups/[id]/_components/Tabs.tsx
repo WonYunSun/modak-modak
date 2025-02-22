@@ -2,44 +2,52 @@
 
 import useGroupStore from '@stores/useGroupStore';
 
+const TABS: TABSElement[] = [
+  {
+    tabName: 'posts',
+    displayName: '게시글',
+  },
+  {
+    tabName: 'photos',
+    displayName: '사진첩',
+  },
+  {
+    tabName: 'schedules',
+    displayName: '모임일정',
+  },
+];
+
+export type TabType = 'posts' | 'photos' | 'schedules';
+type TABSElement = { tabName: TabType; displayName: string };
+
 interface TabsProps {
   isScrolled?: boolean;
+  onTabChange: (tab:TabType) => void;
 }
 
-const Tabs = ({ isScrolled }: TabsProps) => {
+const Tabs = ({ isScrolled, onTabChange }: TabsProps) => {
   const { activeTab, setActiveTab } = useGroupStore();
+
+  const onClickTab = (tab: TabType) => {
+    onTabChange(activeTab as TabType);
+    setActiveTab(tab);
+  };
 
   return (
     <div className={`sticky top-12 left-0 flex cursor-pointer transition-all ${isScrolled ? 'bg-white z-20' : ''}`}>
-      {/* 게시글 탭 */}
-      <div
-        onClick={() => setActiveTab('posts')}
-        className={`flex-1 text-center text-base py-3 ${
-          activeTab === 'posts' ? 'border-b-2 border-gray-900 font-semibold' : 'text-gray-700 border-b-0'
-        }`}
-      >
-        게시글
-      </div>
-
-      {/* 사진첩 탭 */}
-      <div
-        onClick={() => setActiveTab('photos')}
-        className={`flex-1 text-center text-base py-3 ${
-          activeTab === 'photos' ? 'border-b-2 border-gray-900 font-semibold' : 'text-gray-700 border-b-0'
-        }`}
-      >
-        사진첩
-      </div>
-
-      {/* 모임일정 탭 */}
-      <div
-        onClick={() => setActiveTab('schedules')}
-        className={`flex-1 text-center text-base py-3 ${
-          activeTab === 'schedules' ? 'border-b-2 border-gray-900 font-semibold' : 'text-gray-700 border-b-0'
-        }`}
-      >
-        모임일정
-      </div>
+      {TABS.map(({ tabName, displayName }) => (
+        <div
+          key={tabName}
+          onClick={async () => {
+            onClickTab(tabName);
+          }}
+          className={`flex-1 text-center text-base py-3 ${
+            activeTab === tabName ? 'border-b-2 border-gray-900 font-semibold' : 'text-gray-700 border-b-0'
+          }`}
+        >
+          {displayName}
+        </div>
+      ))}
     </div>
   );
 };
