@@ -126,6 +126,14 @@ https://github.com/user-attachments/assets/3f91078b-3812-4c40-9d68-244093e007be
 - **Supabase 메시지 구독**을 통해 읽음 처리 기능 추가
 
 <br>
+
+### 2.1 **상세 기능 - 모바일**
+
+#### 푸시 알림
+
+- **Expo push notification API**, **supabase webhook**, 그리고 **supabase edge function**을 이용하여 <br> 모바일 어플리케이션에 로그인한 유저의 핸드폰에 푸시 알림을 보냄
+
+<br>
 <br>
 
 # 📱 기능 구현 영상
