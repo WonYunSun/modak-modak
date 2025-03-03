@@ -14,19 +14,10 @@ import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBo
 import useUser from '@hooks/common/useUser';
 import useCommentValueStore from '@stores/useCommentValueStore';
 
-import { PostType, UserType, ScheduleType, CommentCountType, PostImageType } from '@ts/postType';
-
-export type PostCommonType = {
-  id: PostType['id'];
-  content: PostType['content'];
-  users: UserType;
-  schedules: ScheduleType;
-  comments: CommentCountType;
-  post_images: PostImageType[];
-};
+import { PostListType } from '@ts/postType';
 
 interface PostProps {
-  post: PostCommonType;
+  post: PostListType;
   openDeleteAlert: () => void;
 }
 
