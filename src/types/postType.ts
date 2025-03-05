@@ -17,7 +17,3 @@ export interface PostListType {
   comments: CommentCountType;
   post_images: PostImageType[];
 };
-
-export interface PostCacheListType extends PostListType {
-  postCacheId: number;
-};

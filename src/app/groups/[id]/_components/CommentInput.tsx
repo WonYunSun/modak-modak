@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 
 import { useRef } from 'react';
 
-import { InfiniteData, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import Button from '@components/common/Button';
 
@@ -12,14 +12,12 @@ import useCommentHandler from '@hooks/comment/useCommentHandler';
 import useCommentInput from '@hooks/comment/useCommentInput';
 
 import useCommentValueStore from '@stores/useCommentValueStore';
-import { PostCacheListType } from '@ts/postType';
 
 interface CommentInputProps {
   postId: string;
-  postCacheId: number;
 }
 
-const CommentInput = ({ postId, postCacheId }: CommentInputProps) => {
+const CommentInput = ({ postId }: CommentInputProps) => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
 
@@ -27,9 +25,9 @@ const CommentInput = ({ postId, postCacheId }: CommentInputProps) => {
 
   const { checkModify, commentValue, commentId, setCommentValue, reset } = useCommentValueStore();
 
-  const createMutation = useCommentInput({ postId });
+  const createMutation = useCommentInput(postId);
 
-  const { updateCommentMutation } = useCommentHandler(commentId || '', postId, groupId, postCacheId);
+  const { updateCommentMutation } = useCommentHandler(commentId || '', postId, groupId);
 
   const queryClient = useQueryClient();
 
@@ -66,24 +64,7 @@ const CommentInput = ({ postId, postCacheId }: CommentInputProps) => {
     } else {
       createMutation.mutate(commentValue, {
         onSuccess: () => {
-          queryClient.setQueryData<InfiniteData<PostCacheListType[]>>(['posts', groupId, ''], (oldData) => {
-            if (!oldData) {
-              return oldData;
-            }
-
-            const newData = oldData?.pages.map((posts) => {
-              return posts?.map((post) => {
-                if (post.postCacheId === postCacheId)
-                  return { ...post, comments: { ...post.comments, count: post.comments.count + 1 } };
-                return post;
-              });
-            });
-
-            return {
-              ...oldData,
-              pages: newData,
-            };
-          });
+          queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
           setCommentValue('');
           if (textAreaRef.current) {
             textAreaRef.current.style.height = 'auto';

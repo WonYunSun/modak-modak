@@ -2,11 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import fetchComments from '@queries/group/comments/fetchComments';
 
-interface UseCommentParams {
-  post_id: string;
-}
-
-const useComments = ({post_id}: UseCommentParams) => {
+const useComments = (post_id: string) => {
   const {
     data: comments,
     isPending,

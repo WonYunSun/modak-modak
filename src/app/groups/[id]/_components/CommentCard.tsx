@@ -25,7 +25,6 @@ export type CommentUser = Omit<User, 'created_at'>;
 interface CommentCardProps {
   comment: Comment & { users: CommentUser };
   postId: string;
-  postCacheId: number;
 }
 
 const formatTimeAgo = (dateString: string): string => {
@@ -56,7 +55,7 @@ const formatTimeAgo = (dateString: string): string => {
   return '방금 전';
 };
 
-const CommentCard = ({ comment, postId, postCacheId }: CommentCardProps) => {
+const CommentCard = ({ comment, postId }: CommentCardProps) => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
 
@@ -66,7 +65,7 @@ const CommentCard = ({ comment, postId, postCacheId }: CommentCardProps) => {
 
   const { setCheckModify, setCommentValue, setCommentId } = useCommentValueStore();
 
-  const { deleteCommentMutation } = useCommentHandler(comment.id, postId, groupId, postCacheId);
+  const { deleteCommentMutation } = useCommentHandler(comment.id, postId, groupId);
 
   const { user } = useUser();
 

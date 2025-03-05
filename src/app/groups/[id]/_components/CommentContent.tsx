@@ -8,11 +8,10 @@ import useComments from '@hooks/comment/useComments';
 
 interface CommentContentProps {
   postId: string;
-  postCacheId: number;
 }
 
-const CommentContent = ({ postId, postCacheId }: CommentContentProps) => {
-  const { comments, isPending, isError } = useComments({ post_id: postId });
+const CommentContent = ({ postId }: CommentContentProps) => {
+  const { comments, isPending, isError } = useComments(postId);
 
   if (isPending) return <SpinnerContainer />;
   if (isError) return <div>에러발생</div>;
@@ -21,7 +20,7 @@ const CommentContent = ({ postId, postCacheId }: CommentContentProps) => {
     <div className="min-h-[80%] max-h-[80%] w-[92%] mx-auto pt-5 overflow-y-scroll scrollbar-hide">
       {comments && comments?.length > 0 ? (
         comments?.map((comment) => (
-          <CommentCard key={comment.id || new Date().toISOString()} comment={comment} postId={postId} postCacheId={postCacheId} />
+          <CommentCard key={comment.id || new Date().toISOString()} comment={comment} postId={postId} />
         ))
       ) : (
         <div className="flex items-center justify-center text-center pt-[6.25rem]">

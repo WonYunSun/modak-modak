@@ -6,7 +6,7 @@ const PAGE_SIZE = 1;
 export const useFetchGetPosts = (groupId: string, searchTerm?: string) => {
   const { data, fetchNextPage, hasNextPage, isPending, isError } = useInfiniteQuery({
     queryKey: ['posts', groupId, searchTerm || ''],
-    queryFn: ({ pageParam = 0 }) => getPosts(groupId, Number(pageParam), PAGE_SIZE, pageParam, searchTerm),
+    queryFn: ({ pageParam = 0 }) => getPosts(groupId, Number(pageParam), PAGE_SIZE, searchTerm),
     enabled: !!groupId,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
