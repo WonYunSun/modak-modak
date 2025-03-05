@@ -38,7 +38,7 @@ const TabPages = forwardRef<HTMLDivElement, TabPagesProps>(({ isScrolled, tabScr
   }, []);
 
   return (
-    <div className="w-full mx-auto px-5 mt-8">
+    <div className="w-full mx-auto px-5 mt-8 min-h-[calc(100dvh-35px)]">
       <div ref={ref} />
       <Tabs isScrolled={isScrolled} onTabChange={onTabChange} />
       <div>

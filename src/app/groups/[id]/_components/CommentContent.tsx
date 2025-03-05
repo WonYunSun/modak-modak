@@ -12,7 +12,7 @@ interface CommentContentProps {
 }
 
 const CommentContent = ({ postId, postCacheId }: CommentContentProps) => {
-  const { comments, isPending, isError } = useComments({ post_id: postId, postCacheId });
+  const { comments, isPending, isError } = useComments({ post_id: postId });
 
   if (isPending) return <SpinnerContainer />;
   if (isError) return <div>에러발생</div>;
