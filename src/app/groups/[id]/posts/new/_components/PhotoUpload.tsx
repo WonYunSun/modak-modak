@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -7,11 +8,9 @@ import 'swiper/css';
 import Button from '@components/common/Button';
 import { DeletePhoto, PlusGray } from '@components/icons';
 
-import { useState } from 'react';
+import { resizeImage } from '@utils/imageUtils';
 
 const MAX_FILES = 10; // 최대 파일 수
-const MAX_WIDTH = 1024; // 최대 너비
-const QUALITY = 1; // 이미지 품질 (0 ~ 1)
 
 interface PhotoUploadProps {
   selectedFiles: File[];
@@ -21,49 +20,6 @@ interface PhotoUploadProps {
 
 const PhotoUpload = ({ selectedFiles, setSelectedFiles, OpenImageCountAlert }: PhotoUploadProps) => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
-
-  // 이미지 파일 최적화
-  const resizeImage = (file: File): Promise<File> => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        img.src = e.target?.result as string;
-      };
-
-      reader.onerror = (e) => reject(e);
-
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-
-        if (!ctx) return reject('Canvas context not available');
-
-        // 이미지 크기 조정
-        const scale = img.width > MAX_WIDTH ? Math.min(MAX_WIDTH / img.width, 1) : 1;
-        const width = img.width * scale;
-        const height = img.height * scale;
-
-        canvas.width = width;
-        canvas.height = height;
-
-        ctx.drawImage(img, 0, 0, width, height);
-
-        canvas.toBlob(
-          (blob) => {
-            if (!blob) return reject('Blob conversion failed');
-            const resizedFile = new File([blob], file.name, { type: 'image/jpeg' });
-            resolve(resizedFile);
-          },
-          'image/jpeg',
-          QUALITY
-        );
-      };
-
-      reader.readAsDataURL(file);
-    });
-  };
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -78,12 +34,27 @@ const PhotoUpload = ({ selectedFiles, setSelectedFiles, OpenImageCountAlert }: P
         return;
       }
 
-      // 이미지 리사이즈 처리
-      const resizedFiles = await Promise.all(acceptedFiles.map((file) => resizeImage(file)));
-      const newUrls = resizedFiles.map((file) => URL.createObjectURL(file));
+      try {
+        const resizedResults = await Promise.all(
+          acceptedFiles.map(async (file, index) => {
+            const resizedFile = await resizeImage(file); // 이미지 파일 리사이즈
+            const newUrl = URL.createObjectURL(resizedFile); // 이미지 URL
+            return { index, resizedFile, newUrl };
+          })
+        );
 
-      setSelectedFiles([...selectedFiles, ...resizedFiles]);
-      setPreviewUrls([...previewUrls, ...newUrls]);
+        // 원래 순서대로 정렬
+        const sortedResults = resizedResults.sort((a, b) => a.index - b.index);
+
+        // 파일과 URL을 업데이트
+        const resizedFiles = sortedResults.map((result) => result.resizedFile);
+        const newUrls = sortedResults.map((result) => result.newUrl);
+
+        setSelectedFiles((prevFiles) => [...prevFiles, ...resizedFiles]);
+        setPreviewUrls((prevUrls) => [...prevUrls, ...newUrls]);
+      } catch (error) {
+        console.error('Image resize failed:', error);
+      }
     },
   });
 
