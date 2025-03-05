@@ -1,15 +1,23 @@
 'use server';
 
 import { createClient } from '@utils/supabase/server';
-import { PostListType } from '@ts/postType';
+import { PostCacheListType } from '@ts/postType';
 
+// interface getPostParams {
+//   groupId: string;
+//   offset: number;
+//   limit: number;
+//   postCacheId: number;
+//   searchTerm?: string;
+// }
 // 게시글 리스트 불러오기
 export const getPosts = async (
   groupId: string,
   offset: number,
   limit: number,
+  postCacheId: number,
   searchTerm?: string
-): Promise<PostListType[]> => {
+): Promise<PostCacheListType[]> => {
   try {
     const supabase = await createClient();
 
@@ -49,8 +57,7 @@ export const getPosts = async (
       schedules: [{ name: "일정1", start_date: "2024-01-01" }],
       comments: [{ count: 3 }]
     } */
-
-    const formattedData: PostListType[] =
+    const formattedData: PostCacheListType[] =
       data.map((post) => ({
         id: post.id,
         content: post.content,
@@ -58,6 +65,7 @@ export const getPosts = async (
         schedules: Array.isArray(post.schedules) ? post.schedules[0] : post.schedules,
         comments: Array.isArray(post.comments) ? post.comments[0] : post.comments,
         post_images: post.post_images,
+        postCacheId,
       })) || [];
 
     return formattedData;

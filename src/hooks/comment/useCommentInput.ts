@@ -5,7 +5,11 @@ import useUser from '@hooks/common/useUser';
 import { CommentsType } from '@queries/group/comments/fetchComments';
 import createComment from '@queries/group/comments/createComment';
 
-const useCommentInput = (postId: string) => {
+interface CommentInputParams {
+  postId: string;
+}
+
+const useCommentInput = ({ postId }: CommentInputParams) => {
   const queryClient = useQueryClient();
 
   const { user } = useUser();

@@ -12,9 +12,10 @@ interface CommentListProps {
   isOpen: boolean;
   onClose: () => void;
   postId: string;
+  postCacheId: number;
 }
 
-const CommentList = ({ isOpen, onClose, postId }: CommentListProps) => {
+const CommentList = ({ isOpen, onClose, postId, postCacheId }: CommentListProps) => {
   const { isActionModalOpen } = useBottomSheetStore();
 
   const keyboardHeight = useIOSKeyboardHeight();
@@ -34,8 +35,8 @@ const CommentList = ({ isOpen, onClose, postId }: CommentListProps) => {
           <h3 className="w-full mx-auto mt-9 text-xl text-center font-bold leading-[140%]">댓글</h3>
         </Sheet.Header>
         <Sheet.Content>
-          <CommentContent postId={postId} />
-          <CommentInput postId={postId} />
+          <CommentContent postId={postId} postCacheId={postCacheId}/>
+          <CommentInput postId={postId} postCacheId={postCacheId}/>
         </Sheet.Content>
       </Sheet.Container>
       <Sheet.Backdrop onTap={onClose} className="modal-back-drop modal-sheet-back-drop !bg-black !bg-opacity-80" />

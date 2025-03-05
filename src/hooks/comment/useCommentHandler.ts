@@ -1,11 +1,12 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import deleteComment from '@queries/group/comments/deleteComment';
 import updateComment from '@queries/group/comments/updateComment';
 
 import { CommentsType } from '@queries/group/comments/fetchComments';
+import { PostCacheListType } from '@ts/postType';
 
-const useCommentHandler = (commentId: string, postId: string, groupId: string) => {
+const useCommentHandler = (commentId: string, postId: string, groupId: string, postCacheId: number) => {
   const queryClient = useQueryClient();
 
   const deleteCommentMutation = useMutation({
@@ -26,7 +27,24 @@ const useCommentHandler = (commentId: string, postId: string, groupId: string) =
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
-      queryClient.invalidateQueries({ queryKey: ['posts', groupId, ''] });
+      queryClient.setQueryData<InfiniteData<PostCacheListType[]>>(['posts', groupId, ''], (oldData) => {
+        if (!oldData) {
+          return oldData;
+        }
+
+        const newData = oldData?.pages.map((posts) => {
+          return posts?.map((post) => {
+            if (post.postCacheId === postCacheId)
+              return { ...post, comments: { ...post.comments, count: post.comments.count - 1 } };
+            return post;
+          });
+        });
+
+        return {
+          ...oldData,
+          pages: newData,
+        };
+      });
     },
   });
 

@@ -9,11 +9,15 @@ export type ScheduleType = Pick<
 export type CommentCountType = { count: number };
 export type PostImageType = { image_url: string };
 
-export type PostListType = {
+export interface PostListType {
   id: PostType['id'];
   content: PostType['content'];
   users: UserType;
   schedules: ScheduleType;
   comments: CommentCountType;
   post_images: PostImageType[];
+};
+
+export interface PostCacheListType extends PostListType {
+  postCacheId: number;
 };

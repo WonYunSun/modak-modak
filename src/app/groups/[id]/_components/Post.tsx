@@ -14,10 +14,10 @@ import { PostActionBottomSheet } from '@app/groups/[id]/_components/PostActionBo
 import useUser from '@hooks/common/useUser';
 import useCommentValueStore from '@stores/useCommentValueStore';
 
-import { PostListType } from '@ts/postType';
+import { PostCacheListType } from '@ts/postType';
 
 interface PostProps {
-  post: PostListType;
+  post: PostCacheListType;
   openDeleteAlert: () => void;
 }
 
@@ -113,7 +113,7 @@ const Post = ({ post, openDeleteAlert }: PostProps) => {
       </article>
 
       {/* 댓글 바텀시트 */}
-      <CommentList postId={post.id} isOpen={isCommentOpen} onClose={closeCommentList} />
+      <CommentList postId={post.id} postCacheId={post.postCacheId} isOpen={isCommentOpen} onClose={closeCommentList} />
 
       {/* 메뉴 수정 바텀시트 */}
       {bottomSheetPostId && (
