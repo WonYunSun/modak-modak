@@ -22,7 +22,25 @@ export const getPhotos = async (groupId: string) => {
       throw new Error(`getPhotos 모임 사진첩 불러오는 중 에러 발생: ${error.message}`);
     }
 
-    return data;
+    // post_images 배열 정렬
+    const formattedData = data.map((post) => ({
+      ...post,
+      post_images: Array.isArray(post.post_images)
+        ? post.post_images.sort((a, b) => {
+            const extractTimestamp = (url: string) => Number(url.split('/').pop()?.split('-')[0]);
+
+            const timeA = extractTimestamp(a.image_url);
+            const timeB = extractTimestamp(b.image_url);
+
+            if (timeA === timeB) {
+              return a.image_url.localeCompare(b.image_url);
+            }
+            return timeA - timeB;
+          })
+        : post.post_images,
+    }));
+
+    return formattedData;
   } catch (err) {
     console.error(err);
     throw new Error(`getPhotos 함수 실행 중 에러 발생: ${(err as Error).message}`);

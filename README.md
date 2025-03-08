@@ -38,11 +38,11 @@ https://github.com/user-attachments/assets/3f91078b-3812-4c40-9d68-244093e007be
 
 # 👨‍👩‍👧‍👦 Team Members
 
-| 박상기                         | 박산하                            | 김민후                         | 박은영                                   | 원윤선                                     |
-| ----------------------------- | -------------------------------- | ----------------------------- | --------------------------------------- | ------------------------------------------ |
-| [@adorable-otter](https://github.com/adorable-otter) | [@heftyCornerstone](https://github.com/heftyCornerstone) | [@minhoo](https://github.com/Kminhoo) | [@euncloud](https://github.com/euncloud) | [@WonYunSun](https://github.com/WonYunSun) |
-| 팀장                             | 부팀장                                         | 팀원                            | 팀원                          | 팀원                              |
-|인증/인가, 일정 캘린더, <br> react native app|홈, 모임 관리, 멤버 목록, <br>모임 가입 신청, 알림|        댓글, 채팅           | 모임방, 게시글CRUD, 사진첩, <br> 공용 컴포넌트, 게시글 검색 |모임 생성, 모임 일정, <br> 공용 컴포넌트  |
+| 박상기                                               | 박산하                                                   | 김민후                                | 박은영                                          | 원윤선                                     |
+| ---------------------------------------------------- | -------------------------------------------------------- | ------------------------------------- | ----------------------------------------------- | ------------------------------------------ |
+| [@adorable-otter](https://github.com/adorable-otter) | [@heftyCornerstone](https://github.com/heftyCornerstone) | [@minhoo](https://github.com/Kminhoo) | [@euncloud](https://github.com/euncloud)        | [@WonYunSun](https://github.com/WonYunSun) |
+| 팀장                                                 | 부팀장                                                   | 팀원                                  | 팀원                                            | 팀원                                       |
+| 인증/인가, 일정 캘린더, <br> react native app        | 홈, 모임 관리, 멤버 목록, <br>모임 가입 신청, 알림       | 댓글, 채팅                            | 모임방(게시글, 사진첩, 검색) <br> 공용 컴포넌트 | 모임 생성, 모임 일정, <br> 공용 컴포넌트   |
 
 <br><br>
 
@@ -56,47 +56,65 @@ https://github.com/user-attachments/assets/3f91078b-3812-4c40-9d68-244093e007be
 
 ### 1. **페이지 구성**
 
-#### 모임 가입 신청  [`/join/[id]`]
+#### 모임 가입 신청 [`/join/[id]`]
+
 - 모임 가입 신청 링크 클릭 시 진입
 
-#### 로그인/회원가입  [`/login`, `/signup`]
+#### 로그인/회원가입 [`/login`, `/signup`]
+
 - 소셜 로그인 기능, 소셜 로그인 간편 회원가입
 
 <br>
 
-#### 홈  [`/`]
+#### 홈 [`/`]
+
 - 가입/대기중 모임 목록
 
-#### 알림  [`/notifiactions`]
+#### 알림 [`/notifiactions`]
+
 - 신규/읽은 알림 확인
 
-#### 마이페이지  [`/mypage`]
+#### 마이페이지 [`/mypage`]
+
 - 프로필 표시, 일정 표시
 
 <br>
 
-#### 채팅  [`/chat`]
+#### 채팅 [`/chat`]
+
 - 채팅방 리스트 업데이트, 채팅 메세지 읽음 처리기능
-  #### 채팅 상세  [`/chat/[id]`]
-    - 채팅 내용 실시간 업데이트, 읽음 처리, AI요약 기능
+  #### 채팅 상세 [`/chat/[id]`]
+  - 채팅 내용 실시간 업데이트, 읽음 처리, AI요약 기능
 
 <br>
 
-#### 모임방  [`/groups/[id]`]
--  모임방 게시글 업데이트
+#### 모임방 [`/groups/[id]`]
 
-    #### 모임 관리  [`/groups/[id]/management`]
-    - 모임 프로필 변경, 모임방 알림 on / off, 모임 탈퇴, 모임 삭제, 모임 초대 링크 복사
+- 모임별 추억 공유 및 관리 기능
 
-    #### 멤버 목록  [`/groups/[id]/management/members`]
-    - 모임 가입 신청 수락 및 거절, 대표 양도
+  #### 게시글 관리 [`/groups/[id]/posts`]
+
+  - 모임 게시글 쓰기, 수정, 삭제, 검색
+
+  #### 일정 관리 [`/groups/[id]/schedules`]
+
+  - 모임 일정 추가, 수정, 삭제, 검색
+
+  #### 모임 관리 [`/groups/[id]/management`]
+
+  - 모임 프로필 변경, 모임방 알림 on / off, 모임 탈퇴, 모임 삭제, 모임 초대 링크 복사
+
+  #### 멤버 목록 [`/groups/[id]/management/members`]
+
+  - 모임 가입 신청 수락 및 거절, 대표 양도
 
 <br>
 
 ### 2. **상세 기능**
 
 #### 모임 가입 신청 페이지
- - 사용자의 다양한 상태에 따른 분기처리
+
+- 사용자의 다양한 상태에 따른 분기처리
 
 #### 사용자 프로필 관리
 
