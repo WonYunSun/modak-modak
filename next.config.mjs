@@ -13,7 +13,7 @@ const nextConfig = {
       },
     ],
   },
-  reactStrictMode: false, //todo: 나중에 삭제하기
+  reactStrictMode: false,
 };
 
 export default withSentryConfig(nextConfig, {
