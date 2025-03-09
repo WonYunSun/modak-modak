@@ -63,7 +63,21 @@ export const getPosts = async (
         users: Array.isArray(post.users) ? post.users[0] : post.users,
         schedules: Array.isArray(post.schedules) ? post.schedules[0] : post.schedules,
         comments: Array.isArray(post.comments) ? post.comments[0] : post.comments,
-        post_images: post.post_images,
+        post_images: Array.isArray(post.post_images)
+          ? post.post_images.sort((a, b) => {
+              // 파일명에서 시간 부분 추출 후 비교
+              const extractTimestamp = (url: string) => Number(url.split('/').pop()?.split('-')[0]);
+
+              const timeA = extractTimestamp(a.image_url);
+              const timeB = extractTimestamp(b.image_url);
+
+              // 시간이 같으면 파일명 순으로 비교
+              if (timeA === timeB) {
+                return a.image_url.localeCompare(b.image_url);
+              }
+              return timeA - timeB;
+            })
+          : post.post_images,
       })) || [];
 
     return formattedData;
