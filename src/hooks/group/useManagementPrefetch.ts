@@ -1,11 +1,12 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import useUser from '@hooks/common/useUser';
 import { fetchLeaderInfo } from '@queries/management/fetchMembers';
 import { fetchReceiveNotifications } from '@queries/management/fetchReceiveNotifications';
-import { useQueryClient } from '@tanstack/react-query';
 import { GroupsType } from '@ts/supabaseTableRowTypes';
-import { useEffect } from 'react';
+
 
 interface ManagementPrefetchParams {
   groupId: GroupsType['id'];

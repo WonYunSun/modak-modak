@@ -1,8 +1,8 @@
 'use client';
 
 import { MutableRefObject, useEffect, useState } from 'react';
-import { TabType } from '@app/groups/[id]/_components/Tabs';
 import useGroupStore from '@stores/useGroupStore';
+import { TabType } from '@app/groups/[id]/_components/Tabs';
 
 type ScrollYType = {
   [key in TabType]: number;
