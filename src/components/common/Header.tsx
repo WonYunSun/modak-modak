@@ -15,6 +15,7 @@ interface HeaderProps {
 }
 
 const Header = ({ home = false, label, hasSetting, isScrolled }: HeaderProps) => {
+
   const router = useRouter();
   const { data: notificationsData } = useFetchNotifications();
 

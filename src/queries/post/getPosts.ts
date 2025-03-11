@@ -1,8 +1,15 @@
 'use server';
 
 import { createClient } from '@utils/supabase/server';
-import PostListType from '@ts/postType';
+import { PostListType } from '@ts/postType';
 
+// interface getPostParams {
+//   groupId: string;
+//   offset: number;
+//   limit: number;
+//   postCacheId: number;
+//   searchTerm?: string;
+// }
 // 게시글 리스트 불러오기
 export const getPosts = async (
   groupId: string,
@@ -49,7 +56,6 @@ export const getPosts = async (
       schedules: [{ name: "일정1", start_date: "2024-01-01" }],
       comments: [{ count: 3 }]
     } */
-
     const formattedData: PostListType[] =
       data.map((post) => ({
         id: post.id,

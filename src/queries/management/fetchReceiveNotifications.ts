@@ -8,7 +8,7 @@ interface FetchReceiveNotificationsParams {
   userId: User['id'];
   groupId: GroupsType['id'];
 }
-export const FetchReceiveNotifications = async ({ userId, groupId }: FetchReceiveNotificationsParams) => {
+export const fetchReceiveNotifications = async ({ userId, groupId }: FetchReceiveNotificationsParams) => {
   try {
     const supabase = await createClient();
     const { data } = await supabase

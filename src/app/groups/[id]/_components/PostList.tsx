@@ -7,7 +7,6 @@ import Button from '@components/common/Button';
 import SpinnerContainer from '@components/common/SpinnerContainer';
 
 import CountBar from '@app/groups/[id]/_components/CountBar';
-import Post from '@app/groups/[id]/_components/Post';
 import SearchBar from '@app/groups/[id]/_components/SearchBar';
 import NoPost from '@app/groups/[id]/_components/NoPost';
 import NoSearchPost from '@app/groups/[id]/_components/NoSearchPost';
@@ -18,6 +17,7 @@ import { useFetchGetPosts } from '@hooks/post/useFetchGetPosts';
 import { useFetchPostCount } from '@hooks/post/useFetchPostCount';
 
 import { sendGAEvent } from '@next/third-parties/google';
+import Post from '@app/groups/[id]/_components/Post';
 
 interface PostListProps {
   openDeleteAlert: () => void;
@@ -71,7 +71,11 @@ const PostList = ({ openDeleteAlert }: PostListProps) => {
       {isPending ? (
         <SpinnerContainer />
       ) : posts && posts.length > 0 ? (
-        posts.map((post) => <Post key={post.id} post={post} openDeleteAlert={openDeleteAlert} />) // 데이터가 있으면 Post 리스트 렌더링
+        <>
+          {posts.map((post) => (
+            <Post key={post.id} post={post} openDeleteAlert={openDeleteAlert} />
+          ))}
+        </> // 데이터가 있으면 Post 리스트 렌더링
       ) : searchTerm ? (
         <NoSearchPost /> // 검색어가 있는데 데이터가 없으면 검색 결과 없음 표시
       ) : (

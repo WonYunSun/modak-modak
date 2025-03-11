@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useEffect } from 'react';
+import { forwardRef, MutableRefObject, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 
 import Tabs from '@app/groups/[id]/_components/Tabs';
@@ -11,17 +11,21 @@ import { CircleOk } from '@components/icons';
 
 import useGroupStore from '@stores/useGroupStore';
 import useSmallAlert from '@hooks/common/useSmallAlert';
+import useMemoScrollPosition from '@hooks/group/useMemoScrollPosition';
 
 interface TabPagesProps {
   isScrolled: boolean;
+  tabScrollRef: MutableRefObject<HTMLDivElement | null>;
 }
 
-const TabPages = forwardRef<HTMLDivElement, TabPagesProps>(({ isScrolled }, ref) => {
+const TabPages = forwardRef<HTMLDivElement, TabPagesProps>(({ isScrolled, tabScrollRef }, ref) => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
 
   const { SmallAlert, openAlert: openDeleteAlert } = useSmallAlert();
   const { activeTab, previousGroupId, setPreviousGroupId, resetActiveTab } = useGroupStore();
+
+  const onTabChange = useMemoScrollPosition({ tabScrollRef });
 
   useEffect(() => {
     if (groupId) {
@@ -34,9 +38,9 @@ const TabPages = forwardRef<HTMLDivElement, TabPagesProps>(({ isScrolled }, ref)
   }, []);
 
   return (
-    <div className="w-full mx-auto px-5 mt-8">
+    <div className="w-full mx-auto px-5 mt-8 min-h-[calc(100dvh-35px)]">
       <div ref={ref} />
-      <Tabs isScrolled={isScrolled} />
+      <Tabs isScrolled={isScrolled} onTabChange={onTabChange} />
       <div>
         {activeTab === 'posts' && <PostList openDeleteAlert={openDeleteAlert} />}
         {activeTab === 'photos' && <PhotoList />}

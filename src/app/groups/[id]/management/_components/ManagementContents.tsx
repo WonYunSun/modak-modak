@@ -10,7 +10,7 @@ import ManagementModal from '@app/groups/[id]/management/_components/modal/Manag
 import SpinnerContainer from '@components/common/SpinnerContainer';
 import { CircleOk, Copy, NextArrow } from '@components/icons';
 import useSmallAlert from '@hooks/common/useSmallAlert';
-import useIsLeader from '@hooks/management/useIsLeader';
+import useFetchManagementInfo from '@hooks/management/useFetchManagementInfo';
 
 export type ModalModeType = 'changeProfile' | 'deleteGroup' | 'leaveGroup' | 'leaderTransition';
 interface ManagementContentsProps {
@@ -32,7 +32,7 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
     openModal();
   };
 
-  const { data: isLeader, isPending } = useIsLeader({ groupId });
+  const { receiveNotification, isLeader, isPending } = useFetchManagementInfo({ groupId });
 
   if (isPending) return <SpinnerContainer height={112} />;
 
@@ -55,7 +55,7 @@ const ManagementContents = ({ groupId }: ManagementContentsProps) => {
 
           <ManagementSection title={'알림 관리'}>
             <ManagementCard label={'모임방 전체 알림'}>
-              <ToggleBox />
+              {receiveNotification !== undefined && <ToggleBox receiveNotification={receiveNotification} />}
             </ManagementCard>
           </ManagementSection>
 

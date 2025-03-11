@@ -9,7 +9,7 @@ export type ScheduleType = Pick<
 export type CommentCountType = { count: number };
 export type PostImageType = { image_url: string };
 
-type PostListType = {
+export interface PostListType {
   id: PostType['id'];
   content: PostType['content'];
   users: UserType;
@@ -17,5 +17,3 @@ type PostListType = {
   comments: CommentCountType;
   post_images: PostImageType[];
 };
-
-export default PostListType;

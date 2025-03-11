@@ -2,14 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
-import useFetchReceiveNotification from '@hooks/management/useFetchReceiveNotification';
 import useToggleNotification from '@hooks/management/useToggleNotification';
 
-const ToggleBox = () => {
+interface ToggleBoxProps {
+  receiveNotification: boolean;
+}
+const ToggleBox = ({ receiveNotification }: ToggleBoxProps) => {
   const { id } = useParams();
   const groupId = Array.isArray(id) ? id[0] : id;
 
-  const { data: receiveNotification } = useFetchReceiveNotification({ groupId });
   const toggleSubscription = useToggleNotification({ groupId });
   const [isProcessing, setIsProcessing] = useState(false);
 
